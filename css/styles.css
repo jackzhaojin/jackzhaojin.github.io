@@ -1,0 +1,318 @@
+/* Base styles and variables */
+:root {
+    --primary-color: #2c3e50;
+    --microsoft-blue: #0078d4; /* Official Microsoft blue */
+    --adobe-red: #fa0f00; /* Official Adobe red */
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --presentation-color: #27ae60; /* Green for presentations */
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --light-text: #777;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Header */
+header {
+    margin-bottom: 3rem;
+}
+
+.profile-header {
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.profile-header:after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(to right, var(--adobe-red), var(--microsoft-blue));
+    margin: 1.5rem auto 0;
+    border-radius: 3px;
+}
+
+.profile-header h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+    color: var(--primary-color);
+}
+
+.profile-header .subtitle {
+    font-size: 1.4rem;
+    color: var(--light-text);
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+/* Main content */
+main {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Certifications section */
+.cert-group {
+    margin-bottom: 3rem;
+}
+
+.cert-group h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.microsoft-group h2 {
+    color: var(--microsoft-blue);
+    border-bottom: 2px solid var(--microsoft-blue);
+}
+
+.adobe-group h2 {
+    color: var(--adobe-red);
+    border-bottom: 2px solid var(--adobe-red);
+}
+
+.cert-subheading {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 1.5rem 0 1rem;
+    opacity: 0.8;
+}
+
+.certifications {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cert-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.cert-item-link:hover {
+    transform: translateY(-5px);
+}
+
+.cert-item {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+.cert-item:hover {
+    box-shadow: var(--box-shadow);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Microsoft certification cards */
+.microsoft-group .cert-item {
+    border-left: 4px solid var(--microsoft-blue);
+    background-color: rgba(0, 120, 212, 0.05);
+}
+
+.microsoft-group .cert-item:hover {
+    background-color: rgba(0, 120, 212, 0.1);
+}
+
+.microsoft-group .cert-item h3 {
+    color: var(--microsoft-blue);
+}
+
+/* Adobe certification cards */
+.adobe-group .cert-item {
+    border-left: 4px solid var(--adobe-red);
+    background-color: rgba(250, 15, 0, 0.05);
+}
+
+.adobe-group .cert-item:hover {
+    background-color: rgba(250, 15, 0, 0.1);
+}
+
+.adobe-group .cert-item h3 {
+    color: var(--adobe-red);
+}
+
+/* Presentation section */
+.presentation-group h2 {
+    color: var(--adobe-red);
+    border-bottom: 2px solid var(--adobe-red);
+}
+
+.presentation-group .cert-item {
+    border-left: 4px solid var(--adobe-red);
+    background-color: rgba(250, 15, 0, 0.05);
+}
+
+.presentation-group .cert-item:hover {
+    background-color: rgba(250, 15, 0, 0.1);
+}
+
+.presentation-group .cert-item h3 {
+    color: var(--adobe-red);
+}
+
+.presentation-details {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.presentation-group .cert-badge img {
+    width: 120px;
+    border-radius: var(--border-radius);
+}
+
+.cert-content {
+    flex: 1;
+}
+
+.cert-badge {
+    flex-shrink: 0;
+}
+
+.cert-badge img {
+    width: 80px;
+    height: auto;
+    transition: var(--transition);
+}
+
+.adobe-group .cert-badge img {
+    width: 100px;
+}
+
+.cert-badge img:hover {
+    transform: scale(1.1);
+}
+
+.cert-item h3 {
+    font-size: 1.2rem;
+}
+
+
+.cert-date, .cert-expiry, .cert-renewal {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-top: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.social-links {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.social-links .employer-link {
+    background-color: #a100ff;
+    color: white;
+}
+
+.social-links .employer-link:hover {
+    background-color: #7600b8;
+}
+
+.social-links i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .certifications {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
