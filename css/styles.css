@@ -81,11 +81,15 @@ header {
     color: var(--primary-color);
 }
 
+/* This CSS snippet only changes the subtitle styling for better accessibility */
 .profile-header .subtitle {
-    font-size: 1.1rem;
-    color: var(--light-text);
+    font-size: 1.2rem;
+    /* Increased from 1.1rem */
+    color: #333;
+    /* Darker color instead of var(--light-text) which was #777 */
     margin-top: 0.25rem;
-    font-weight: 400;
+    font-weight: 500;
+    /* Slightly bolder than the original 400 */
 }
 
 /* Main content */
