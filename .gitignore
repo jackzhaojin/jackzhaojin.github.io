@@ -1,3 +1,6 @@
 
 # node_modules for node js 
 node_modules
+
+# mac files
+.DS_STORE
