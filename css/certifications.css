@@ -1,0 +1,166 @@
+/* Certifications section */
+.cert-group {
+    margin-bottom: 1.5rem;
+}
+
+.cert-group h2 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.microsoft-group h2 {
+    color: var(--microsoft-blue);
+    border-bottom: 2px solid var(--microsoft-blue);
+}
+
+.adobe-group h2 {
+    color: var(--adobe-red);
+    border-bottom: 2px solid var(--adobe-red);
+}
+
+.cert-subheading {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin: 1rem 0 0.5rem;
+    opacity: 0.8;
+}
+
+.certifications {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cert-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.cert-item-link:hover {
+    transform: translateY(-5px);
+}
+
+.cert-item {
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    height: 100%;
+}
+
+.cert-item:hover {
+    box-shadow: var(--box-shadow);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Microsoft certification cards */
+.microsoft-group .cert-item {
+    border-left: 4px solid var(--microsoft-blue);
+    background-color: rgba(0, 120, 212, 0.05);
+}
+
+.microsoft-group .cert-item:hover {
+    background-color: rgba(0, 120, 212, 0.1);
+}
+
+.microsoft-group .cert-item h3 {
+    color: var(--microsoft-blue);
+}
+
+/* Adobe certification cards */
+.adobe-group .cert-item {
+    border-left: 4px solid var(--adobe-red);
+    background-color: rgba(250, 15, 0, 0.05);
+}
+
+.adobe-group .cert-item:hover {
+    background-color: rgba(250, 15, 0, 0.1);
+}
+
+.adobe-group .cert-item h3 {
+    color: var(--adobe-red);
+}
+
+/* Presentation section */
+.presentation-group h2 {
+    color: var(--adobe-red);
+    border-bottom: 2px solid var(--adobe-red);
+}
+
+.presentation-group .cert-item {
+    border-left: 4px solid var(--adobe-red);
+    background-color: rgba(250, 15, 0, 0.05);
+}
+
+.presentation-group .cert-item:hover {
+    background-color: rgba(250, 15, 0, 0.1);
+}
+
+.presentation-group .cert-item h3 {
+    color: var(--adobe-red);
+}
+
+.presentation-details {
+    font-size: 0.75rem;
+    color: var(--light-text);
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.presentation-group .cert-badge img {
+    width: 85px;
+    border-radius: var(--border-radius);
+}
+
+.cert-content {
+    flex: 1;
+}
+
+.cert-badge {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.cert-badge img {
+    width: 85px;
+    height: auto;
+    transition: var(--transition);
+    image-rendering: -webkit-optimize-contrast;
+    display: block;
+    object-fit: contain;
+}
+
+.cert-badge img:hover {
+    transform: scale(1.05);
+}
+
+.cert-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.cert-date, .cert-expiry, .cert-renewal {
+    font-size: 0.75rem;
+    color: var(--light-text);
+    margin-top: 0.25rem;
+}
+
+/* Responsive styles for certifications */
+@media (max-width: 768px) {
+    .certifications {
+        grid-template-columns: 1fr;
+    }
+}

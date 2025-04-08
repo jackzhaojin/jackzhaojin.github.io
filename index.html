@@ -3,15 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Professional Homepage</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Jack Jin's Professional Portfolio</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <meta http-equiv="refresh" content="0;url=certifications.html">
+    <style>
+        .homepage-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .profile-title {
+            margin-bottom: 2rem;
+        }
+        
+        .profile-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-title p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .main-nav a {
+            text-decoration: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .nav-cert {
+            background-color: var(--adobe-red);
+        }
+        
+        .nav-cert:hover {
+            background-color: #d00e00;
+        }
+        
+        .nav-exp {
+            background-color: #a100ff;
+        }
+        
+        .nav-exp:hover {
+            background-color: #7600b8;
+        }
+        
+        .footer-links {
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <p>Redirecting to certifications page...</p>
+    <div class="homepage-container">
+        <div class="profile-title">
+            <h1>Jack Jin</h1>
+            <p>Senior Technical Architect</p>
+        </div>
+        
+        <div class="main-nav">
+            <a href="certifications.html" class="nav-cert">
+                <i class="fas fa-certificate"></i> Certifications & Presentations
+            </a>
+            <a href="experiences.html" class="nav-exp">
+                <i class="fas fa-briefcase"></i> Professional Experience
+            </a>
+        </div>
+        
+        <footer class="footer-links">
+            <div class="social-links">
+                <a href="https://www.accenture.com/" target="_blank" class="employer-link">
+                    <i class="fas fa-building"></i> Accenture
+                </a>
+                <a href="https://www.linkedin.com/in/jackjin" target="_blank">
+                    <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                </a>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

@@ -1,0 +1,188 @@
+/* Experience page specific styles */
+.exp-group {
+    margin-bottom: 1.5rem;
+}
+
+.exp-header {
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.exp-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.exp-header .company-years {
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+
+.exp-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.exp-group.active .exp-content {
+    max-height: 2000px;
+}
+
+.exp-group.active .exp-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.exp-group.active .chevron {
+    transform: rotate(180deg);
+}
+
+.chevron {
+    transition: transform 0.3s ease;
+}
+
+.exp-details {
+    padding: 1rem;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-top: none;
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.project {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    transition: var(--transition);
+}
+
+.project:hover {
+    transform: translateY(-5px);
+}
+
+.project h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.project-duration {
+    font-size: 0.8rem;
+    color: var(--light-text);
+    margin-bottom: 0.5rem;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.tech-tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+/* Accenture styling */
+.accenture-group .exp-header {
+    background-color: rgba(161, 0, 255, 0.1);
+    border-left: 4px solid #a100ff;
+}
+
+.accenture-group .exp-header:hover {
+    background-color: rgba(161, 0, 255, 0.2);
+}
+
+.accenture-group .exp-header h2 {
+    color: #a100ff;
+}
+
+.accenture-group .exp-details {
+    background-color: rgba(161, 0, 255, 0.05);
+    border: 1px solid rgba(161, 0, 255, 0.1);
+}
+
+.accenture-group .project h3 {
+    color: #a100ff;
+}
+
+.accenture-group .tech-tag {
+    background-color: rgba(161, 0, 255, 0.1);
+    color: #a100ff;
+}
+
+/* Razorfish styling */
+.razorfish-group .exp-header {
+    background-color: rgba(0, 120, 212, 0.1);
+    border-left: 4px solid var(--microsoft-blue);
+}
+
+.razorfish-group .exp-header:hover {
+    background-color: rgba(0, 120, 212, 0.2);
+}
+
+.razorfish-group .exp-header h2 {
+    color: var(--microsoft-blue);
+}
+
+.razorfish-group .exp-details {
+    background-color: rgba(0, 120, 212, 0.05);
+    border: 1px solid rgba(0, 120, 212, 0.1);
+}
+
+.razorfish-group .project h3 {
+    color: var(--microsoft-blue);
+}
+
+.razorfish-group .tech-tag {
+    background-color: rgba(0, 120, 212, 0.1);
+    color: var(--microsoft-blue);
+}
+
+/* Startup styling */
+.startup-group .exp-header {
+    background-color: rgba(39, 174, 96, 0.1);
+    border-left: 4px solid var(--presentation-color);
+}
+
+.startup-group .exp-header:hover {
+    background-color: rgba(39, 174, 96, 0.2);
+}
+
+.startup-group .exp-header h2 {
+    color: var(--presentation-color);
+}
+
+.startup-group .exp-details {
+    background-color: rgba(39, 174, 96, 0.05);
+    border: 1px solid rgba(39, 174, 96, 0.1);
+}
+
+.startup-group .project h3 {
+    color: var(--presentation-color);
+}
+
+.startup-group .tech-tag {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--presentation-color);
+}
+
+/* Responsive styles for experience page */
+@media (max-width: 768px) {
+    .projects {
+        grid-template-columns: 1fr;
+    }
+}
