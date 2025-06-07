@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* Mobile fix for double scrollbar issue */
+        @media (max-width: 768px) {
+            /* Fix double scrollbar issue */
+            body {
+                max-height: none !important;
+                overflow-y: visible !important;
+            }
+            
+            .container {
+                max-height: none !important;
+            }
+            
+            main {
+                max-height: none !important;
+                overflow-y: visible !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">        <header>
