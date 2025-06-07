@@ -2,5 +2,25 @@
 # node_modules for node js 
 node_modules
 
-# mac files
-.DS_STORE
+# Mac files
+.DS_Store
+
+# VS Code workspace files (personal configuration)
+*.code-workspace
+
+# VS Code personal settings (you can uncomment specific files if you want to share them)
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/*.log
+
+# Uncomment the following lines if you want to include shared project settings:
+# !.vscode/settings.json     # Include shared project settings
+# !.vscode/extensions.json   # Include recommended extensions list
+# !.vscode/tasks.json        # Include shared build/run tasks
+# !.vscode/launch.json       # Include shared debug configurations
+
+# OS generated files
+Thumbs.db
+*.tmp
+*.temp

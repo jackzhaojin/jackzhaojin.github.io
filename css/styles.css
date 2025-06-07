@@ -313,17 +313,359 @@ footer {
     color: var(--light-text);
 }
 
-/* Responsive styles */
+/* Home link in header */
+.home-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0.2rem;
+}
+
+.home-link a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    padding: 0.3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-link a:hover {
+    color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Landing page specific styles */
+.landing-welcome .landing-intro {
+    padding: 0.5rem;
+    background-color: rgba(52, 152, 219, 0.04);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.landing-welcome .landing-intro p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.landing-welcome .landing-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.landing-nav-item {
+    border-left: 3px solid var(--secondary-color) !important;
+    background-color: rgba(52, 152, 219, 0.04) !important;
+}
+
+.landing-nav-item:hover {
+    background-color: rgba(52, 152, 219, 0.08) !important;
+}
+
+.landing-nav-item h3 {
+    color: var(--secondary-color) !important;
+}
+
+.landing-nav-item h3 i {
+    margin-right: 0.5rem;
+    width: 1.2rem;
+    text-align: center;
+}
+
+/* Specific colors for different landing nav items */
+.accenture-item {
+    border-left: 3px solid #a100ff !important;
+    background-color: rgba(161, 0, 255, 0.04) !important;
+}
+
+.accenture-item:hover {
+    background-color: rgba(161, 0, 255, 0.08) !important;
+}
+
+.accenture-item h3 {
+    color: #a100ff !important;
+}
+
+.linkedin-item {
+    border-left: 3px solid #0077b5 !important;
+    background-color: rgba(0, 119, 181, 0.04) !important;
+}
+
+.linkedin-item:hover {
+    background-color: rgba(0, 119, 181, 0.08) !important;
+}
+
+.linkedin-item h3 {
+    color: #0077b5 !important;
+}
+
+.github-item {
+    border-left: 3px solid #333 !important;
+    background-color: rgba(51, 51, 51, 0.04) !important;
+}
+
+.github-item:hover {
+    background-color: rgba(51, 51, 51, 0.08) !important;
+}
+
+.github-item h3 {
+    color: #333 !important;
+}
+
+/* Blog page specific */
+.blog-coming-soon .landing-intro {
+    padding: 1rem;
+    background-color: rgba(52, 152, 219, 0.04);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.blog-coming-soon .landing-intro p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.blog-coming-soon .landing-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.blog-coming-soon .landing-intro a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.blog-coming-soon .landing-intro a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Work Section - Modern Card Design */
+.hero-work-section {
+    margin: 2rem 0;
+    padding: 1rem 0;
+}
+
+.hero-title {
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.hero-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(45deg, var(--adobe-red), var(--microsoft-blue), #27ae60);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+}
+
+.hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.hero-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+.hero-card:hover::before {
+    height: 6px;
+}
+
+.cert-card::before {
+    background: linear-gradient(90deg, var(--adobe-red), var(--microsoft-blue));
+}
+
+.blog-card::before {
+    background: linear-gradient(90deg, #27ae60, var(--secondary-color));
+}
+
+.hero-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.hero-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    background: linear-gradient(135deg, var(--secondary-color), #3498db);
+}
+
+.cert-card .hero-icon {
+    background: linear-gradient(135deg, var(--adobe-red), var(--microsoft-blue));
+}
+
+.blog-card .hero-icon {
+    background: linear-gradient(135deg, #27ae60, var(--secondary-color));
+}
+
+.hero-card-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.hero-card-content {
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-card-content p {
+    color: var(--light-text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.cert-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.adobe-badge {
+    background: linear-gradient(135deg, var(--adobe-red), #ff4444);
+}
+
+.azure-badge {
+    background: linear-gradient(135deg, var(--microsoft-blue), #0099ff);
+}
+
+.ai-badge {
+    background: linear-gradient(135deg, #9b59b6, #e74c3c);
+}
+
+.blog-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.topic-tag {
+    padding: 0.2rem 0.6rem;
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.hero-card-footer {
+    margin-top: auto;
+}
+
+.card-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.cert-card .card-action {
+    color: var(--adobe-red);
+}
+
+.blog-card .card-action {
+    color: #27ae60;
+}
+
+.coming-soon {
+    color: var(--light-text) !important;
+    font-style: italic;
+}
+
+.card-action i {
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.hero-card:hover .card-action i {
+    transform: translateX(4px);
+}
+
+/* Responsive adjustments for hero section */
 @media (max-width: 768px) {
-    .container {
-        padding: 0.5rem; /* Reduced from 1rem */
-    }
-    
-    .certifications {
+    .hero-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
     }
     
-    h1 {
-        font-size: 1.3rem; /* Reduced from 2rem */
+    .hero-card {
+        padding: 1.5rem;
+        min-height: 240px;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .hero-card-header h3 {
+        font-size: 1.1rem;
     }
 }
