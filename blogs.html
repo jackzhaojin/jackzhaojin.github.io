@@ -8,6 +8,260 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>        /* Blog-specific styles */        .blog-content {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .blog-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .blog-main {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .blog-filters {
+            padding: 1rem;
+            background: rgba(44, 62, 80, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            position: sticky;
+            top: 1rem;
+        }
+        
+        .filter-section {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-size: 0.85rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+          .filter-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--secondary-color);
+            background: white;
+            color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .filter-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .filter-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .filter-btn.ai-filter.active {
+            background: var(--microsoft-blue);
+            border-color: var(--microsoft-blue);
+        }
+        
+        .filter-btn.aem-filter.active {
+            background: var(--adobe-red);
+            border-color: var(--adobe-red);
+        }
+          .clear-filters {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(44, 62, 80, 0.1);
+        }
+        
+        .clear-filters .filter-btn {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        
+        .clear-filters .filter-btn:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+          .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .blog-item {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: white;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .blog-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .blog-item.ai-topic {
+            border-left: 3px solid var(--microsoft-blue);
+        }
+        
+        .blog-item.aem-topic {
+            border-left: 3px solid var(--adobe-red);
+        }
+        
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            gap: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1.3;
+            flex: 1;
+        }
+        
+        .blog-date {
+            font-size: 0.75rem;
+            color: var(--light-text);
+            white-space: nowrap;
+            margin-top: 0.1rem;
+        }
+        
+        .blog-badges {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .blog-badge {
+            padding: 0.15rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .blog-badge.topic-ai {
+            background: rgba(0, 120, 212, 0.1);
+            color: var(--microsoft-blue);
+        }
+        
+        .blog-badge.topic-aem {
+            background: rgba(250, 15, 0, 0.1);
+            color: var(--adobe-red);
+        }
+        
+        .blog-badge.type-leadership {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--presentation-color);
+        }
+        
+        .blog-badge.type-technical {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        .blog-excerpt {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .result-count {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+          @media (max-width: 768px) {
+            .blog-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .blog-sidebar {
+                width: 100%;
+            }
+            
+            .blog-filters {
+                position: static;
+            }
+            
+            .filter-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            
+            .filter-btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.6rem;
+                width: auto;
+                text-align: center;
+            }
+            
+            .clear-filters .filter-btn {
+                width: 100%;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-header {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            
+            .blog-date {
+                align-self: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -20,38 +274,128 @@
                 </div>
             </div>
         </header>
-        
-        <main>
-            <section class="cert-group blog-coming-soon">
-                <h2>Blog Coming Soon</h2>
-                <div class="landing-intro">
-                    <p>I'm currently working on bringing you insightful content about cloud architecture, digital transformation, and technology trends. Stay tuned for regular updates!</p>
-                    <p>In the meantime, feel free to connect with me on <a href="https://www.linkedin.com/in/jackjin" target="_blank">LinkedIn</a> where I regularly share my thoughts and experiences.</p>
-                </div>
-            </section>
+          <main>
+            <div class="blog-content">
+                <!-- Sidebar with Filters -->
+                <aside class="blog-sidebar">
+                    <section class="blog-filters">
+                        <div class="filter-section">
+                            <span class="filter-label"><i class="fas fa-tag"></i> Filter by Topic:</span>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" data-filter="topic" data-value="all">All Topics</button>
+                                <button class="filter-btn ai-filter" data-filter="topic" data-value="ai">AI</button>
+                                <button class="filter-btn aem-filter" data-filter="topic" data-value="aem">AEM</button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-section">
+                            <span class="filter-label"><i class="fas fa-layer-group"></i> Filter by Content Type:</span>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" data-filter="type" data-value="all">All Types</button>
+                                <button class="filter-btn" data-filter="type" data-value="leadership">Leadership</button>
+                                <button class="filter-btn" data-filter="type" data-value="technical">Technical</button>
+                            </div>
+                        </div>
+                        
+                        <div class="clear-filters">
+                            <button class="filter-btn" onclick="clearAllFilters()">
+                                <i class="fas fa-times-circle"></i> Clear All Filters
+                            </button>
+                        </div>
+                    </section>
+                </aside>
 
-            <section class="cert-group navigation-group">
-                <h2>Explore Other Sections</h2>
-                <div class="certifications">
-                    <a href="index.html" class="cert-item-link">
-                        <div class="cert-item landing-nav-item">
-                            <div class="cert-content">
-                                <h3><i class="fas fa-home"></i> Home</h3>
-                                <p>Return to the main landing page</p>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="certifications.html" class="cert-item-link">
-                        <div class="cert-item landing-nav-item">
-                            <div class="cert-content">
-                                <h3><i class="fas fa-certificate"></i> Certifications</h3>
-                                <p>View my professional certifications and achievements</p>
-                            </div>
-                        </div>
-                    </a>
+                <!-- Main Content Area -->
+                <div class="blog-main">
+                    <!-- Results Count -->
+                    <div class="result-count" id="resultCount">
+                        Showing 5 of 5 posts
+                    </div>
+
+            <!-- Blog Posts Grid -->
+            <section class="blog-grid" id="blogGrid">                <!-- Blog Post 1: Vibe Coding on a Sunday -->
+                <a href="https://www.linkedin.com/pulse/vibe-coding-sunday-ranking-ai-tools-star-story-generation-jack-jin-cadnc" target="_blank" class="blog-item ai-topic" 
+                   data-topic="ai" 
+                   data-type="technical" 
+                   data-date="2025-04-13"
+                   data-title="Vibe Coding on a Sunday: Ranking AI Tools for STAR Story Generation">
+                    <div class="blog-header">
+                        <h3 class="blog-title">Vibe Coding on a Sunday: Ranking AI Tools for STAR Story Generation</h3>
+                        <span class="blog-date">Apr 13, 2025</span>
+                    </div>
+                    <div class="blog-badges">
+                        <span class="blog-badge topic-ai">AI</span>
+                        <span class="blog-badge type-technical">Technical</span>
+                    </div>
+                    <p class="blog-excerpt">A hands-on comparison of AI tools for generating STAR (Situation, Task, Action, Result) stories, complete with coding workflow examples and Azure deployment insights.</p>
+                </a>                <!-- Blog Post 2: I Have a New Hobby -->
+                <a href="https://www.linkedin.com/posts/jackjin_leadershipinai-codingwithai-appliedai-activity-7332500208129363970-Pmv8" target="_blank" class="blog-item ai-topic" 
+                   data-topic="ai" 
+                   data-type="leadership" 
+                   data-date="2025-05-25"
+                   data-title="I Have a New Hobby, and It's Coding With AI">
+                    <div class="blog-header">
+                        <h3 class="blog-title">I Have a New Hobby, and It's Coding With AI</h3>
+                        <span class="blog-date">May 25, 2025</span>
+                    </div>
+                    <div class="blog-badges">
+                        <span class="blog-badge topic-ai">AI</span>
+                        <span class="blog-badge type-leadership">Leadership</span>
+                    </div>
+                    <p class="blog-excerpt">Personal insights on the career journey of AI adoption, exploring how coding with AI has become both a hobby and a professional development strategy.</p>
+                </a>                <!-- Blog Post 3: AEM Headless -->
+                <a href="https://www.linkedin.com/pulse/why-aem-headless-makes-sense-when-frontend-teams-lead-jack-jin-kmtlc" target="_blank" class="blog-item aem-topic" 
+                   data-topic="aem" 
+                   data-type="technical" 
+                   data-date="2025-05-28"
+                   data-title="Why AEM Headless Makes Sense When Frontend Teams Lead the Way">
+                    <div class="blog-header">
+                        <h3 class="blog-title">Why AEM Headless Makes Sense When Frontend Teams Lead the Way</h3>
+                        <span class="blog-date">May 28, 2025</span>
+                    </div>
+                    <div class="blog-badges">
+                        <span class="blog-badge topic-aem">AEM</span>
+                        <span class="blog-badge type-technical">Technical</span>
+                    </div>
+                    <p class="blog-excerpt">Technical analysis of headless CMS architecture and implementation strategies, focusing on how frontend-driven development teams can maximize AEM's capabilities.</p>
+                </a>                <!-- Blog Post 4: Bookshelves to Reasoning Tokens -->
+                <a href="https://www.linkedin.com/pulse/from-bookshelves-reasoning-tokens-reflecting-adobes-marketing-jin-gasfc" target="_blank" class="blog-item ai-topic" 
+                   data-topic="ai" 
+                   data-type="leadership" 
+                   data-date="2025-06-01"
+                   data-title="From Bookshelves to Reasoning Tokens and Reflecting on Adobe's Marketing Cloud Evolution">
+                    <div class="blog-header">
+                        <h3 class="blog-title">From Bookshelves to Reasoning Tokens and Reflecting on Adobe's Marketing Cloud Evolution</h3>
+                        <span class="blog-date">Jun 01, 2025</span>
+                    </div>                    <div class="blog-badges">
+                        <span class="blog-badge topic-ai">AI</span>
+                        <span class="blog-badge type-leadership">Leadership</span>
+                    </div>
+                    <p class="blog-excerpt">Reflecting on the technology evolution from traditional content management to AI-driven experiences, exploring generational perspectives on Adobe's ecosystem transformation.</p>
+                </a>                <!-- Blog Post 5: 7 AEM Capabilities -->
+                <a href="https://www.linkedin.com/pulse/making-sense-7-aem-capabilities-tradeoffs-narratives-why-jack-jin-gl40c" target="_blank" class="blog-item aem-topic" 
+                   data-topic="aem" 
+                   data-type="technical" 
+                   data-date="2025-06-04"
+                   data-title="Making Sense of 7 AEM Capabilities: Tradeoffs, Narratives, and Why It Matters">
+                    <div class="blog-header">
+                        <h3 class="blog-title">Making Sense of 7 AEM Capabilities: Tradeoffs, Narratives, and Why It Matters</h3>
+                        <span class="blog-date">Jun 04, 2025</span>
+                    </div>
+                    <div class="blog-badges">
+                        <span class="blog-badge topic-aem">AEM</span>
+                        <span class="blog-badge type-technical">Technical</span>
+                    </div>
+                    <p class="blog-excerpt">Comprehensive comparison and analysis of AEM's product offerings, providing decision frameworks and consulting methodology for evaluating the right AEM solution.</p>
+                </a>
+            </section>                    <!-- No Results Message -->
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <i class="fas fa-search"></i>
+                        <p>No blog posts match your current filters.</p>
+                        <p><small>Try adjusting your filters or <a href="#" onclick="clearAllFilters()">clear all filters</a> to see all posts.</small></p>
+                    </div>
                 </div>
-            </section>
+            </div>
         </main>
         
         <footer>
@@ -68,5 +412,110 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        // Blog filtering and sorting functionality
+        let currentFilters = {
+            topic: 'all',
+            type: 'all'
+        };        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sort by latest first on page load
+            sortBlogsByLatest();
+            updateResultCount();
+            
+            // Add click handlers to filter buttons
+            document.querySelectorAll('[data-filter]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterType = this.dataset.filter;
+                    const filterValue = this.dataset.value;
+                    
+                    // Update active states
+                    document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Update current filters
+                    currentFilters[filterType] = filterValue;
+                    
+                    // Apply filters
+                    applyFilters();
+                });
+            });
+        });
+
+        function applyFilters() {
+            const blogItems = document.querySelectorAll('.blog-item');
+            let visibleCount = 0;
+
+            blogItems.forEach(item => {
+                const itemTopic = item.dataset.topic;
+                const itemType = item.dataset.type;
+                
+                const topicMatch = currentFilters.topic === 'all' || itemTopic === currentFilters.topic;
+                const typeMatch = currentFilters.type === 'all' || itemType === currentFilters.type;
+                
+                if (topicMatch && typeMatch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            updateResultCount(visibleCount);
+            
+            // Show/hide no results message
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        function updateResultCount(visibleCount = null) {
+            const total = document.querySelectorAll('.blog-item').length;
+            const showing = visibleCount !== null ? visibleCount : total;
+            const resultCount = document.getElementById('resultCount');
+            
+            if (showing === total) {
+                resultCount.textContent = `Showing all ${total} posts, sorted by latest`;
+            } else {
+                resultCount.textContent = `Showing ${showing} of ${total} posts, sorted by latest`;
+            }
+        }        function clearAllFilters() {
+            // Reset filters
+            currentFilters = {
+                topic: 'all',
+                type: 'all'
+            };
+            
+            // Reset button states
+            document.querySelectorAll('[data-filter]').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === 'all') {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Apply changes
+            applyFilters();
+        }        function sortBlogsByLatest() {
+            const blogGrid = document.getElementById('blogGrid');
+            const blogItems = Array.from(blogGrid.querySelectorAll('.blog-item'));
+            
+            // Sort by date descending (latest first)
+            blogItems.sort((a, b) => {
+                return new Date(b.dataset.date) - new Date(a.dataset.date);
+            });
+            
+            // Reorder the items in the DOM
+            blogItems.forEach(item => {
+                blogGrid.appendChild(item);
+            });
+        }
+    </script>
 </body>
 </html>
