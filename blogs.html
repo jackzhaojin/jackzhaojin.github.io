@@ -106,10 +106,9 @@
         .clear-filters .filter-btn:hover {
             background: var(--accent-color);
             color: white;
-        }
-          .blog-grid {
+        }        .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
@@ -246,10 +245,15 @@
             
             .clear-filters .filter-btn {
                 width: 100%;
+            }            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin: 1rem 0;
             }
             
-            .blog-grid {
-                grid-template-columns: 1fr;
+            .blog-item {
+                width: 100%;
+                box-sizing: border-box;
             }
             
             .blog-header {
