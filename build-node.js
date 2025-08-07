@@ -222,7 +222,7 @@ async function generatePDFWithPuppeteer(content, outputFile, title = "Platform B
         // Convert markdown to HTML using our built-in converter
         const htmlContent = markdownToHtml(content);
         
-        // Create full HTML page with professional styling
+        // Create full HTML page with scientific publication styling
         const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -230,143 +230,158 @@ async function generatePDFWithPuppeteer(content, outputFile, title = "Platform B
     <title>Platform Blueprint - ${title}</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #222;
             max-width: none;
             margin: 0;
             padding: 0;
+            font-size: 11pt;
         }
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 30px 40px;
         }
         h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
-            margin-top: 2em;
-            margin-bottom: 1em;
+            color: #000;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
             page-break-after: avoid;
+            font-weight: bold;
         }
         h1 { 
-            border-bottom: 3px solid #3498db; 
-            padding-bottom: 15px; 
-            font-size: 2.2em;
+            border-bottom: 2px solid #000; 
+            padding-bottom: 8px; 
+            font-size: 18pt;
             margin-top: 0;
+            text-align: center;
         }
         h2 { 
-            border-bottom: 1px solid #bdc3c7; 
-            padding-bottom: 10px; 
-            font-size: 1.8em;
-            color: #34495e;
+            border-bottom: 1px solid #666; 
+            padding-bottom: 4px; 
+            font-size: 14pt;
+            color: #000;
+            margin-top: 1.5em;
         }
         h3 { 
-            font-size: 1.4em; 
-            color: #34495e;
+            font-size: 12pt; 
+            color: #000;
+            margin-top: 1.2em;
+        }
+        h4 { 
+            font-size: 11pt; 
+            color: #000;
+            margin-top: 1em;
         }
         p { 
-            margin-bottom: 1.2em; 
+            margin-bottom: 0.8em; 
             text-align: justify; 
-            line-height: 1.7;
+            line-height: 1.4;
             orphans: 2;
             widows: 2;
+            text-indent: 0;
         }
         ul, ol { 
-            margin-bottom: 1.5em; 
-            padding-left: 2em; 
+            margin-bottom: 0.8em; 
+            padding-left: 1.5em; 
         }
         li { 
-            margin-bottom: 0.7em; 
-            line-height: 1.6;
+            margin-bottom: 0.3em; 
+            line-height: 1.4;
             page-break-inside: avoid;
         }
         strong { 
-            color: #2c3e50; 
-            font-weight: 600;
+            color: #000; 
+            font-weight: bold;
         }
         em { 
-            color: #7f8c8d; 
+            color: #222; 
+            font-style: normal;
+            font-weight: 500;
         }
         code {
-            background-color: #f8f9fa;
-            color: #e83e8c;
-            padding: 2px 6px;
-            border-radius: 3px;
+            background-color: #f5f5f5;
+            color: #000;
+            padding: 1px 3px;
+            border-radius: 2px;
             font-family: 'Courier New', Consolas, Monaco, monospace;
-            font-size: 0.9em;
-            border: 1px solid #e9ecef;
+            font-size: 9pt;
+            border: 1px solid #ddd;
         }
         pre {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 1.5em 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 1em 0;
             overflow-x: auto;
             page-break-inside: avoid;
-            line-height: 1.45;
+            line-height: 1.3;
+            font-size: 9pt;
         }
         pre code {
             background: none;
-            color: #24292e;
+            color: #000;
             padding: 0;
             border: none;
-            font-size: 0.85em;
+            font-size: 9pt;
             border-radius: 0;
         }
-        /* Syntax highlighting for different languages */
+        /* Simplified syntax highlighting */
         .language-bash code, .language-shell code {
-            color: #032f62;
+            color: #000;
         }
         .language-javascript code, .language-js code {
-            color: #d73a49;
+            color: #000;
         }
         .language-yaml code, .language-yml code {
-            color: #6f42c1;
+            color: #000;
         }
         .language-json code {
-            color: #005cc5;
+            color: #000;
         }
         blockquote {
-            border-left: 4px solid #3498db;
-            margin: 1.5em 0;
-            padding: 0.5em 1.5em;
-            background-color: #f8f9fa;
-            font-style: italic;
+            border-left: 3px solid #666;
+            margin: 1em 0;
+            padding: 0.3em 1em;
+            background-color: #f9f9f9;
+            font-style: normal;
         }
         table {
             border-collapse: collapse;
             width: 100%;
-            margin: 1.5em 0;
+            margin: 1em 0;
+            font-size: 10pt;
         }
         td, th {
-            border: 1px solid #ddd;
-            padding: 8px 12px;
+            border: 1px solid #666;
+            padding: 4px 8px;
             text-align: left;
         }
         th {
-            background-color: #f8f9fa;
-            font-weight: 600;
+            background-color: #f0f0f0;
+            font-weight: bold;
         }
         hr {
             border: none;
-            border-top: 2px solid #e9ecef;
-            margin: 2em 0;
+            border-top: 1px solid #666;
+            margin: 1.5em 0;
         }
         .header { 
             text-align: center; 
-            margin-bottom: 3em; 
-            padding-bottom: 2em; 
-            border-bottom: 2px solid #3498db;
+            margin-bottom: 2em; 
+            padding-bottom: 1em; 
+            border-bottom: 2px solid #000;
             page-break-after: avoid;
         }
         .footer { 
             text-align: center; 
-            margin-top: 3em; 
-            padding-top: 2em; 
-            border-top: 1px solid #bdc3c7; 
-            color: #7f8c8d;
-            font-size: 0.9em;
+            margin-top: 2em; 
+            padding-top: 1em; 
+            border-top: 1px solid #666; 
+            color: #666;
+            font-size: 9pt;
             page-break-before: avoid;
         }
         @page { 
@@ -374,19 +389,22 @@ async function generatePDFWithPuppeteer(content, outputFile, title = "Platform B
             size: Letter;
         }
         @media print {
-            .container { padding: 20px; }
-            h1 { font-size: 18pt; }
-            h2 { font-size: 16pt; }
-            h3 { font-size: 14pt; }
+            .container { padding: 15px; }
+            h1 { font-size: 16pt; }
+            h2 { font-size: 13pt; }
+            h3 { font-size: 11pt; }
+            h4 { font-size: 10pt; }
+            body { font-size: 10pt; }
+            pre, code { font-size: 8pt; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 style="border: none; margin-bottom: 0;">Jack Jin - Personal Site</h1>
-            <h2 style="border: none; color: #7f8c8d; margin-top: 0; font-size: 1.3em;">${title}</h2>
-            <p><strong>Author:</strong> Jack Jin | <strong>Date:</strong> ${getCurrentDate()}</p>
+            <h1 style="border: none; margin-bottom: 0;">Platform Blueprint</h1>
+            <h2 style="border: none; color: #666; margin-top: 0; font-size: 12pt; font-weight: normal;">${title}</h2>
+            <p style="margin: 0.5em 0; font-size: 10pt;"><strong>Author:</strong> Jack Jin | <strong>Date:</strong> ${getCurrentDate()}</p>
         </div>
         ${htmlContent}
         <div class="footer">
@@ -519,139 +537,155 @@ function generateHTML(content, outputFile, title = "Platform Blueprint") {
     <title>Platform Blueprint - ${title}</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #222;
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: #fff;
+            font-size: 11pt;
         }
         .container {
             background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 0;
+            box-shadow: none;
+            border: 1px solid #ddd;
         }
         h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
-            margin-top: 2em;
-            margin-bottom: 1em;
+            color: #000;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-weight: bold;
         }
         h1 { 
-            border-bottom: 3px solid #3498db; 
-            padding-bottom: 15px; 
-            font-size: 2.5em;
+            border-bottom: 2px solid #000; 
+            padding-bottom: 8px; 
+            font-size: 20pt;
             margin-top: 0;
+            text-align: center;
         }
         h2 { 
-            border-bottom: 1px solid #bdc3c7; 
-            padding-bottom: 10px; 
-            font-size: 2em;
-            color: #34495e;
+            border-bottom: 1px solid #666; 
+            padding-bottom: 4px; 
+            font-size: 16pt;
+            color: #000;
+            margin-top: 1.5em;
         }
         h3 { 
-            font-size: 1.5em; 
-            color: #34495e;
+            font-size: 14pt; 
+            color: #000;
+            margin-top: 1.2em;
+        }
+        h4 { 
+            font-size: 12pt; 
+            color: #000;
+            margin-top: 1em;
         }
         p { 
-            margin-bottom: 1.2em; 
+            margin-bottom: 0.8em; 
             text-align: justify; 
-            line-height: 1.7;
+            line-height: 1.4;
+            text-indent: 0;
         }
         ul, ol { 
-            margin-bottom: 1.5em; 
-            padding-left: 2em; 
+            margin-bottom: 0.8em; 
+            padding-left: 1.5em; 
         }
         li { 
-            margin-bottom: 0.7em; 
-            line-height: 1.6;
+            margin-bottom: 0.3em; 
+            line-height: 1.4;
         }
         strong { 
-            color: #2c3e50; 
-            font-weight: 600;
+            color: #000; 
+            font-weight: bold;
         }
         em { 
-            color: #7f8c8d; 
+            color: #222; 
+            font-style: normal;
+            font-weight: 500;
         }
         code {
-            background-color: #f8f9fa;
-            color: #e83e8c;
-            padding: 2px 6px;
-            border-radius: 3px;
+            background-color: #f5f5f5;
+            color: #000;
+            padding: 1px 3px;
+            border-radius: 2px;
             font-family: 'Courier New', Consolas, Monaco, monospace;
-            font-size: 0.9em;
-            border: 1px solid #e9ecef;
+            font-size: 10pt;
+            border: 1px solid #ddd;
         }
         pre {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 1.5em 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 1em 0;
             overflow-x: auto;
-            line-height: 1.45;
+            line-height: 1.3;
+            font-size: 10pt;
         }
         pre code {
             background: none;
-            color: #24292e;
+            color: #000;
             padding: 0;
             border: none;
-            font-size: 0.85em;
+            font-size: 10pt;
             border-radius: 0;
         }
-        /* Syntax highlighting for different languages */
+        /* Simplified syntax highlighting */
         .language-bash code, .language-shell code {
-            color: #032f62;
+            color: #000;
         }
         .language-javascript code, .language-js code {
-            color: #d73a49;
+            color: #000;
         }
         .language-yaml code, .language-yml code {
-            color: #6f42c1;
+            color: #000;
         }
         .language-json code {
-            color: #005cc5;
+            color: #000;
         }
         blockquote {
-            border-left: 4px solid #3498db;
-            margin: 1.5em 0;
-            padding: 0.5em 1.5em;
-            background-color: #f8f9fa;
-            font-style: italic;
+            border-left: 3px solid #666;
+            margin: 1em 0;
+            padding: 0.3em 1em;
+            background-color: #f9f9f9;
+            font-style: normal;
         }
         table {
             border-collapse: collapse;
             width: 100%;
-            margin: 1.5em 0;
+            margin: 1em 0;
+            font-size: 10pt;
         }
         td, th {
-            border: 1px solid #ddd;
-            padding: 8px 12px;
+            border: 1px solid #666;
+            padding: 4px 8px;
             text-align: left;
         }
         th {
-            background-color: #f8f9fa;
-            font-weight: 600;
+            background-color: #f0f0f0;
+            font-weight: bold;
         }
         hr {
             border: none;
-            border-top: 2px solid #e9ecef;
-            margin: 2em 0;
+            border-top: 1px solid #666;
+            margin: 1.5em 0;
         }
         .header { 
             text-align: center; 
-            margin-bottom: 3em; 
-            padding-bottom: 2em; 
-            border-bottom: 2px solid #3498db;
+            margin-bottom: 2em; 
+            padding-bottom: 1em; 
+            border-bottom: 2px solid #000;
         }
         .footer { 
             text-align: center; 
-            margin-top: 3em; 
-            padding-top: 2em; 
-            border-top: 1px solid #bdc3c7; 
-            color: #7f8c8d;
-            font-size: 0.9em;
+            margin-top: 2em; 
+            padding-top: 1em; 
+            border-top: 1px solid #666; 
+            color: #666;
+            font-size: 9pt;
         }
         .page-break {
             page-break-before: always;
@@ -659,21 +693,24 @@ function generateHTML(content, outputFile, title = "Platform Blueprint") {
         @media print {
             body { 
                 background-color: white; 
-                font-size: 12pt;
+                font-size: 10pt;
             }
             .container {
                 box-shadow: none;
-                padding: 20px;
+                padding: 15px;
+                border: none;
             }
-            h1 { font-size: 18pt; }
-            h2 { font-size: 16pt; }
-            h3 { font-size: 14pt; }
+            h1 { font-size: 16pt; }
+            h2 { font-size: 13pt; }
+            h3 { font-size: 11pt; }
+            h4 { font-size: 10pt; }
+            pre, code { font-size: 8pt; }
         }
         /* Make links print-friendly */
         @media print {
             a[href]:after {
                 content: " (" attr(href) ")";
-                font-size: 0.8em;
+                font-size: 8pt;
                 color: #666;
             }
         }
@@ -682,9 +719,9 @@ function generateHTML(content, outputFile, title = "Platform Blueprint") {
 <body>
     <div class="container">
         <div class="header">
-            <h1 style="border: none; margin-bottom: 0;">Jack Jin - Personal Site</h1>
-            <h2 style="border: none; color: #7f8c8d; margin-top: 0; font-size: 1.5em;">${title}</h2>
-            <p><strong>Author:</strong> Jack Jin | <strong>Date:</strong> ${getCurrentDate()}</p>
+            <h1 style="border: none; margin-bottom: 0;">Platform Blueprint</h1>
+            <h2 style="border: none; color: #666; margin-top: 0; font-size: 14pt; font-weight: normal;">${title}</h2>
+            <p style="margin: 0.5em 0; font-size: 10pt;"><strong>Author:</strong> Jack Jin | <strong>Date:</strong> ${getCurrentDate()}</p>
         </div>
         ${htmlContent}
         <div class="footer">

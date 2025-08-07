@@ -220,7 +220,7 @@ Instead of showing complex code, we document the filtering approach:
 | **Category-based** | O(n log n) | Minimal | Smooth | Future option |
 
 Content sorting implementation uses JavaScript array manipulation to reorder blog items based on date metadata. The system extracts blog items from the DOM, sorts them by date in descending order, and re-appends them to maintain chronological presentation.
-```
+
 
 ## Data Consistency and Validation
 
@@ -350,8 +350,6 @@ Migration to static site generators involves extracting data attributes to JSON/
 #### To Dynamic CMS
 
 Dynamic CMS migration requires content export to structured formats, database schema design, API layer implementation, and frontend rebuild with API integration.
-  5. Migrate to different hosting platform
-```
 
 ## Data Architecture Best Practices
 

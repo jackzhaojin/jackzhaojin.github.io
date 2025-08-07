@@ -147,8 +147,6 @@ The static site architecture provides an inherently secure foundation by elimina
 3. **Implementation Effort**: 5 minutes
 4. **Security Benefit**: Protection against CDN compromise
 5. **Compatibility**: Universal browser support 
-      referrerpolicy="no-referrer" />
-```
 
 ## Privacy and Data Protection
 
@@ -256,7 +254,6 @@ The static site architecture provides an inherently secure foundation by elimina
 ## Risk Assessment Matrix
 
 ### Current Risk Profile
-```
 Risk Level: LOW
 Primary Risk Factors:
   - Minimal attack surface
@@ -270,7 +267,6 @@ Residual Risks:
   - External font dependency (Low impact)
   - Browser security reliance (Low impact)
   - DNS/domain risks (Low impact - using github.io)
-```
 
 ### Risk Mitigation Strategies
 1. **Defense in Depth**: Multiple security layers
