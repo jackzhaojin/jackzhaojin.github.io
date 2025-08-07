@@ -218,18 +218,8 @@ Instead of showing complex code, we document the filtering approach:
 | **Oldest First** | O(n log n) | Minimal | Smooth | Alternative |
 | **Alphabetical** | O(n log n) | Minimal | Smooth | Future option |
 | **Category-based** | O(n log n) | Minimal | Smooth | Future option |
-    const blogItems = Array.from(blogGrid.querySelectorAll('.blog-item'));
-    
-    // Sort by date descending (latest first)
-    blogItems.sort((a, b) => {
-        return new Date(b.dataset.date) - new Date(a.dataset.date);
-    });
-    
-    // Reorder DOM elements
-    blogItems.forEach(item => {
-        blogGrid.appendChild(item);
-    });
-}
+
+Content sorting implementation uses JavaScript array manipulation to reorder blog items based on date metadata. The system extracts blog items from the DOM, sorts them by date in descending order, and re-appends them to maintain chronological presentation.
 ```
 
 ## Data Consistency and Validation
@@ -255,20 +245,12 @@ Since there's no build-time validation, consistency relies on:
 ### Data Integrity Measures
 
 #### Git-Based Integrity
-```bash
-# Every change is tracked and reversible
-git log --oneline           # View change history
-git show <commit>           # Review specific changes
-git revert <commit>         # Undo problematic changes
-```
+
+Git version control ensures every change is tracked and reversible through commit history review, specific change inspection, and problematic change reversal operations.
 
 #### Schema Evolution Strategy
-```javascript
-// Future-proofing data attributes
-// Current: data-topic="ai"
-// Future: data-topics="ai,machine-learning" (multiple topics)
-// Backward compatibility maintained through graceful degradation
-```
+
+The platform supports future-proofing through flexible data attribute design. Current single-value topic attributes can evolve to multi-value systems while maintaining backward compatibility through graceful degradation patterns.
 
 ## Performance Optimization
 
@@ -283,25 +265,16 @@ Metrics (Current Implementation):
 
 #### Optimization Strategies
 1. **DOM Query Optimization**
-   ```javascript
-   // Cache DOM queries
-   const blogItems = document.querySelectorAll('.blog-item'); // Once
-   // Instead of querying repeatedly in loops
-   ```
+   
+   DOM query optimization uses element caching to store query results once rather than repeated selections during filter operations.
 
 2. **Batch DOM Updates**
-   ```javascript
-   // Batch style changes to minimize reflow
-   blogItems.forEach(item => {
-       item.style.display = shouldShow(item) ? 'block' : 'none';
-   });
-   ```
+   
+   Style change batching minimizes browser reflow by applying all visibility changes in a single operation rather than individual item updates.
 
 3. **Lazy Loading Considerations**
-   ```javascript
-   // Future: Implement virtual scrolling for large datasets
-   // Current: Not needed (~15 blog posts)
-   ```
+   
+   Virtual scrolling implementation is considered for future large dataset scenarios, though current blog post volume does not require this optimization.
 
 ## Data Backup and Recovery
 
@@ -329,7 +302,6 @@ Backup Levels:
 ## Analytics and Insights
 
 ### GitHub Native Analytics
-```yaml
 Available Metrics:
   Traffic:
     - Unique visitors (14-day rolling window)
@@ -343,22 +315,10 @@ Available Metrics:
     - Commit frequency
     - Contributor activity
     - Code change patterns
-```
 
 ### Custom Analytics Considerations
-```javascript
-// Potential client-side analytics (not implemented)
-const trackingData = {
-    filterUsage: {}, // Which filters are used most
-    contentViews: {}, // Which blog posts get clicks
-    userJourney: {} // How users navigate the site
-};
 
-// Could implement privacy-respecting analytics:
-// - No personal data collection
-// - Local storage only
-// - Aggregated insights only
-```
+Potential client-side analytics implementation would focus on filter usage patterns, content engagement metrics, and user navigation flows. Privacy-respecting approach would avoid personal data collection, use local storage exclusively, and provide only aggregated insights.
 
 ## Future Data Architecture Evolution
 
@@ -367,51 +327,29 @@ const trackingData = {
 #### Scenario 1: Content Volume Growth
 **Current**: ~15 blog posts, manageable client-side processing
 **Future**: 100+ posts might require:
-```javascript
-// Pagination or virtual scrolling
-// Static generation of filtered views
-// Search index generation
-```
+Content volume growth beyond 100+ posts might require pagination or virtual scrolling, static generation of filtered views, and search index generation.
 
 #### Scenario 2: Multiple Content Types
 **Current**: Blog posts and certifications
 **Future**: Projects, presentations, case studies
-```html
-<!-- Extended data model -->
-<div data-content-type="project"
-     data-technologies="react,typescript,azure"
-     data-status="active"
-     data-client-type="enterprise">
-```
+
+Extended data models would include project content types with technology stacks, status indicators, and client type classifications.
 
 #### Scenario 3: API Integration
 **Current**: Static content only
 **Future**: External data sources
-```javascript
-// Hybrid approach: Static + API
-// - Core content: Static (fast, reliable)
-// - Dynamic content: API (current, interactive)
-```
+
+Hybrid approach combines static core content for speed and reliability with API-driven dynamic content for current information and interactive features.
 
 ### Migration Strategies
 
 #### To Static Site Generator
-```yaml
-Migration Path:
-  1. Extract data attributes to JSON/YAML files
-  2. Create templates for current HTML structure
-  3. Implement Jekyll/Hugo/11ty build process
-  4. Maintain current URL structure
-  5. Deploy build artifacts to GitHub Pages
-```
+
+Migration to static site generators involves extracting data attributes to JSON/YAML files, creating templates for current HTML structure, implementing Jekyll/Hugo/11ty build process, maintaining URL structure, and deploying build artifacts to GitHub Pages.
 
 #### To Dynamic CMS
-```yaml
-Migration Path:
-  1. Export content to structured format
-  2. Design database schema
-  3. Implement API layer
-  4. Rebuild frontend with API integration
+
+Dynamic CMS migration requires content export to structured formats, database schema design, API layer implementation, and frontend rebuild with API integration.
   5. Migrate to different hosting platform
 ```
 

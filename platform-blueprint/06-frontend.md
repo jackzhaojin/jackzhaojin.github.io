@@ -72,48 +72,18 @@ Despite not using a framework, the code follows component-like patterns:
         this.applyFilters();
         this.updateUI();
     }
-};
+;
 ```
 
 ### Module Pattern Implementation
-```javascript
-// Include System (includes.js)
-const IncludeModule = (() => {
-    // Private methods
-    function loadFooter() {
-        const footerHTML = `<!-- Footer content -->`;
-        const footerElements = document.querySelectorAll('[data-include*="footer.html"]');
-        footerElements.forEach(element => {
-            element.innerHTML = footerHTML;
-        });
-    }
-    
-    // Public API
-    return {
-        init: () => {
-            document.addEventListener('DOMContentLoaded', loadFooter);
-        }
-    };
-})();
 
-// Auto-initialize
-IncludeModule.init();
-```
+The include system uses module pattern encapsulation with private methods for footer loading and public initialization API. The system automatically processes data-include attributes and populates elements with static footer content during DOM content loaded events.
 
 ## CSS Architecture
 
 ### Systematic Design System
-```css
-/* CSS Custom Properties as Design Tokens */
-:root {
-    /* Color System */
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    
-    /* Brand Colors */
-    --microsoft-blue: #0078d4;
-    --adobe-red: #fa0f00;
+
+CSS custom properties serve as design tokens defining color systems with primary, secondary, and accent colors. Brand-specific colors for Microsoft and Adobe maintain consistency with certification displays.
     --presentation-color: #27ae60;
     
     /* Typography Scale */
@@ -133,66 +103,18 @@ IncludeModule.init();
     --border-radius: 8px;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
-}
-```
 
 ### Component-Based CSS Organization
-```css
-/* Base Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: var(--line-height);
-    color: var(--text-color);
-    background-color: var(--background-color);
-}
 
-/* Layout Components */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--space-sm);
-}
-
-/* Card Component Pattern */
-.blog-item,
-.cert-item {
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-    padding: var(--space-md);
-}
+The CSS architecture follows systematic component patterns using design tokens for consistency. Base styles establish typography and color foundations, layout components provide responsive containers, and card component patterns ensure uniform presentation across blog items and certification displays.
 
 .blog-item:hover,
 .cert-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-```
-
 ### Responsive Design Strategy
-```css
-/* Mobile-First Approach */
-.blog-content {
-    display: block; /* Stack on mobile */
-}
 
-.blog-sidebar {
-    width: 100%;
-    margin-bottom: var(--space-lg);
-}
-
-/* Progressive Enhancement */
-@media (min-width: 768px) {
-    .blog-content {
-        display: flex;
-        gap: var(--space-lg);
-    }
-    
-    .blog-sidebar {
-        width: 250px;
-        flex-shrink: 0;
-        margin-bottom: 0;
+Mobile-first responsive design uses progressive enhancement with flexible layouts. Blog content stacks vertically on mobile devices and transitions to horizontal layouts with sidebar positioning on larger screens. Grid systems activate at desktop breakpoints for optimal content presentation.
     }
 }
 
@@ -208,21 +130,8 @@ body {
 ## State Management Architecture
 
 ### Client-Side State Pattern
-```javascript
-// Centralized State Management (without Redux)
-const AppState = {
-    // Application state
-    filters: {
-        topic: 'all',
-        type: 'all',
-        media: 'all'
-    },
-    
-    ui: {
-        activeButtons: new Set(),
-        visibleItemCount: 0,
-        sortOrder: 'latest'
-    },
+
+Centralized state management without external libraries provides application-wide filter state, UI state tracking, and observer pattern notifications. The system maintains filter selections, active button states, visible item counts, and sort order preferences.
     
     // State management methods
     setState(path, value) {
@@ -261,17 +170,9 @@ const AppState = {
     }
 };
 
-// Usage example
-AppState.subscribe((path, value) => {
-    if (path.startsWith('filters.')) {
-        applyFilters();
-        updateResultCount();
-    }
-});
-```
+The state management system uses path-based property access, observer pattern notifications, and automatic filter application with result count updates when filter states change.
 
 ### URL State Management
-```javascript
 // URL-based state persistence (optional enhancement)
 const URLStateManager = {
     // Serialize state to URL parameters
@@ -306,49 +207,12 @@ const URLStateManager = {
 ## Performance Optimization
 
 ### DOM Query Optimization
-```javascript
-// Efficient DOM querying patterns
-class DOMCache {
-    constructor() {
-        this.cache = new Map();
-    }
-    
-    query(selector) {
-        if (!this.cache.has(selector)) {
-            this.cache.set(selector, document.querySelectorAll(selector));
-        }
-        return this.cache.get(selector);
-    }
-    
-    queryOne(selector) {
-        const cacheKey = `${selector}:single`;
-        if (!this.cache.has(cacheKey)) {
-            this.cache.set(cacheKey, document.querySelector(selector));
-        }
-        return this.cache.get(cacheKey);
-    }
-    
-    invalidate(selector) {
-        this.cache.delete(selector);
-        this.cache.delete(`${selector}:single`);
-    }
-}
 
-const domCache = new DOMCache();
-```
+Efficient DOM querying uses caching classes to store selector results in memory maps. The system provides single and multiple element queries with cache invalidation for dynamic content updates.
 
 ### Event Delegation Pattern
-```javascript
-// Efficient event handling
-class EventManager {
-    static init() {
-        // Single event listener for all filter buttons
-        document.addEventListener('click', (event) => {
-            const filterButton = event.target.closest('[data-filter]');
-            if (filterButton) {
-                this.handleFilterClick(filterButton);
-                return;
-            }
+
+Event delegation patterns use single document-level listeners to handle filter button interactions efficiently. The system uses event bubbling to process clicks on filter elements without individual listeners.
             
             const blogItem = event.target.closest('.blog-item');
             if (blogItem) {
@@ -375,44 +239,16 @@ class EventManager {
         AppState.setState(`filters.${filterType}`, filterValue);
     }
 }
-```
 
 ### Lazy Loading Implementation
-```javascript
-// Image lazy loading (future enhancement)
-class LazyLoader {
-    static init() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-}
-```
+
+Image lazy loading implementation uses Intersection Observer API to monitor image visibility. The system loads images only when they enter the viewport, improving initial page load performance through deferred image loading.
 
 ## Accessibility Architecture
 
 ### Semantic HTML Structure
-```html
-<!-- Proper semantic structure -->
-<main role="main">
-    <section aria-labelledby="blog-heading">
-        <h2 id="blog-heading">Professional Blogs & Videos</h2>
-        
-        <aside role="complementary" aria-label="Content filters">
-            <div class="blog-filters" role="group" aria-labelledby="filter-heading">
-                <h3 id="filter-heading" class="sr-only">Filter Options</h3>
-                
-                <fieldset>
+
+Semantic HTML structure provides proper main content roles with section labeling and complementary aside elements. The system uses fieldsets for filter groups with appropriate ARIA labels and screen reader support.
                     <legend>Filter by Topic</legend>
                     <button type="button" 
                             aria-pressed="true" 
@@ -437,65 +273,16 @@ class LazyLoader {
         </div>
     </section>
 </main>
-```
 
 ### Keyboard Navigation Support
-```javascript
-class AccessibilityManager {
-    static init() {
-        // Focus management for filter buttons
-        this.setupFocusTrapping();
-        this.setupKeyboardNavigation();
-    }
-    
-    static setupKeyboardNavigation() {
-        document.addEventListener('keydown', (event) => {
-            // Arrow key navigation in filter groups
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-                const focusedButton = document.activeElement;
-                if (focusedButton.hasAttribute('data-filter')) {
-                    event.preventDefault();
-                    this.navigateFilters(focusedButton, event.key);
-                }
-            }
-            
-            // Enter/Space activation
-            if (['Enter', ' '].includes(event.key)) {
-                const focusedElement = document.activeElement;
-                if (focusedElement.hasAttribute('data-filter')) {
-                    event.preventDefault();
-                    focusedElement.click();
-                }
-            }
-        });
-    }
-}
-```
+
+Accessibility management provides keyboard navigation for filter controls with focus trapping and arrow key navigation. The system handles Enter and Space key activation for filter buttons while maintaining proper focus management throughout user interactions.
 
 ## Testing Strategy
 
 ### Unit Testing with Vanilla JavaScript
-```javascript
-// Simple testing framework (no dependencies)
-class SimpleTest {
-    static test(name, fn) {
-        try {
-            fn();
-            console.log(`✅ ${name}`);
-        } catch (error) {
-            console.error(`❌ ${name}: ${error.message}`);
-        }
-    }
-    
-    static assertEqual(actual, expected, message) {
-        if (actual !== expected) {
-            throw new Error(`${message}: expected ${expected}, got ${actual}`);
-        }
-    }
-    
-    static assertTrue(value, message) {
-        if (!value) {
-            throw new Error(`${message}: expected truthy value`);
+
+Simple testing framework implementation provides dependency-free testing capabilities. The system includes assertion methods for equality testing, truthiness validation, and error handling with console-based result reporting.
         }
     }
 }
@@ -513,15 +300,10 @@ SimpleTest.test('Filter function works correctly', () => {
         SimpleTest.assertEqual(post.topic, 'ai', 'All posts should be AI topic');
     });
 });
-```
 
 ### Integration Testing
-```javascript
-// DOM-based integration tests
-class IntegrationTests {
-    static async testFilterInteraction() {
-        // Simulate user clicking filter button
-        const aiButton = document.querySelector('[data-filter="topic"][data-value="ai"]');
+
+DOM-based integration testing simulates user interactions with filter buttons and validates results. The system tests filter functionality by clicking elements and verifying visible items match expected criteria.
         aiButton.click();
         
         // Wait for DOM updates
@@ -534,98 +316,33 @@ class IntegrationTests {
         SimpleTest.assertTrue(visibleItems.length > 0, 'Should show AI posts');
         SimpleTest.assertTrue(hiddenItems.length > 0, 'Should hide non-AI posts');
     }
-}
-```
 
 ## Build and Development Tools
 
 ### Development Workflow
-```bash
-# Local development - no build required
-open index.html
 
-# HTTP server for testing
-npx http-server . -p 8080 -c-1
-
-# CSS/JS validation
-npx stylelint css/*.css
-npx eslint js/*.js
-
-# Accessibility testing
+Local development requires no build process with direct HTML file opening. HTTP server provides testing environment with cache disabled. CSS and JavaScript validation uses standard linting tools for code quality assurance.
 npx pa11y http://localhost:8080
 ```
 
 ### Code Quality Tools
 ```json
 // .eslintrc.json (optional)
-{
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": "eslint:recommended",
-    "rules": {
-        "no-unused-vars": "warn",
-        "no-console": "off",
-        "prefer-const": "error"
-    }
-}
-```
+ESLint configuration extends recommended rules with browser environment support and ES2021 features. The configuration warns about unused variables, allows console logging, and enforces const usage for better code quality.
 
 ## Future Frontend Evolution
 
 ### Progressive Web App (PWA) Readiness
-```javascript
-// Service Worker for offline functionality
-const CACHE_NAME = 'jack-jin-portfolio-v1';
-const urlsToCache = [
-    '/',
-    '/css/styles.css',
-    '/css/blogs.css',
-    '/js/blog-filters.js',
-    '/js/includes.js'
-];
 
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(urlsToCache))
-    );
-});
-```
+Service Worker implementation provides offline functionality through resource caching. The system caches essential CSS, JavaScript, and HTML files for offline access with cache management and update strategies.
 
 ### Web Components Migration Path
-```javascript
-// Custom element for blog filters (future enhancement)
-class BlogFilterComponent extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-    
-    connectedCallback() {
-        this.render();
-        this.attachEventListeners();
-    }
-    
-    render() {
-        this.shadowRoot.innerHTML = `
-            <style>
-                /* Component-scoped styles */
-            </style>
-            <div class="filter-container">
-                <!-- Filter UI -->
-            </div>
-        `;
-    }
-}
 
-customElements.define('blog-filter', BlogFilterComponent);
-```
+Blog filter component implementation uses Web Components API with shadow DOM encapsulation. The system provides component-scoped styling, lifecycle management, and custom element registration for reusable filter interfaces.
 
 ### Framework Migration Strategy
-```javascript
-// Gradual migration approach (if needed)
+
+Gradual migration approaches enable future framework adoption when complexity warrants additional tooling and architectural patterns.
 const MigrationStrategy = {
     phase1: 'Extract reusable functions',
     phase2: 'Create component interfaces',

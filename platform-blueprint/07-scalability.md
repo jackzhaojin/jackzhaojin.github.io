@@ -75,19 +75,8 @@ The current static architecture provides inherent scalability advantages through
 | **Service Worker Caching** | Any scale | Medium | 75% repeat visits | 1 week |
 
 #### Implementation: Virtual Scrolling
-```javascript
-class VirtualScrollManager {
-    constructor(container, itemHeight = 200, bufferSize = 5) {
-        this.container = container;
-        this.itemHeight = itemHeight;
-        this.bufferSize = bufferSize;
-        this.visibleItems = new Map();
-        this.scrollTop = 0;
-    }
-    
-    calculateVisibleRange(scrollTop, containerHeight) {
-        const startIndex = Math.floor(scrollTop / this.itemHeight);
-        const endIndex = Math.min(
+
+Virtual scroll management uses container-based rendering with configurable item heights and buffer sizes. The system calculates visible ranges based on scroll position and container dimensions for efficient large dataset handling.
             startIndex + Math.ceil(containerHeight / this.itemHeight) + this.bufferSize,
             this.totalItems - 1
         );
@@ -219,47 +208,12 @@ For advanced interactive features, implement event-driven architecture:
 - **WebSocket Integration**: Bidirectional real-time communication
 - **Polling Fallback**: Graceful degradation for unsupported browsers
 - **Event Handling**: Manage real-time content updates efficiently
-        this.fallbackInterval = null;
-    }
-    
-    connect() {
-        // Try Server-Sent Events first
-        if (typeof EventSource !== 'undefined') {
-            this.connectSSE();
-        } else {
-            // Fallback to polling
-            this.startPolling();
-        }
-    }
-    
-    connectSSE() {
-        this.eventSource = new EventSource('/api/events');
-        
-        this.eventSource.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            this.handleRealTimeUpdate(data);
-        };
-        
-        this.eventSource.onerror = () => {
-            this.eventSource.close();
-            this.startPolling(); // Graceful degradation
-        };
-    }
-}
-```
+
 
 ### Architecture Scaling Patterns
 
 #### Micro-Frontend Architecture (Future Evolution)
-```javascript
-// Module Federation pattern for scaling frontend
-class ModuleFederation {
-    static async loadRemoteComponent(scope, module) {
-        // Dynamic import of remote modules
-        await this.loadScript(`/remotes/${scope}/remoteEntry.js`);
-### Architecture Scaling Patterns
 
-#### Micro-Frontend Architecture (Future Evolution)
 **Module Federation Strategy for Frontend Scaling:**
 Future architecture evolution could support independent module loading:
 
@@ -396,16 +350,6 @@ Performance Requirements:
 
 ## Future Scaling Architecture
 
-### Serverless Integration Strategy
-```javascript
-// Serverless functions for dynamic features
-class ServerlessIntegration {
-    static async callFunction(name, data) {
-        const response = await fetch(`/.netlify/functions/${name}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
         
 ## Future Scaling Architecture
 
