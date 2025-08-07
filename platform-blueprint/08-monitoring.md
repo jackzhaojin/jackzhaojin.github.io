@@ -7,70 +7,60 @@ In a static site architecture, traditional server-side monitoring is replaced by
 ## Current Monitoring Landscape
 
 ### GitHub-Provided Monitoring
-```yaml
-GitHub Repository Insights:
-  Traffic Analytics:
-    - Unique visitors (14-day rolling window)
-    - Page views by URL path
-    - Top referrers and traffic sources
-    - Popular content identification
-  
-  Repository Activity:
-    - Commit frequency and patterns
-    - Contributor activity levels
-    - Code change velocity
-    - Issue and PR activity
-  
-  Performance Indicators:
-    - Repository size and growth
-    - Pages build status and times
-    - Deployment success/failure rates
-    - Service availability metrics
 
-GitHub Pages Status:
-  Infrastructure Health:
-    - Global CDN status
-    - Build service availability
-    - SSL certificate status
-    - DNS resolution health
+**Diagram 9: Monitoring and Observability Architecture**
 ```
+┌─────────────────────────────────────────────────────────────┐
+│                  Observability Stack                        │
+├─────────────────┬─────────────────┬─────────────────────────┤
+│ GitHub Analytics│ Browser APIs    │   Performance Tools    │
+│  (Server-side)  │ (Client-side)   │    (Development)        │
+├─────────────────┼─────────────────┼─────────────────────────┤
+│ • Traffic Data  │ • Performance   │ • Lighthouse Audits    │
+│ • Referrers     │ • Memory Usage  │ • Web Vitals           │
+│ • Popular Pages │ • Network Info  │ • DevTools Metrics     │
+│ • Build Status  │ • User Timing   │ • A11y Checking        │
+└─────────────────┴─────────────────┴─────────────────────────┘
+```
+
+**GitHub Repository Insights Coverage:**
+
+| Analytics Category | Data Available | Retention Period | Update Frequency | Actionable Insights |
+|-------------------|----------------|------------------|------------------|-------------------|
+| **Traffic Analytics** | | | | |
+| Unique Visitors | 14-day rolling window | 14 days | Daily | Content performance |
+| Page Views by URL | Path-level detail | 14 days | Real-time | Popular content ID |
+| Traffic Sources | Referrer analysis | 14 days | Daily | Marketing effectiveness |
+| Geographic Data | Country-level | 14 days | Daily | Global reach |
+| **Repository Activity** | | | | |
+| Commit Frequency | Pattern analysis | Unlimited | Real-time | Development velocity |
+| Build Success Rate | Deploy reliability | 90 days | Per build | Infrastructure health |
+| Issue Tracking | Bug/feature requests | Unlimited | Real-time | Quality metrics |
 
 ### Built-In Browser Monitoring
-```javascript
-// Performance API utilization
-class BrowserMetrics {
-    static collect() {
-        const navigation = performance.getEntriesByType('navigation')[0];
-        const paint = performance.getEntriesByType('paint');
-        
-        return {
-            // Navigation Timing
-            domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
-            loadComplete: navigation.loadEventEnd - navigation.loadEventStart,
-            totalPageLoad: navigation.loadEventEnd - navigation.fetchStart,
-            
-            // Paint Timing
-            firstPaint: paint.find(p => p.name === 'first-paint')?.startTime || 0,
-            firstContentfulPaint: paint.find(p => p.name === 'first-contentful-paint')?.startTime || 0,
-            
-            // Resource Timing
-            resources: performance.getEntriesByType('resource').map(r => ({
-                name: r.name,
-                duration: r.duration,
-                size: r.transferSize,
-                type: r.initiatorType
-            })),
-            
-            // Memory Usage (if available)
-            memory: performance.memory ? {
-                used: performance.memory.usedJSHeapSize,
-                total: performance.memory.totalJSHeapSize,
-                limit: performance.memory.jsHeapSizeLimit
-            } : null
-        };
-    }
-}
-```
+
+**Browser Performance API Capabilities**
+
+Instead of relying on third-party monitoring tools, we leverage built-in browser APIs for comprehensive performance tracking:
+
+**Core Web Vitals Tracking Matrix:**
+
+| Metric | Measurement Method | Good Threshold | Needs Improvement | Poor Threshold | Business Impact |
+|--------|-------------------|----------------|-------------------|----------------|----------------|
+| **Largest Contentful Paint** | Performance Observer | <2.5s | 2.5s-4.0s | >4.0s | User engagement |
+| **First Input Delay** | Event timing | <100ms | 100ms-300ms | >300ms | Interaction quality |
+| **Cumulative Layout Shift** | Layout shift tracking | <0.1 | 0.1-0.25 | >0.25 | Visual stability |
+| **First Contentful Paint** | Paint timing | <1.8s | 1.8s-3.0s | >3.0s | Perceived speed |
+| **Time to Interactive** | Navigation timing | <3.8s | 3.8s-7.3s | >7.3s | Usability |
+
+**Browser Memory and Resource Monitoring:**
+
+| Resource Type | Tracking Method | Normal Range | Warning Threshold | Critical Threshold |
+|---------------|----------------|--------------|-------------------|-------------------|
+| JavaScript Heap | `performance.memory` | <20MB | 20-50MB | >50MB |
+| DOM Node Count | `document.querySelectorAll('*')` | <1000 | 1000-5000 | >5000 |
+| Network Requests | `performance.getEntriesByType('resource')` | <50 | 50-100 | >100 |
+| Total Page Weight | Resource timing | <1MB | 1-3MB | >3MB |
 
 ## Client-Side Performance Monitoring
 

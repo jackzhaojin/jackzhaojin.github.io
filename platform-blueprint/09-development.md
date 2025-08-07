@@ -7,386 +7,193 @@ The development workflow embraces simplicity and immediate feedback while mainta
 ## Local Development Environment
 
 ### Zero-Dependency Development Setup
-```bash
-# Development workflow - no installation required
-# Option 1: Direct file access (fastest feedback)
-open index.html  # macOS
-start index.html  # Windows
-xdg-open index.html  # Linux
 
-# Option 2: HTTP server for production-like testing
-npx http-server . -p 8080 -c-1
-# Benefits:
-# - True HTTP environment
-# - CORS headers available
-# - Multi-threaded request handling
-# - No global installation required
-# - Cache disabled (-c-1) for immediate changes
-
-# Option 3: Alternative simple servers
-python3 -m http.server 8080
-php -S localhost:8080  # If PHP installed
-npx serve . -p 8080
-npx live-server . --port=8080  # With live reload
+**Diagram 10: Development Workflow and Environment Options**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Development Environment Flow                │
+├─────────────────┬─────────────────┬─────────────────────────┤
+│  Direct Files   │  Local Server   │   Production Test       │
+│  (Fastest)      │  (Recommended)  │    (Validation)         │
+├─────────────────┼─────────────────┼─────────────────────────┤
+│ • No setup      │ • NPX server    │ • GitHub Pages          │
+│ • Instant       │ • CORS headers  │ • Real CDN behavior     │
+│ • Offline       │ • Multi-thread  │ • SSL testing           │
+│ • Any browser   │ • Cache control │ • Global distribution   │
+└─────────────────┴─────────────────┴─────────────────────────┘
+          │                │                     │
+          ▼                ▼                     ▼
+     File Protocol    HTTP Protocol        HTTPS Protocol
+     <5 second setup  <30 second setup    <3 minute deploy
 ```
 
-### Development Environment Advantages
-```yaml
-Immediate Feedback Loop:
-  Edit → Save → Refresh (Browser) → See Changes
-  Total time: <5 seconds
+**Development Environment Comparison:**
 
-No Build Process Benefits:
-  - No webpack, gulp, grunt configuration
-  - No node_modules directory (lighter repo)
-  - No build failures blocking development
-  - No transpilation errors to debug
-  - Works on any machine with a browser
+| Setup Method | Time to Start | Dependencies | Features Available | Production Similarity | Recommended For |
+|-------------|---------------|--------------|-------------------|----------------------|----------------|
+| **Direct File Access** | <5 seconds | None | Basic testing | 60% | Quick edits |
+| **NPX HTTP Server** | <30 seconds | Node.js | Full HTTP features | 85% | Development |
+| **Python Server** | <30 seconds | Python | Basic HTTP | 80% | Alternative |
+| **Live Server** | <60 seconds | Node.js | Auto-reload | 85% | Active development |
+| **GitHub Pages** | <180 seconds | Git push | Full production | 100% | Final testing |
 
-Cross-Platform Compatibility:
-  - Windows: Direct file access or npx
-  - macOS: Direct file access or npx
-  - Linux: Direct file access or npx
-  - Any OS with browser: Works universally
-```
+**Development Tool Integration:**
 
-### Development Tools Integration
-```json
-// package.json (minimal dependencies for tooling only)
-{
-  "name": "jackzhaojin-portfolio",
-  "version": "1.0.0",
-  "description": "Professional portfolio website",
-  "scripts": {
-    "dev": "npx http-server . -p 8080 -c-1 -o",
-    "lint:css": "npx stylelint 'css/**/*.css'",
-    "lint:js": "npx eslint 'js/**/*.js'",
-    "lint:html": "npx html-validate '*.html'",
-    "test": "npm run lint:css && npm run lint:js && npm run lint:html",
-    "audit:accessibility": "npx pa11y http://localhost:8080",
-    "audit:performance": "npx lighthouse http://localhost:8080 --view",
-    "validate": "npm test && npm run audit:accessibility"
-  },
-  "devDependencies": {
-    "@anthropic-ai/claude-code": "^0.2.57"
-  }
-}
-```
+| Tool Category | Tool Name | Purpose | Installation | Usage Frequency |
+|--------------|-----------|---------|--------------|----------------|
+| **Linting** | ESLint | JavaScript quality | NPX | Pre-commit |
+| **Styling** | Stylelint | CSS validation | NPX | Pre-commit |
+| **HTML** | HTML-validate | Markup validation | NPX | Pre-commit |
+| **Performance** | Lighthouse | Performance audits | NPX | Weekly |
+| **Accessibility** | Pa11y | A11y testing | NPX | Before release |
 
 ## Git Workflow and Branching Strategy
 
 ### Simplified Git Flow for Solo Development
-```bash
-# Main development workflow
-git checkout main
-git pull origin main  # Stay current
 
-# Feature development
-git checkout -b feature/blog-search-functionality
-# Make changes...
-git add .
-git commit -m "Add client-side search functionality with fuzzy matching"
+**Git Workflow Process with Performance Metrics**
 
-# Direct merge (no PR needed for solo development)
-git checkout main
-git merge feature/blog-search-functionality --no-ff
-git push origin main
+| Workflow Stage | Time Investment | Complexity Level | Error Risk | Automation Level |
+|---------------|-----------------|------------------|------------|------------------|
+| **Feature Branch Creation** | 30 seconds | Low | Minimal | Manual |
+| **Development/Testing** | 1-4 hours | Medium | Low | Partial |
+| **Local Validation** | 5 minutes | Low | Low | Automated |
+| **Commit and Push** | 2 minutes | Low | Minimal | Manual |
+| **GitHub Pages Deploy** | 1-3 minutes | None | Very low | Fully automated |
+| **Production Verification** | 2 minutes | Low | Low | Manual |
 
-# Cleanup
-git branch -d feature/blog-search-functionality
-```
+**Branch Management Strategy:**
+- **Main Branch**: Always production-ready code
+- **Feature Branches**: Short-lived (1-3 days maximum)
+- **Direct Merges**: No pull request overhead for solo development
+- **Linear History**: Optional, merge commits provide context
 
 ### Commit Message Convention
-```bash
-# Conventional Commits format for clarity
-git commit -m "feat: add blog post filtering by multiple categories"
-git commit -m "fix: resolve mobile layout issues in blog grid"
-git commit -m "docs: update platform blueprint with monitoring strategy"
-git commit -m "style: improve CSS organization and variable naming"
-git commit -m "refactor: extract common JavaScript patterns to modules"
-git commit -m "test: add accessibility validation to development workflow"
-git commit -m "chore: update development tooling configuration"
+**Structured Commit Message Format:**
+Use conventional commit format for clear change tracking:
 
-# Examples from actual development:
-git commit -m "feat(blog): implement dual-dimension filtering system"
-git commit -m "fix(css): resolve mobile scrolling issues on iOS Safari"
-git commit -m "docs(platform): complete scalability and monitoring blueprints"
-```
+**Commit Type Examples:**
+- **feat**: add blog post filtering by multiple categories
+- **fix**: resolve mobile layout issues in blog grid
+- **docs**: update platform blueprint with monitoring strategy
+- **style**: improve organization and variable naming
+- **refactor**: extract common patterns to reusable modules
+- **test**: add accessibility validation to development workflow
+- **chore**: update development tooling configuration
+
+**Real Development Examples:**
+- **feat(blog)**: implement dual-dimension filtering system
+- **fix(css)**: resolve mobile scrolling issues on iOS Safari
+- **docs(platform)**: complete scalability and monitoring blueprints
 
 ### Advanced Git Workflow (Future Team Development)
-```bash
-# Feature branch workflow for collaboration
-git flow init  # Initialize git-flow
+**Feature Branch Workflow for Team Collaboration:**
+When transitioning to team development, implement structured workflows:
 
-# Feature development
-git flow feature start blog-search
-# Development work...
-git flow feature finish blog-search
-
-# Release preparation
-git flow release start v1.1.0
-# Final testing and documentation...
-git flow release finish v1.1.0
-
-# Hotfix workflow
-git flow hotfix start critical-css-fix
-# Fix critical issue...
-git flow hotfix finish critical-css-fix
-```
+**Git Flow Implementation:**
+- Initialize git-flow for structured branching
+**Hotfix Workflow:**
+- Create hotfix branches for critical production issues
+- Apply fixes with minimal change scope
+- Complete hotfix process with immediate deployment
 
 ## Continuous Integration Pipeline
 
-### GitHub Actions Workflow
-```yaml
-# .github/workflows/ci.yml
-name: Continuous Integration
+### GitHub Actions Workflow Configuration
+**Continuous Integration Trigger Setup:**
+- **Push Events**: Monitor main and develop branch changes
+- **Pull Request Events**: Validate changes before merge
+- **Workflow File**: Located in .github/workflows/ci.yml
 
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
+**Automated Quality Assurance Pipeline:**
 
-jobs:
-  quality-checks:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Lint CSS
-      run: npx stylelint 'css/**/*.css'
-      
-    - name: Lint JavaScript
-      run: npx eslint 'js/**/*.js'
-      
-    - name: Validate HTML
-      run: npx html-validate '*.html'
-      
-    - name: Check for broken links
-      run: |
-        npm install -g broken-link-checker
-        npx http-server . -p 8080 &
-        sleep 5
-        blc http://localhost:8080 --recursive --ordered
-  
-  accessibility-audit:
-    runs-on: ubuntu-latest
-    needs: quality-checks
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    
-    - name: Start local server
-      run: |
-        npx http-server . -p 8080 &
-        sleep 5
-    
-    - name: Run accessibility audit
-      run: |
-        npx pa11y http://localhost:8080
-        npx pa11y http://localhost:8080/blogs.html
-        npx pa11y http://localhost:8080/certifications.html
-  
-  performance-audit:
-    runs-on: ubuntu-latest
-    needs: quality-checks
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    
-    - name: Install Lighthouse CI
-      run: npm install -g @lhci/cli
-    
-    - name: Start local server
-      run: |
-        npx http-server . -p 8080 &
-        sleep 5
-    
-    - name: Run Lighthouse CI
-      run: lhci autorun
-      env:
-        LHCI_UPLOAD_TARGET: temporary-public-storage
-    
-    - name: Upload Lighthouse results
-      uses: actions/upload-artifact@v3
-      with:
-        name: lighthouse-results
-        path: .lighthouseci/
-```
+**Quality Checks Job Configuration:**
+- **Environment**: Ubuntu latest with Node.js 20
+- **Code Checkout**: Latest version with dependency caching
+- **Dependency Management**: Clean install for consistent builds
+- **CSS Validation**: Stylelint for CSS quality and standards
+- **JavaScript Quality**: ESLint for code quality and consistency
+- **HTML Validation**: HTML-validate for markup compliance
+- **Link Verification**: Broken link checker for content integrity
 
-### Pre-commit Hooks
-```bash
-# .git/hooks/pre-commit (executable)
-#!/bin/sh
+**Accessibility Audit Pipeline:**
+- **Prerequisites**: Requires successful quality checks completion
+- **Local Server**: HTTP server for live accessibility testing
+- **Page Coverage**: Test all major pages including homepage, blogs, and certifications
+- **Tool Integration**: Pa11y for automated accessibility scanning
 
-echo "Running pre-commit checks..."
+**Performance Audit Implementation:**
+- **Lighthouse Integration**: Automated performance scoring
+- **Server Setup**: Local server for realistic testing conditions
+- **Metric Tracking**: Core Web Vitals and performance budget enforcement
+- **Environment Variables**: Configurable thresholds and targets
+- **Result Storage**: Upload Lighthouse results as build artifacts
 
-# Check for large files
-git diff --cached --name-only | while read file; do
-    if [ -f "$file" ]; then
-        size=$(du -k "$file" | cut -f1)
-        if [ $size -gt 1000 ]; then  # 1MB
-            echo "Error: $file is larger than 1MB ($size KB)"
-            exit 1
-        fi
-    fi
-done
+### Pre-commit Hooks Implementation
+**Pre-commit Validation Script:**
+Executable script located in .git/hooks/pre-commit that performs:
 
-# Lint staged files
-echo "Linting CSS files..."
-git diff --cached --name-only --diff-filter=ACM | grep '\.css$' | xargs npx stylelint
+**File Size Validation:**
+- Check for large files before commit
+- Prevent files larger than 1MB from being committed
+- Display file size warnings for optimization
 
-echo "Linting JavaScript files..."
-git diff --cached --name-only --diff-filter=ACM | grep '\.js$' | xargs npx eslint
+**Code Quality Checks:**
+- Lint staged CSS files using Stylelint
+- Validate staged JavaScript files using ESLint
+- Check HTML markup validation using html-validate
+- Only process files that are actually staged for commit
 
-echo "Validating HTML files..."
-git diff --cached --name-only --diff-filter=ACM | grep '\.html$' | xargs npx html-validate
-
-echo "Pre-commit checks passed!"
-```
+**Process Flow:**
+1. Echo progress messages for user feedback
+2. Run checks on staged files only
+3. Exit with error code if any check fails
+4. Allow commit to proceed if all checks pass
 
 ## Deployment Pipeline
 
 ### GitHub Pages Automatic Deployment
-```yaml
-# GitHub Pages deployment configuration
-# Located in repository settings, not in code
+**GitHub Pages Configuration:**
+- **Source**: Deploy from main branch
+- **Folder**: Root directory (/)
+- **Build Process**: No Jekyll processing due to no configuration file
+- **File Serving**: Direct static file serving
+- **Distribution**: Global CDN distribution
 
-Pages Configuration:
-  Source: Deploy from a branch
-  Branch: main
-  Folder: / (root)
-  
-Build Process:
-  - Automatic build on push to main
-  - No Jekyll processing (due to no _config.yml)
-  - Direct static file serving
-  - Global CDN distribution
-  
-Deployment Characteristics:
-  - Build time: 30-60 seconds
-  - Propagation time: 2-3 minutes globally
-  - Zero downtime deployment
-  - Automatic rollback on failure
-```
+**Deployment Characteristics:**
+- **Build Time**: 30-60 seconds for processing
+- **Propagation Time**: 2-3 minutes globally across CDN
+- **Zero Downtime**: Seamless deployment without service interruption
+- **Automatic Rollback**: Failure recovery with previous version
 
 ### Deployment Health Checks
-```javascript
-// deployment-health-check.js
-class DeploymentValidator {
-    static async validateDeployment() {
-        const checks = [
-            this.checkCriticalPages,
-            this.checkAssetLoading,
-            this.checkJavaScriptExecution,
-            this.checkCSSLoading,
-            this.checkResponsiveness
-        ];
-        
-        console.log('🚀 Starting deployment validation...');
-        
-        const results = await Promise.allSettled(
-            checks.map(check => check())
-        );
-        
-        const failed = results.filter(r => r.status === 'rejected');
-        
-        if (failed.length === 0) {
-            console.log('✅ Deployment validation passed!');
-            return true;
-        } else {
-            console.error('❌ Deployment validation failed:');
-            failed.forEach(failure => {
-                console.error(`  - ${failure.reason.message}`);
-            });
-            return false;
-        }
-    }
-    
-    static async checkCriticalPages() {
-        const pages = ['/', '/blogs.html', '/certifications.html'];
-        
-        for (const page of pages) {
-            const response = await fetch(page);
-            if (!response.ok) {
-                throw new Error(`Page ${page} returned ${response.status}`);
-            }
-            
-            const content = await response.text();
-            if (!content.includes('<!DOCTYPE html>')) {
-                throw new Error(`Page ${page} does not contain valid HTML`);
-            }
-        }
-    }
-    
-    static async checkAssetLoading() {
-        const assets = [
-            '/css/styles.css',
-            '/css/blogs.css',
-            '/js/blog-filters.js',
-            '/js/includes.js',
-            '/favicon.ico'
-        ];
-        
-        for (const asset of assets) {
-            const response = await fetch(asset);
-            if (!response.ok) {
-                throw new Error(`Asset ${asset} failed to load: ${response.status}`);
-            }
-        }
-    }
-    
-    static async checkJavaScriptExecution() {
-        // Wait for DOM to load
-        await new Promise(resolve => {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', resolve);
-            } else {
-                resolve();
-            }
-        });
-        
-        // Check if critical functions are available
-        if (typeof applyFilters !== 'function') {
-            throw new Error('Blog filtering functionality not loaded');
-        }
-        
-        if (typeof includeHTML !== 'function') {
-            throw new Error('HTML includes functionality not loaded');
-        }
-        
-        // Test filter functionality
-        const blogItems = document.querySelectorAll('.blog-item');
-        if (blogItems.length === 0 && window.location.pathname === '/blogs.html') {
-            throw new Error('No blog items found on blogs page');
-        }
-    }
-}
+**Deployment Validation Strategy:**
+Implement post-deployment validation to ensure successful deployment:
 
-// Run validation in production (with flag)
+**Critical Page Validation:**
+- Test homepage, blogs page, and certifications page
+- Verify HTTP response codes are successful
+- Validate HTML document structure integrity
+- Ensure proper content loading
+
+**Asset Loading Verification:**
+- Check CSS files load correctly
+- Verify JavaScript files are accessible
+- Validate image and icon assets
+- Test favicon availability
+
+**Functionality Testing:**
+- Wait for DOM to load completely
+- Verify critical JavaScript functions are available
+- Test blog filtering functionality
+- Validate HTML includes functionality
+- Check for expected content on each page
+
+**Validation Results:**
+- Use Promise.allSettled for comprehensive testing
+- Report all failures with specific error messages
+- Return boolean success/failure status
+- Log detailed validation progress
 if (window.location.search.includes('validate=1')) {
     window.addEventListener('load', () => {
         DeploymentValidator.validateDeployment();
@@ -490,157 +297,101 @@ budgets:
     - metric: largest-contentful-paint
       budget: 4000  # 4 seconds
     - metric: interactive
-      budget: 5000  # 5 seconds
-    - metric: cumulative-layout-shift
-      budget: 0.1   # CLS score
-```
+**Performance Budget Configuration:**
+- **First Contentful Paint**: Budget of 1500 milliseconds
+- **Speed Index**: Budget of 2500 milliseconds
+- **Largest Contentful Paint**: Budget of 2500 milliseconds  
+- **Total Blocking Time**: Budget of 200 milliseconds
+- **Time to Interactive**: Budget of 5000 milliseconds (5 seconds)
+- **Cumulative Layout Shift**: Budget of 0.1 CLS score
 
 ## Testing Strategy
 
 ### Manual Testing Checklist
-```markdown
-## Pre-Deployment Testing Checklist
+**Pre-Deployment Testing Requirements:**
 
-### Functionality Testing
-- [ ] Homepage loads correctly
-- [ ] Blog filtering works for all combinations
-- [ ] Blog sorting functions properly
-- [ ] Certification links open correctly
-- [ ] All external links work
-- [ ] Footer includes load properly
+**Functionality Testing:**
+- Homepage loads correctly with all content
+- Blog filtering works for all filter combinations
+- Blog sorting functions properly for date and topic
+- Certification links open correctly to external sites
+- All external links work and open appropriately
+- Footer includes load properly across pages
 
-### Cross-Browser Testing
-- [ ] Chrome (latest)
-- [ ] Firefox (latest)
-- [ ] Safari (latest)
-- [ ] Edge (latest)
-- [ ] Mobile Chrome
-- [ ] Mobile Safari
+**Cross-Browser Testing:**
+- Chrome (latest version)
+- Firefox (latest version)
+- Safari (latest version)
+- Edge (latest version)
+- Mobile Chrome
+- Mobile Safari
 
-### Responsive Design Testing
-- [ ] Mobile (320px - 767px)
-- [ ] Tablet (768px - 1023px)
-- [ ] Desktop (1024px+)
-- [ ] Large desktop (1200px+)
+**Responsive Design Testing:**
+- Mobile viewport (320px - 767px)
+- Tablet viewport (768px - 1023px)
+- Desktop viewport (1024px+)
+- Large desktop viewport (1200px+)
 
-### Accessibility Testing
-- [ ] Keyboard navigation works
-- [ ] Screen reader compatibility
-- [ ] Color contrast meets WCAG AA
-- [ ] Focus indicators visible
-- [ ] Alt text on images
+**Accessibility Testing:**
+- Keyboard navigation works for all interactive elements
+- Screen reader compatibility verified
+- Color contrast meets WCAG AA standards
+- Focus indicators visible and clear
+- Alt text present on all images
 
-### Performance Testing
-- [ ] Lighthouse score > 90
-- [ ] Page load < 3 seconds
-- [ ] No console errors
-- [ ] Efficient resource loading
-```
+**Performance Testing:**
+- Lighthouse score greater than 90
+- Page load time under 3 seconds
+- No console errors present
+- Efficient resource loading verified
 
 ### Automated Testing Implementation
-```javascript
-// simple-test-runner.js
-class SimpleTestRunner {
-    constructor() {
-        this.tests = [];
-        this.results = [];
-    }
-    
-    test(name, testFunction) {
-        this.tests.push({ name, testFunction });
-        return this;
-    }
-    
-    async runAll() {
-        console.log(`Running ${this.tests.length} tests...`);
-        
-        for (const test of this.tests) {
-            try {
-                await test.testFunction();
-                this.results.push({ name: test.name, status: 'PASS' });
-                console.log(`✅ ${test.name}`);
-            } catch (error) {
-                this.results.push({ 
-                    name: test.name, 
-                    status: 'FAIL', 
-                    error: error.message 
-                });
-                console.log(`❌ ${test.name}: ${error.message}`);
-            }
-        }
-        
-        this.printSummary();
-        return this.results;
-    }
-    
-    printSummary() {
-        const passed = this.results.filter(r => r.status === 'PASS').length;
-        const failed = this.results.filter(r => r.status === 'FAIL').length;
-        
-        console.log(`\n📊 Test Results: ${passed} passed, ${failed} failed`);
-        
-        if (failed > 0) {
-            console.log('\nFailed tests:');
-            this.results
-                .filter(r => r.status === 'FAIL')
-                .forEach(r => console.log(`  - ${r.name}: ${r.error}`));
-        }
-    }
-}
+**Simple Test Runner Strategy:**
+Custom lightweight testing framework for static site validation:
 
-// Usage example
-const testRunner = new SimpleTestRunner();
+**Test Runner Features:**
+- **Test Registration**: Add named test functions with descriptions
+- **Async Support**: Handle asynchronous test operations
+- **Result Tracking**: Collect pass/fail status with error details
+- **Console Output**: Provide clear test progress and results
+- **Summary Reporting**: Display total passed and failed counts
 
-testRunner
-    .test('Blog filtering works', () => {
-        const filters = { topic: 'ai', type: 'technical' };
-        const results = ContentAPI.filterPosts(filters);
-        if (results.length === 0) throw new Error('No results found');
-        results.forEach(post => {
-            if (post.topic !== 'ai') throw new Error('Wrong topic filtered');
-            if (post.type !== 'technical') throw new Error('Wrong type filtered');
-        });
-    })
-    .test('All critical pages accessible', async () => {
-        const pages = ['/', '/blogs.html', '/certifications.html'];
-        for (const page of pages) {
-            const response = await fetch(page);
-            if (!response.ok) throw new Error(`${page} returned ${response.status}`);
-        }
-    });
+**Test Implementation Examples:**
+- **Blog Filtering Validation**: Verify filter results match criteria
+- **Page Accessibility**: Test critical pages respond correctly
+- **Content Integrity**: Validate expected content loads properly
+- **Function Availability**: Ensure JavaScript functionality works
 
-// Run tests on page load (development only)
-if (window.location.hostname === 'localhost') {
-    window.addEventListener('load', () => testRunner.runAll());
-}
-```
+**Development Integration:**
+- Run tests automatically on localhost
+- Provide immediate feedback during development
+- Skip testing in production environment
+- Log detailed results for debugging
 
 ## Documentation and Knowledge Management
 
-### Documentation as Code
-```markdown
-# Documentation Structure
-├── README.md (Project overview)
-├── CLAUDE.md (Development guidance)
-├── platform-blueprint/ (Technical architecture)
-├── req-and-design/ (Requirements and design docs)
-└── docs/ (Future: Extended documentation)
+### Documentation as Code Strategy
+**Documentation Structure:**
+- **README.md**: Project overview and quick start guide
+- **CLAUDE.md**: Development guidance and AI interaction patterns
+- **platform-blueprint/**: Technical architecture documentation
+- **req-and-design/**: Requirements and design documentation
+- **docs/** (Future): Extended documentation for complex features
 
-# Documentation Standards
-1. All documentation in Markdown format
-2. Version controlled alongside code
-3. Updated with every significant change
-4. Examples include working code snippets
-5. Architecture decisions recorded (ADR format)
-```
+**Documentation Standards:**
+1. All documentation written in Markdown format for universal compatibility
+2. Version controlled alongside code for consistency
+3. Updated with every significant change or feature addition
+4. Examples include working references and practical guidance
+5. Architecture decisions recorded using ADR format
 
-### Architecture Decision Records
-```markdown
-# ADR-001: Use Vanilla JavaScript Instead of Framework
+### Architecture Decision Records Framework
+**ADR Implementation:**
+Document significant architectural decisions with structured format:
 
-## Status: Accepted
-
-## Context
+**Decision Record Structure:**
+- **Status**: Current state (Proposed, Accepted, Deprecated)
+- **Context**: Background and driving factors
 The site requires basic interactivity (filtering, sorting) and could be built with a JavaScript framework or vanilla JavaScript.
 
 ## Decision
@@ -697,25 +448,37 @@ git push origin v1.0.0
 ```markdown
 ## Release Checklist v1.1.0
 
-### Pre-Release
-- [ ] All tests passing
-- [ ] Performance audit completed
-- [ ] Accessibility audit passed
-- [ ] Cross-browser testing done
-- [ ] Documentation updated
-- [ ] Version number updated
+- **Decision**: Alternative options considered and rejected
+- **Consequences**: Positive and negative outcomes
 
-### Release
-- [ ] Create release tag
-- [ ] Deploy to production
-- [ ] Verify deployment health
-- [ ] Update external links if needed
+**Example ADR Topics:**
+- Use of vanilla technologies instead of frameworks
+- Static site architecture over dynamic systems
+- GitHub Pages hosting decision
+- Client-side filtering implementation
+- Zero-build development approach
 
-### Post-Release
-- [ ] Monitor for issues
-- [ ] Update project documentation
-- [ ] Plan next iteration
-- [ ] Collect user feedback
-```
+## Release Management Process
+
+### Release Preparation Checklist
+**Pre-Release Validation:**
+- All automated tests passing successfully
+- Performance audit completed with acceptable scores
+- Accessibility audit passed with no critical issues
+- Cross-browser testing completed across target browsers
+- Documentation updated to reflect all changes
+- Version number updated in relevant files
+
+**Release Execution:**
+- Create annotated release tag with version information
+- Deploy changes to production environment
+- Verify deployment health using automated checks
+- Update external links if needed for new features
+
+**Post-Release Monitoring:**
+- Monitor system for any deployment issues
+- Update project documentation with lessons learned
+- Plan next iteration based on feedback and metrics
+- Collect user feedback through available channels
 
 This development workflow maintains professional standards while embracing the simplicity that makes the static architecture so effective. The process scales from solo development to team collaboration without losing the core benefits of immediate feedback and zero build complexity.

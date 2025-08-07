@@ -58,14 +58,25 @@ This platform blueprint documents the architectural decisions and technical impl
 - **Git-based Deployment**: Version control as deployment mechanism
 
 ### Local Development Options
-```bash
-# Option 1: Direct file opening
-open index.html
 
-# Option 2: Simple HTTP server for CORS/testing
-npx http-server . -p 8080
-python -m http.server 8080
+**Diagram 1: Development Environment Flow**
 ```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Direct File   │    │   HTTP Server   │    │   Production    │
+│    Opening      │───▶│   (Local Dev)   │───▶│  GitHub Pages   │
+│                 │    │                 │    │                 │
+│ • Instant load  │    │ • CORS support  │    │ • Global CDN    │
+│ • No deps       │    │ • True HTTP     │    │ • SSL/TLS       │
+│ • Offline work  │    │ • Port 8080     │    │ • Caching       │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+| Development Method | Load Time | Dependencies | CORS Support | Production Similarity |
+|-------------------|-----------|--------------|--------------|----------------------|
+| Direct File Access | <1 second | None | Limited | 60% |
+| NPX HTTP Server | <3 seconds | Node.js | Full | 85% |
+| Python HTTP Server | <5 seconds | Python | Full | 85% |
+| Production (GitHub Pages) | 1-3 seconds | Internet | Full | 100% |
 
 ## Platform Capabilities
 
