@@ -60,37 +60,147 @@ function getISOTimestamp() {
     return now.toISOString().replace(/[:.]/g, '-').split('.')[0];
 }
 
-// Simple markdown to HTML converter (basic implementation)
+// Enhanced markdown to HTML converter with code block support
 function markdownToHtml(markdown) {
     let html = markdown;
     
     // Remove YAML frontmatter
     html = html.replace(/^---[\s\S]*?---\n/, '');
     
-    // Headers
+    // Process code blocks first (before other processing)
+    // Handle fenced code blocks with language specification
+    html = html.replace(/```(\w+)?\s*\n([\s\S]*?)\n```/g, (match, language, code) => {
+        const lang = language || 'text';
+        const escapedCode = code
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        return `<pre><code class="language-${lang}">${escapedCode}</code></pre>`;
+    });
+    
+    // Handle inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Headers (process after code blocks to avoid conflicts)
+    html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
     html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
     html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
     html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
     
-    // Bold and italic
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
     
-    // Lists
+    // Bold and italic (avoid code blocks)
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    
+    // Tables (basic support)
+    html = html.replace(/\|(.+)\|/g, (match, content) => {
+        const cells = content.split('|').map(cell => cell.trim());
+        const tableCells = cells.map(cell => `<td>${cell}</td>`).join('');
+        return `<tr>${tableCells}</tr>`;
+    });
+    html = html.replace(/(<tr>.*<\/tr>)/s, '<table>$1</table>');
+    
+    // Lists (numbered and bulleted)
+    html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
     html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
     html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
-    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
     
-    // Paragraphs
-    html = html.replace(/\n\n/g, '</p>\n<p>');
-    html = '<p>' + html + '</p>';
+    // Wrap consecutive list items in ul/ol tags
+    html = html.replace(/((<li>.*<\/li>\s*)+)/gs, (match) => {
+        // Check if it's a numbered list by looking at the original content
+        if (markdown.includes('1. ') || markdown.includes('2. ')) {
+            return `<ol>${match}</ol>`;
+        }
+        return `<ul>${match}</ul>`;
+    });
     
-    // Clean up empty paragraphs
+    // Blockquotes
+    html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+    
+    // Horizontal rules
+    html = html.replace(/^---$/gm, '<hr>');
+    html = html.replace(/^\*\*\*$/gm, '<hr>');
+    
+    // Paragraphs (process last, avoiding code blocks and other block elements)
+    const lines = html.split('\n');
+    let result = [];
+    let inCodeBlock = false;
+    let inBlockElement = false;
+    let currentParagraph = [];
+    
+    for (let line of lines) {
+        const trimmedLine = line.trim();
+        
+        // Check if we're in a code block
+        if (trimmedLine.startsWith('<pre>')) {
+            inCodeBlock = true;
+            if (currentParagraph.length > 0) {
+                result.push(`<p>${currentParagraph.join(' ')}</p>`);
+                currentParagraph = [];
+            }
+            result.push(line);
+            continue;
+        }
+        if (trimmedLine.endsWith('</pre>')) {
+            inCodeBlock = false;
+            result.push(line);
+            continue;
+        }
+        if (inCodeBlock) {
+            result.push(line);
+            continue;
+        }
+        
+        // Check if we're in a block element
+        const blockElements = ['<h1', '<h2', '<h3', '<h4', '<ul>', '<ol>', '<table>', '<blockquote>', '<hr>', '<pre>'];
+        const blockEndElements = ['</ul>', '</ol>', '</table>', '</blockquote>'];
+        
+        if (blockElements.some(tag => trimmedLine.startsWith(tag))) {
+            inBlockElement = true;
+            if (currentParagraph.length > 0) {
+                result.push(`<p>${currentParagraph.join(' ')}</p>`);
+                currentParagraph = [];
+            }
+            result.push(line);
+            continue;
+        }
+        
+        if (blockEndElements.some(tag => trimmedLine.includes(tag))) {
+            inBlockElement = false;
+            result.push(line);
+            continue;
+        }
+        
+        if (inBlockElement) {
+            result.push(line);
+            continue;
+        }
+        
+        // Regular content - build paragraphs
+        if (trimmedLine === '') {
+            if (currentParagraph.length > 0) {
+                result.push(`<p>${currentParagraph.join(' ')}</p>`);
+                currentParagraph = [];
+            }
+        } else {
+            currentParagraph.push(trimmedLine);
+        }
+    }
+    
+    // Handle any remaining paragraph content
+    if (currentParagraph.length > 0) {
+        result.push(`<p>${currentParagraph.join(' ')}</p>`);
+    }
+    
+    html = result.join('\n');
+    
+    // Clean up empty paragraphs and fix nesting
     html = html.replace(/<p><\/p>/g, '');
-    html = html.replace(/<p>(<h[1-6]>)/g, '$1');
-    html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
-    html = html.replace(/<p>(<ul>)/g, '$1');
-    html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+    html = html.replace(/<p>\s*<\/p>/g, '');
     
     return html;
 }
@@ -176,6 +286,72 @@ async function generatePDFWithPuppeteer(content, outputFile, title = "Platform B
         }
         em { 
             color: #7f8c8d; 
+        }
+        code {
+            background-color: #f8f9fa;
+            color: #e83e8c;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            border: 1px solid #e9ecef;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 1.5em 0;
+            overflow-x: auto;
+            page-break-inside: avoid;
+            line-height: 1.45;
+        }
+        pre code {
+            background: none;
+            color: #24292e;
+            padding: 0;
+            border: none;
+            font-size: 0.85em;
+            border-radius: 0;
+        }
+        /* Syntax highlighting for different languages */
+        .language-bash code, .language-shell code {
+            color: #032f62;
+        }
+        .language-javascript code, .language-js code {
+            color: #d73a49;
+        }
+        .language-yaml code, .language-yml code {
+            color: #6f42c1;
+        }
+        .language-json code {
+            color: #005cc5;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 1.5em 0;
+            padding: 0.5em 1.5em;
+            background-color: #f8f9fa;
+            font-style: italic;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #e9ecef;
+            margin: 2em 0;
         }
         .header { 
             text-align: center; 
@@ -397,6 +573,71 @@ function generateHTML(content, outputFile, title = "Platform Blueprint") {
         }
         em { 
             color: #7f8c8d; 
+        }
+        code {
+            background-color: #f8f9fa;
+            color: #e83e8c;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            border: 1px solid #e9ecef;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 1.5em 0;
+            overflow-x: auto;
+            line-height: 1.45;
+        }
+        pre code {
+            background: none;
+            color: #24292e;
+            padding: 0;
+            border: none;
+            font-size: 0.85em;
+            border-radius: 0;
+        }
+        /* Syntax highlighting for different languages */
+        .language-bash code, .language-shell code {
+            color: #032f62;
+        }
+        .language-javascript code, .language-js code {
+            color: #d73a49;
+        }
+        .language-yaml code, .language-yml code {
+            color: #6f42c1;
+        }
+        .language-json code {
+            color: #005cc5;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 1.5em 0;
+            padding: 0.5em 1.5em;
+            background-color: #f8f9fa;
+            font-style: italic;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #e9ecef;
+            margin: 2em 0;
         }
         .header { 
             text-align: center; 
