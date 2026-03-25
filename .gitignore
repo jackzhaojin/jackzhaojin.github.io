@@ -28,3 +28,6 @@ node_modules
 Thumbs.db
 *.tmp
 *.temp
+
+# Playwright MCP temp files
+.playwright-mcp

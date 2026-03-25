@@ -132,9 +132,9 @@ main {
 
 .certifications {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Reduced min width */
-    gap: 0.6rem; /* Reduced from 1rem */
-    margin-bottom: 0.7rem; /* Reduced from 1rem */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 0.7rem;
 }
 
 .cert-item-link {
@@ -149,15 +149,15 @@ main {
 }
 
 .cert-item {
-    padding: 0.5rem; /* Reduced from 0.75rem */
+    padding: 0.75rem;
     border-radius: var(--border-radius);
-    border-left: 3px solid var(--secondary-color); /* Reduced from 4px */
-    background-color: rgba(52, 152, 219, 0.04); /* Slightly lighter */
+    border-left: 3px solid var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.04);
     transition: var(--transition);
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.5rem; /* Reduced from 0.75rem */
+    align-items: center;
+    gap: 0.75rem;
     height: 100%;
 }
 
@@ -194,7 +194,7 @@ main {
     color: var(--adobe-red);
 }
 
-/* Accenture and Other certification cards */
+/* Accenture certification cards */
 .accenture-group h2 {
     color: #a100ff;
     border-bottom: 2px solid #a100ff;
@@ -212,6 +212,7 @@ main {
 .accenture-group .cert-item h3 {
     color: #a100ff;
 }
+
 
 /* Presentation section */
 .presentation-group h2 {
@@ -240,7 +241,7 @@ main {
 }
 
 .presentation-group .cert-badge img {
-    width: 65px; /* Reduced from 85px */
+    width: 90px;
     border-radius: var(--border-radius);
 }
 
@@ -251,12 +252,12 @@ main {
 .cert-badge {
     flex-shrink: 0;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 }
 
 .cert-badge img {
-    width: 65px; /* Reduced from 85px */
+    width: 90px;
     height: auto;
     transition: var(--transition);
     image-rendering: -webkit-optimize-contrast;
@@ -661,7 +662,25 @@ footer {
 }
 
 /* Responsive adjustments for hero section */
+@media (max-width: 1024px) {
+    .certifications {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    .certifications {
+        grid-template-columns: 1fr;
+    }
+
+    .cert-item {
+        padding: 0.75rem;
+    }
+
+    .cert-badge img {
+        width: 75px;
+    }
+
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
