@@ -194,6 +194,25 @@ main {
     color: var(--adobe-red);
 }
 
+/* Accenture and Other certification cards */
+.accenture-group h2 {
+    color: #a100ff;
+    border-bottom: 2px solid #a100ff;
+}
+
+.accenture-group .cert-item {
+    border-left: 3px solid #a100ff;
+    background-color: rgba(161, 0, 255, 0.04);
+}
+
+.accenture-group .cert-item:hover {
+    background-color: rgba(161, 0, 255, 0.08);
+}
+
+.accenture-group .cert-item h3 {
+    color: #a100ff;
+}
+
 /* Presentation section */
 .presentation-group h2 {
     color: var(--adobe-red);
