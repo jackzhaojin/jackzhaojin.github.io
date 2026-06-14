@@ -6,7 +6,7 @@ This document outlines the requirements for implementing a blog browsing system 
 
 ## Business Context
 
-Jack Jin is a Senior Manager at Accenture with expertise in:
+Jack Jin is an Associate Director at Accenture with expertise in:
 - Adobe Experience Manager (AEM) architecture and development
 - AI/LLM integration and development tools
 - Cloud architecture and Azure solutions
