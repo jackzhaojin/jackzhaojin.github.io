@@ -31,3 +31,4 @@ Thumbs.db
 
 # Playwright MCP temp files
 .playwright-mcp
+.playwright-cli
