@@ -487,9 +487,9 @@ footer {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 2rem;
-    max-width: 900px;
+    max-width: 1280px;
     margin: 0 auto;
 }
 
@@ -537,6 +537,10 @@ footer {
     background: linear-gradient(90deg, #27ae60, var(--secondary-color));
 }
 
+.portfolio-card::before {
+    background: linear-gradient(90deg, #7c5cbf, #4834d4);
+}
+
 .hero-card-header {
     display: flex;
     align-items: center;
@@ -562,6 +566,10 @@ footer {
 
 .blog-card .hero-icon {
     background: linear-gradient(135deg, #27ae60, var(--secondary-color));
+}
+
+.portfolio-card .hero-icon {
+    background: linear-gradient(135deg, #7c5cbf, #4834d4);
 }
 
 .hero-card-header h3 {
@@ -645,6 +653,19 @@ footer {
 
 .blog-card .card-action {
     color: #27ae60;
+}
+
+.portfolio-card .card-action {
+    color: #7c5cbf;
+}
+
+.portfolio-tag {
+    padding: 0.2rem 0.6rem;
+    background-color: rgba(124, 92, 191, 0.1);
+    color: #7c5cbf;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
 }
 
 .coming-soon {
