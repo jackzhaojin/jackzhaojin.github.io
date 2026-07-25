@@ -103,6 +103,55 @@ a { color: inherit; }
   color: var(--ink-faint);
 }
 
+/* "how it was built" method line, one per chapter */
+.method-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-top: 10px;
+}
+.method-line b {
+  font-weight: 500;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 7px;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+/* method legend under the timeline */
+.method-legend {
+  margin-top: 34px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+.method-legend ul {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px 28px;
+}
+.method-legend li {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.method-legend li b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 7px;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
 .skip-link {
   position: absolute; left: -9999px; top: 0;
   background: var(--ink); color: var(--bg);
@@ -159,6 +208,7 @@ html.js .d5 { transition-delay: 0.4s; }
 
 .nav-links { display: flex; gap: 26px; align-items: center; }
 .nav-links a {
+  position: relative;
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: 0.06em;
@@ -170,7 +220,16 @@ html.js .d5 { transition-delay: 0.4s; }
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a.active { color: var(--ink); border-bottom-color: var(--accent-nav, var(--accent)); }
-.nav-num { color: var(--ink-faint); margin-right: 2px; }
+/* the dot separator sits outside the link's border box so the
+   active underline centers on the year text itself */
+.nav-num {
+  color: var(--ink-faint);
+  position: absolute;
+  right: 100%;
+  margin-right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .nav-aux { opacity: 0.85; }
 
 .nav-toggle {
@@ -198,6 +257,7 @@ html.js .d5 { transition-delay: 0.4s; }
   }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px var(--pad); width: 100%; }
+  .nav-num { display: none; }
 }
 
 /* ---------------------------------------------------------- year rail */
@@ -689,6 +749,8 @@ html.js .d5 { transition-delay: 0.4s; }
   margin-bottom: 12px;
 }
 .story-text > p:not(.pattern-line):not(.story-meta):not(.proof-links) { color: var(--ink-soft); font-size: 15px; }
+/* space between consecutive plain body paragraphs (multi-paragraph stories) */
+.story-text > p:not(.pattern-line):not(.story-meta):not(.proof-links) + p:not(.pattern-line):not(.proof-links) { margin-top: 14px; }
 .story-text.center { max-width: 760px; margin: 0 auto 34px; text-align: center; }
 .story-text.center .story-meta { justify-content: center; }
 .ciam-text { margin-top: 30px; }
@@ -718,7 +780,7 @@ html.js .d5 { transition-delay: 0.4s; }
 /* ------------------------------------------------- link type system
    one icon per destination type, everywhere on the page:
    git-branch = source repo · globe = deployed/live · "in" badge = LinkedIn */
-a.link-repo::before, a.link-post::before, a.link-live::before {
+a.link-repo::before, a.link-post::before, a.link-live::before, a.link-video::before {
   content: "";
   display: inline-block;
   width: 12px;
@@ -738,6 +800,10 @@ a.link-live::before {
 a.link-post::before {
   --licon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1.2' y='1.2' width='13.6' height='13.6' rx='2.6' fill='none' stroke='black' stroke-width='1.5'/%3E%3Ccircle cx='5.1' cy='5.3' r='1.15' fill='black'/%3E%3Crect x='4.2' y='7.4' width='1.8' height='4.4' fill='black'/%3E%3Cpath d='M8.2 11.8V9.2c0-2 3.4-2 3.4 0v2.6' fill='none' stroke='black' stroke-width='1.8'/%3E%3C/svg%3E");
 }
+a.link-video::before {
+  --licon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1.2' y='2.6' width='13.6' height='10.8' rx='2.8' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M6.6 5.6l3.8 2.4-3.8 2.4z' fill='black'/%3E%3C/svg%3E");
+}
+.proof-links a.link-video { color: var(--ink-soft); border-bottom-color: rgba(255, 255, 255, 0.18); }
 /* per-type color inside proof-links: live pops in the chapter accent,
    repos stay neutral ink, posts recede slightly */
 .proof-links a.link-repo { color: var(--ink); border-bottom-color: rgba(255, 255, 255, 0.25); }

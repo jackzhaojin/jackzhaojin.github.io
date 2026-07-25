@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jack Jin's Portfolio</title>
-<meta name="description" content="Jack Jin: Associate Director at Accenture, enterprise CMS architect, builder of autonomous AI systems. A career told through shipped projects, every one dated and backed by a GitHub repo. Newest first.">
+<meta name="description" content="Jack Jin's side-project log: AI systems, enterprise CMS work, and a couple of games built with my son. Every project dated and linked to its repo, newest first.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23c0b3ff' stroke-width='8'/%3E%3Cpath d='M50 8a42 42 0 0 1 0 84z' fill='%23c0b3ff'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 <a class="skip-link" href="#ch-anima">Skip to projects</a>
@@ -23,8 +23,8 @@
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Site">
       <a href="#timeline-view" data-nav="timeline-view">Timeline</a>
-      <a href="#ch-anima" data-nav="y2026"><span class="nav-num">·</span> 2026</a>
-      <a href="#year-2025" data-nav="y2025"><span class="nav-num">·</span> 2025</a>
+      <a href="#ch-anima" data-nav="y2026"><span class="nav-num" aria-hidden="true">·</span>2026</a>
+      <a href="#year-2025" data-nav="y2025"><span class="nav-num" aria-hidden="true">·</span>2025</a>
       <a href="#career" data-nav="career">Career</a>
       <a href="#workbench" data-nav="workbench" class="nav-aux">More builds</a>
     </nav>
@@ -82,9 +82,18 @@
     <div class="timeline-head">
       <p class="kicker reveal">Apr 2025 → now · all projects</p>
       <h2 class="reveal d1">Projects <em>over time</em></h2>
-      <p class="timeline-hint reveal d2">Bars run first commit → last commit, so overlaps are visible. Click one to jump to the writeup.</p>
+      <p class="timeline-hint reveal d2">Bars run first commit → last build commit, so overlaps are visible. A few repos kept getting small restyles after their bar ends. Click one to jump to the writeup.</p>
     </div>
     <div class="gantt reveal d2" id="gantt"></div>
+    <div class="method-legend reveal" aria-label="How the projects were built">
+      <p class="kicker-sm">How they were built · each writeup below carries one of these labels</p>
+      <ul>
+        <li><b>spec-first</b> A PRD and tech spec before any code, with tasks numbered from the spec. The oldest habit here; it started in 2025.</li>
+        <li><b>incremental specs</b> No big up-front plan. A dated spec folder per release, then build, tag, and repeat.</li>
+        <li><b>ad hoc</b> Conversation-driven, no spec. Some of the quickest builds on this page went this way, and it shows in their scope.</li>
+        <li><b>dark factory</b> An unattended harness planned, built, and verified the work. I read the commits in the morning.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -99,6 +108,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">Jul 2026 — present · 2 repos</p>
       <h2 class="reveal d1">Anima Mesh<br><em>The company-of-0 experiment</em></h2>
+      <p class="method-line reveal d1"><b>ad hoc</b> no spec preceded the code. The discipline came from releases: 26 tags in 19 days, a changelog per release line, learnings written down as they happened.</p>
       <p class="thesis reveal d2">
         The experiment: how much of an organization's back office can a mesh of agents run on
         its own? Compliance calendar, bookkeeping, document library, board hygiene, research
@@ -274,6 +284,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">Feb — Jul 2026 · 2 repos · co-developer: age single digits</p>
       <h2 class="reveal d1">Built with Bruce<br><em>The father-and-son repos</em></h2>
+      <p class="method-line reveal d1"><b>ad hoc</b> he pitches the design, we talk, it ships. No spec survives a co-designer under ten.</p>
       <p class="thesis reveal d2">
         Not every project is an agent mesh. Two of the repos are games designed with my son:
         he supplies the game design, I supply the AI, and an idea becomes something playable
@@ -318,18 +329,22 @@
   <header class="chapter-head">
     <span class="chapter-num" aria-hidden="true">03</span>
     <div class="chapter-title-block">
-      <p class="kicker reveal">Oct 2025 — Jun 2026 · 2 repos · 298 commits · 16 releases</p>
+      <p class="kicker reveal">Oct 2025 — Jun 2026 · 2 repos · 317 commits · 16 tagged releases</p>
       <h2 class="reveal d1">The Content Factory<br><em>A decoupled agent mesh</em></h2>
+      <p class="method-line reveal d1"><b>incremental specs</b> Spec Kit bundles (spec, plan, tasks) in the v1 era; a dated plan in ai-docs per release in the mesh era. Six days from PRD to deployed mesh, because the spec came first.</p>
       <p class="thesis reveal d2">
         Talk material for adaptTo() 2026, built for real: a mesh of independently-addressable
         A2A agents that generate, migrate, and evaluate CMS content. Different vendors compose
         over an open protocol. Quality is measured, not vibed.
       </p>
       <p class="arc reveal d3">
-        The arc: it starts in Oct 2025 as an MCP server for Adobe's da.live. v1 proves AI can
-        migrate and judge content, but as one coupled app. v2.0 rebuilds it as four agents:
-        coordinator, content-gen, migration, eval. Six days from PRD to a deployed mesh on
-        Cloudflare Workers and Containers.
+        The arc runs in three eras. Oct 2025: an MCP server for AEM's da.live, on Azure
+        Functions. A 94-commit December push tags v1.0 on New Year's Day: evals in a Docker
+        container, Make.com scenarios calling the Functions to do the authoring, and by
+        mid-January, Adobe Summit 2026 blog material coming out of the same repo. Then a
+        quiet spring. In June, v2.0 rebuilds it as four agents: coordinator, content-gen,
+        migration, eval. Six days from PRD to a deployed mesh on Cloudflare Workers and
+        Containers.
       </p>
     </div>
   </header>
@@ -354,6 +369,33 @@
     </div>
   </article>
 
+  <!-- the eval thread -->
+  <article class="story flip" id="p-factory-eval">
+    <div class="story-media reveal">
+      <div class="beforeafter panel" aria-label="The eval component across v1 and v2">
+        <p class="panel-label">One eval engine, two deployments</p>
+        <div class="ba-rows">
+          <div class="ba-row"><span class="mono ba-tag">v1.0</span><p>A deployable container: a Next.js eval app with four agents, each pairing deterministic checks (axe-core, Cheerio, Playwright) with model judgment. Still running as the frozen backup.</p></div>
+          <div class="ba-row ba-mid"><span class="mono ba-tag">the engine</span><p>The scoring engine survived the rewrite. It was copied out of the v1 app, not rebuilt.</p></div>
+          <div class="ba-row"><span class="mono ba-tag">v2.0</span><p>An addressable A2A agent in the mesh: any vendor's output gets scored the same way, on every run.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="story-text">
+      <p class="story-meta reveal">The through-line, v1.0 → v2.5 · the biggest single component</p>
+      <h3 class="reveal d1">The eval outlived both architectures</h3>
+      <p class="pattern-line reveal d2">If agents author content, something has to say whether it's good. That something gets versioned, deployed, and tested like a product of its own.</p>
+      <p class="reveal d3">
+        Four dimensions: structure, accessibility, content fidelity, visual correctness. In
+        v1 the eval shipped as its own Docker container. In v2 it became an agent in the
+        mesh, so every migration lands with a score attached. The payoff came in v2.5, when
+        the numbers said the site redesign was failing: the error turned out to be in the
+        eval's own methodology, and scoring generated pages on their own merits moved a real
+        article from 67 to 89. Numbers you can argue with beat vibes you can't.
+      </p>
+    </div>
+  </article>
+
   <article class="story" id="p-factory-story">
     <div class="story-media reveal">
       <div class="beforeafter panel" aria-label="The demo story: a 2002 travel blog migrated to a modern CMS by agents">
@@ -370,12 +412,10 @@
       <h3 class="reveal d1">A daily unattended run</h3>
       <p class="pattern-line reveal d2">A daily cron submits a run with no topic. The coordinator ideates one, generates, migrates, evaluates, and parks it in preview. A human curates later.</p>
       <p class="reveal d3">
-        Three lessons came out of production. Streams die crossing the Worker-to-container hop,
+        Two lessons came out of production. Streams die crossing the Worker-to-container hop,
         so the store, not the stream, is the contract: every agent persists full task state and
-        consumers recover by polling. Containers get no native database bindings, so the Worker
-        proxies queries. And the eval methodology got fixed in v2.5 when the numbers said the
-        redesign was failing: scoring generated pages on their own merits moved a real article
-        from 67 to 89.
+        consumers recover by polling. And containers get no native database bindings, so the
+        Worker proxies queries.
       </p>
       <div class="stat-chips reveal d4">
         <span class="stat"><b>20.6K</b> lines of TypeScript</span>
@@ -389,24 +429,41 @@
     </div>
   </article>
 
+  <!-- the v1 plan, recovered -->
+  <article class="story wide" id="p-factory-v1plan">
+    <div class="story-text center">
+      <p class="story-meta reveal"><time datetime="2026-01-01">Dec 2025 — Jan 2026</time> · v1.0 as designed · recovered from git</p>
+      <h3 class="reveal d1">The v1 platform, <em>in its planned final form</em></h3>
+      <p class="pattern-line reveal d2">Five subsystems around one EDS site. Color is the semantic axis this page's diagrams still use: deterministic in blue, agentic in red, mixed in purple.</p>
+    </div>
+    <figure class="frame diagram-frame reveal">
+      <a href="assets/factory/v1-platform-plan.png" target="_blank" rel="noopener" aria-label="Open the v1 platform diagram full size">
+        <img src="assets/factory/v1-platform-plan.png" loading="lazy" alt="The v1 content platform plan: a UI/UX specification feeds a mock-content generator (Claude Agent SDK producing PDFs and HTML into Azure Storage), a Make.com / Workfront Fusion content builder calls MCP tools (Playwright, AEM da.live get/update/create/publish) into the da.live EDS site, an evals container on an Oracle VM pairs deterministic and agentic logic four ways each, and a site-building harness runs planning and task agents through research, build, and validate with a human-in-the-loop escape hatch.">
+      </a>
+      <figcaption>Drawn while v1 was being built: Agent SDK content generation, a Make.com builder over MCP, the evals container, and the site-building harness. The Excalidraw was later recovered from git history.</figcaption>
+    </figure>
+  </article>
+
   <!-- mcp origin -->
   <article class="story flip" id="p-factory-origin">
     <div class="story-media reveal">
       <div class="request-flow panel" aria-label="Diagram: request and response flowing between an agent and a CMS">
         <div class="rf-node mono">agent</div>
         <div class="rf-wire"><i class="rf-dot"></i><i class="rf-dot back"></i></div>
-        <div class="rf-node mono">CMS</div>
+        <div class="rf-node mono">AEM</div>
         <p class="panel-note rf-note">create page · update content · publish, as tool calls</p>
       </div>
     </div>
     <div class="story-text">
       <p class="story-meta reveal"><time datetime="2025-10-05">Oct 2025</time> · where this repo started</p>
-      <h3 class="reveal d1">First, content operations became tool calls</h3>
-      <p class="pattern-line reveal d2">The origin build: an MCP server for da.live, then the same server proven from Claude, Gemini, Azure OpenAI, and n8n. No client-specific forks.</p>
+      <h3 class="reveal d1">First, AEM content operations became tool calls</h3>
+      <p class="pattern-line reveal d2">The origin build: an MCP server for AEM's da.live, then the same server proven from Claude, Gemini, Azure OpenAI, and n8n. No client-specific forks.</p>
       <p class="reveal d3">
-        Before the mesh, the repo's first life was interoperability: expose a CMS's operations
-        over MCP once, and every agent that speaks the protocol inherits them. The mesh grew
-        out of asking what happens when the agents themselves get addresses too.
+        The repo's first life was interoperability with the CMS I work on professionally:
+        expose AEM Edge Delivery's content operations, get, update, create, publish, over
+        MCP once, and every agent that speaks the protocol inherits them. Everything else in
+        this chapter stands on that server. The mesh grew out of asking what happens when
+        the agents themselves get addresses too.
       </p>
       <p class="proof-links reveal d4">
         <a class="link-post" href="https://www.linkedin.com/posts/jackjin_eds-dalive-mcp-activity-7380821161925959680-dk3f" target="_blank" rel="noopener">The MCP build, published ↗</a>
@@ -427,6 +484,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">Mar — Jun 2026 · 54 commits · a public plugin marketplace</p>
       <h2 class="reveal d1">AI Builder Kit<br><em>Skills anyone can install</em></h2>
+      <p class="method-line reveal d1"><b>ad hoc</b> skill by skill, as the need came up. Each ships docs and guardrails; the heaviest one ships its own evals.</p>
       <p class="thesis reveal d2">
         A Claude Code plugin marketplace: nine published skills, written so that people other
         than the author can install and use them. Two of them get detail here, because they
@@ -478,8 +536,17 @@
         axis, how exceptions are marked. The style rules live in reference files the skill
         must read before generating, because the rules interact.
       </p>
+      <p class="reveal d3">
+        The skill also ships its own eval harness: two benchmark diagrams, graded by a script
+        against roughly twenty assertions each, XML mechanics and brand rules alike. The
+        baseline run without the skill passed 15 of 18 assertions; with the skill, all of
+        them. The second iteration folded review findings back in as three new assertions per
+        eval, and the runs are kept in the repo. A skill you can't score is a skill you can't
+        improve.
+      </p>
       <p class="proof-links reveal d4">
         <a class="link-repo" href="https://github.com/jackzhaojin/ai-builder-kit/tree/main/skills/drawio" target="_blank" rel="noopener">The skill, in the repo ↗</a>
+        <a class="link-repo" href="https://github.com/jackzhaojin/ai-builder-kit/tree/main/skills/drawio/evals" target="_blank" rel="noopener">Its evals, with the benchmark runs ↗</a>
       </p>
     </div>
   </article>
@@ -524,6 +591,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">May 31 — Jun 5, 2026 · 19 commits · phase 1 complete</p>
       <h2 class="reveal d1">Conversion Factory<br><em>Agents that evolve site blocks</em></h2>
+      <p class="method-line reveal d1"><b>spec-first</b> the PRD and the architecture diagram were committed before the agents existed.</p>
       <p class="thesis reveal d2">
         An agent runtime for conversion-rate optimization on Edge Delivery Services. A
         coordinator forms a theory from analytics, four spoke agents produce a variant block on
@@ -566,8 +634,9 @@
   <header class="chapter-head">
     <span class="chapter-num" aria-hidden="true">06</span>
     <div class="chapter-title-block">
-      <p class="kicker reveal">Jan 24 — May 31, 2026 · 374 commits · 16 releases · runs 24/7</p>
+      <p class="kicker reveal">Jan 24 — May 31, 2026 · 374 commits · 16 releases · ran 24/7 for four months</p>
       <h2 class="reveal d1">Continuous Executive Agent<br><em>A 24/7 coding agent</em></h2>
+      <p class="method-line reveal d1"><b>incremental specs</b> to build it: a dated spec and plan per release, ai-docs v1 through v3. <b>dark factory</b> when it ran: nobody watched the overnight builds.</p>
       <p class="thesis reveal d2">
         A coding agent that runs around the clock under PM2. It selects work from a priority
         queue, spawns isolated workers, validates with deterministic verifiers, retries with a
@@ -801,6 +870,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">Feb — Apr 2026 · 48 commits · live demo + published video</p>
       <h2 class="reveal d1">CIAM Demo<br><em>Customer identity, end to end</em></h2>
+      <p class="method-line reveal d1"><b>spec-first</b> specs and prompt logs kept in the repo's ai-docs.</p>
       <p class="thesis reveal d2">
         No agents in this one. Customer identity and access management, built out fully:
         identity provider, session boundary, resource API, multi-tenant authorization.
@@ -823,6 +893,8 @@
         demoed on video. 48 commits, Feb to Apr 2026.
       </p>
       <p class="proof-links center-links reveal d3">
+        <a class="link-live" href="http://157.151.152.16:3001/" target="_blank" rel="noopener">The deployed demo ↗</a>
+        <a class="link-video" href="https://www.youtube.com/watch?v=DIWQCDbMUM8" target="_blank" rel="noopener">The walkthrough video ↗</a>
         <a class="link-repo" href="https://github.com/jackzhaojin/ciam-demo" target="_blank" rel="noopener">ciam-demo ↗</a>
       </p>
     </div>
@@ -844,28 +916,46 @@
   <header class="chapter-head">
     <span class="chapter-num" aria-hidden="true">08</span>
     <div class="chapter-title-block">
-      <p class="kicker reveal">Jul 2025 · 2 repos · two weeks, two stacks</p>
+      <p class="kicker reveal">Jul 2025 · 2 repos · two stacks · restyles into 2026</p>
       <h2 class="reveal d1">Postal Portal<br><em>A shipping product on two stacks</em></h2>
+      <p class="method-line reveal d1"><b>spec-first</b> PRD, then tech spec, then tasks. The transactional flow's commit log counts up from task 1.2 to 9.3.</p>
       <p class="thesis reveal d2">
-        A postal shipping product built in two weeks of July 2025. The marketing site went on
-        Adobe Edge Delivery Services as 17+ reusable authoring blocks. The transactional
-        portal, quote through pickup through confirmation, went on Next.js: 89 commits in a
-        six-day sprint. The build stopped there; only small restyles trickled in later.
+        A postal shipping product built across two weeks of July 2025, spec-first on both
+        halves. The marketing site went on Adobe Edge Delivery Services as 17+ reusable
+        authoring blocks. The transactional flow, quote through pickup through confirmation,
+        went on Next.js: 89 commits in a six-day sprint, each one numbered against the task
+        list it was working through.
+      </p>
+      <p class="arc reveal d3">
+        The git history under-counts this one. The marketing repo's whole build week landed
+        as a single commit touching 2,700+ lines, the PRD and tech spec its README points to
+        never got committed, and the page content lives in da.live rather than git. Small
+        restyles kept trailing in afterward; the last one landed in May 2026, ten months
+        after the sprint.
       </p>
     </div>
   </header>
 
+  <article class="story wide" id="p-postal-diagram">
+    <figure class="frame diagram-frame reveal">
+      <a href="assets/postal/spec-to-two-stacks.svg" target="_blank" rel="noopener" aria-label="Open the postal portal build diagram full size">
+        <img src="assets/postal/spec-to-two-stacks.svg" loading="lazy" alt="Postal Portal build diagram: a written spec layer (PRD, tech spec, numbered task list) drives two stacks side by side. Left, the EDS marketing site with 17+ authoring blocks and content in da.live. Right, the Next.js transactional flow built as a six-day task-numbered sprint from quote to pickup to confirmation.">
+      </a>
+      <figcaption>One spec method, two stacks. Drawn for this page from the two repos' commit history.</figcaption>
+    </figure>
+  </article>
+
   <article class="story wide" id="p-postal">
     <div class="repo-grid reveal">
       <a class="repo-card" href="https://github.com/jackzhaojin/da-live-postal-2025-07" target="_blank" rel="noopener">
-        <span class="mono rc-dates">Jul 12 — 19, 2025 · 17+ blocks</span>
+        <span class="mono rc-dates">Jul 12 — 19, 2025 · 17+ blocks · restyles to May 2026</span>
         <h4>da-live-postal-2025-07</h4>
-        <p>The marketing site on EDS and da.live: hero, cards, stats, and forms as reusable authoring blocks, with PRD and tech-spec docs.</p>
+        <p>The marketing site on EDS and da.live: hero, cards, stats, and forms as reusable authoring blocks. The specs that drove it stayed local; the build week landed as one big commit.</p>
       </a>
       <a class="repo-card" href="https://github.com/jackzhaojin/nextjs-postal-2025-07" target="_blank" rel="noopener">
         <span class="mono rc-dates">Jul 19 — 25, 2025 · 89 commits in 6 days</span>
         <h4>nextjs-postal-2025-07</h4>
-        <p>The transactional portal in Next.js: a task-numbered sprint from init to a tested pickup and confirmation flow.</p>
+        <p>The transactional flow in Next.js: a task-numbered sprint, 1.2 through 9.3, from init to a Playwright-tested pickup and confirmation flow, with release branches along the way.</p>
       </a>
     </div>
   </article>
@@ -880,8 +970,9 @@
   <header class="chapter-head">
     <span class="chapter-num" aria-hidden="true">09</span>
     <div class="chapter-title-block">
-      <p class="kicker reveal">May — Jul 2025 · the first AI-coded production app</p>
-      <h2 class="reveal d1">Shadow Pivot<br><em>The first AI-coded app</em></h2>
+      <p class="kicker reveal">May — Jul 2025 · my first fully AI-written production app</p>
+      <h2 class="reveal d1">Shadow Pivot<br><em>My first AI-coded app</em></h2>
+      <p class="method-line reveal d1"><b>spec-first</b> where the habit started: PRDs, rules files, blueprints, then code.</p>
       <p class="thesis reveal d2">
         A public, production Next.js agent app where AI wrote all of the code. Then CI/CD stood
         up around it, and the methodology written down: PRDs, rules files, blueprints.
@@ -929,6 +1020,7 @@
     <div class="chapter-title-block">
       <p class="kicker reveal">Apr 2025 · 24 commits · since retired</p>
       <h2 class="reveal d1">Azure STAR Generator<br><em>Day one</em></h2>
+      <p class="method-line reveal d1"><b>ad hoc</b> one Sunday, the same app tried in several tools.</p>
       <p class="thesis reveal d2">
         The first project: a Sunday spent trying AI coding tools by building the same app in
         each. Azure Functions plus Azure OpenAI, turning CSV feedback exports into STAR-format
@@ -1003,7 +1095,7 @@
       </a>
       <a class="tool-card" href="https://github.com/jackzhaojin/ai-sandbox" target="_blank" rel="noopener">
         <span class="mono tool-name">ai-sandbox</span>
-        <p>The continuous agent's output repo: 157 commits it authored on its own.</p>
+        <p>The continuous agent's output repo: 236 commits across per-project branches, written by the harness and read in the morning.</p>
         <span class="tool-meta mono">Mar — Apr 2026</span>
       </a>
       <a class="tool-card" href="https://github.com/jackzhaojin/a2a-demo" target="_blank" rel="noopener">
