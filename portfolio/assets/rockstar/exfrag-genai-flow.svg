@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 660" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="660" fill="#ffffff"/>
+
+  <text x="40" y="46" font-size="21" font-weight="700" fill="#1f2328">AEM Rockstar 2024 — GenAI experience-fragment variations, inside the authoring UI</text>
+  <text x="40" y="70" font-size="13" fill="#57606a">Built Aug 2023 → Jan 2024, hand-written. Everything rides AEM's native machinery; the only new surface is one injected clientlib.</text>
+
+  <!-- legend -->
+  <g font-size="11.5">
+    <rect x="980" y="88" width="66" height="20" rx="4" fill="#f6f8fa" stroke="#1f2328" stroke-width="1.2"/><text x="1013" y="102" text-anchor="middle" fill="#1f2328">author</text>
+    <rect x="1052" y="88" width="96" height="20" rx="4" fill="#ddf4ff" stroke="#0969da" stroke-width="1.2"/><text x="1100" y="102" text-anchor="middle" fill="#0550ae">deterministic</text>
+    <rect x="1154" y="88" width="66" height="20" rx="4" fill="#ffebe9" stroke="#cf222e" stroke-width="1.2"/><text x="1187" y="102" text-anchor="middle" fill="#a40e26">agentic</text>
+    <rect x="1226" y="88" width="0" height="0" fill="none"/>
+  </g>
+
+  <!-- ==================== ROW 1: generate ==================== -->
+  <rect x="40" y="130" width="350" height="170" rx="12" fill="#faf5ff" stroke="#8250df" stroke-width="1.5"/>
+  <text x="58" y="158" font-size="14.5" font-weight="700" fill="#6639ba">The injected clientlib  <tspan font-weight="400" font-size="11.5" fill="#8a6fc0">(jQuery + Granite)</tspan></text>
+  <text x="58" y="182" font-size="12" fill="#3f4660">Overlaid into the stock Sites properties editor</text>
+  <text x="58" y="202" font-size="12" fill="#3f4660">on the foundation-contentloaded hook</text>
+  <text x="58" y="226" font-size="12" fill="#3f4660">Prompt input · continue-chat toggle · Generate</text>
+  <text x="58" y="246" font-size="12" fill="#3f4660">Fragment path derived from the editor URL</text>
+  <text x="58" y="276" font-size="11.5" font-style="italic" fill="#6e5a94">No new editor. Authors stay where they work.</text>
+
+  <path d="M 390 215 L 460 215" fill="none" stroke="#57606a" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="425" y="205" font-size="11" fill="#57606a" text-anchor="middle">GET</text>
+
+  <rect x="462" y="130" width="360" height="170" rx="12" fill="#ddf4ff" stroke="#0969da" stroke-width="1.5"/>
+  <text x="480" y="158" font-size="14.5" font-weight="700" fill="#0550ae">ExfragGptServlet</text>
+  <text x="480" y="182" font-size="12" fill="#33506b">A Sling selector, <tspan font-family="ui-monospace, monospace" font-size="11">.aipreview.json</tspan>, mounted on</text>
+  <text x="480" y="202" font-size="12" fill="#33506b">the stock experience-fragment page type</text>
+  <text x="480" y="226" font-size="12" fill="#33506b">QueryBuilder walks the fragment subtree and</text>
+  <text x="480" y="246" font-size="12" fill="#33506b">collects its text properties: path → value</text>
+  <text x="480" y="276" font-size="11.5" font-style="italic" fill="#4a7db5">Zero new endpoints. Resource-type binding only.</text>
+
+  <path d="M 822 215 L 892 215" fill="none" stroke="#57606a" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <rect x="894" y="130" width="346" height="170" rx="12" fill="#ffebe9" stroke="#cf222e" stroke-width="1.5"/>
+  <text x="912" y="158" font-size="14.5" font-weight="700" fill="#a40e26">ChatGptService</text>
+  <text x="912" y="182" font-size="12" fill="#5c3a3e">Each property through Chat Completions</text>
+  <text x="912" y="202" font-size="12" fill="#5c3a3e">with the author's prompt</text>
+  <text x="912" y="226" font-size="12" fill="#5c3a3e">Per-fragment chat log keyed by session + path,</text>
+  <text x="912" y="246" font-size="12" fill="#5c3a3e">so continue-chat refines multi-turn</text>
+  <text x="912" y="276" font-size="11.5" font-style="italic" fill="#b35a5a">GPT-3.5 default, GPT-4 configurable · Aug 2023</text>
+
+  <!-- return path down to review table -->
+  <path d="M 1067 300 L 1067 330 L 260 330 L 260 358" fill="none" stroke="#57606a" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="663" y="322" font-size="11" fill="#57606a" text-anchor="middle">original + generated values, returned side by side</text>
+
+  <!-- ==================== ROW 2: review + apply ==================== -->
+  <rect x="40" y="360" width="440" height="160" rx="12" fill="#f6f8fa" stroke="#1f2328" stroke-width="1.5"/>
+  <text x="58" y="388" font-size="14.5" font-weight="700" fill="#1f2328">The review table</text>
+  <text x="58" y="412" font-size="12" fill="#3f4660" font-family="ui-monospace, monospace">Path · Original Value · Generated Value</text>
+  <text x="58" y="436" font-size="12" fill="#3f4660">The author reads every row before anything writes.</text>
+  <text x="58" y="456" font-size="12" fill="#3f4660">Wrong direction? Continue the chat and regenerate.</text>
+  <text x="58" y="486" font-size="11.5" font-style="italic" fill="#57606a">Nothing has touched the repository yet.</text>
+
+  <path d="M 480 440 L 550 440" fill="none" stroke="#57606a" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="515" y="430" font-size="11" fill="#57606a" text-anchor="middle">approve</text>
+
+  <rect x="552" y="360" width="400" height="160" rx="12" fill="#ddf4ff" stroke="#0969da" stroke-width="1.5"/>
+  <text x="570" y="388" font-size="14.5" font-weight="700" fill="#0550ae">AEM's own write machinery</text>
+  <text x="570" y="412" font-size="12" fill="#33506b"><tspan font-family="ui-monospace, monospace" font-size="11">/bin/wcmcommand copyPage</tspan> clones the variation</text>
+  <text x="570" y="436" font-size="12" fill="#33506b">A Sling POST writes the accepted values onto the copy</text>
+  <text x="570" y="456" font-size="12" fill="#33506b">jcr:title set from the variation name</text>
+  <text x="570" y="486" font-size="11.5" font-style="italic" fill="#4a7db5">No custom writers. The platform does the writing.</text>
+
+  <path d="M 952 440 L 1022 440" fill="none" stroke="#57606a" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <rect x="1024" y="360" width="216" height="160" rx="12" fill="#e9f5ee" stroke="#1a7f37" stroke-width="1.5"/>
+  <text x="1042" y="388" font-size="14.5" font-weight="700" fill="#116329">New variation</text>
+  <text x="1042" y="412" font-size="12" fill="#33513f">A real experience-</text>
+  <text x="1042" y="430" font-size="12" fill="#33513f">fragment variation,</text>
+  <text x="1042" y="448" font-size="12" fill="#33513f">opened directly in</text>
+  <text x="1042" y="466" font-size="12" fill="#33513f">the editor, ready</text>
+  <text x="1042" y="484" font-size="12" fill="#33513f">for targeting</text>
+
+  <!-- ==================== bottom strip ==================== -->
+  <rect x="40" y="556" width="1200" height="52" rx="9" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.1"/>
+  <text x="640" y="587" font-size="12.5" fill="#57606a" text-anchor="middle"><tspan font-weight="700" fill="#1f2328">The shape the 2026 systems formalize as propose / dispose:</tspan>  the model proposes values, the author reviews every row, deterministic machinery writes.</text>
+</svg>

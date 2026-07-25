@@ -75,11 +75,13 @@
     if (id === "timeline-view") return "timeline-view";
     if (id === "career") return "career";
     if (id === "workbench") return "workbench";
+    /* the 2024 prologue belongs to the career zone, not a year of the run */
+    if (id === "ch-rockstar") return "career";
     if (id === "ch-postal" || id === "ch-shadow" || id === "ch-star") return "y2025";
     if (id.indexOf("ch-") === 0) return "y2026";
     return null;
   }
-  var spyIds = ["timeline-view", "career", "workbench"].concat(PROJECTS.map(function (p) { return p.id; }));
+  var spyIds = ["timeline-view", "career", "workbench", "ch-rockstar"].concat(PROJECTS.map(function (p) { return p.id; }));
   var accentByChapter = {};
   PROJECTS.forEach(function (p) { accentByChapter[p.id] = p.color; });
 

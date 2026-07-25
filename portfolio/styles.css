@@ -865,6 +865,7 @@ a.link-video::before {
   letter-spacing: 0.02em;
 }
 .frame.sub { margin-top: 18px; }
+.frame.portrait { max-width: 340px; }
 .diagram-frame { max-width: 1040px; margin: 0 auto; }
 .diagram-frame a { display: block; background: #f4f2ee; }
 .diagram-frame img { width: 100%; }
