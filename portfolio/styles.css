@@ -558,6 +558,11 @@ html.js .d5 { transition-delay: 0.4s; }
   white-space: nowrap;
 }
 .tdiv i { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+/* labels don't fit one row on phones; let the second one wrap under the rule */
+@media (max-width: 700px) {
+  .tdiv { flex-wrap: wrap; row-gap: 4px; }
+  .tdiv i { min-width: 40px; }
+}
 
 .year-band {
   position: relative;
@@ -724,6 +729,17 @@ html.js .d5 { transition-delay: 0.4s; }
 .story.flip .story-text { order: 1; }
 .story.wide { display: block; }
 .story:last-child { margin-bottom: 0; }
+
+/* stack the side-by-side stories on small screens: text first, media below */
+@media (max-width: 860px) {
+  .story {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    align-items: start;
+  }
+  .story .story-text { order: 1; }
+  .story .story-media { order: 2; }
+}
 
 .story-meta {
   font-family: var(--font-mono);
@@ -1178,6 +1194,12 @@ a.link-video::before {
 .ciam-node .mono { font-size: 14px; color: var(--accent); }
 .ciam-node p { font-size: 12px; color: var(--ink-faint); margin-top: 6px; font-family: var(--font-mono); }
 .ciam-arrow { color: var(--ink-faint); font-size: 20px; }
+/* stacked on phones: arrows point down between the tiers */
+@media (max-width: 700px) {
+  .ciam-flow { flex-direction: column; }
+  .ciam-node { width: 100%; }
+  .ciam-arrow { transform: rotate(90deg); }
+}
 
 /* --------------------------------------------------- repo card grid */
 .repo-grid {

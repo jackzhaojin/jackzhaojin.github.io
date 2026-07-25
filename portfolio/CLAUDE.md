@@ -8,16 +8,19 @@ An engineer. Not a marketer, not a salesperson, not a hype account. The work car
 
 ## Voice: present the work; the work doesn't need exaggeration
 
-- Engineering is the truth. Describe what exists, link to it, stop.
+- Engineering is the truth. Describe what exists, maybe have a diagram, link to it, stop.
+- It's ok to talk about how it was built (process building it), as well as the architecture/design.
 - Link labels name the destination factually: "Summit 2024 post ↗", "v2.1 deck post ↗", "ciam-demo ↗". NEVER triumphal or flourish labels: "The win, posted ↗", "X, published ↗", or any label that celebrates instead of describes.
-- No first-mover or gap claims. "My first X" only when literally true and load-bearing.
+- No first-mover or gap claims. "My first X" only when literally true and load-bearing. Even then, use very seldomly.
 - No unnecessary anything: no filler adjectives, no drama in dividers or kickers, no self-congratulation dressed as a caption. Every phrase either states a fact or gets cut.
 - Honest limitations build credibility and stay in: "since retired", "frozen as the backup", "the git history under-counts this one".
 - Plain engineer voice everywhere: labels not poetry, no editorial flourish, no AI-tell words. Short sentences over em-dash constructions in prose.
+- no em dashes.
 
 ## Facts
 
 - Every number on the page (commits, tags, dates, scores, run counts) comes from git history, ledgers, or repo docs. Verify in the sibling repos under `/Users/jackjin/dev/` before writing. Never estimate or carry a number forward without checking.
+- Story telling through metrics is always a win for an engineer's portfolio.
 
 ## Page systems
 

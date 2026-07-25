@@ -26,8 +26,6 @@ body {
     line-height: 1.4;
     color: var(--text-color);
     background-color: var(--background-color);
-    max-height: 1440px;
-    overflow-y: auto;
     font-size: 0.88rem; /* Reduced from 0.95rem */
 }
 
@@ -35,7 +33,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0.5rem; /* Reduced from 1rem */
-    max-height: 1440px;
 }
 
 /* Typography */
@@ -96,8 +93,6 @@ main {
     box-shadow: var(--box-shadow);
     padding: 0.7rem; /* Reduced from 1rem */
     margin-bottom: 0.7rem; /* Reduced from 1rem */
-    overflow-y: auto;
-    max-height: 1200px;
 }
 
 /* Certifications section */
@@ -485,9 +480,10 @@ footer {
     border-radius: 2px;
 }
 
+/* Always 3 across on desktop, 1 column on smaller screens — never 2-1 */
 .hero-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     max-width: 1280px;
     margin: 0 auto;
@@ -687,6 +683,23 @@ footer {
     .certifications {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .hero-grid {
+        gap: 1.25rem;
+    }
+
+    .hero-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Below this the three tiles stack into a single column */
+@media (max-width: 899px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -702,17 +715,10 @@ footer {
         width: 75px;
     }
 
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-    }
-    
     .hero-card {
-        padding: 1.5rem;
         min-height: 240px;
     }
-    
+
     .hero-title {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
