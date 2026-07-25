@@ -1360,6 +1360,100 @@ a.link-video::before {
 .tool-card p { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 12px; }
 .tool-meta { font-size: 10.5px; color: var(--ink-faint); }
 
+/* ---------------------------------------------------------- lightbox
+   built by script.js; anchors keep their href as the no-js fallback */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  background: rgba(12, 12, 12, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.lightbox.open { opacity: 1; }
+.lightbox[hidden] { display: none; }
+
+.lightbox-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px clamp(14px, 3vw, 26px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.lightbox-file, .lightbox-zoom {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 9px 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.lightbox-file:hover, .lightbox-zoom:hover { color: var(--ink); border-color: var(--ink-faint); }
+.lightbox-close {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, transform 0.25s;
+}
+.lightbox-close:hover { border-color: var(--ink-faint); transform: rotate(90deg); }
+
+.lightbox-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(14px, 3vw, 30px);
+}
+.lightbox-body img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  cursor: zoom-in;
+}
+.lightbox-body img.light-plate { background: #f4f2ee; }
+/* zoomed: natural size, pan by scrolling */
+.lightbox.zoomed .lightbox-body { display: block; }
+.lightbox.zoomed .lightbox-body img { max-width: none; max-height: none; margin: 0 auto; cursor: zoom-out; }
+
+.lightbox-caption {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  padding: 12px clamp(14px, 3vw, 26px);
+  border-top: 1px solid var(--line-soft);
+  max-height: 5.4em;
+  overflow-y: auto;
+}
+.lightbox-caption:empty { display: none; }
+
+/* page behind the overlay must not scroll */
+html.lightbox-open { overflow: hidden; }
+
+/* images that open the lightbox without being links */
+.lb-zoomable { cursor: zoom-in; }
+
 /* ------------------------------------------------------------ footer */
 .site-footer {
   border-top: 1px solid var(--line);

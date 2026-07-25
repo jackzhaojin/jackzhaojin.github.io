@@ -352,6 +352,121 @@
     }, { passive: true });
   });
 
+  /* --------------------------------------------------------- lightbox
+     diagrams and photos open in an overlay instead of a new tab.
+     anchors keep their href as the no-js fallback and become the
+     "open file" action inside the overlay. */
+  var IMG_HREF = /\.(svg|png|jpe?g|webp|gif)(\?.*)?$/i;
+
+  var lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-label", "Image viewer");
+  lightbox.hidden = true;
+  lightbox.innerHTML =
+    '<div class="lightbox-top">' +
+      '<a class="lightbox-file mono" target="_blank" rel="noopener">open file &nearr;</a>' +
+      '<button class="lightbox-zoom mono" type="button" aria-pressed="false">zoom 1:1</button>' +
+      '<button class="lightbox-close" type="button" aria-label="Close image viewer">&times;</button>' +
+    "</div>" +
+    '<div class="lightbox-body"><img alt=""></div>' +
+    '<p class="lightbox-caption mono"></p>';
+  document.body.appendChild(lightbox);
+
+  var lbBody = lightbox.querySelector(".lightbox-body");
+  var lbImg = lbBody.querySelector("img");
+  var lbCaption = lightbox.querySelector(".lightbox-caption");
+  var lbFile = lightbox.querySelector(".lightbox-file");
+  var lbZoom = lightbox.querySelector(".lightbox-zoom");
+  var lbClose = lightbox.querySelector(".lightbox-close");
+  var lbOpener = null;
+
+  function captionFor(el) {
+    var fig = el.closest("figure");
+    var cap = fig && fig.querySelector("figcaption");
+    return cap ? cap.textContent.trim() : "";
+  }
+
+  function openLightbox(src, alt, caption, lightPlate, opener) {
+    lbImg.src = src;
+    lbImg.alt = alt || "";
+    lbImg.classList.toggle("light-plate", lightPlate);
+    lbCaption.textContent = caption || "";
+    lbFile.href = src;
+    lbOpener = opener || null;
+    setZoom(false);
+    lightbox.hidden = false;
+    requestAnimationFrame(function () { lightbox.classList.add("open"); });
+    document.documentElement.classList.add("lightbox-open");
+    lbClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    document.documentElement.classList.remove("lightbox-open");
+    window.setTimeout(function () {
+      lightbox.hidden = true;
+      lbImg.src = "";
+    }, reducedMotion ? 0 : 250);
+    if (lbOpener && lbOpener.focus) lbOpener.focus();
+    lbOpener = null;
+  }
+
+  function setZoom(zoomed) {
+    lightbox.classList.toggle("zoomed", zoomed);
+    lbZoom.setAttribute("aria-pressed", String(zoomed));
+    lbZoom.textContent = zoomed ? "fit screen" : "zoom 1:1";
+    // svg diagrams have no intrinsic pixel size, so "natural" width alone
+    // would collapse back to the container; floor the zoom at 1200px
+    lbImg.style.width = zoomed ? Math.max(lbImg.naturalWidth || 0, 1200) + "px" : "";
+  }
+
+  lbClose.addEventListener("click", closeLightbox);
+  lbZoom.addEventListener("click", function () { setZoom(!lightbox.classList.contains("zoomed")); });
+  lbImg.addEventListener("click", function () { setZoom(!lightbox.classList.contains("zoomed")); });
+  lbBody.addEventListener("click", function (e) {
+    if (e.target === lbBody) closeLightbox(); // backdrop, not the image
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") { closeLightbox(); return; }
+    if (e.key === "Tab") {
+      // small focus trap across the three controls
+      var stops = [lbFile, lbZoom, lbClose];
+      var i = stops.indexOf(document.activeElement);
+      e.preventDefault();
+      var next = e.shiftKey ? (i <= 0 ? stops.length - 1 : i - 1) : (i === stops.length - 1 ? 0 : i + 1);
+      stops[next].focus();
+    }
+  });
+
+  // linked images: intercept the anchor, keep href as fallback
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest("a");
+    if (!a || !lightbox.hidden) return;
+    if (!IMG_HREF.test(a.getAttribute("href") || "")) return;
+    var img = a.querySelector("img");
+    if (!img) return;
+    e.preventDefault();
+    var lightPlate = !!(a.closest(".diagram-frame") || a.closest(".deck-pane"));
+    openLightbox(a.href, img.alt, captionFor(a), lightPlate, a);
+  });
+
+  // plain images in frames and carousel slides open the overlay too
+  document.querySelectorAll(".frame img, .carousel .slide img").forEach(function (img) {
+    if (img.closest("a")) return;
+    img.classList.add("lb-zoomable");
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    function openIt() { openLightbox(img.currentSrc || img.src, img.alt, captionFor(img), false, img); }
+    img.addEventListener("click", openIt);
+    img.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openIt(); }
+    });
+  });
+
   /* ------------------------------------------- hero: signal field
      ambient threads in the chapter accents; pauses off screen */
   var canvas = document.getElementById("signal-field");
