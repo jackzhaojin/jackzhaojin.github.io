@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23c0b3ff' stroke-width='8'/%3E%3Cpath d='M50 8a42 42 0 0 1 0 84z' fill='%23c0b3ff'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 <a class="skip-link" href="#ch-anima">Skip to projects</a>
@@ -122,8 +122,8 @@
       <p class="pattern-line reveal d2">The split is the design: all logic in a public engine that never names anyone. All identity in a private instance repo the engine animates.</p>
     </div>
     <figure class="frame diagram-frame reveal" >
-      <a href="assets/anima/cloud-architecture.svg" target="_blank" rel="noopener" aria-label="Open the cloud architecture diagram full size">
-        <img src="assets/anima/cloud-architecture.svg" loading="lazy" alt="AnimaMesh cloud architecture: the principal reaches the mesh via Discord and a dashboard; two Cloudflare Durable Objects run the heartbeat and directions; the private GitHub brain is the only durable store; read-only sources and model vendors hang off the side.">
+      <a href="assets/anima/cloud-architecture.svg?v=2" target="_blank" rel="noopener" aria-label="Open the cloud architecture diagram full size">
+        <img src="assets/anima/cloud-architecture.svg?v=2" loading="lazy" alt="AnimaMesh cloud architecture: the principal reaches the mesh via Discord and a dashboard; two Cloudflare Durable Objects run the heartbeat and directions; the private GitHub brain is the only durable store; read-only sources and model vendors hang off the side.">
       </a>
       <figcaption>The cloud tier. Two Durable Objects, one alarm, zero databases. Git is the only durable store.</figcaption>
     </figure>
@@ -144,19 +144,19 @@
       </div>
       <div class="deck-panes">
         <figure class="deck-pane active" id="deck-brain">
-          <a href="assets/anima/brain-anatomy.svg" target="_blank" rel="noopener"><img src="assets/anima/brain-anatomy.svg" loading="lazy" alt="Anatomy of a brain: one organization as plain files. What the mesh knows, who does the work, and what the work leaves behind."></a>
+          <a href="assets/anima/brain-anatomy.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/brain-anatomy.svg?v=2" loading="lazy" alt="Anatomy of a brain: one organization as plain files. What the mesh knows, who does the work, and what the work leaves behind."></a>
           <figcaption>One organization as plain files: knowledge, roster, and the trail the work leaves behind. No code lives here.</figcaption>
         </figure>
         <figure class="deck-pane" id="deck-beat">
-          <a href="assets/anima/heartbeat-sequence.svg" target="_blank" rel="noopener"><img src="assets/anima/heartbeat-sequence.svg" loading="lazy" alt="Sequence diagram of one heartbeat: a single alarm reads the brain, runs each due spoke sequentially, runs the hub last, verifies, commits once, and delivers a brief."></a>
+          <a href="assets/anima/heartbeat-sequence.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/heartbeat-sequence.svg?v=2" loading="lazy" alt="Sequence diagram of one heartbeat: a single alarm reads the brain, runs each due spoke sequentially, runs the hub last, verifies, commits once, and delivers a brief."></a>
           <figcaption>One alarm, the whole company. Spokes run first; the hub runs last and reads the day's work instead of commanding it.</figcaption>
         </figure>
         <figure class="deck-pane" id="deck-roster">
-          <a href="assets/anima/agent-roster.svg" target="_blank" rel="noopener"><img src="assets/anima/agent-roster.svg" loading="lazy" alt="Agent roster lifecycle: born in the engine as a template, lives in the brain as markdown frontmatter, climbs a four-level autonomy ladder."></a>
+          <a href="assets/anima/agent-roster.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/agent-roster.svg?v=2" loading="lazy" alt="Agent roster lifecycle: born in the engine as a template, lives in the brain as markdown frontmatter, climbs a four-level autonomy ladder."></a>
           <figcaption>An agent is a markdown file. Hiring is copying a template. Promotion is a one-line frontmatter edit, with git as the record.</figcaption>
         </figure>
         <figure class="deck-pane" id="deck-split">
-          <a href="assets/anima/engine-and-instance.svg" target="_blank" rel="noopener"><img src="assets/anima/engine-and-instance.svg" loading="lazy" alt="Two-repo topology: the public engine has a one-way dependency into many isolated private brains."></a>
+          <a href="assets/anima/engine-and-instance.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/engine-and-instance.svg?v=2" loading="lazy" alt="Two-repo topology: the public engine has a one-way dependency into many isolated private brains."></a>
           <figcaption>One-way dependency. The engine never references the brain. One engine can animate many isolated companies.</figcaption>
         </figure>
       </div>
@@ -341,8 +341,8 @@
       <p class="pattern-line reveal d2">One pipeline, two model vendors, zero contract changes. Kimi authors. Claude judges. Neither knows the other exists.</p>
     </div>
     <figure class="frame diagram-frame reveal">
-      <a href="assets/factory/a2a-closed-loop-pipeline.png" target="_blank" rel="noopener">
-        <img src="assets/factory/a2a-closed-loop-pipeline.png" loading="lazy" alt="The closed-loop pipeline: a coordinator asks content-gen to fabricate a synthetic legacy page, hands it to the migration agent to author into da.live, and hands that to the eval agent to score across four dimensions.">
+      <a href="assets/factory/a2a-closed-loop-pipeline.png?v=2" target="_blank" rel="noopener">
+        <img src="assets/factory/a2a-closed-loop-pipeline.png?v=2" loading="lazy" alt="The closed-loop pipeline: a coordinator asks content-gen to fabricate a synthetic legacy page, hands it to the migration agent to author into da.live, and hands that to the eval agent to score across four dimensions.">
       </a>
       <figcaption>The closed loop, from the repo's own docs. The coordinator can enter or exit the loop anywhere.</figcaption>
     </figure>
@@ -461,8 +461,8 @@
   <article class="story flip" id="p-kit-drawio">
     <div class="story-media reveal">
       <figure class="frame">
-        <a href="assets/kit/agent-sdk-harness.png" target="_blank" rel="noopener">
-          <img src="assets/kit/agent-sdk-harness.png" loading="lazy" alt="Reference output of the drawio skill: an agentic harness diagram with a four-color semantic palette, deterministic processor, planning and task agents, and dashed human-readable handoff loops.">
+        <a href="assets/kit/agent-sdk-harness.png?v=2" target="_blank" rel="noopener">
+          <img src="assets/kit/agent-sdk-harness.png?v=2" loading="lazy" alt="Reference output of the drawio skill: an agentic harness diagram with a four-color semantic palette, deterministic processor, planning and task agents, and dashed human-readable handoff loops.">
         </a>
         <figcaption>The skill's reference output. The four-color semantic palette here is the same one on diagrams across this page.</figcaption>
       </figure>
@@ -487,7 +487,7 @@
   <article class="story" id="p-kit">
     <div class="story-media reveal">
       <figure class="frame">
-        <img src="assets/collateral/ai-team-enablement-2025-08-26-2224.png" loading="lazy" alt="Hand-drawn diagram mapping AI skills to team enablement objectives: one skill node, many hands">
+        <img src="assets/collateral/ai-team-enablement-2025-08-26-2224.png?v=2" loading="lazy" alt="Hand-drawn diagram mapping AI skills to team enablement objectives: one skill node, many hands">
         <figcaption>One skill node, many hands. The moment personal tooling became team enablement.</figcaption>
       </figure>
     </div>
@@ -541,8 +541,8 @@
       <p class="pattern-line reveal d2">Analyst scores the block. Architect forms the theory. Builder writes the variant. Validator runs Lighthouse, accessibility, and regression.</p>
     </div>
     <figure class="frame diagram-frame tall-diagram reveal">
-      <a href="assets/conversion/conversion-factory.png" target="_blank" rel="noopener">
-        <img src="assets/conversion/conversion-factory.png" loading="lazy" alt="Conversion Factory architecture: a coordinator hub orchestrates analyst, architect, builder, and validator agents through four phases - generate a PR, human review plus live A/B experiment, promote to permanent baseline, and a retrospective loop that updates agent instructions.">
+      <a href="assets/conversion/conversion-factory.png?v=2" target="_blank" rel="noopener">
+        <img src="assets/conversion/conversion-factory.png?v=2" loading="lazy" alt="Conversion Factory architecture: a coordinator hub orchestrates analyst, architect, builder, and validator agents through four phases - generate a PR, human review plus live A/B experiment, promote to permanent baseline, and a retrospective loop that updates agent instructions.">
       </a>
       <figcaption>From the repo's ai-docs. Phase 4 is the part I care about: the retrospective agent proposes instruction changes, and humans gate how the agents reason.</figcaption>
     </figure>
@@ -724,7 +724,7 @@
   <article class="story flip" id="p-cea-identity">
     <div class="story-media reveal">
       <figure class="frame">
-        <img src="assets/collateral/Discord.png" loading="lazy" alt="Discord workspace owned and operated by the autonomous agent, posting its own status updates">
+        <img src="assets/collateral/Discord.png?v=2" loading="lazy" alt="Discord workspace owned and operated by the autonomous agent, posting its own status updates">
         <figcaption>The agent's own Discord. I read it like a colleague's channel.</figcaption>
       </figure>
     </div>
@@ -738,7 +738,7 @@
         morning. Human interaction is markdown files, not a chat box waiting for input.
       </p>
       <figure class="frame sub reveal d4">
-        <img src="assets/collateral/continuous-agent-architecture.png" loading="lazy" alt="Hand-drawn architecture diagram of Continuous Executive Agent v2.1: executive brain, multi-vendor worker execution, and self-correcting feedback loop">
+        <img src="assets/collateral/continuous-agent-architecture.png?v=2" loading="lazy" alt="Hand-drawn architecture diagram of Continuous Executive Agent v2.1: executive brain, multi-vendor worker execution, and self-correcting feedback loop">
         <figcaption>The v2.1 system map, hand-drawn: executive brain, worker execution, feedback loop.</figcaption>
       </figure>
       <p class="proof-links reveal d5">
@@ -751,8 +751,8 @@
   <article class="story" id="p-cea-brain">
     <div class="story-media reveal">
       <figure class="frame">
-        <a href="assets/cea/ingestion-and-retrieval.png" target="_blank" rel="noopener">
-          <img src="assets/cea/ingestion-and-retrieval.png" loading="lazy" alt="Diagram of the memory system's write path (hooks feed a harvester that validates and writes to mem0) and read path (a reader runs natural-language searches and builds memory packs)">
+        <a href="assets/cea/ingestion-and-retrieval.png?v=2" target="_blank" rel="noopener">
+          <img src="assets/cea/ingestion-and-retrieval.png?v=2" loading="lazy" alt="Diagram of the memory system's write path (hooks feed a harvester that validates and writes to mem0) and read path (a reader runs natural-language searches and builds memory packs)">
         </a>
         <figcaption>The write path and the read path. One writer, one reader, no agent scribbles wherever it wants.</figcaption>
       </figure>
@@ -893,15 +893,15 @@
   <article class="story wide" id="p-shadow">
     <div class="carousel trilogy reveal" id="carousel-trilogy" tabindex="0" aria-label="Three-act carousel: release, infrastructure, methodology">
       <figure class="slide act">
-        <img src="assets/collateral/3-3-blueprint-image.png" loading="lazy" alt="Blueprint document driving the AI-coded Next.js agent build">
+        <img src="assets/collateral/3-3-blueprint-image.png?v=2" loading="lazy" alt="Blueprint document driving the AI-coded Next.js agent build">
         <figcaption><b class="mono">Act 1 · Release 1.0</b> The app ships. 100% AI-written code, one person directing. <a class="link-post" href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345205386179710977-_hZJ" target="_blank" rel="noopener">Post ↗</a></figcaption>
       </figure>
       <figure class="slide act">
-        <img src="assets/collateral/4-1-cicd-gh-action.png" loading="lazy" alt="GitHub Actions CI/CD pipeline for the AI-coded application">
+        <img src="assets/collateral/4-1-cicd-gh-action.png?v=2" loading="lazy" alt="GitHub Actions CI/CD pipeline for the AI-coded application">
         <figcaption><b class="mono">Act 2 · Infrastructure</b> CI/CD and deployment, so the loop can run without ceremony. <a class="link-post" href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345630816263118848-cd2t" target="_blank" rel="noopener">Post ↗</a></figcaption>
       </figure>
       <figure class="slide act">
-        <img src="assets/collateral/3-1-prd.png" loading="lazy" alt="Product requirements document used to scale the AI coding methodology">
+        <img src="assets/collateral/3-1-prd.png?v=2" loading="lazy" alt="Product requirements document used to scale the AI coding methodology">
         <figcaption><b class="mono">Act 3 · Methodology</b> The repeatable part extracted: PRDs, rules files, blueprints. <a class="link-post" href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7348559013199925248-j9Ws" target="_blank" rel="noopener">Post ↗</a></figcaption>
       </figure>
     </div>
@@ -1035,6 +1035,6 @@
 </footer>
 
 </main>
-<script src="script.js" defer></script>
+<script src="script.js?v=2" defer></script>
 </body>
 </html>
