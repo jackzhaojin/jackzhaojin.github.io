@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23c0b3ff' stroke-width='8'/%3E%3Cpath d='M50 8a42 42 0 0 1 0 84z' fill='%23c0b3ff'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <a class="skip-link" href="#ch-anima">Skip to projects</a>
@@ -100,26 +100,24 @@
 <!-- ================================================================= -->
 <!-- CHAPTER 1 · ANIMA MESH (flagship)                                  -->
 <!-- ================================================================= -->
-<div class="tdiv" aria-hidden="true"><span class="mono">now · Jul 2026</span><i></i><span class="mono">the latest build</span></div>
+<div class="tdiv" aria-hidden="true"><span class="mono">now · Aug 2026</span><i></i><span class="mono">the latest build</span></div>
 
 <section class="chapter flagship" id="ch-anima" data-proj="anima">
   <header class="chapter-head">
     <span class="chapter-num" aria-hidden="true">01</span>
     <div class="chapter-title-block">
-      <p class="kicker reveal">Jul 2026 — present · 2 repos</p>
+      <p class="kicker reveal">Jul 2026 · present · 2 repos</p>
       <h2 class="reveal d1">Anima Mesh<br><em>The company-of-0 experiment</em></h2>
-      <p class="method-line reveal d1"><b>ad hoc</b> no spec preceded the code. The discipline came from releases: 26 tags in 19 days, a changelog per release line, learnings written down as they happened.</p>
+      <p class="method-line reveal d1"><b>ad hoc</b> no spec preceded the code. The structure came from releases: 36 tags in 29 days, a changelog per minor line, and platform failures written down as learnings.</p>
       <p class="thesis reveal d2">
-        The experiment: how much of an organization's back office can a mesh of agents run on
-        its own? Compliance calendar, bookkeeping, document library, board hygiene, research
-        watch, inbound triage. The point is to push that boundary until one human job is left
-        standing: the approval gate.
+        AnimaMesh runs recurring back-office work from a private repo: compliance checks,
+        bookkeeping prep, document memory, governance, research, and inbound triage. A human
+        remains the approval gate for money, filings, publishing, credentials, and access.
       </p>
       <p class="arc reveal d3">
-        The engine is public and knows no names. The knowledge lives in a second, private
-        brain repo: ledger, records, CRM, all plain markdown. One daily heartbeat reads the
-        repo, runs the agents that are due, verifies the work in code, and commits.
-        <span class="mono">git log</span> is literally "what did the mesh do while I was away."
+        Cloud execution is primary. A Worker reads the brain as one tarball, runs the agents
+        that are due, verifies their artifacts, and lands one commit before a brief or reply
+        is sent. The CLI uses the same engine for setup, recovery, and subprocess-only harnesses.
       </p>
     </div>
   </header>
@@ -127,47 +125,80 @@
   <!-- hero diagram -->
   <article class="story wide" id="p-anima-arch">
     <div class="story-text center">
-      <p class="story-meta reveal"><time datetime="2026-07-05">Jul 5, 2026</time> · engine + brain, born seven minutes apart</p>
-      <h3 class="reveal d1">One engine, one private brain per instance</h3>
-      <p class="pattern-line reveal d2">The split is the design: all logic in a public engine that never names anyone. All identity in a private instance repo the engine animates.</p>
+      <p class="story-meta reveal">v0.16.0 · Cloudflare Workers + Durable Objects + GitHub</p>
+      <h3 class="reveal d1">Cloud first, one private brain per instance</h3>
+      <p class="pattern-line reveal d2">Durable Objects hold alarms, locks, queues, and budgets. The private GitHub repo holds knowledge and evidence. Read sources stay external.</p>
     </div>
     <figure class="frame diagram-frame reveal" >
-      <a href="assets/anima/cloud-architecture.svg?v=2" target="_blank" rel="noopener" aria-label="Open the cloud architecture diagram full size">
-        <img src="assets/anima/cloud-architecture.svg?v=2" loading="lazy" alt="AnimaMesh cloud architecture: the principal reaches the mesh via Discord and a dashboard; two Cloudflare Durable Objects run the heartbeat and directions; the private GitHub brain is the only durable store; read-only sources and model vendors hang off the side.">
+      <a href="assets/anima/cloud-architecture.svg?v=3" target="_blank" rel="noopener" aria-label="Open the cloud architecture diagram full size">
+        <img src="assets/anima/cloud-architecture.svg?v=3" loading="lazy" alt="AnimaMesh cloud architecture: Discord and a browser connect to separate Cloudflare Workers; Heartbeat and Direction Durable Objects run against a private GitHub brain, read-only context sources, and fetch-based model APIs.">
       </a>
-      <figcaption>The cloud tier. Two Durable Objects, one alarm, zero databases. Git is the only durable store.</figcaption>
+      <figcaption>The normal operating path. The cloud tier runs while the laptop is closed; the laptop tier remains available for local tools and recovery.</figcaption>
     </figure>
   </article>
 
   <!-- diagram deck -->
   <article class="story wide" id="p-anima-diagrams">
     <div class="story-text center">
-      <p class="story-meta reveal">Hand-authored SVG · from the repo's own docs</p>
-      <h3 class="reveal d1">The system, in <em>four</em> diagrams</h3>
+      <p class="story-meta reveal">Repository SVGs · synced with the Aug 2 implementation</p>
+      <h3 class="reveal d1">Six views of the <em>same system</em></h3>
+      <p class="pattern-line reveal d2">State, reach, runtime, feedback, staffing, and ownership. Each view follows a seam that exists in the code.</p>
     </div>
     <div class="diagram-deck reveal" id="anima-deck">
-      <div class="deck-tabs" role="tablist" aria-label="Anima Mesh diagrams">
-        <button class="deck-tab active" role="tab" aria-selected="true" data-deck="deck-brain">Anatomy of a brain</button>
-        <button class="deck-tab" role="tab" aria-selected="false" data-deck="deck-beat">Anatomy of a beat</button>
-        <button class="deck-tab" role="tab" aria-selected="false" data-deck="deck-roster">The roster is data</button>
-        <button class="deck-tab" role="tab" aria-selected="false" data-deck="deck-split">Engine vs instance</button>
+      <div class="deck-toolbar" aria-hidden="true">
+        <span class="deck-label">System index</span>
+        <span class="deck-position"><b>01</b> / 06</span>
+      </div>
+      <div class="deck-tabs" role="tablist" aria-label="Anima Mesh engineering diagrams" aria-orientation="horizontal">
+        <button class="deck-tab active" id="deck-tab-brain" role="tab" aria-selected="true" aria-controls="deck-brain" tabindex="0" data-deck="deck-brain"><span>01</span>Brain</button>
+        <button class="deck-tab" id="deck-tab-reach" role="tab" aria-selected="false" aria-controls="deck-reach" tabindex="-1" data-deck="deck-reach"><span>02</span>Resource reach</button>
+        <button class="deck-tab" id="deck-tab-beat" role="tab" aria-selected="false" aria-controls="deck-beat" tabindex="-1" data-deck="deck-beat"><span>03</span>One beat</button>
+        <button class="deck-tab" id="deck-tab-defect" role="tab" aria-selected="false" aria-controls="deck-defect" tabindex="-1" data-deck="deck-defect"><span>04</span>Defect loop</button>
+        <button class="deck-tab" id="deck-tab-roster" role="tab" aria-selected="false" aria-controls="deck-roster" tabindex="-1" data-deck="deck-roster"><span>05</span>Roster</button>
+        <button class="deck-tab" id="deck-tab-split" role="tab" aria-selected="false" aria-controls="deck-split" tabindex="-1" data-deck="deck-split"><span>06</span>Engine / instance</button>
       </div>
       <div class="deck-panes">
-        <figure class="deck-pane active" id="deck-brain">
-          <a href="assets/anima/brain-anatomy.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/brain-anatomy.svg?v=2" loading="lazy" alt="Anatomy of a brain: one organization as plain files. What the mesh knows, who does the work, and what the work leaves behind."></a>
-          <figcaption>One organization as plain files: knowledge, roster, and the trail the work leaves behind. No code lives here.</figcaption>
+        <figure class="deck-pane active" id="deck-brain" role="tabpanel" aria-labelledby="deck-tab-brain">
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">01 · state</span>
+            <div><h4>One organization as plain files</h4><p>Knowledge, agent definitions, deploy configuration, approvals, reports, and an append-only ledger live in one private repo. No engine code lives there.</p></div>
+          </figcaption>
+          <a href="assets/anima/brain-anatomy.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/brain-anatomy.svg?v=3" loading="lazy" alt="Anatomy of a brain: one organization stored as plain files, including knowledge, the agent roster, evidence surfaces, cloud deployment configuration, and two writers sharing one git history."></a>
         </figure>
-        <figure class="deck-pane" id="deck-beat">
-          <a href="assets/anima/heartbeat-sequence.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/heartbeat-sequence.svg?v=2" loading="lazy" alt="Sequence diagram of one heartbeat: a single alarm reads the brain, runs each due spoke sequentially, runs the hub last, verifies, commits once, and delivers a brief."></a>
-          <figcaption>One alarm, the whole company. Spokes run first; the hub runs last and reads the day's work instead of commanding it.</figcaption>
+        <figure class="deck-pane" id="deck-reach" role="tabpanel" aria-labelledby="deck-tab-reach" hidden>
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">02 · reach</span>
+            <div><h4>The files stay where their truth already lives</h4><p>SharePoint, mail, and GitHub are scoped inputs. Reads are consented and read-only; writes pass a deterministic gate and land in the ledger.</p></div>
+          </figcaption>
+          <a href="assets/anima/resource-reach.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/resource-reach.svg?v=3" loading="lazy" alt="Resource reach diagram: SharePoint and OneDrive, a company mailbox, and GitHub repos feed a private brain through read-only seams; resulting briefs, commits, public issues, and approvals are gated and ledgered."></a>
         </figure>
-        <figure class="deck-pane" id="deck-roster">
-          <a href="assets/anima/agent-roster.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/agent-roster.svg?v=2" loading="lazy" alt="Agent roster lifecycle: born in the engine as a template, lives in the brain as markdown frontmatter, climbs a four-level autonomy ladder."></a>
-          <figcaption>An agent is a markdown file. Hiring is copying a template. Promotion is a one-line frontmatter edit, with git as the record.</figcaption>
+        <figure class="deck-pane" id="deck-beat" role="tabpanel" aria-labelledby="deck-tab-beat" hidden>
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">03 · runtime</span>
+            <div><h4>One alarm, then one evidence commit</h4><p>The beat reads the whole brain, runs due spokes sequentially, runs the hub last, commits once, and only then sends the brief.</p></div>
+          </figcaption>
+          <a href="assets/anima/heartbeat-sequence.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/heartbeat-sequence.svg?v=3" loading="lazy" alt="Heartbeat sequence: one Durable Object alarm reads the brain, evaluates which agents are due, runs spokes sequentially and the hub last, commits all evidence once, delivers the brief, and rearms itself."></a>
         </figure>
-        <figure class="deck-pane" id="deck-split">
-          <a href="assets/anima/engine-and-instance.svg?v=2" target="_blank" rel="noopener"><img src="assets/anima/engine-and-instance.svg?v=2" loading="lazy" alt="Two-repo topology: the public engine has a one-way dependency into many isolated private brains."></a>
-          <figcaption>One-way dependency. The engine never references the brain. One engine can animate many isolated companies.</figcaption>
+        <figure class="deck-pane" id="deck-defect" role="tabpanel" aria-labelledby="deck-tab-defect" hidden>
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">04 · feedback</span>
+            <div><h4>The brain reports defects on its own engine</h4><p>A gated report crosses a leak guard, title deduplication, and a per-run cap before it becomes a public issue. The fix returns through a tagged engine release.</p></div>
+          </figcaption>
+          <a href="assets/anima/defect-loop.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/defect-loop.svg?v=3" loading="lazy" alt="Defect loop: an agent proposes an engine issue, deterministic code checks its whitelist, scans for identity leaks, deduplicates the title, caps filing, and ledgers the result before a maintainer fixes and tags the engine."></a>
+        </figure>
+        <figure class="deck-pane" id="deck-roster" role="tabpanel" aria-labelledby="deck-tab-roster" hidden>
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">05 · staffing</span>
+            <div><h4>The roster is data, not deployment</h4><p>Each agent is frontmatter plus prose. Its file carries model, harness, rhythm, sources, read paths, web budget, whitelist, and autonomy level.</p></div>
+          </figcaption>
+          <a href="assets/anima/agent-roster.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/agent-roster.svg?v=3" loading="lazy" alt="Agent roster lifecycle: generic templates become private markdown agent files whose frontmatter declares cognition, schedule, sources, web budget, whitelist, and autonomy level."></a>
+        </figure>
+        <figure class="deck-pane" id="deck-split" role="tabpanel" aria-labelledby="deck-tab-split" hidden>
+          <figcaption class="deck-pane-head">
+            <span class="deck-eyebrow">06 · ownership</span>
+            <div><h4>Generic engine, isolated company state</h4><p>The public repo owns reusable logic and tests. Each private instance owns identity, knowledge, credential bindings, deploy configuration, and durable evidence.</p></div>
+          </figcaption>
+          <a href="assets/anima/engine-and-instance.svg?v=3" target="_blank" rel="noopener"><img src="assets/anima/engine-and-instance.svg?v=3" loading="lazy" alt="Engine and instance topology: a public, instance-agnostic engine is pinned by version from private brain repos that own their knowledge, configuration, deployment workspace, credentials, and evidence."></a>
         </figure>
       </div>
     </div>
@@ -182,25 +213,24 @@
           <polyline id="pulse-line" points="0,60 120,60 150,60 165,18 185,102 200,60 320,60 350,60 365,26 383,96 398,60 560,60" fill="none" />
         </svg>
         <div class="counter-row pulse-stats" id="anima-counters">
-          <span class="counter"><b data-count="202">0</b> ledger entries</span>
-          <span class="counter"><b data-count="54">0</b> agent reports</span>
-          <span class="counter"><b data-count="25">0</b> commits by the machine</span>
+          <span class="counter"><b data-count="330">0</b> ledger entries</span>
+          <span class="counter"><b data-count="81">0</b> agent reports</span>
+          <span class="counter"><b data-count="38">0</b> commits by the mesh</span>
           <span class="counter"><b data-count="9">0</b> agents on roster</span>
         </div>
         <button class="replay mono" data-replay="anima-beat" aria-label="Replay the heartbeat animation">↻ replay the beat</button>
       </div>
     </div>
     <div class="story-text">
-      <p class="story-meta reveal">Running since <time datetime="2026-07-06">Jul 6, 2026</time> · cloud-native since Jul 11</p>
+      <p class="story-meta reveal">Running since <time datetime="2026-07-06">Jul 6, 2026</time> · cloud primary since Jul 11</p>
       <h3 class="reveal d1">Nine agents, one <em>approval gate</em></h3>
       <p class="pattern-line reveal d2">From the docs: "the initiative inverts: you stop driving the operations and start reviewing them."</p>
       <p class="reveal d3">
-        Nine agent archetypes on four rhythms: daily, weekly, monthly, quarterly. A compliance
-        watcher, a bookkeeper, a librarian, a board secretary, a research watch, an inbound
-        triage. The hub, a Chief of Staff persona, is the single voice the human ever hears.
-        Three inbound channels: Discord, a dashboard, plain email. And a documented moment of
-        real judgment: the hub woke the bookkeeper early because a deadline outpaced its
-        monthly rhythm. That is exactly the judgment the mechanism exists for.
+        Nine agent concepts run on daily, weekly, monthly, and quarterly rhythms. Due spokes
+        run sequentially; the hub runs last and reads their fresh reports. Discord and Gmail
+        feed direction runs. A separately credentialed dashboard shows the evidence and can
+        trigger a beat. Role-declared <span class="mono">reads:</span> paths are inlined into
+        every prompt, with missing context named instead of silently dropped.
       </p>
       <blockquote class="pull-quote reveal d4">"A reply that isn't backed by a commit is a hallucination with a send button."</blockquote>
       <p class="proof-links reveal d5">
@@ -223,51 +253,50 @@
           <button class="gloss-chip" data-def="A fenced block in a model's output. Applied only through the gate, always ledgered. Model judgment proposes; deterministic code disposes.">propose / dispose</button>
           <button class="gloss-chip" data-def="Reminders that ride in every prompt and repeat every beat, with age, until done.">nags</button>
         </div>
-        <div class="gloss-readout mono" id="gloss-readout" aria-live="polite">a system earns its own nouns. click one.</div>
+        <div class="gloss-readout mono" id="gloss-readout" aria-live="polite">select a term.</div>
       </div>
     </div>
     <div class="story-text">
-      <p class="story-meta reveal">26 tagged releases in the first 19 days · ~296 tests · Apache-2.0</p>
+      <p class="story-meta reveal">36 tagged releases in 29 days · 379 passing tests · Apache-2.0</p>
       <h3 class="reveal d1">Safety lives in code, never in prompts</h3>
       <p class="pattern-line reveal d2">Everything between wake-up and gate is model judgment. Gates, ladder, ledger, and verifiers are deterministic code.</p>
       <p class="reveal d3">
-        Five constitutionally gated action classes: money movement, government filings, external
-        publishing, credential exposure, access expansion. Three commercial agents are fully
-        written and the engine refuses to run them until their activation gates open.
-        Capability never outruns permission. And when api.kimi.com's WAF blocked all Cloudflare
-        Workers egress in week one, cognition rerouted to Anthropic with a two-line config edit.
-        The agent's identity never changed.
+        Five constitutionally gated action classes cover money movement, government filings,
+        publishing, credentials, and access expansion. Three reversible write paths ship today:
+        schedule updates, draft writes, and defect reports. Each request is parsed, checked
+        against the same ladder and whitelist gate, and ledgered whether applied or denied.
       </p>
       <div class="stat-chips reveal d4">
-        <span class="stat"><b>0</b> databases · git is the store</span>
-        <span class="stat"><b>6</b> model harnesses, swappable</span>
-        <span class="stat"><b>3</b> agents waiting on permission</span>
+        <span class="stat"><b>3</b> gated write paths</span>
+        <span class="stat"><b>2</b> fetch-only cloud harnesses</span>
+        <span class="stat"><b>1</b> evidence commit per beat or drain</span>
       </div>
       <p class="proof-links reveal d5">
-        <a class="link-repo" href="https://github.com/jackzhaojin/anima-mesh" target="_blank" rel="noopener">Read the docs in the repo ↗</a>
+        <a class="link-repo" href="https://github.com/jackzhaojin/anima-mesh/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture notes ↗</a>
+        <a class="link-repo" href="https://github.com/jackzhaojin/anima-mesh/tree/main/docs/sample-brain" target="_blank" rel="noopener">Scrubbed sample brain ↗</a>
       </p>
     </div>
   </article>
 
-  <aside class="edge panel-wide reveal" aria-label="Why this project matters most">
-    <p class="kicker-sm">Why this one gets the most space</p>
+  <aside class="edge panel-wide reveal" aria-label="Project context and evidence">
+    <p class="kicker-sm">What this project collects</p>
     <div class="edge-grid">
       <div class="edge-col">
-        <h4>The fourth coordinator, on purpose</h4>
+        <h4>Four coordination approaches</h4>
         <p>
           Three coordinator systems came before it, each with a different coupling: the
           continuous agent below, a tightly coupled monolith; the conversion factory's hub
           and four spokes; and the content factory's loosely coupled A2A mesh. Anima Mesh is
-          the extracted lesson: the minimal sovereign core worth owning, on top of A2A,
-          Durable Objects, and a typed knowledge format.
+          the extracted lesson: keep coordination in shared state and model judgment, while
+          deterministic code owns gates, ledgers, verification, and scheduling.
         </p>
       </div>
       <div class="edge-col">
-        <h4>Receipts, not claims</h4>
+        <h4>Operational evidence</h4>
         <p>
-          The claim under test: AI can be a real contributor given context, agency, and a
-          heartbeat. The receipt is a brain repo where the machine has authored its own commits
-          since July 6, a ledger with 202 entries, and a calendar that wakes up without me.
+          The private brain records 38 commits authored by the mesh, 330 append-only ledger
+          entries, and 81 reports since July 6. The cloud schedule and the repo history are the
+          evidence surfaces; the portfolio only summarizes them.
         </p>
       </div>
     </div>
@@ -1205,6 +1234,6 @@
 </footer>
 
 </main>
-<script src="script.js?v=4" defer></script>
+<script src="script.js?v=6" defer></script>
 </body>
 </html>

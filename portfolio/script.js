@@ -7,7 +7,7 @@
   /* ------------------------------------------------------ project data */
   // spans drive both the gantt and the year rail. order = page order.
   var PROJECTS = [
-    { id: "ch-anima",   label: "Anima Mesh",            start: "2026-07-05", end: "2026-07-25", color: "#c0b3ff", year: "2026", ongoing: true },
+    { id: "ch-anima",   label: "Anima Mesh",            start: "2026-07-05", end: "2026-08-02", color: "#c0b3ff", year: "2026", ongoing: true },
     { id: "ch-bruce",   label: "Built with Bruce",      start: "2026-02-28", end: "2026-07-17", color: "#ff9d9d", year: "2026" },
     { id: "ch-factory", label: "Content Factory",       start: "2025-10-04", end: "2026-06-29", color: "#8fd8e8", year: "2026" },
     { id: "ch-kit",     label: "AI Builder Kit",        start: "2026-03-22", end: "2026-06-11", color: "#f0cf8e", year: "2026" },
@@ -121,8 +121,8 @@
   var gantt = document.getElementById("gantt");
   if (gantt) {
     var START = Date.parse("2025-04-01");
-    var END = Date.parse("2026-08-01");
-    var NOW = Date.parse("2026-07-25");
+    var END = Date.parse("2026-08-15");
+    var CURRENT = "2026-08-02";
     function pct(d) { return ((Date.parse(d) - START) / (END - START)) * 100; }
 
     var scale = document.createElement("div");
@@ -147,13 +147,13 @@
 
       var nowLine = document.createElement("i");
       nowLine.className = "gantt-now";
-      nowLine.style.left = pct("2026-07-25") + "%";
+      nowLine.style.left = pct(CURRENT) + "%";
       track.appendChild(nowLine);
 
       var bar = document.createElement("button");
       bar.className = "gantt-bar";
       var left = pct(p.start);
-      var width = Math.max(pct(p.ongoing ? "2026-08-01" : p.end) - left, 1);
+      var width = Math.max(pct(p.ongoing ? CURRENT : p.end) - left, 1);
       bar.style.left = left.toFixed(2) + "%";
       bar.style.width = width.toFixed(2) + "%";
       bar.style.setProperty("--bar", p.color);
@@ -243,15 +243,40 @@
   }
 
   /* ------------------------------------------------ anima: diagram deck */
-  document.querySelectorAll(".deck-tab").forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      var deck = tab.closest(".diagram-deck");
-      deck.querySelectorAll(".deck-tab").forEach(function (t) {
-        t.classList.toggle("active", t === tab);
-        t.setAttribute("aria-selected", String(t === tab));
+  document.querySelectorAll(".diagram-deck").forEach(function (deck) {
+    var deckTabs = Array.from(deck.querySelectorAll(".deck-tab"));
+    var position = deck.querySelector(".deck-position b");
+
+    function activateDeckTab(tab, moveFocus) {
+      deckTabs.forEach(function (t) {
+        var selected = t === tab;
+        t.classList.toggle("active", selected);
+        t.setAttribute("aria-selected", String(selected));
+        t.tabIndex = selected ? 0 : -1;
       });
       deck.querySelectorAll(".deck-pane").forEach(function (pane) {
-        pane.classList.toggle("active", pane.id === tab.dataset.deck);
+        var selected = pane.id === tab.dataset.deck;
+        pane.classList.toggle("active", selected);
+        pane.hidden = !selected;
+      });
+      if (position) position.textContent = tab.querySelector("span").textContent;
+      if (moveFocus) {
+        tab.focus();
+        tab.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest", inline: "center" });
+      }
+    }
+
+    deckTabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () { activateDeckTab(tab, false); });
+      tab.addEventListener("keydown", function (event) {
+        var next = index;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % deckTabs.length;
+        else if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index - 1 + deckTabs.length) % deckTabs.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = deckTabs.length - 1;
+        else return;
+        event.preventDefault();
+        activateDeckTab(deckTabs[next], true);
       });
     });
   });
@@ -385,7 +410,7 @@
   function captionFor(el) {
     var fig = el.closest("figure");
     var cap = fig && fig.querySelector("figcaption");
-    return cap ? cap.textContent.trim() : "";
+    return cap ? cap.innerText.trim() : "";
   }
 
   function openLightbox(src, alt, caption, lightPlate, opener) {
