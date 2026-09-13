@@ -152,7 +152,7 @@ The static site architecture provides an inherently secure foundation by elimina
 
 ### Data Collection Practices
 - **No Cookies**: Site doesn't set or use cookies
-- **No Analytics**: No Google Analytics or tracking scripts
+- **Analytics**: Google Analytics 4 (gtag.js) has been on every page since 2026-09-13; see [docs/site-operations.md](../docs/site-operations.md). The rest of this section predates it.
 - **No User Data**: No forms or user input collection
 - **No Local Storage**: No client-side data persistence
 
@@ -173,7 +173,7 @@ The static site architecture provides an inherently secure foundation by elimina
 
 ### GDPR Compliance Considerations
 - **No Personal Data Processing**: Site doesn't process personal data
-- **No Consent Required**: No tracking or analytics implementation
+- **Consent**: Revisit if EEA traffic matters; GA4 is now installed (see note above). No consent banner is implemented.
 - **Transparency**: Privacy practices documented
 - **Data Subject Rights**: Not applicable due to no data collection
 

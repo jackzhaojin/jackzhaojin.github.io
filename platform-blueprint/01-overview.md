@@ -29,6 +29,8 @@ This platform blueprint documents the architectural decisions and technical impl
 - **Debugging**: Direct relationship between source and output
 
 #### 2. No Custom Domain (CNAME)
+> **Superseded 2026-06-14.** The site now serves at `www.jackzhaojin.com` through Cloudflare, with `github.io` redirecting to it. Current hosting, DNS, analytics, and search setup: [docs/site-operations.md](../docs/site-operations.md). The original reasoning is kept below for history.
+
 **Decision**: Use github.io subdomain instead of custom domain
 **Rationale**:
 - **Decoupling**: Avoid tying professional presence to specific side projects

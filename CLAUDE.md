@@ -22,7 +22,7 @@ node build-node.js platform-blueprint # explicit target
 ```
 Output goes to `blueprint-output/`. PDF generation requires `npm install -g puppeteer`.
 
-**No tests, no linter, no CI/CD.** Manual browser testing only. Commits to `main` deploy directly via GitHub Pages.
+**No tests, no linter, no CI/CD.** Manual browser testing only. Commits to `main` deploy directly via GitHub Pages. After a push, `./scripts/check-site.sh` verifies the live site end to end (build state, redirects, analytics tag, Search Console verification, sitemap).
 
 ## Architecture
 
@@ -59,9 +59,10 @@ Filter buttons use `data-filter` (dimension) and `data-value` (value) attributes
 - **No frameworks, no build tools** — this is intentional, not a limitation
 - **No Jekyll** — deliberately avoided despite GitHub Pages support
 - **Custom domain** — configured 2026-06-14 to serve at [www.jackzhaojin.com](https://www.jackzhaojin.com). Driven by the `CNAME` file at the repo root (contents: `www.jackzhaojin.com`), which GitHub Pages reads to set the custom domain. **Do not delete `CNAME`** — it is load-bearing; removing it resets the Pages custom-domain config and breaks the site. The `github.io` subdomain still resolves. All GitHub GET endpoints were smoke tested on 2026-06-14 and are working. POST functionality has not yet been tested (pending — only test if/when POST endpoints exist).
-- **Google Analytics (GA4)** — every page carries the gtag.js snippet for Measurement ID `G-ZVENE6BXTJ` (property "jackzhaojin.com" under the personal "Jack Jin" Analytics account, never under Experience Reinvented; web stream `https://www.jackzhaojin.com`) as the first thing after the viewport meta in `<head>`. Add it to any new page.
-- **Google Search Console** — the URL-prefix property `https://www.jackzhaojin.com/` is verified two ways: the HTML file `google57906613577fdd42.html` at the repo root and the `google-site-verification` meta tag in `index.html`. **Do not delete either** — removing them un-verifies the property.
-- **SEO files** — `robots.txt` (points at the sitemap) and `sitemap.xml` (one `<url>` per page with a `lastmod` date). When a page changes materially or a new page is added, update its `lastmod` in `sitemap.xml`. Every page has a `<link rel="canonical">` pointing at its `https://www.jackzhaojin.com/...` URL; add one to any new page.
-- **HTTPS** — TLS is terminated by Cloudflare (the domain is proxied), so GitHub's "Enforce HTTPS" toggle is not eligible and stays off. That is expected, not a bug.
+- **Hosting, analytics, search: read [docs/site-operations.md](docs/site-operations.md) before touching any of it.** It covers Cloudflare (DNS, redirects, cache), GitHub Pages, Google Analytics 4 (Measurement ID `G-ZVENE6BXTJ`, personal "Jack Jin" account, never a company account), Google Search Console, and the checklists for adding or changing pages. Hard rules from it:
+  - Every page carries the gtag.js snippet as the first thing after the viewport meta in `<head>`, plus a `<link rel="canonical">` and an entry in `sitemap.xml`.
+  - **Never delete** `google57906613577fdd42.html` or the `google-site-verification` meta tag in `index.html`; they keep the Search Console property verified.
+  - Wait for the Pages build to report `built` before requesting a new URL; Cloudflare caches 404s.
+  - GitHub's "Enforce HTTPS" toggle is not eligible (Cloudflare terminates TLS). Expected, not a bug.
 - Do not create markdown files (like CHANGES.md) in the project root
 - Do not commit or push unless explicitly instructed to
