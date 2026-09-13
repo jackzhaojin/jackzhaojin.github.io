@@ -32,3 +32,6 @@ Thumbs.db
 # Playwright MCP temp files
 .playwright-mcp
 .playwright-cli
+# Project-local agent skills (installed via npx skills add)
+.agents/
+skills-lock.json
