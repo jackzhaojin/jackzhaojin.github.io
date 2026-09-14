@@ -35,3 +35,5 @@ Thumbs.db
 # Project-local agent skills (installed via npx skills add)
 .agents/
 skills-lock.json
+# Codex project hooks (installed via npx impeccable install)
+.codex/
