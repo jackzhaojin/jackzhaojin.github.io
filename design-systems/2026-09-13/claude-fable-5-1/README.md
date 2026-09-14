@@ -76,6 +76,10 @@ Semantic names: `--color-bg`, `--color-bg-alt`, `--color-surface`, `--color-surf
 
 The DTCG file `tokens.json` mirrors these with `$type`, `$value` and `$description`. Semantic color values reference palette entries with `{palette.name}` aliases.
 
+### Band tokens
+
+`--band-tint-strong`, `--band-tint-soft` and `--band-tint-edge` are percentages, one set per theme: 9, 5 and 4 in light, 7, 4 and 3 in dark (the portfolio's values). They set how much of `--band-accent` the tint wash mixes into transparent on a band's `::before` layer. `--band-pad` is the band's vertical padding, `clamp(48px, 8vw, 96px)`. `--band-accent` is not a global token: a section sets it inline to a topic color, and it defaults to `--color-accent`.
+
 ## Components
 
 | Name | Class | Status |
@@ -101,6 +105,8 @@ The DTCG file `tokens.json` mirrors these with `$type`, `$value` and `$descripti
 | Transcript | `.transcript`, `.transcript__body` | stable |
 | Author box | `.author-box`, `.avatar` | stable |
 | Callout | `.callout`, `.callout--warn`, `.callout__label` | stable |
+| Section band | `.band` with `.band--plain`, `.band--alt`, `.band--tint`, `.band--inverse`, `.band--milestone`, optional `.band--dots`; `.band__numeral`, `.band__caption` | beta |
+| Divider | `.divider`, `.divider__label` | beta |
 | CTA band | `.cta-band` | stable |
 | Footer | `.site-footer`, `.site-footer__grid`, `.site-footer__col`, `.site-footer__heading`, `.site-footer__meta` | stable |
 | Icons | `.icon`, `.icon--sm`, `.icon--md`, `.icon--lg` | stable |
@@ -120,6 +126,10 @@ Content comes only from `../shared/data/site.json`, `posts.json`, `credentials.j
 - `templates/blog.html`: generated from posts.json so every URL, date and excerpt is exact. Breadcrumb, H1 "Blog", summary, a start-here panel for the Stardust post, counts by facet from site.json, the filter bar, all 39 posts newest first linking to LinkedIn, a three question FAQ. No pagination because 39 is under the 48 threshold.
 
 Hub pages are not built in this round, so every hub link points to `blog.html?topic=<slug>` with the slugs from site.json: `aem-ai`, `adobe-aem`, `ai-agents`, `working-with-ai`. `scripts.js` maps them to the card `data-hubs` values. Provisional: AEM + AI membership is "[curated: membership set per post]" in site.json, so the six AEM posts whose excerpts are about agents, skills or MCP servers (2026-08-09, 2026-05-24, 2026-05-17, 2026-03-23, 2025-10-12, 2025-10-05) carry the AEM + AI chip until Jack sets the real membership.
+
+### Section rhythm
+
+Every section between the page head and the footer is a section band, so the ground changes at every section and the bands do the separating. Home: page head plain; topics tint with the AEM + AI accent; latest posts alt; featured project tint with dots; credentials plain, opened by a divider; talks tint with the Working with AI accent; Book a talk inverse. Post: everything through the FAQ plain; related, discuss and the author box in one alt band. Blog: start here and counts in a tint band; filter bar and grid plain; FAQ alt. The full table is in the docs page under Patterns.
 
 ## Accessibility
 
@@ -160,6 +170,14 @@ Structure: one H1 per page, heading levels in order, `nav` landmarks labelled, d
 - Topic filter chips are links; format and type chips are buttons with `aria-pressed`; sort is a real `select`.
 - No pagination on the blog (39 items, threshold 48). The component remains in the docs.
 - Format chips draw their icon with a CSS mask on `::before` so the canonical markup is text only; the canvas used `a.ico` classes.
+- Hub card kickers gained a topic-colored dot and a two-digit number ("01 / Flagship topic"). The canvas kicker was the plain uppercase label in the topic color.
+- Section ledes moved from a paragraph under the H2 to a right-aligned side note beside it.
+- Featured project: the canvas's descriptive title and mono git stats row became the project name plus a facts table, because the commit and tag numbers were unverified.
+- Post card meta: the canvas's inline "VIDEO · 12 MIN · date" line became a boxed format chip plus a date.
+- Post page: the open transcript panel became a collapsed disclosure, and the "Key facts" caption above the facts table was dropped.
+- Blog: the "New here? Start with..." paragraph became a "Start here" featured card.
+- Content column is 1152px at 1440 wide against the canvas's 1056px (1200px wrap with 72px padding), a consequence of the fluid container.
+- Phones: the mobile menu's nav links are 14px rather than 12.5px for tap size; H2 spacing comes from section padding rather than the canvas's 44px margin; button vertical padding is 8px against the canvas's 9px.
 
 ## Sources
 
@@ -174,6 +192,15 @@ Structure: one H1 per page, heading levels in order, `nav` landmarks labelled, d
 ## Status and changelog
 
 Version 0.1.0, beta. Built 2026-09-13.
+
+0.2.0, 2026-09-14
+
+- Section band and divider components added from the portfolio page: full-bleed grounds per section with plain, alt, tint, inverse and milestone variants, the accent wash and dot motif from `portfolio/styles.css`, band tokens per theme, and a divider with a mono label. All three templates now use bands (home seven, post two, blog four). Inverse bands re-point the semantic tokens so every component inside stays readable. Docs page gained `#c-band`, `#c-divider` and a Section rhythm pattern.
+
+0.1.1, 2026-09-13
+
+- Fidelity review against the Claude Design canvas: every core color in both themes, the three faces, H1 64/44, positioning 20, body 16 on 1.65, card radius 10 and padding 22, kicker 11 at 0.14em, button 12 at radius 6 and chip 11 at radius 4 measure identical. The summary paragraph now follows the canvas on phones (17px, 19px on desktop) through a clamp on `--text-body-lg`. The deviations list above was completed with the composition changes the review found.
+- Dark story frames re-checked: 144 text nodes across 23 frames, none below 4.5:1.
 
 0.1.0, 2026-09-13
 

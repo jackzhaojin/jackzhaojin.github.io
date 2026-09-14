@@ -21,7 +21,7 @@ async page => {
       const l1=lum(fg), l2=lum(bg); return Math.round(((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05))*100)/100; };
   })()`;
   for (const slug of SLUGS) {
-    const r = { slug, pages: {}, theme: {}, contrast: {}, nojs: {} };
+    const r = { slug, pages: {}, theme: {}, contrast: {}, nojs: {}, darkStory: {}, bands: {} };
     for (const p of PAGES) {
       const pr = {};
       for (const w of WIDTHS) {
@@ -70,6 +70,59 @@ async page => {
         return { summary: vis('.summary'), facts: vis('.facts'), firstSection: vis('main h2'), nav: vis('.site-nav'), transcriptInDom: !!document.querySelector('.transcript') }; });
       await ctx.close();
     } catch (e) { r.nojs = { error: e.message.slice(0, 120) }; }
+    // Bands: full bleed at three widths, distinct grounds per theme, text contrast on tint and inverse bands
+    try {
+      const bandProbe = () => {
+        function parse(c){ const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
+        function lum(c){ const f=v=>{v/=255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4)}; return 0.2126*f(c[0])+0.7152*f(c[1])+0.0722*f(c[2]); }
+        function blend(fg,bg){ const a=fg[3]; return [fg[0]*a+bg[0]*(1-a), fg[1]*a+bg[1]*(1-a), fg[2]*a+bg[2]*(1-a),1]; }
+        function ratio(fg,bg){ if(fg[3]<1) fg=blend(fg,bg); const l1=lum(fg), l2=lum(bg); return Math.round(((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05))*100)/100; }
+        const pageBg = parse(getComputedStyle(document.body).backgroundColor) || [255,255,255,1];
+        const bands = [...document.querySelectorAll('.band')];
+        const grounds = new Set(); const narrow = []; const contrast = [];
+        bands.forEach((b, i) => {
+          const rect = b.getBoundingClientRect(); if (Math.abs(rect.width - window.innerWidth) > 1) narrow.push({ i, width: Math.round(rect.width) });
+          const cs = getComputedStyle(b); const before = getComputedStyle(b, '::before');
+          grounds.add(cs.backgroundColor + '|' + (before.backgroundImage !== 'none' ? before.backgroundImage.slice(0, 80) : '') + '|' + (b.className.match(/band--[a-z]+/g) || []).join(','));
+          const el = b.querySelector('h2, h3, p'); if (!el) return;
+          const fg = parse(getComputedStyle(el).color); if (!fg) return;
+          let bg = parse(cs.backgroundColor); if (!bg || bg[3] === 0) bg = pageBg; else if (bg[3] < 1) bg = blend(bg, pageBg);
+          if (b.classList.contains('band--tint') || b.classList.contains('band--milestone')) {
+            const probe = document.createElement('div'); probe.style.color = 'var(--band-accent, var(--color-accent))'; b.appendChild(probe);
+            const acc = parse(getComputedStyle(probe).color); probe.remove();
+            const pct = parseFloat(cs.getPropertyValue('--band-tint-strong')) || 7;
+            if (acc) bg = blend([acc[0], acc[1], acc[2], pct / 100], bg);
+          }
+          const rr = ratio(fg, bg); contrast.push({ i, variant: (b.className.match(/band--[a-z]+/g) || ['plain']).join(','), ratio: rr, pass: rr >= 4.5 });
+          if (b.classList.contains('band--inverse')) b.querySelectorAll('.btn--primary').forEach(btn => { const bb = parse(getComputedStyle(btn).backgroundColor); const bandBg = parse(cs.backgroundColor) || pageBg; const visible = bb && bb[3] > 0 && ratio(bb, bandBg) >= 3; contrast.push({ i, variant: 'inverse button', ratio: bb ? ratio(bb, bandBg) : 0, pass: !!visible }); });
+        });
+        return { count: bands.length, distinct: grounds.size, narrow, contrast };
+      };
+      const home = BASE + slug + '/templates/home.html';
+      const bandsOut = { widths: {}, themes: {} };
+      for (const w of [390, 1440, 2560]) { await page.setViewportSize({ width: w, height: 900 }); await page.goto(home, { waitUntil: 'load' }); await page.waitForTimeout(200); const v = await page.evaluate(bandProbe); bandsOut.widths[w] = { count: v.count, narrow: v.narrow }; }
+      await page.setViewportSize({ width: 1440, height: 900 });
+      for (const th of ['light', 'dark']) { await page.goto(home, { waitUntil: 'load' }); await page.evaluate((t) => document.documentElement.setAttribute('data-theme', t), th); await page.waitForTimeout(150); const v = await page.evaluate(bandProbe); bandsOut.themes[th] = { count: v.count, distinct: v.distinct, contrast: v.contrast }; }
+      r.bands = bandsOut;
+    } catch (e) { r.bands = { error: e.message.slice(0, 120) }; }
+    // Dark story frames: every text node inside a .story[data-theme="dark"] on the docs page meets 4.5:1
+    try {
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.goto(BASE + slug + '/index.html', { waitUntil: 'load' });
+      r.darkStory = await page.evaluate(() => {
+        function parse(c){ const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
+        function lum(c){ const f=v=>{v/=255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4)}; return 0.2126*f(c[0])+0.7152*f(c[1])+0.0722*f(c[2]); }
+        function blend(fg,bg){ const a=fg[3]; return [fg[0]*a+bg[0]*(1-a), fg[1]*a+bg[1]*(1-a), fg[2]*a+bg[2]*(1-a),1]; }
+        function effBg(el){ let e=el, stack=[]; while(e && e!==document.documentElement){ const b=parse(getComputedStyle(e).backgroundColor); if(b && b[3]>0){ stack.push(b); if(b[3]>=1) break; } e=e.parentElement; } if(!stack.length||stack[stack.length-1][3]<1){ stack.push(parse(getComputedStyle(document.body).backgroundColor)||[255,255,255,1]); } let bg=stack.pop(); while(stack.length){ bg=blend(stack.pop(),bg); } return bg; }
+        function ratio(fg,bg){ if(fg[3]<1) fg=blend(fg,bg); const l1=lum(fg), l2=lum(bg); return Math.round(((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05))*100)/100; }
+        const frames=[...document.querySelectorAll('.story[data-theme="dark"]')]; const fails=[]; let checked=0;
+        frames.forEach((fr)=>{ const sec=fr.closest('[id^="c-"], section'); const sid=sec?sec.id:'?';
+          const els=[...fr.querySelectorAll('*')].filter(e=>[...e.childNodes].some(n=>n.nodeType===3 && n.textContent.trim().length>1));
+          els.forEach(e=>{ const cs=getComputedStyle(e); if(cs.visibility==='hidden'||cs.display==='none') return; const fg=parse(cs.color); if(!fg) return; const rr=ratio(fg,effBg(e)); checked++;
+            if(rr<4.5) fails.push({ section:sid, el:e.tagName.toLowerCase()+(e.className?'.'+String(e.className).split(' ')[0]:''), text:e.textContent.trim().slice(0,40), ratio:rr }); }); });
+        return { frames: frames.length, checked, fails };
+      });
+    } catch (e) { r.darkStory = { error: e.message.slice(0, 120) }; }
     out.push(r);
   }
   return JSON.stringify(out);

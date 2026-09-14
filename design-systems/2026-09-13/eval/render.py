@@ -30,16 +30,29 @@ for slug, name, _ in SYSTEMS:
         row["centered"] = "yes" if not nc else "no: " + ", ".join(nc)
         t = b.get("theme", {}); row["theme"] = "pass" if t and all(t.get(k) for k in ("defaultLight","clickDark","persists","systemRemovesAttr","systemFollowsDark")) else "fail: " + ", ".join(k for k in ("defaultLight","clickDark","persists","systemRemovesAttr","systemFollowsDark") if not t.get(k))
         cf = [f"{th}: {c['pair']} {c['ratio']}" for th, cs in b.get("contrast", {}).items() for c in cs if not c["pass"]]
-        row["contrast"] = "all pairs pass AA" if not cf else "; ".join(cf)
+        ds = b.get("darkStory", {}); dsf = ds.get("fails", []) if isinstance(ds, dict) else []
+        dsn = ds.get("checked") if isinstance(ds, dict) else None
+        ds_text = ("dark frames pass (%s nodes)" % dsn) if (dsn and not dsf) else ("dark frames: %d failures" % len(dsf) if dsf else "dark frames not run")
+        row["contrast"] = ("all pairs pass AA; " + ds_text) if not cf else "; ".join(cf) + "; " + ds_text
+        bd = b.get("bands", {})
+        if isinstance(bd, dict) and bd.get("widths"):
+            cnt = bd["widths"].get("1440", bd["widths"].get(1440, {})).get("count", 0)
+            narrow = [f"{w}: {len(v.get('narrow', []))} not full bleed" for w, v in bd["widths"].items() if v.get("narrow")]
+            thb = [f"{t}: {len([c for c in v.get('contrast', []) if not c.get('pass')])} contrast failures" for t, v in bd.get("themes", {}).items() if any(not c.get("pass") for c in v.get("contrast", []))]
+            few = [f"{t}: {v.get('distinct')} grounds" for t, v in bd.get("themes", {}).items() if (v.get("distinct") or 0) < 3]
+            probs = narrow + thb + few
+            row["bands"] = (f"{cnt} bands, full bleed, distinct grounds, text passes" if cnt and not probs else (f"{cnt} bands; " + "; ".join(probs) if cnt else "none"))
+        else:
+            row["bands"] = "not run" if not isinstance(bd, dict) or "error" in bd else "none"
         n = b.get("nojs", {}); row["nojs"] = "pass" if n and all(n.get(k) for k in ("summary","facts","firstSection","nav")) else "fail: " + ", ".join(k for k in ("summary","facts","firstSection","nav") if not n.get(k))
     else:
-        for k in ("overflow","centered","theme","contrast","nojs"): row[k] = "not run"
+        for k in ("overflow","centered","theme","contrast","nojs","bands"): row[k] = "not run"
     rows.append(row)
 (ROOT / "eval" / "results.json").write_text(json.dumps(rows, indent=1))
 stamp = datetime.date.today().isoformat()
 md = ["# Eval results, " + stamp, "", "Gates from SPEC.md section 10. Static checks run on the files; browser checks run in Chromium via playwright-cli at 390, 768, 1024, 1440, 1920 and 2560 px.", "",
-      "| System | Static checks | Overflow | Centered at 1440+ | Theme control | Contrast AA | No JS |", "|---|---|---|---|---|---|---|"]
-for r in rows: md.append(f"| {r['name']} | {r['static']} | {r['overflow']} | {r['centered']} | {r['theme']} | {r['contrast']} | {r['nojs']} |")
+      "| System | Static checks | Overflow | Centered at 1440+ | Theme control | Contrast AA | Bands | No JS |", "|---|---|---|---|---|---|---|---|"]
+for r in rows: md.append(f"| {r['name']} | {r['static']} | {r['overflow']} | {r['centered']} | {r['theme']} | {r['contrast']} | {r['bands']} | {r['nojs']} |")
 md.append("")
 for r in rows:
     if r["static_fails"]:
@@ -54,7 +67,7 @@ for slug, name, blurb in SYSTEMS:
   <p>{blurb}</p>
   <p class="links"><a href="{slug}/">Design system docs</a> <a href="{slug}/templates/home.html">Home</a> <a href="{slug}/templates/post.html">Post</a> <a href="{slug}/templates/blog.html">Blog</a> <a href="{slug}/README.md">README</a></p>
 </article>"""
-trs = "".join(f"<tr><th scope=\"row\">{r['name']}</th><td>{r['static']}</td><td>{html.escape(r['overflow'])}</td><td>{html.escape(r['centered'])}</td><td>{html.escape(r['theme'])}</td><td>{html.escape(r['contrast'])}</td><td>{html.escape(r['nojs'])}</td></tr>" for r in rows)
+trs = "".join(f"<tr><th scope=\"row\">{r['name']}</th><td>{r['static']}</td><td>{html.escape(r['overflow'])}</td><td>{html.escape(r['centered'])}</td><td>{html.escape(r['theme'])}</td><td>{html.escape(r['contrast'])}</td><td>{html.escape(r['bands'])}</td><td>{html.escape(r['nojs'])}</td></tr>" for r in rows)
 page = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -98,7 +111,7 @@ code {{ font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace; font
 <h2>Eval scorecard</h2>
 <p class="lead">Automated gates from SPEC section 10, last run {stamp}. Static checks count file-level rules (head contract, tokens, components, dashes, links). Browser checks run at six widths in both themes. Details in <a href="eval/results.md">eval/results.md</a>.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>System</th><th>Static</th><th>Overflow</th><th>Centered</th><th>Theme</th><th>Contrast</th><th>No JS</th></tr></thead>
+<thead><tr><th>System</th><th>Static</th><th>Overflow</th><th>Centered</th><th>Theme</th><th>Contrast</th><th>Bands</th><th>No JS</th></tr></thead>
 <tbody>{trs}</tbody>
 </table></div>
 <h2>How to evaluate by hand</h2>

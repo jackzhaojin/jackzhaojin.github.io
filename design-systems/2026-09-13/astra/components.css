@@ -11,12 +11,19 @@
   --button-pad-x-sm: 14px;
   --card-radius: var(--radius-lg);
   --card-pad: var(--space-5);
-  --card-bg: var(--color-surface);
-  --card-line: var(--color-line);
   --chip-radius: var(--radius-pill);
   --panel-radius: var(--radius-lg);
   --panel-pad: clamp(var(--space-5), 4vw, var(--space-7));
   --control-height: 44px;
+}
+
+/* Component tokens that resolve a color token must be declared on every themed
+   scope, not only :root. A custom property resolves var() where it is declared,
+   so a :root-only declaration would carry the light value into a
+   [data-theme="dark"] story frame. */
+:root, [data-theme] {
+  --card-bg: var(--color-surface);
+  --card-line: var(--color-line);
 }
 
 /* Kicker: numbered mono label, the primary identity mark */
@@ -250,6 +257,7 @@ a.chip[aria-current="true"] { border-color: var(--color-accent); box-shadow: ins
 .card--hub .card__arrow { position: absolute; right: var(--space-4); bottom: var(--space-4); color: var(--color-accent); width: 18px; height: 18px; }
 .card--hub.is-flagship { background: var(--color-accent-soft); border-color: transparent; }
 .card--hub.is-flagship .kicker { color: var(--color-accent); }
+.card--hub.is-flagship .card__counts { color: var(--color-text-muted); }
 @media (max-width: 479.98px) {
   .card--hub { padding: var(--space-4); min-height: 0; }
   .card--hub .card__title { font-size: 1.0625rem; }

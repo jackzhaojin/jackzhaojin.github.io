@@ -56,3 +56,11 @@ Open items the builders raised, for Jack:
 - Claude Fable 5.1 wraps its phone header to two rows to keep the theme control visible; Google Stitch hides the Book a talk button under 480 px instead. Pick one behaviour for the site.
 
 Decision pending Jack's review of the four.
+
+### 2026-09-14: section bands
+
+Jack wants the site to keep the portfolio page's full-bleed section grounds, in light as well as dark. SPEC.md section 7 now defines a **Section band** component (`.band` with plain, alt, tint, inverse and milestone variants, the portfolio's accent wash and dot motif, per-theme tint tokens) and a **Divider**; section 9 says which sections of each template take which band; section 10 adds the gates (static: classes, `color-mix`, template usage, docs ids; browser: full bleed at three widths, distinct grounds per theme, text and filled-button contrast on tint and inverse bands). The compare page has a Bands column.
+
+Claude Fable 5.1 is the reference implementation (136 of 136 static, all band gates pass). Astra, Kimi K3 and Google Stitch fail the seven new band checks until their owners implement the contract; the prompt for that is [ai-docs/2026-09-13-seo-geo-redesign/section-bands-prompt-2026-09-14.md](../../ai-docs/2026-09-13-seo-geo-redesign/section-bands-prompt-2026-09-14.md).
+
+Also on 2026-09-14: a review of Astra by Codex found cards inside dark story frames rendering light surfaces under dark text; the same defect existed in Google Stitch. Both are fixed (component tokens that resolve a color are now declared on every themed scope), and the eval gained a dark-frame gate. A fidelity review of Claude Fable 5.1 against its canvas is recorded in that system's README.

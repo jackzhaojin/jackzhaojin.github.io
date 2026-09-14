@@ -153,7 +153,6 @@ a:hover { color: var(--color-accent-hover); }
 .section { margin-top: var(--space-8); }
 .section--tight { margin-top: var(--space-6); }
 .section__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5); }
-.band { background: var(--color-bg-alt); border-top: var(--border-width) solid var(--color-line); border-bottom: var(--border-width) solid var(--color-line); padding-block: var(--space-7); }
 main { padding-bottom: var(--space-9); }
 
 /* ------------------------------------------------------------ utilities */

@@ -67,15 +67,20 @@
 </header>
 
 <main id="main">
-<div class="container">
 
+<div class="band band--plain">
+<div class="container">
   <header class="page-head">
     <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="home.html">Home</a></li><li aria-current="page">Blog</li></ol></nav>
     <h1 class="page-title">Blog</h1>
     <p class="byline">39 pieces&nbsp;· Newest <time datetime="2026-08-09">2026-08-09</time>&nbsp;· Oldest <time datetime="2025-04-13">2025-04-13</time></p>
     <p class="summary">Everything Jack Jin has published since April 2025: 39 pieces, 7 articles, 13 short posts and 19 videos, newest first, on Adobe Experience Manager (AEM), Edge Delivery Services (EDS), AI agents and working with AI. Topic chips lead to the four hubs. Format and type filters narrow the grid here. Each piece links to its LinkedIn copy.</p>
   </header>
+</div>
+</div>
 
+<section class="band band--tint" aria-labelledby="h-start">
+<div class="container">
   <section class="section--tight" aria-labelledby="h-start">
     <div class="panel stack stack--sm">
       <p class="kicker kicker--accent" id="h-start">Start here</p>
@@ -97,7 +102,11 @@
       </tbody>
     </table>
   </section>
+</div>
+</section>
 
+<section class="band band--plain" aria-labelledby="h-all">
+<div class="container">
   <form class="filter-bar section--tight" data-collection aria-label="Filter and sort">
     <div class="filter-bar__row"><span class="filter-bar__label">Topic</span> <a class="chip chip--plain" data-topic-slug="" href="blog.html">All</a> <a class="chip chip--topic" data-topic="aem-ai" data-topic-slug="aem-ai" href="blog.html?topic=aem-ai">AEM + AI</a> <a class="chip chip--topic" data-topic="aem" data-topic-slug="adobe-aem" href="blog.html?topic=adobe-aem">Adobe AEM and EDS</a> <a class="chip chip--topic" data-topic="agents" data-topic-slug="ai-agents" href="blog.html?topic=ai-agents">AI Agents</a> <a class="chip chip--topic" data-topic="work" data-topic-slug="working-with-ai" href="blog.html?topic=working-with-ai">Working with AI</a></div>
     <div class="filter-bar__row"><span class="filter-bar__label">Format</span> <button type="button" class="chip chip--plain" data-filter="format" data-value="all" aria-pressed="true">All</button> <button type="button" class="chip chip--format" data-format="article" data-filter="format" data-value="article" aria-pressed="false">Article</button> <button type="button" class="chip chip--format" data-format="post" data-filter="format" data-value="post" aria-pressed="false">Post</button> <button type="button" class="chip chip--format" data-format="video" data-filter="format" data-value="video" aria-pressed="false">Video</button></div>
@@ -344,15 +353,20 @@
       </article>
     </div>
   </section>
+</div>
+</section>
 
+<section class="band band--alt" aria-labelledby="h-faq">
+<div class="container">
   <section class="faq section" style="max-width:860px">
-    <h2>Questions about the blog</h2>
+    <h2 id="h-faq">Questions about the blog</h2>
     <details class="faq__item"><summary>Where do the full posts live?</summary><p>On LinkedIn today. Every title on this page links to its LinkedIn copy; the post template shows the shape a post takes on this site.</p></details>
     <details class="faq__item"><summary>How many pieces are there?</summary><p>39: 7 articles, 13 short posts and 19 videos. 27 are on AI and 12 on AEM; 22 are technical and 17 are leadership.</p></details>
     <details class="faq__item"><summary>Can I filter by topic?</summary><p>Topic chips are links. In this round they open this page filtered by topic, because the hub pages are not built yet. Format and type chips filter the grid and keep their state in the address bar. Without JavaScript all 39 pieces show.</p></details>
   </section>
-
 </div>
+</section>
+
 </main>
 
 <footer class="site-footer">

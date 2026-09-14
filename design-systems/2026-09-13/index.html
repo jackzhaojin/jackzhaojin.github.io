@@ -59,10 +59,10 @@ code { font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace; font-
 </article>
 </div>
 <h2>Eval scorecard</h2>
-<p class="lead">Automated gates from SPEC section 10, last run 2026-09-13. Static checks count file-level rules (head contract, tokens, components, dashes, links). Browser checks run at six widths in both themes. Details in <a href="eval/results.md">eval/results.md</a>.</p>
+<p class="lead">Automated gates from SPEC section 10, last run 2026-09-14. Static checks count file-level rules (head contract, tokens, components, dashes, links). Browser checks run at six widths in both themes. Details in <a href="eval/results.md">eval/results.md</a>.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>System</th><th>Static</th><th>Overflow</th><th>Centered</th><th>Theme</th><th>Contrast</th><th>No JS</th></tr></thead>
-<tbody><tr><th scope="row">Claude Fable 5.1</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Astra</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Kimi K3</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Google Stitch</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr></tbody>
+<thead><tr><th>System</th><th>Static</th><th>Overflow</th><th>Centered</th><th>Theme</th><th>Contrast</th><th>Bands</th><th>No JS</th></tr></thead>
+<tbody><tr><th scope="row">Claude Fable 5.1</th><td>136/136</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA; dark frames pass (153 nodes)</td><td>7 bands, full bleed, distinct grounds, text passes</td><td>pass</td></tr><tr><th scope="row">Astra</th><td>129/136</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA; dark frames pass (175 nodes)</td><td>none</td><td>pass</td></tr><tr><th scope="row">Kimi K3</th><td>129/136</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA; dark frames pass (151 nodes)</td><td>none</td><td>pass</td></tr><tr><th scope="row">Google Stitch</th><td>129/136</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA; dark frames pass (185 nodes)</td><td>none</td><td>pass</td></tr></tbody>
 </table></div>
 <h2>How to evaluate by hand</h2>
 <p>Open each docs site, switch the theme control through Light, Dark and System, resize the window from phone width to 2560 px, and read the post template with JavaScript disabled. Then open the three templates side by side across systems. The blueprint the templates follow is in <a href="../../ai-docs/2026-09-13-seo-geo-redesign/seo-page-blueprint.md">seo-page-blueprint.md</a>.</p>

@@ -100,6 +100,30 @@
    },
    {
     "page": "(folder)",
+    "check": "band tint uses color-mix",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "(folder)",
+    "check": "home uses five bands across three variants",
+    "pass": true,
+    "detail": "7 bands, variants ['alt', 'inverse', 'tint']"
+   },
+   {
+    "page": "(folder)",
+    "check": "post uses a non-plain band",
+    "pass": true,
+    "detail": "2 bands, variants ['alt']"
+   },
+   {
+    "page": "(folder)",
+    "check": "blog uses a non-plain band",
+    "pass": true,
+    "detail": "4 bands, variants ['alt', 'tint']"
+   },
+   {
+    "page": "(folder)",
     "check": "reduced motion respected",
     "pass": true,
     "detail": ""
@@ -347,6 +371,18 @@
    {
     "page": "index.html",
     "check": "docs section #c-facts-table",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-band",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-divider",
     "pass": true,
     "detail": ""
    },
@@ -783,8 +819,8 @@
     "detail": "39"
    }
   ],
-  "passed": 130,
-  "total": 130
+  "passed": 136,
+  "total": 136
  },
  {
   "slug": "astra",
@@ -882,8 +918,32 @@
    {
     "page": "(folder)",
     "check": "all component classes styled",
-    "pass": true,
+    "pass": false,
+    "detail": ".band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label"
+   },
+   {
+    "page": "(folder)",
+    "check": "band tint uses color-mix",
+    "pass": false,
     "detail": ""
+   },
+   {
+    "page": "(folder)",
+    "check": "home uses five bands across three variants",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "post uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "blog uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
    },
    {
     "page": "(folder)",
@@ -1135,6 +1195,18 @@
     "page": "index.html",
     "check": "docs section #c-facts-table",
     "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-band",
+    "pass": false,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-divider",
+    "pass": false,
     "detail": ""
    },
    {
@@ -1570,8 +1642,8 @@
     "detail": "39"
    }
   ],
-  "passed": 130,
-  "total": 130
+  "passed": 129,
+  "total": 136
  },
  {
   "slug": "kimi-k3",
@@ -1669,8 +1741,32 @@
    {
     "page": "(folder)",
     "check": "all component classes styled",
-    "pass": true,
+    "pass": false,
+    "detail": ".band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label"
+   },
+   {
+    "page": "(folder)",
+    "check": "band tint uses color-mix",
+    "pass": false,
     "detail": ""
+   },
+   {
+    "page": "(folder)",
+    "check": "home uses five bands across three variants",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "post uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "blog uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
    },
    {
     "page": "(folder)",
@@ -1922,6 +2018,18 @@
     "page": "index.html",
     "check": "docs section #c-facts-table",
     "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-band",
+    "pass": false,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-divider",
+    "pass": false,
     "detail": ""
    },
    {
@@ -2357,8 +2465,8 @@
     "detail": "40"
    }
   ],
-  "passed": 130,
-  "total": 130
+  "passed": 129,
+  "total": 136
  },
  {
   "slug": "google-stitch",
@@ -2456,8 +2564,32 @@
    {
     "page": "(folder)",
     "check": "all component classes styled",
-    "pass": true,
+    "pass": false,
+    "detail": ".band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label"
+   },
+   {
+    "page": "(folder)",
+    "check": "band tint uses color-mix",
+    "pass": false,
     "detail": ""
+   },
+   {
+    "page": "(folder)",
+    "check": "home uses five bands across three variants",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "post uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
+   },
+   {
+    "page": "(folder)",
+    "check": "blog uses a non-plain band",
+    "pass": false,
+    "detail": "0 bands, variants []"
    },
    {
     "page": "(folder)",
@@ -2709,6 +2841,18 @@
     "page": "index.html",
     "check": "docs section #c-facts-table",
     "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-band",
+    "pass": false,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-divider",
+    "pass": false,
     "detail": ""
    },
    {
@@ -3144,7 +3288,7 @@
     "detail": "40"
    }
   ],
-  "passed": 130,
-  "total": 130
+  "passed": 129,
+  "total": 136
  }
 ]

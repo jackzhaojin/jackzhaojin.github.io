@@ -12,9 +12,16 @@
   --chip-padding: 1px var(--space-2);
   --card-padding: var(--space-5);
   --card-radius: var(--radius-sm);
+  --panel-radius: var(--radius-md);
+}
+
+/* Component tokens that resolve a color token must be declared on every themed
+   scope, not only :root. A custom property resolves var() where it is declared,
+   so a :root-only declaration would carry the light value into a
+   [data-theme="dark"] story frame. */
+:root, [data-theme] {
   --card-bg: var(--color-surface);
   --card-line: var(--color-line);
-  --panel-radius: var(--radius-md);
   --control-line: var(--color-line-strong);
 }
 

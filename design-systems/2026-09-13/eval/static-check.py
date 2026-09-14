@@ -19,9 +19,10 @@ COMPONENTS = [".skip-link",".sr-only",".site-header",".wordmark",".nav-toggle","
   ".kicker",".page-title",".byline",".summary",".btn",".btn--primary",".btn--secondary",".btn--ghost",".btn--sm",".chip",".chip--topic",
   ".chip--format",".chip--status",".card",".card--hub",".card--project",".facts",".table-wrap",".table",".counts",
   ".row-list",".faq",".faq__item",".filter-bar",".pagination",".embed",".embed__fallback",".chapters",".transcript",".author-box",
-  ".callout",".cta-band",".site-footer",".icon",".story",".docs-nav",".container",".grid",".stack",".cluster",".prose"]
+  ".callout",".cta-band",".site-footer",".icon",".story",".docs-nav",".container",".grid",".stack",".cluster",".prose",
+  ".band",".band--alt",".band--tint",".band--inverse",".band--milestone",".divider",".divider__label"]
 SECTIONS = ["overview","color","typography","spacing","layout","shape-elevation","motion","iconography","theming","components",
-  "patterns","templates","status","changelog","c-button","c-card","c-facts-table"]
+  "patterns","templates","status","changelog","c-button","c-card","c-facts-table","c-band","c-divider"]
 README_HEADINGS = ["What this is","Identity","Files","How to use","Tokens","Components","Theming","Templates","Accessibility",
   "Deviations","Sources","Status"]
 PREPAINT = "(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');"
@@ -121,6 +122,17 @@ def run(slug):
     comp = "".join((folder / f).read_text(errors="ignore") for f in ("base.css","components.css","index.html") if (folder / f).exists())
     miss_c = [c for c in COMPONENTS if c not in comp]
     ok("all component classes styled", not miss_c, ", ".join(miss_c[:10]))
+    ok("band tint uses color-mix", "color-mix(" in comp and ".band--tint" in comp)
+    def band_stats(name):
+        t = (folder / "templates" / name).read_text(errors="ignore") if (folder / "templates" / name).exists() else ""
+        classes = re.findall(r'class="([^"]*)"', t)
+        bands = [c for c in classes if re.search(r'(^|\s)band(\s|$)', c)]
+        variants = set(v for c in bands for v in re.findall(r'band--(alt|tint|inverse|milestone)', c))
+        return len(bands), variants
+    hb, hv = band_stats("home.html"); pb, pv = band_stats("post.html"); bb, bv = band_stats("blog.html")
+    ok("home uses five bands across three variants", hb >= 5 and len(hv) >= 3, f"{hb} bands, variants {sorted(hv)}")
+    ok("post uses a non-plain band", len(pv) >= 1, f"{pb} bands, variants {sorted(pv)}")
+    ok("blog uses a non-plain band", len(bv) >= 1, f"{bb} bands, variants {sorted(bv)}")
     ok("reduced motion respected", "prefers-reduced-motion" in comp)
     ok("focus-visible styled", "focus-visible" in comp)
     ok("no opacity-zero reveal", not re.search(r"\.reveal[^{]*\{[^}]*opacity:\s*0", comp))

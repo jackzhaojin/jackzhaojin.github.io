@@ -186,4 +186,5 @@ Structure: one H1 per page, headings never skip a level, `lang="en"`, alt on eve
 
 Status: beta. Every quality gate in SPEC section 10 was checked locally at 390, 768, 1024, 1440, 1920 and 2560 in both themes, plus the theme gates and a no JavaScript pass.
 
+- 0.1.1, 2026-09-13. Fixed: cards inside the docs page's dark story frames rendered a light surface under dark-theme text (1.1:1) because `--card-bg`, `--card-line` and `--control-line` were declared on `:root` only. They now resolve on every themed scope (`:root, [data-theme]`).
 - 0.1.0, 2026-09-13. First build from the Stitch round. Tokens in CSS and DTCG JSON for light and dark, base and component styles, the documentation page, three templates, this README. Three token values replaced for contrast. Telemetry bar, invented facts, Tailwind, Material Symbols and em dashes removed.

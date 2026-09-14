@@ -648,13 +648,148 @@ button.chip { cursor: pointer; }
 .callout--warn .callout__label { color: var(--color-topic-agents); }
 
 /* ------------------------------------------------------------ cta band */
+
+/* ------------------------------------------------------------ section band
+   The portfolio's chapter treatment: a full-bleed ground per section, a
+   hairline top edge, an accent wash for tint bands, an optional dot motif.
+   Content stays inside .container. Only bands are full bleed between the
+   header and the footer. */
+.band {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  border-top: var(--border-width) solid var(--color-line);
+  padding-block: var(--band-pad);
+}
+.band > .container > :first-child, .band > .container > .prose > :first-child, .band > .container > .stack > :first-child { margin-top: 0; }
+.band + .band--plain, .band--plain:first-child { border-top-color: var(--color-line); }
+.band--plain { background: var(--color-bg); }
+.band--alt { background: var(--color-bg-alt); }
+.band--tint, .band--milestone, .band--dots { --band-accent: var(--color-accent); }
+.band--tint::before, .band--milestone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, color-mix(in srgb, var(--band-accent) var(--band-tint-strong), transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--band-accent) var(--band-tint-soft), transparent), transparent 30%, transparent 78%, color-mix(in srgb, var(--band-accent) var(--band-tint-edge), transparent));
+}
+.band--dots::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle 1.5px at 12% 22%, color-mix(in srgb, var(--band-accent) 35%, transparent) 99%, transparent),
+    radial-gradient(circle 1px at 34% 64%, color-mix(in srgb, var(--band-accent) 28%, transparent) 99%, transparent),
+    radial-gradient(circle 1.5px at 58% 18%, color-mix(in srgb, var(--band-accent) 30%, transparent) 99%, transparent),
+    radial-gradient(circle 1px at 78% 48%, color-mix(in srgb, var(--band-accent) 26%, transparent) 99%, transparent),
+    radial-gradient(circle 1.5px at 90% 76%, color-mix(in srgb, var(--band-accent) 30%, transparent) 99%, transparent),
+    radial-gradient(circle 1px at 22% 86%, color-mix(in srgb, var(--band-accent) 24%, transparent) 99%, transparent);
+  background-size: 900px 700px;
+}
+/* Inverse band: the semantic tokens are re-pointed for the inverse ground so
+   every component inside (links, buttons, chips, row lists, the CTA band)
+   resolves readable colors without its own dark rules. */
+.band--inverse {
+  /* Private copies resolve here, against the page's tokens, so the swap below
+     cannot form a cycle. The swap itself lives on the container child. */
+  --inverse-ground: var(--color-inverse-bg);
+  --inverse-ink: var(--color-inverse-text);
+  --page-ground: var(--color-bg);
+  --page-ink: var(--color-text);
+  background: var(--inverse-ground);
+  color: var(--inverse-ink);
+  border-top-color: transparent;
+}
+.band--inverse > .container {
+  --color-bg: var(--inverse-ground);
+  --color-bg-alt: color-mix(in srgb, var(--inverse-ground) 94%, var(--inverse-ink));
+  --color-surface: color-mix(in srgb, var(--inverse-ground) 92%, var(--inverse-ink));
+  --color-surface-raised: color-mix(in srgb, var(--inverse-ground) 88%, var(--inverse-ink));
+  --color-text: var(--inverse-ink);
+  --color-text-muted: color-mix(in srgb, var(--inverse-ink) 80%, var(--inverse-ground));
+  --color-text-faint: color-mix(in srgb, var(--inverse-ink) 64%, var(--inverse-ground));
+  --color-line: color-mix(in srgb, var(--inverse-ink) 14%, transparent);
+  --color-line-strong: color-mix(in srgb, var(--inverse-ink) 42%, transparent);
+  --color-accent: var(--inverse-ink);
+  --color-accent-hover: var(--inverse-ink);
+  --color-on-accent: var(--inverse-ground);
+  --color-accent-soft: color-mix(in srgb, var(--inverse-ink) 10%, transparent);
+  --color-focus: var(--inverse-ink);
+  /* The inverse pair flips too, so a filled button is the page ground with page ink. */
+  --color-inverse-bg: var(--page-ground);
+  --color-inverse-text: var(--page-ink);
+}
+.band--inverse .cta-band { background: transparent; border: 0; padding: 0; }
+/* Milestone band: a year marker or a "start here" break. Outlined numeral in the display face. */
+.band--milestone {
+  text-align: center;
+  border-bottom: var(--border-width) solid var(--color-line);
+  padding-block: clamp(var(--space-7), 10vw, var(--space-10));
+}
+.band__numeral {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 10rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--band-accent) 55%, transparent);
+}
+.band__numeral--solid { color: var(--color-text); -webkit-text-stroke: 0; }
+.band__caption {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+@media (max-width: 479px) {
+  .band { padding-block: var(--space-7); }
+}
+
+/* ------------------------------------------------------------------ divider
+   The portfolio's tdiv: a mono label between two hairlines that fade to the
+   edges. Sits inside a container, at the top of a band or between groups. */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  margin: 0 0 var(--space-5);
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: var(--border-width);
+  background: linear-gradient(90deg, transparent, var(--color-line-strong), transparent);
+}
+.divider:not(:has(.divider__label))::after { display: none; }
+.divider__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
 .cta-band {
   border: var(--border-width) solid var(--color-line);
   border-radius: var(--card-radius);
   background: var(--color-surface);
   padding: 36px 40px;
 }
-.cta-band h2 { font-size: 26px; }
+.cta-band h2, .cta-band__title { font-size: 26px; }
+.cta-band__title { margin: 0; font-family: var(--font-display); font-weight: var(--weight-bold); line-height: var(--leading-tight); color: var(--color-text); }
 .cta-band > p { margin-top: 8px; font-size: 15.5px; color: var(--color-text-muted); max-width: 64ch; }
 .cta-band .cluster { margin-top: 20px; gap: 18px; }
 @media (max-width: 479px) {
