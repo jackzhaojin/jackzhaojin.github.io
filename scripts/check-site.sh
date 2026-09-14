@@ -9,13 +9,16 @@
 #   3. Every page serves the gtag snippet with the expected Measurement ID
 #   4. Search Console verification file and meta tag are still live
 #   5. robots.txt and sitemap.xml are served and the sitemap lists every page
+#   6. Demo pages (design-system candidates) carry noindex and stay out of the sitemap
 
 set -u
 SITE="https://www.jackzhaojin.com"
 GA_ID="G-ZVENE6BXTJ"
 VERIFY_FILE="google57906613577fdd42.html"
 VERIFY_META="6FfUrqzAd1GDf35t2W1QHz-2rIbSjVTKzuZwWQKJjqw"
-PAGES=("/" "/blogs.html" "/certifications.html" "/portfolio/" "/design-systems/2026-09-13/")
+PAGES=("/" "/blogs.html" "/certifications.html" "/portfolio/")
+# Published for show-and-tell only: must serve gtag, must be noindex, must not be in the sitemap.
+NOINDEX_PAGES=("/design-systems/2026-09-13/" "/design-systems/2026-09-13/claude-fable-5-1/" "/design-systems/2026-09-13/astra/" "/design-systems/2026-09-13/kimi-k3/" "/design-systems/2026-09-13/google-stitch/")
 fail=0
 cb() { printf '%s' "$(date +%s%N)"; }   # cache-buster so Cloudflare cannot serve a stale copy
 ok()  { printf '  ok   %s\n' "$1"; }
@@ -41,7 +44,7 @@ for u in "http://jackzhaojin.com/" "http://www.jackzhaojin.com/" "https://jackzh
 done
 
 echo "3. Analytics tag on every page"
-for p in "${PAGES[@]}"; do
+for p in "${PAGES[@]}" "${NOINDEX_PAGES[@]}"; do
   n=$(curl -s "$SITE$p?cb=$(cb)" | grep -c "gtag/js?id=$GA_ID")
   [ "$n" = "1" ] && ok "$p" || bad "$p (found $n occurrences of $GA_ID)"
 done
@@ -56,6 +59,15 @@ curl -s "$SITE/robots.txt?cb=$(cb)" | grep -q "^Sitemap: $SITE/sitemap.xml" && o
 sitemap=$(curl -s "$SITE/sitemap.xml?cb=$(cb)")
 for p in "${PAGES[@]}"; do
   echo "$sitemap" | grep -q "<loc>$SITE$p</loc>" && ok "sitemap lists $p" || bad "sitemap missing $p"
+done
+
+echo "6. Demo pages are noindex and absent from the sitemap"
+for p in "${NOINDEX_PAGES[@]}"; do
+  page=$(curl -s -w '\n%{http_code}' "$SITE$p?cb=$(cb)")
+  code=$(echo "$page" | tail -n1)
+  [ "$code" = "200" ] && ok "$p serves 200" || bad "$p returned $code"
+  echo "$page" | grep -q '<meta name="robots" content="noindex">' && ok "$p has noindex" || bad "$p missing noindex"
+  echo "$sitemap" | grep -q "<loc>$SITE$p" && bad "sitemap must not list $p" || ok "$p not in sitemap"
 done
 
 echo

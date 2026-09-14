@@ -20,13 +20,13 @@
 @media (prefers-color-scheme: dark) { :root { --bg:#141414; --surface:#1c1c1b; --ink:#ebe8e4; --muted:#b3afaa; --line:#333; --accent:#c0b3ff; } }
 body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 Inter, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
 .wrap { max-width:1100px; margin-inline:auto; padding:48px 24px; }
-h1 { font-size:32px; margin:0 0 8px; } h2 { font-size:20px; margin:0 0 6px; }
+h1 { font-size:32px; margin:0 0 8px; } h2 { font-size:20px; margin:0 0 6px; } .wrap > h2 { margin-top:40px; }
 p { margin:0 0 12px; } .lead { color:var(--muted); max-width:70ch; }
 .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin:32px 0; }
 .sys { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px; }
 .sys p { color:var(--muted); font-size:15px; } .links a { margin-right:12px; color:var(--accent); }
 a { color:var(--accent); }
-.table-wrap { overflow-x:auto; } table { border-collapse:collapse; width:100%; font-size:14px; }
+.table-wrap { overflow-x:auto; margin-bottom:8px; } table { border-collapse:collapse; width:100%; font-size:14px; }
 th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
 th[scope=row] { white-space:nowrap; }
 code { font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace; font-size:13px; }
