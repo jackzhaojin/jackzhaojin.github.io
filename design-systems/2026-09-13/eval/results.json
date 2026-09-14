@@ -1,0 +1,46 @@
+[
+ {
+  "slug": "claude-fable-5-1",
+  "name": "Claude Fable 5.1",
+  "static": "130/130",
+  "static_fails": [],
+  "overflow": "none",
+  "centered": "yes",
+  "theme": "pass",
+  "contrast": "all pairs pass AA",
+  "nojs": "pass"
+ },
+ {
+  "slug": "astra",
+  "name": "Astra",
+  "static": "130/130",
+  "static_fails": [],
+  "overflow": "none",
+  "centered": "yes",
+  "theme": "pass",
+  "contrast": "all pairs pass AA",
+  "nojs": "pass"
+ },
+ {
+  "slug": "kimi-k3",
+  "name": "Kimi K3",
+  "static": "130/130",
+  "static_fails": [],
+  "overflow": "none",
+  "centered": "yes",
+  "theme": "pass",
+  "contrast": "all pairs pass AA",
+  "nojs": "pass"
+ },
+ {
+  "slug": "google-stitch",
+  "name": "Google Stitch",
+  "static": "130/130",
+  "static_fails": [],
+  "overflow": "none",
+  "centered": "yes",
+  "theme": "pass",
+  "contrast": "all pairs pass AA",
+  "nojs": "pass"
+ }
+]

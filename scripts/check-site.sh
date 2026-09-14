@@ -15,7 +15,7 @@ SITE="https://www.jackzhaojin.com"
 GA_ID="G-ZVENE6BXTJ"
 VERIFY_FILE="google57906613577fdd42.html"
 VERIFY_META="6FfUrqzAd1GDf35t2W1QHz-2rIbSjVTKzuZwWQKJjqw"
-PAGES=("/" "/blogs.html" "/certifications.html" "/portfolio/")
+PAGES=("/" "/blogs.html" "/certifications.html" "/portfolio/" "/design-systems/2026-09-13/")
 fail=0
 cb() { printf '%s' "$(date +%s%N)"; }   # cache-buster so Cloudflare cannot serve a stale copy
 ok()  { printf '  ok   %s\n' "$1"; }

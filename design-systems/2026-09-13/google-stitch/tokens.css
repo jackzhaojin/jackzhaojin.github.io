@@ -1,0 +1,235 @@
+/* google-stitch design system, tokens
+   Round 2026-09-13. Origin: the Google Stitch round (terminal console identity).
+   Three tiers: primitives (--palette-*, --font-*, raw sizes) define options,
+   semantic tokens reference primitives, components consume semantic tokens only.
+   Selector structure follows SPEC section 4 so a nested frame can force one theme. */
+
+/* ------------------------------------------------------------------ */
+/* Primitives (theme independent)                                       */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Ink scale: the dark ground from the Stitch dark config */
+  --palette-ink-950: #0d0e10;
+  --palette-ink-900: #121315;
+  --palette-ink-850: #18191b;
+  --palette-ink-800: #1f2022;
+  --palette-ink-750: #292a2c;
+  --palette-ink-700: #343537;
+  --palette-ink-600: #2e3138;
+  --palette-ink-500: #484550;
+  --palette-ink-400: #6b6875;
+  --palette-ink-300: #8e929b;
+  --palette-ink-200: #c9c4d1;
+  --palette-ink-100: #e3e2e4;
+  --palette-ink-50: #f4f4f6;
+
+  /* Slate scale: the light ground from the Stitch light config */
+  --palette-slate-950: #0f172a;
+  --palette-slate-800: #1e293b;
+  --palette-slate-700: #334155;
+  --palette-slate-600: #475569;
+  --palette-slate-550: #5d6b82;
+  --palette-slate-500: #64748b;
+  --palette-slate-450: #7b8798;
+  --palette-slate-400: #94a3b8;
+  --palette-slate-300: #cbd5e1;
+  --palette-slate-200: #e2e8f0;
+  --palette-slate-100: #f1f5f9;
+  --palette-slate-50: #f8fafc;
+  --palette-white: #ffffff;
+  --palette-lilac-50: #faf8ff;
+
+  /* Primary: lavender in dark, indigo in light */
+  --palette-lavender-100: #e6deff;
+  --palette-lavender-200: #dcd3ff;
+  --palette-lavender-300: #c0b3ff;
+  --palette-lavender-900: #312567;
+  --palette-indigo-100: #e0e7ff;
+  --palette-indigo-700: #4338ca;
+  --palette-indigo-800: #372abf;
+
+  /* Secondary accents, used sparingly */
+  --palette-emerald-100: #d1fae5;
+  --palette-emerald-300: #4edea3;
+  --palette-emerald-500: #10b981;
+  --palette-emerald-700: #047857;
+  --palette-emerald-900: #064e3b;
+  --palette-cyan-300: #7bd0ff;
+  --palette-cyan-400: #38bdf8;
+  --palette-sky-600: #0284c7;
+  --palette-sky-700: #0369a1;
+  --palette-coral-300: #ffb4ab;
+  --palette-red-600: #dc2626;
+
+  /* Font families */
+  --font-display: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Type scale. Mono headings with negative tracking, Inter body. */
+  --text-display: clamp(1.875rem, 1.25rem + 1.7vw, 2.5rem);   /* 30px to 40px */
+  --text-h1: clamp(1.875rem, 1.25rem + 1.7vw, 2.5rem);        /* 30px to 40px */
+  --text-h2: clamp(1.375rem, 1.15rem + 0.65vw, 1.75rem);      /* 22px to 28px */
+  --text-h3: 1.25rem;                                          /* 20px */
+  --text-body-lg: 1.125rem;                                    /* 18px */
+  --text-body: 0.9375rem;                                      /* 15px */
+  --text-small: 0.8125rem;                                     /* 13px */
+  --text-label: 0.8125rem;                                     /* 13px, label-md */
+  --text-label-sm: 0.6875rem;                                  /* 11px, uppercase */
+  --text-mono: 0.84375rem;                                     /* 13.5px */
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.3;
+  --leading-body: 1.7;
+
+  --tracking-display: -0.04em;
+  --tracking-h2: -0.03em;
+  --tracking-h3: -0.02em;
+  --tracking-label: 0.05em;
+  --tracking-label-md: 0.02em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* Spacing, 4px base */
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+  --space-10: 8rem;     /* 128 */
+
+  /* Layout */
+  --container-max: 1280px;
+  --gutter: 1rem;
+  --measure: 68ch;
+  --header-height: 4rem;
+
+  /* Shape */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Stacking */
+  --z-header: 100;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 1.5rem; }
+}
+@media (min-width: 1280px) {
+  :root { --gutter: 2rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Semantic tokens, light (default)                                     */
+/* ------------------------------------------------------------------ */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --color-bg: var(--palette-lilac-50);
+  --color-bg-alt: var(--palette-slate-100);
+  --color-surface: var(--palette-white);
+  --color-surface-raised: var(--palette-slate-50);
+  --color-text: var(--palette-slate-950);
+  --color-text-muted: var(--palette-slate-700);
+  --color-text-faint: var(--palette-slate-550);
+  --color-line: var(--palette-slate-200);
+  --color-line-strong: var(--palette-slate-450);
+  --color-accent: var(--palette-indigo-700);
+  --color-accent-hover: var(--palette-indigo-800);
+  --color-on-accent: var(--palette-white);
+  --color-accent-soft: var(--palette-indigo-100);
+  --color-focus: var(--palette-indigo-700);
+  --color-inverse-bg: var(--palette-slate-950);
+  --color-inverse-text: var(--palette-lilac-50);
+  --color-topic-aem-ai: var(--palette-indigo-700);
+  --color-topic-aem: var(--palette-sky-700);
+  --color-topic-agents: var(--palette-red-600);
+  --color-topic-work: var(--palette-emerald-700);
+  /* Secondary accents (identity marks only: prompt glyph, status dot, format chips) */
+  --color-emerald: var(--palette-emerald-700);
+  --color-cyan: var(--palette-sky-700);
+  /* Code blocks keep the dark console look in both themes */
+  --color-code-bg: var(--palette-slate-950);
+  --color-code-text: var(--palette-ink-100);
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-2: 0 1px 8px rgba(15, 23, 42, 0.10);
+}
+
+/* ------------------------------------------------------------------ */
+/* Semantic tokens, dark                                                */
+/* ------------------------------------------------------------------ */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: var(--palette-ink-900);
+  --color-bg-alt: var(--palette-ink-950);
+  --color-surface: var(--palette-ink-850);
+  --color-surface-raised: var(--palette-ink-800);
+  --color-text: var(--palette-ink-50);
+  --color-text-muted: var(--palette-ink-200);
+  --color-text-faint: var(--palette-ink-300);
+  --color-line: var(--palette-ink-600);
+  --color-line-strong: var(--palette-ink-400);
+  --color-accent: var(--palette-lavender-300);
+  --color-accent-hover: var(--palette-lavender-200);
+  --color-on-accent: var(--palette-lavender-900);
+  --color-accent-soft: #c0b3ff1f;
+  --color-focus: var(--palette-cyan-400);
+  --color-inverse-bg: var(--palette-ink-50);
+  --color-inverse-text: var(--palette-ink-900);
+  --color-topic-aem-ai: var(--palette-lavender-300);
+  --color-topic-aem: var(--palette-cyan-300);
+  --color-topic-agents: var(--palette-coral-300);
+  --color-topic-work: var(--palette-emerald-300);
+  --color-emerald: var(--palette-emerald-500);
+  --color-cyan: var(--palette-cyan-400);
+  --color-code-bg: var(--palette-ink-950);
+  --color-code-text: var(--palette-ink-100);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* System choice: no data-theme attribute, follow the OS. Values duplicated on purpose. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+    --color-bg: var(--palette-ink-900);
+    --color-bg-alt: var(--palette-ink-950);
+    --color-surface: var(--palette-ink-850);
+    --color-surface-raised: var(--palette-ink-800);
+    --color-text: var(--palette-ink-50);
+    --color-text-muted: var(--palette-ink-200);
+    --color-text-faint: var(--palette-ink-300);
+    --color-line: var(--palette-ink-600);
+    --color-line-strong: var(--palette-ink-400);
+    --color-accent: var(--palette-lavender-300);
+    --color-accent-hover: var(--palette-lavender-200);
+    --color-on-accent: var(--palette-lavender-900);
+    --color-accent-soft: #c0b3ff1f;
+    --color-focus: var(--palette-cyan-400);
+    --color-inverse-bg: var(--palette-ink-50);
+    --color-inverse-text: var(--palette-ink-900);
+    --color-topic-aem-ai: var(--palette-lavender-300);
+    --color-topic-aem: var(--palette-cyan-300);
+    --color-topic-agents: var(--palette-coral-300);
+    --color-topic-work: var(--palette-emerald-300);
+    --color-emerald: var(--palette-emerald-500);
+    --color-cyan: var(--palette-cyan-400);
+    --color-code-bg: var(--palette-ink-950);
+    --color-code-text: var(--palette-ink-100);
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-2: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+}

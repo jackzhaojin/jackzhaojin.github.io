@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVENE6BXTJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZVENE6BXTJ');
+</script>
+<title>Design systems, round 2026-09-13 | Jack Jin</title>
+<meta name="description" content="Four candidate design systems for jackzhaojin.com, built to one contract from four vendor design rounds, with automated eval results.">
+<link rel="canonical" href="https://www.jackzhaojin.com/design-systems/2026-09-13/">
+<meta name="robots" content="noindex">
+<style>
+:root { color-scheme: light dark; --bg:#f7f6f3; --surface:#fff; --ink:#1a1917; --muted:#5a5754; --line:#dcd9d4; --accent:#4b3fb0; }
+@media (prefers-color-scheme: dark) { :root { --bg:#141414; --surface:#1c1c1b; --ink:#ebe8e4; --muted:#b3afaa; --line:#333; --accent:#c0b3ff; } }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 Inter, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+.wrap { max-width:1100px; margin-inline:auto; padding:48px 24px; }
+h1 { font-size:32px; margin:0 0 8px; } h2 { font-size:20px; margin:0 0 6px; }
+p { margin:0 0 12px; } .lead { color:var(--muted); max-width:70ch; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin:32px 0; }
+.sys { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px; }
+.sys p { color:var(--muted); font-size:15px; } .links a { margin-right:12px; color:var(--accent); }
+a { color:var(--accent); }
+.table-wrap { overflow-x:auto; } table { border-collapse:collapse; width:100%; font-size:14px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+th[scope=row] { white-space:nowrap; }
+code { font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace; font-size:13px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Design systems, round 2026-09-13</h1>
+<p class="lead">Four candidate design systems for www.jackzhaojin.com. Each one was built from a different vendor's design round (Claude Design, Codex, Kimi K3, Google Stitch), then rebuilt to one shared contract so they can be compared on equal terms: same token names, same components, same page templates, same three-state theme control, real content only. Read the contract in <a href="SPEC.md">SPEC.md</a> and the round notes in <a href="README.md">README.md</a>.</p>
+<div class="grid">
+<article class="sys">
+  <h2>Claude Fable 5.1</h2>
+  <p>Editorial field notes, continuous with the portfolio: Playfair Display, Inter, JetBrains Mono, warm neutrals, lavender accent.</p>
+  <p class="links"><a href="claude-fable-5-1/">Design system docs</a> <a href="claude-fable-5-1/templates/home.html">Home</a> <a href="claude-fable-5-1/templates/post.html">Post</a> <a href="claude-fable-5-1/templates/blog.html">Blog</a> <a href="claude-fable-5-1/README.md">README</a></p>
+</article>
+<article class="sys">
+  <h2>Astra</h2>
+  <p>Serif display with a sans body, violet accent, lavender tint panels and a deep plum feature panel. From the Codex round.</p>
+  <p class="links"><a href="astra/">Design system docs</a> <a href="astra/templates/home.html">Home</a> <a href="astra/templates/post.html">Post</a> <a href="astra/templates/blog.html">Blog</a> <a href="astra/README.md">README</a></p>
+</article>
+<article class="sys">
+  <h2>Kimi K3</h2>
+  <p>Developer editorial: Inter and IBM Plex Mono, near black on off white, electric blue, square corners, bracketed chips.</p>
+  <p class="links"><a href="kimi-k3/">Design system docs</a> <a href="kimi-k3/templates/home.html">Home</a> <a href="kimi-k3/templates/post.html">Post</a> <a href="kimi-k3/templates/blog.html">Blog</a> <a href="kimi-k3/README.md">README</a></p>
+</article>
+<article class="sys">
+  <h2>Google Stitch</h2>
+  <p>Terminal console: JetBrains Mono headings, sharp corners, lavender primary with emerald and cyan accents. Extrapolated from one page.</p>
+  <p class="links"><a href="google-stitch/">Design system docs</a> <a href="google-stitch/templates/home.html">Home</a> <a href="google-stitch/templates/post.html">Post</a> <a href="google-stitch/templates/blog.html">Blog</a> <a href="google-stitch/README.md">README</a></p>
+</article>
+</div>
+<h2>Eval scorecard</h2>
+<p class="lead">Automated gates from SPEC section 10, last run 2026-09-13. Static checks count file-level rules (head contract, tokens, components, dashes, links). Browser checks run at six widths in both themes. Details in <a href="eval/results.md">eval/results.md</a>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>System</th><th>Static</th><th>Overflow</th><th>Centered</th><th>Theme</th><th>Contrast</th><th>No JS</th></tr></thead>
+<tbody><tr><th scope="row">Claude Fable 5.1</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Astra</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Kimi K3</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr><tr><th scope="row">Google Stitch</th><td>130/130</td><td>none</td><td>yes</td><td>pass</td><td>all pairs pass AA</td><td>pass</td></tr></tbody>
+</table></div>
+<h2>How to evaluate by hand</h2>
+<p>Open each docs site, switch the theme control through Light, Dark and System, resize the window from phone width to 2560 px, and read the post template with JavaScript disabled. Then open the three templates side by side across systems. The blueprint the templates follow is in <a href="../../ai-docs/2026-09-13-seo-geo-redesign/seo-page-blueprint.md">seo-page-blueprint.md</a>.</p>
+</main>
+</body>
+</html>

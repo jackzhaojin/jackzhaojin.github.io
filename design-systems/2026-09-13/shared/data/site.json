@@ -1,0 +1,89 @@
+{
+  "name": "Jack Jin",
+  "role": "Associate Director at Accenture",
+  "title_line": "Associate Director at Accenture. Cloud architect. Adobe Certified Master. AEM Champion 2026.",
+  "location": "Columbus, Ohio",
+  "summary_40_60": "Jack Jin is an Associate Director at Accenture in Columbus, Ohio, an Adobe Certified Master and an AEM Champion 2026. He builds AI agent systems and writes about Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. This site holds his posts, videos, projects, talks and certifications.",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/jackjin",
+    "github": "https://github.com/jackzhaojin",
+    "credentials": "https://www.jackzhaojin.com/certifications.html",
+    "site": "https://www.jackzhaojin.com/"
+  },
+  "contact": {
+    "email": "[email address to be supplied]",
+    "book_a_talk": "https://www.linkedin.com/in/jackjin"
+  },
+  "hubs": [
+    {
+      "slug": "aem-ai",
+      "name": "AEM + AI",
+      "flagship": true,
+      "description": "AI agents, skills and MCP servers working on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and DA.live.",
+      "counts": "[curated: membership set per post]"
+    },
+    {
+      "slug": "adobe-aem",
+      "name": "Adobe AEM and EDS",
+      "flagship": false,
+      "description": "Architecture, headless delivery and the EDS offerings, from production programs.",
+      "counts": "12 posts and videos (topic aem)"
+    },
+    {
+      "slug": "ai-agents",
+      "name": "AI Agents",
+      "flagship": false,
+      "description": "Continuous agents, harnesses, coordination approaches and safety that lives in code.",
+      "counts": "27 posts and videos (topic ai)"
+    },
+    {
+      "slug": "working-with-ai",
+      "name": "Working with AI",
+      "flagship": false,
+      "description": "Patterns of work, team enablement and careers, from a year of building with AI most days.",
+      "counts": "17 posts and videos (type leadership)"
+    }
+  ],
+  "counts": {
+    "posts": 39,
+    "articles": 7,
+    "short_posts": 13,
+    "videos": 19,
+    "topic_ai": 27,
+    "topic_aem": 12,
+    "type_technical": 22,
+    "type_leadership": 17,
+    "projects": 12,
+    "certifications": 22,
+    "talks": 6
+  },
+  "featured_project": {
+    "name": "Anima Mesh",
+    "period": "Jul 2026 to present",
+    "summary": "Runs recurring back-office work from a private repo: compliance checks, bookkeeping prep, document memory, governance, research and inbound triage. A human remains the approval gate for money, filings, publishing, credentials and access.",
+    "facts": {
+      "repo": "https://github.com/jackzhaojin/anima-mesh",
+      "license": "Apache 2.0",
+      "version": "v0.16.2",
+      "stack": "TypeScript on Cloudflare Workers, Durable Objects, GitHub",
+      "build_method": "ad hoc (no spec preceded the code)",
+      "releases": "36 tags in 29 days",
+      "agents": "nine agents",
+      "commits": "[from git, not yet verified]"
+    },
+    "source": "portfolio/index.html, Anima Mesh chapter"
+  },
+  "video_post": {
+    "title": "Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)",
+    "date": "2026-08-09",
+    "format": "video",
+    "watch_time": "[watch time to confirm]",
+    "topic": "aem",
+    "hub": "aem-ai",
+    "linkedin": "(see posts.json entry dated 2026-08-09)",
+    "youtube": "[YouTube link pending]",
+    "chapters": "[chapters to be supplied from the recording]",
+    "transcript": "[transcript to be supplied]",
+    "related_project": "Content Factory"
+  }
+}

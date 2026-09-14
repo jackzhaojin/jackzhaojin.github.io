@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="en" data-theme-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVENE6BXTJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZVENE6BXTJ');
+</script>
+<title>Design system | google-stitch | Jack Jin</title>
+<meta name="description" content="Documentation for the google-stitch design system: tokens, typography, layout, theming, components with live stories, patterns, templates, status and changelog.">
+<link rel="canonical" href="https://www.jackzhaojin.com/design-systems/2026-09-13/google-stitch/">
+<meta name="robots" content="noindex">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');var def=d.getAttribute('data-theme-default')||'light';var c=(s==='light'||s==='dark'||s==='system')?s:def;if(c==='system'){d.removeAttribute('data-theme');}else{d.setAttribute('data-theme',c);}d.setAttribute('data-theme-choice',c);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="components.css">
+<script src="../shared/theme.js" defer></script>
+<style>
+/* Documentation page only */
+.docs-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding-block: var(--space-6) var(--space-8); align-items: start; }
+.docs-content { min-width: 0; }
+.docs-nav { font-family: var(--font-mono); font-size: var(--text-small); }
+.docs-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); }
+.docs-nav ul ul { padding-left: var(--space-3); }
+.docs-nav a { color: var(--color-text-muted); text-decoration: none; display: inline-block; padding: 2px 0; border-left: 2px solid transparent; }
+.docs-nav a:hover { color: var(--color-accent); }
+.docs-nav__title { font-size: var(--text-label-sm); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--color-text-faint); margin-bottom: var(--space-2); }
+.docs-nav__title::before { content: "// "; }
+@media (min-width: 1024px) {
+  .docs-layout { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-8); }
+  .docs-nav { position: sticky; top: calc(var(--header-height) + var(--space-4)); max-height: calc(100vh - var(--header-height) - var(--space-6)); overflow-y: auto; padding-right: var(--space-2); }
+  .docs-nav ul { flex-direction: column; gap: 0; }
+  .docs-nav ul ul { display: none; }
+  .docs-nav a { display: block; padding: 3px var(--space-2); }
+  .docs-nav a:hover { border-left-color: var(--color-line-strong); }
+}
+.docs-section { padding-block: var(--space-7); border-top: var(--border-width) solid var(--color-line); }
+.docs-section:first-child { padding-top: 0; border-top: 0; }
+.docs-section > .kicker { margin-bottom: var(--space-2); }
+.docs-section > h2 { margin-bottom: var(--space-4); }
+.docs-section > h1 ~ h2 { margin-top: var(--space-6); margin-bottom: var(--space-3); }
+.docs-section > h3 { margin-top: var(--space-6); margin-bottom: var(--space-3); }
+.docs-section > h4, .component > h4 { margin-top: var(--space-5); margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-label-sm); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--color-text-faint); }
+.docs-section > p, .docs-section > ul, .docs-section > ol { max-width: var(--measure); }
+.docs-section > p + p, .docs-section > p + ul, .docs-section > ul + p { margin-top: var(--space-3); }
+.docs-section pre { margin-top: var(--space-3); }
+.component { padding-block: var(--space-6); border-top: var(--border-width) dashed var(--color-line); }
+.component__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.component__desc { max-width: var(--measure); margin-top: var(--space-2); }
+.anatomy { max-width: var(--measure); }
+.stories { display: grid; gap: var(--space-3); }
+.story { padding: var(--space-5); background: var(--color-bg); color: var(--color-text); border: var(--border-width) solid var(--color-line-strong); border-radius: var(--radius-md); min-width: 0; overflow: hidden; }
+.story--flush { padding: 0; }
+.story--flush .story__label { padding: var(--space-3) var(--space-4) 0; }
+.story__label { font-family: var(--font-mono); font-size: var(--text-label-sm); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--color-text-faint); margin-bottom: var(--space-3); }
+.story__label::before { content: "story: "; }
+.story .site-header { position: static; box-shadow: none; }
+.story .site-footer { margin-top: 0; }
+.story .skip-link { position: static; display: inline-block; }
+.story .grid { margin-top: 0; }
+.story .container { padding-inline: var(--space-4); }
+.do-dont { display: grid; gap: var(--space-3); margin-top: var(--space-5); }
+@media (min-width: 768px) { .do-dont { grid-template-columns: 1fr 1fr; } }
+.do, .dont { padding: var(--space-3) var(--space-4); border-left: 3px solid; background: var(--color-surface); border-radius: var(--radius-sm); font-size: var(--text-small); }
+.do { border-color: var(--color-emerald); }
+.dont { border-color: var(--color-topic-agents); }
+.do h4, .dont h4 { margin: 0 0 var(--space-1); font-family: var(--font-mono); font-size: var(--text-label-sm); text-transform: uppercase; letter-spacing: var(--tracking-label); }
+.do h4::before { content: "[ok] "; color: var(--color-emerald); }
+.dont h4::before { content: "[x] "; color: var(--color-topic-agents); }
+.token-list { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); font-size: var(--text-small); }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: var(--space-2); margin-bottom: var(--space-4); }
+.swatch { border: var(--border-width) solid var(--color-line); border-radius: var(--radius-sm); overflow: hidden; background: var(--color-surface); }
+.swatch__color { height: 2.75rem; border-bottom: var(--border-width) solid var(--color-line); }
+.swatch__meta { display: flex; flex-direction: column; padding: var(--space-2); font-family: var(--font-mono); font-size: var(--text-label-sm); }
+.swatch__name { color: var(--color-text); }
+.swatch__hex { color: var(--color-text-faint); }
+.dot { display: inline-block; width: 0.8em; height: 0.8em; border: 1px solid var(--color-line-strong); border-radius: 2px; vertical-align: -0.1em; margin-right: var(--space-1); }
+.specimen { display: grid; gap: var(--space-2); padding: var(--space-4) 0; border-bottom: var(--border-width) solid var(--color-line); }
+@media (min-width: 768px) { .specimen { grid-template-columns: 14rem minmax(0, 1fr); gap: var(--space-5); align-items: center; } }
+.specimen__meta { font-family: var(--font-mono); font-size: var(--text-label-sm); color: var(--color-text-faint); line-height: 1.6; }
+.specimen__meta strong { color: var(--color-text); font-weight: var(--weight-medium); }
+.specimen__sample { min-width: 0; }
+.spec-h2 { font-family: var(--font-display); font-size: var(--text-h2); line-height: var(--leading-snug); font-weight: var(--weight-bold); letter-spacing: var(--tracking-h2); }
+.spec-h3 { font-family: var(--font-display); font-size: var(--text-h3); line-height: 1.4; font-weight: var(--weight-medium); letter-spacing: var(--tracking-h3); }
+.space-row { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 4rem; gap: var(--space-3); align-items: center; padding: var(--space-1) 0; }
+.space-bar { height: 0.9rem; background: var(--color-accent); border-radius: 1px; max-width: 100%; }
+.demo-grid .demo-box { background: var(--color-accent-soft); border: var(--border-width) solid var(--color-accent); border-radius: var(--radius-sm); padding: var(--space-3); text-align: center; font-family: var(--font-mono); font-size: var(--text-small); color: var(--color-accent); }
+.radius-demo, .shadow-demo { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-end; }
+.radius-demo div { width: 5rem; height: 3.5rem; border: var(--border-width) solid var(--color-line-strong); background: var(--color-surface); display: grid; place-items: center; font-family: var(--font-mono); font-size: var(--text-label-sm); color: var(--color-text-faint); }
+.shadow-demo div { width: 9rem; height: 4rem; background: var(--color-surface); border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); display: grid; place-items: center; font-family: var(--font-mono); font-size: var(--text-label-sm); color: var(--color-text-faint); }
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); gap: var(--space-2); }
+.icon-grid div { border: var(--border-width) solid var(--color-line); border-radius: var(--radius-sm); background: var(--color-surface); padding: var(--space-3); text-align: center; font-family: var(--font-mono); font-size: var(--text-label-sm); color: var(--color-text-faint); }
+.icon-grid .icon { width: 1.5rem; height: 1.5rem; margin: 0 auto var(--space-2); color: var(--color-text); }
+.contrast-table td.pass { color: var(--color-emerald); font-family: var(--font-mono); }
+.contrast-table td.fail { color: var(--color-topic-agents); font-family: var(--font-mono); }
+.contrast-table td.live:not(:empty)::before { content: "live "; color: var(--color-text-faint); }
+.motion-demo { display: inline-block; padding: var(--space-3) var(--space-4); border: var(--border-width) solid var(--color-line-strong); border-radius: var(--radius-sm); background: var(--color-surface); font-family: var(--font-mono); font-size: var(--text-small); transition: background var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard); }
+.motion-demo:hover { background: var(--color-accent); color: var(--color-on-accent); }
+.probe { display: none; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg hidden xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="1"/><path d="M16 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="icon-article" viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></symbol>
+  <symbol id="icon-post" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="icon-repo" viewBox="0 0 24 24"><circle cx="6" cy="4" r="2"/><circle cx="6" cy="20" r="2"/><circle cx="18" cy="8" r="2"/><path d="M6 6v12M18 10c0 4-12 2-12 8"/></symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M19 13v6H5V5h6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+</svg>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a><span class="status-dot" aria-hidden="true"></span>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="container docs-layout">
+    <nav class="docs-nav" aria-label="On this page">
+      <p class="docs-nav__title">Contents</p>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#color">Color</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#shape-elevation">Shape and elevation</a></li>
+        <li><a href="#motion">Motion</a></li>
+        <li><a href="#iconography">Iconography</a></li>
+        <li><a href="#theming">Theming</a></li>
+        <li><a href="#components">Components</a>
+          <ul><li><a href="#c-skip-link">Skip link</a></li><li><a href="#c-site-header">Site header</a></li><li><a href="#c-breadcrumb">Breadcrumb</a></li><li><a href="#c-page-head">Page head</a></li><li><a href="#c-button">Button</a></li><li><a href="#c-chip">Chip</a></li><li><a href="#c-card">Card</a></li><li><a href="#c-facts-table">Facts table</a></li><li><a href="#c-data-table">Data table</a></li><li><a href="#c-counts">Counts</a></li><li><a href="#c-row-list">Row list</a></li><li><a href="#c-faq">FAQ</a></li><li><a href="#c-filter-bar">Filter bar</a></li><li><a href="#c-pagination">Pagination</a></li><li><a href="#c-embed">Embed</a></li><li><a href="#c-chapters">Chapters</a></li><li><a href="#c-transcript">Transcript</a></li><li><a href="#c-author-box">Author box</a></li><li><a href="#c-callout">Callout</a></li><li><a href="#c-cta-band">CTA band</a></li><li><a href="#c-footer">Footer</a></li><li><a href="#c-icons">Icons</a></li><li><a href="#c-theme-control">Theme control</a></li></ul>
+        </li>
+        <li><a href="#patterns">Patterns</a></li>
+        <li><a href="#templates">Templates</a></li>
+        <li><a href="#status">Status</a></li>
+        <li><a href="#changelog">Changelog</a></li>
+      </ul>
+    </nav>
+
+    <div class="docs-content">
+      <section class="docs-section" id="overview">
+        <p class="kicker">00 / Overview</p>
+        <h1>google-stitch design system</h1>
+        <p class="lead">Terminal console identity for www.jackzhaojin.com. JetBrains Mono headings with negative tracking, Inter body, sharp corners, 1px borders, bracketed counts and numbered <code>//</code> section labels. Light is the default; dark is the round's native palette.</p>
+        <table class="facts" style="margin-top: var(--space-5)">
+          <caption class="sr-only">System facts</caption>
+          <tbody>
+            <tr><th scope="row">Origin</th><td>The Google Stitch round of 2026-09-13. It produced the home page only, in dark, plus a light variant.</td></tr>
+            <tr><th scope="row">Origin folder</th><td><code>local-only/stitch-2026-09-13/stitch-v1.html</code> (dark document from line 682, light from line 1141); split copies in <code>.playwright-cli/stitch/</code></td></tr>
+            <tr><th scope="row">Version</th><td>0.1.0</td></tr>
+            <tr><th scope="row">Status</th><td><span class="chip chip--status" data-status="beta">beta</span> round candidate, not deployed</td></tr>
+            <tr><th scope="row">Contract</th><td><a href="../SPEC.md">SPEC.md</a>, round 2026-09-13</td></tr>
+          </tbody>
+        </table>
+        <h2>Identity</h2>
+        <p>The round read like a console: a <code>$</code> prompt before the breadcrumb, counts in square brackets, section labels written as <code>// 01 / NAME</code>, a lavender primary on a near-black ground, emerald and cyan as sparing accents. This system keeps those marks and drops what broke the rules: the fake telemetry bar, the invented facts, Tailwind, Material Symbols and the em dashes. The light theme is built from the round's light config as a first-class set, not a fallback.</p>
+        <h2>Principles</h2>
+        <ol>
+          <li>Facts over adjectives. Every number on a page comes from data or stays in brackets.</li>
+          <li>Content is in the HTML. JavaScript switches theme, opens the nav, filters and sorts. It never supplies content.</li>
+          <li>One system, two palettes. Every component renders in light and dark from the same markup.</li>
+          <li>Clean over clever. 2px radii, 1px lines, no shadows except under the sticky header, no decoration that implies status.</li>
+          <li>Readable by machines. Tables for facts, ordered lists for steps, one H1, headings in order, breadcrumb above the H1.</li>
+        </ol>
+        <h2>Quick start</h2>
+        <p>Copy the head from SPEC section 3. The three stylesheets load in this order, and <code>data-theme-default</code> on <code>html</code> is <code>light</code> for every page in this round.</p>
+        <pre><code>&lt;html lang=&quot;en&quot; data-theme-default=&quot;light&quot;&gt;
+...
+&lt;link rel=&quot;stylesheet&quot; href=&quot;tokens.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;base.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;components.css&quot;&gt;
+&lt;script src=&quot;../shared/theme.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+      </section>
+
+      <section class="docs-section" id="color">
+        <p class="kicker">01 / Color</p>
+        <h2>Color</h2>
+        <p>Primitives are named by hue and step. Semantic tokens reference primitives and are the only names components use. The two theme sets are defined in <code>tokens.css</code> with the selector structure in the theming section.</p>
+        <h3>Primitive palette</h3>
+        <h4>Ink (dark ground)</h4>
+<div class="swatches"><div class="swatch"><div class="swatch__color" style="background:#0d0e10"></div><div class="swatch__meta"><span class="swatch__name">ink-950</span><span class="swatch__hex">#0d0e10</span></div></div><div class="swatch"><div class="swatch__color" style="background:#121315"></div><div class="swatch__meta"><span class="swatch__name">ink-900</span><span class="swatch__hex">#121315</span></div></div><div class="swatch"><div class="swatch__color" style="background:#18191b"></div><div class="swatch__meta"><span class="swatch__name">ink-850</span><span class="swatch__hex">#18191b</span></div></div><div class="swatch"><div class="swatch__color" style="background:#1f2022"></div><div class="swatch__meta"><span class="swatch__name">ink-800</span><span class="swatch__hex">#1f2022</span></div></div><div class="swatch"><div class="swatch__color" style="background:#292a2c"></div><div class="swatch__meta"><span class="swatch__name">ink-750</span><span class="swatch__hex">#292a2c</span></div></div><div class="swatch"><div class="swatch__color" style="background:#343537"></div><div class="swatch__meta"><span class="swatch__name">ink-700</span><span class="swatch__hex">#343537</span></div></div><div class="swatch"><div class="swatch__color" style="background:#2e3138"></div><div class="swatch__meta"><span class="swatch__name">ink-600</span><span class="swatch__hex">#2e3138</span></div></div><div class="swatch"><div class="swatch__color" style="background:#484550"></div><div class="swatch__meta"><span class="swatch__name">ink-500</span><span class="swatch__hex">#484550</span></div></div><div class="swatch"><div class="swatch__color" style="background:#6b6875"></div><div class="swatch__meta"><span class="swatch__name">ink-400</span><span class="swatch__hex">#6b6875</span></div></div><div class="swatch"><div class="swatch__color" style="background:#8e929b"></div><div class="swatch__meta"><span class="swatch__name">ink-300</span><span class="swatch__hex">#8e929b</span></div></div><div class="swatch"><div class="swatch__color" style="background:#c9c4d1"></div><div class="swatch__meta"><span class="swatch__name">ink-200</span><span class="swatch__hex">#c9c4d1</span></div></div><div class="swatch"><div class="swatch__color" style="background:#e3e2e4"></div><div class="swatch__meta"><span class="swatch__name">ink-100</span><span class="swatch__hex">#e3e2e4</span></div></div><div class="swatch"><div class="swatch__color" style="background:#f4f4f6"></div><div class="swatch__meta"><span class="swatch__name">ink-50</span><span class="swatch__hex">#f4f4f6</span></div></div></div>
+<h4>Slate (light ground)</h4>
+<div class="swatches"><div class="swatch"><div class="swatch__color" style="background:#faf8ff"></div><div class="swatch__meta"><span class="swatch__name">lilac-50</span><span class="swatch__hex">#faf8ff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#ffffff"></div><div class="swatch__meta"><span class="swatch__name">white</span><span class="swatch__hex">#ffffff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#f8fafc"></div><div class="swatch__meta"><span class="swatch__name">slate-50</span><span class="swatch__hex">#f8fafc</span></div></div><div class="swatch"><div class="swatch__color" style="background:#f1f5f9"></div><div class="swatch__meta"><span class="swatch__name">slate-100</span><span class="swatch__hex">#f1f5f9</span></div></div><div class="swatch"><div class="swatch__color" style="background:#e2e8f0"></div><div class="swatch__meta"><span class="swatch__name">slate-200</span><span class="swatch__hex">#e2e8f0</span></div></div><div class="swatch"><div class="swatch__color" style="background:#cbd5e1"></div><div class="swatch__meta"><span class="swatch__name">slate-300</span><span class="swatch__hex">#cbd5e1</span></div></div><div class="swatch"><div class="swatch__color" style="background:#94a3b8"></div><div class="swatch__meta"><span class="swatch__name">slate-400</span><span class="swatch__hex">#94a3b8</span></div></div><div class="swatch"><div class="swatch__color" style="background:#7b8798"></div><div class="swatch__meta"><span class="swatch__name">slate-450</span><span class="swatch__hex">#7b8798</span></div></div><div class="swatch"><div class="swatch__color" style="background:#64748b"></div><div class="swatch__meta"><span class="swatch__name">slate-500</span><span class="swatch__hex">#64748b</span></div></div><div class="swatch"><div class="swatch__color" style="background:#5d6b82"></div><div class="swatch__meta"><span class="swatch__name">slate-550</span><span class="swatch__hex">#5d6b82</span></div></div><div class="swatch"><div class="swatch__color" style="background:#475569"></div><div class="swatch__meta"><span class="swatch__name">slate-600</span><span class="swatch__hex">#475569</span></div></div><div class="swatch"><div class="swatch__color" style="background:#334155"></div><div class="swatch__meta"><span class="swatch__name">slate-700</span><span class="swatch__hex">#334155</span></div></div><div class="swatch"><div class="swatch__color" style="background:#1e293b"></div><div class="swatch__meta"><span class="swatch__name">slate-800</span><span class="swatch__hex">#1e293b</span></div></div><div class="swatch"><div class="swatch__color" style="background:#0f172a"></div><div class="swatch__meta"><span class="swatch__name">slate-950</span><span class="swatch__hex">#0f172a</span></div></div></div>
+<h4>Primary</h4>
+<div class="swatches"><div class="swatch"><div class="swatch__color" style="background:#e6deff"></div><div class="swatch__meta"><span class="swatch__name">lavender-100</span><span class="swatch__hex">#e6deff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#dcd3ff"></div><div class="swatch__meta"><span class="swatch__name">lavender-200</span><span class="swatch__hex">#dcd3ff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#c0b3ff"></div><div class="swatch__meta"><span class="swatch__name">lavender-300</span><span class="swatch__hex">#c0b3ff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#312567"></div><div class="swatch__meta"><span class="swatch__name">lavender-900</span><span class="swatch__hex">#312567</span></div></div><div class="swatch"><div class="swatch__color" style="background:#e0e7ff"></div><div class="swatch__meta"><span class="swatch__name">indigo-100</span><span class="swatch__hex">#e0e7ff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#4338ca"></div><div class="swatch__meta"><span class="swatch__name">indigo-700</span><span class="swatch__hex">#4338ca</span></div></div><div class="swatch"><div class="swatch__color" style="background:#372abf"></div><div class="swatch__meta"><span class="swatch__name">indigo-800</span><span class="swatch__hex">#372abf</span></div></div></div>
+<h4>Secondary accents</h4>
+<div class="swatches"><div class="swatch"><div class="swatch__color" style="background:#d1fae5"></div><div class="swatch__meta"><span class="swatch__name">emerald-100</span><span class="swatch__hex">#d1fae5</span></div></div><div class="swatch"><div class="swatch__color" style="background:#4edea3"></div><div class="swatch__meta"><span class="swatch__name">emerald-300</span><span class="swatch__hex">#4edea3</span></div></div><div class="swatch"><div class="swatch__color" style="background:#10b981"></div><div class="swatch__meta"><span class="swatch__name">emerald-500</span><span class="swatch__hex">#10b981</span></div></div><div class="swatch"><div class="swatch__color" style="background:#047857"></div><div class="swatch__meta"><span class="swatch__name">emerald-700</span><span class="swatch__hex">#047857</span></div></div><div class="swatch"><div class="swatch__color" style="background:#064e3b"></div><div class="swatch__meta"><span class="swatch__name">emerald-900</span><span class="swatch__hex">#064e3b</span></div></div><div class="swatch"><div class="swatch__color" style="background:#7bd0ff"></div><div class="swatch__meta"><span class="swatch__name">cyan-300</span><span class="swatch__hex">#7bd0ff</span></div></div><div class="swatch"><div class="swatch__color" style="background:#38bdf8"></div><div class="swatch__meta"><span class="swatch__name">cyan-400</span><span class="swatch__hex">#38bdf8</span></div></div><div class="swatch"><div class="swatch__color" style="background:#0284c7"></div><div class="swatch__meta"><span class="swatch__name">sky-600</span><span class="swatch__hex">#0284c7</span></div></div><div class="swatch"><div class="swatch__color" style="background:#0369a1"></div><div class="swatch__meta"><span class="swatch__name">sky-700</span><span class="swatch__hex">#0369a1</span></div></div><div class="swatch"><div class="swatch__color" style="background:#ffb4ab"></div><div class="swatch__meta"><span class="swatch__name">coral-300</span><span class="swatch__hex">#ffb4ab</span></div></div><div class="swatch"><div class="swatch__color" style="background:#dc2626"></div><div class="swatch__meta"><span class="swatch__name">red-600</span><span class="swatch__hex">#dc2626</span></div></div></div>
+
+        <h3>Semantic tokens</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <caption>Semantic color tokens, light and dark values</caption>
+            <thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Use</th></tr></thead>
+            <tbody><tr><th scope="row"><code>--color-bg</code></th><td><span class="dot" style="background:#faf8ff"></span><code>#faf8ff</code></td><td><span class="dot" style="background:#121315"></span><code>#121315</code></td><td>Page background</td></tr>
+<tr><th scope="row"><code>--color-bg-alt</code></th><td><span class="dot" style="background:#f1f5f9"></span><code>#f1f5f9</code></td><td><span class="dot" style="background:#0d0e10"></span><code>#0d0e10</code></td><td>Footer, table heads, alternate bands</td></tr>
+<tr><th scope="row"><code>--color-surface</code></th><td><span class="dot" style="background:#ffffff"></span><code>#ffffff</code></td><td><span class="dot" style="background:#18191b"></span><code>#18191b</code></td><td>Cards, panels, header</td></tr>
+<tr><th scope="row"><code>--color-surface-raised</code></th><td><span class="dot" style="background:#f8fafc"></span><code>#f8fafc</code></td><td><span class="dot" style="background:#1f2022"></span><code>#1f2022</code></td><td>Inset panels, hover rows</td></tr>
+<tr><th scope="row"><code>--color-text</code></th><td><span class="dot" style="background:#0f172a"></span><code>#0f172a</code></td><td><span class="dot" style="background:#f4f4f6"></span><code>#f4f4f6</code></td><td>Primary text</td></tr>
+<tr><th scope="row"><code>--color-text-muted</code></th><td><span class="dot" style="background:#334155"></span><code>#334155</code></td><td><span class="dot" style="background:#c9c4d1"></span><code>#c9c4d1</code></td><td>Secondary text, nav, excerpts</td></tr>
+<tr><th scope="row"><code>--color-text-faint</code></th><td><span class="dot" style="background:#5d6b82"></span><code>#5d6b82</code></td><td><span class="dot" style="background:#8e929b"></span><code>#8e929b</code></td><td>Dates, kickers, labels</td></tr>
+<tr><th scope="row"><code>--color-line</code></th><td><span class="dot" style="background:#e2e8f0"></span><code>#e2e8f0</code></td><td><span class="dot" style="background:#2e3138"></span><code>#2e3138</code></td><td>Hairlines</td></tr>
+<tr><th scope="row"><code>--color-line-strong</code></th><td><span class="dot" style="background:#7b8798"></span><code>#7b8798</code></td><td><span class="dot" style="background:#6b6875"></span><code>#6b6875</code></td><td>Control borders, 3:1</td></tr>
+<tr><th scope="row"><code>--color-accent</code></th><td><span class="dot" style="background:#4338ca"></span><code>#4338ca</code></td><td><span class="dot" style="background:#c0b3ff"></span><code>#c0b3ff</code></td><td>Links, primary button, CTA band</td></tr>
+<tr><th scope="row"><code>--color-accent-hover</code></th><td><span class="dot" style="background:#372abf"></span><code>#372abf</code></td><td><span class="dot" style="background:#dcd3ff"></span><code>#dcd3ff</code></td><td>Hover on accent</td></tr>
+<tr><th scope="row"><code>--color-on-accent</code></th><td><span class="dot" style="background:#ffffff"></span><code>#ffffff</code></td><td><span class="dot" style="background:#312567"></span><code>#312567</code></td><td>Text on accent</td></tr>
+<tr><th scope="row"><code>--color-accent-soft</code></th><td><span class="dot" style="background:#e0e7ff"></span><code>#e0e7ff</code></td><td><span class="dot" style="background:#c0b3ff1f"></span><code>#c0b3ff1f</code></td><td>Pressed and selected tint</td></tr>
+<tr><th scope="row"><code>--color-focus</code></th><td><span class="dot" style="background:#4338ca"></span><code>#4338ca</code></td><td><span class="dot" style="background:#38bdf8"></span><code>#38bdf8</code></td><td>Focus ring</td></tr>
+<tr><th scope="row"><code>--color-inverse-bg</code></th><td><span class="dot" style="background:#0f172a"></span><code>#0f172a</code></td><td><span class="dot" style="background:#f4f4f6"></span><code>#f4f4f6</code></td><td>Avatar, inverse panels</td></tr>
+<tr><th scope="row"><code>--color-inverse-text</code></th><td><span class="dot" style="background:#faf8ff"></span><code>#faf8ff</code></td><td><span class="dot" style="background:#121315"></span><code>#121315</code></td><td>Text on inverse</td></tr>
+<tr><th scope="row"><code>--color-topic-aem-ai</code></th><td><span class="dot" style="background:#4338ca"></span><code>#4338ca</code></td><td><span class="dot" style="background:#c0b3ff"></span><code>#c0b3ff</code></td><td>AEM + AI chip</td></tr>
+<tr><th scope="row"><code>--color-topic-aem</code></th><td><span class="dot" style="background:#0369a1"></span><code>#0369a1</code></td><td><span class="dot" style="background:#7bd0ff"></span><code>#7bd0ff</code></td><td>AEM chip</td></tr>
+<tr><th scope="row"><code>--color-topic-agents</code></th><td><span class="dot" style="background:#dc2626"></span><code>#dc2626</code></td><td><span class="dot" style="background:#ffb4ab"></span><code>#ffb4ab</code></td><td>AI Agents chip</td></tr>
+<tr><th scope="row"><code>--color-topic-work</code></th><td><span class="dot" style="background:#047857"></span><code>#047857</code></td><td><span class="dot" style="background:#4edea3"></span><code>#4edea3</code></td><td>Working with AI chip</td></tr>
+<tr><th scope="row"><code>--color-emerald</code></th><td><span class="dot" style="background:#047857"></span><code>#047857</code></td><td><span class="dot" style="background:#10b981"></span><code>#10b981</code></td><td>Prompt glyph, status dot, article chip, FAQ marker</td></tr>
+<tr><th scope="row"><code>--color-cyan</code></th><td><span class="dot" style="background:#0369a1"></span><code>#0369a1</code></td><td><span class="dot" style="background:#38bdf8"></span><code>#38bdf8</code></td><td>Video chip, dark focus ring</td></tr>
+<tr><th scope="row"><code>--color-code-bg</code></th><td><span class="dot" style="background:#0f172a"></span><code>#0f172a</code></td><td><span class="dot" style="background:#0d0e10"></span><code>#0d0e10</code></td><td>Code and embed frame</td></tr>
+<tr><th scope="row"><code>--color-code-text</code></th><td><span class="dot" style="background:#e3e2e4"></span><code>#e3e2e4</code></td><td><span class="dot" style="background:#e3e2e4"></span><code>#e3e2e4</code></td><td>Text in code blocks</td></tr></tbody>
+          </table>
+        </div>
+        <h3>Contrast</h3>
+        <p>Measured with the WCAG 2 relative luminance formula. Text pairs need 4.5:1, the strong line needs 3:1. Two values from the vendor brief failed and were replaced: dark <code>line-strong</code> #484550 measured 1.99:1 and is now #6b6875; light <code>line-strong</code> #cbd5e1 measured 1.41:1 and is now #7b8798. Light <code>text-faint</code> moved from #64748b (4.52:1, and 4.34:1 on the alternate background) to #5d6b82. The live column is filled in by a small script from the computed tokens when JavaScript runs.</p>
+        <div class="table-wrap">
+          <table class="table contrast-table" id="contrast-table">
+            <caption>Contrast ratios for every required pair, both themes</caption>
+            <thead><tr><th scope="col">Pair</th><th scope="col">Min</th><th scope="col">Light colors</th><th scope="col">Ratio</th><th scope="col">Result</th><th scope="col">Live</th><th scope="col">Dark colors</th><th scope="col">Ratio</th><th scope="col">Result</th><th scope="col">Live</th></tr></thead>
+            <tbody>
+        <tr data-fg="--color-text" data-bg="--color-bg">
+          <th scope="row"><code>--color-text</code> on <code>--color-bg</code></th>
+          <td class="num">4.5</td>
+          <td><code>#0f172a</code> / <code>#faf8ff</code></td><td class="num">16.95</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#f4f4f6</code> / <code>#121315</code></td><td class="num">16.92</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-text" data-bg="--color-surface">
+          <th scope="row"><code>--color-text</code> on <code>--color-surface</code></th>
+          <td class="num">4.5</td>
+          <td><code>#0f172a</code> / <code>#ffffff</code></td><td class="num">17.85</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#f4f4f6</code> / <code>#18191b</code></td><td class="num">16.02</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-text-muted" data-bg="--color-bg">
+          <th scope="row"><code>--color-text-muted</code> on <code>--color-bg</code></th>
+          <td class="num">4.5</td>
+          <td><code>#334155</code> / <code>#faf8ff</code></td><td class="num">9.83</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#c9c4d1</code> / <code>#121315</code></td><td class="num">10.89</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-text-muted" data-bg="--color-surface">
+          <th scope="row"><code>--color-text-muted</code> on <code>--color-surface</code></th>
+          <td class="num">4.5</td>
+          <td><code>#334155</code> / <code>#ffffff</code></td><td class="num">10.35</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#c9c4d1</code> / <code>#18191b</code></td><td class="num">10.30</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-text-faint" data-bg="--color-bg">
+          <th scope="row"><code>--color-text-faint</code> on <code>--color-bg</code></th>
+          <td class="num">4.5</td>
+          <td><code>#5d6b82</code> / <code>#faf8ff</code></td><td class="num">5.12</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#8e929b</code> / <code>#121315</code></td><td class="num">5.96</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-accent" data-bg="--color-bg">
+          <th scope="row"><code>--color-accent</code> on <code>--color-bg</code></th>
+          <td class="num">4.5</td>
+          <td><code>#4338ca</code> / <code>#faf8ff</code></td><td class="num">7.50</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#c0b3ff</code> / <code>#121315</code></td><td class="num">9.86</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-on-accent" data-bg="--color-accent">
+          <th scope="row"><code>--color-on-accent</code> on <code>--color-accent</code></th>
+          <td class="num">4.5</td>
+          <td><code>#ffffff</code> / <code>#4338ca</code></td><td class="num">7.90</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#312567</code> / <code>#c0b3ff</code></td><td class="num">7.00</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-inverse-text" data-bg="--color-inverse-bg">
+          <th scope="row"><code>--color-inverse-text</code> on <code>--color-inverse-bg</code></th>
+          <td class="num">4.5</td>
+          <td><code>#faf8ff</code> / <code>#0f172a</code></td><td class="num">16.95</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#121315</code> / <code>#f4f4f6</code></td><td class="num">16.92</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+        <tr data-fg="--color-line-strong" data-bg="--color-bg">
+          <th scope="row"><code>--color-line-strong</code> on <code>--color-bg</code></th>
+          <td class="num">3.0</td>
+          <td><code>#7b8798</code> / <code>#faf8ff</code></td><td class="num">3.46</td><td class="pass">pass</td><td class="num live" data-live="light"></td>
+          <td><code>#6b6875</code> / <code>#121315</code></td><td class="num">3.42</td><td class="pass">pass</td><td class="num live" data-live="dark"></td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="probe-light" class="probe" data-theme="light"></div>
+        <div id="probe-dark" class="probe" data-theme="dark"></div>
+      </section>
+
+      <section class="docs-section" id="typography">
+        <p class="kicker">02 / Typography</p>
+        <h2>Typography</h2>
+        <p>Two families from Google Fonts. JetBrains Mono 400, 500 and 600 for display, headings, the wordmark, labels, code and counts. Inter 400, 500 and 600 for body copy. Headings are tracked negative, labels positive. No weight above 600.</p>
+        <div class="table-wrap">
+          <table class="table">
+            <caption>Families and roles</caption>
+            <thead><tr><th scope="col">Token</th><th scope="col">Stack</th><th scope="col">Role</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><code>--font-display</code></th><td>JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace</td><td>Display, h1 to h4, wordmark, card titles, FAQ questions</td></tr>
+              <tr><th scope="row"><code>--font-body</code></th><td>Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif</td><td>Paragraphs, excerpts, table cells</td></tr>
+              <tr><th scope="row"><code>--font-mono</code></th><td>Same stack as display</td><td>Labels, kickers, chips, breadcrumb, counts, code, facts</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Scale</h3>
+        <div class="specimen"><div class="specimen__meta"><strong>display</strong><br>.display<br>40px / 48px, 600, -0.04em. 30px on phones.</div><div class="specimen__sample"><p class="display">Jack Jin</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>h1</strong><br>h1, .page-title<br>40px / 48px, 600, -0.04em. 30px on phones.</div><div class="specimen__sample"><p class="page-title">Adobe Stardust Explained</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>h2</strong><br>h2<br>28px / 36px, 600, -0.03em. 22px on phones.</div><div class="specimen__sample"><p class="spec-h2">How does the skill work?</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>h3</strong><br>h3, .card__title<br>20px / 28px, 500, -0.02em</div><div class="specimen__sample"><p class="spec-h3">Theming a Brand-New EDS Site</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>body-lg</strong><br>.summary, .lead<br>18px / 30px, 400, Inter</div><div class="specimen__sample"><p class="lead">Jack Jin is an Associate Director at Accenture in Columbus, Ohio, an Adobe Certified Master and an AEM Champion 2026.</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>body</strong><br>p<br>15px / 26px, 400, Inter</div><div class="specimen__sample"><p>He builds AI agent systems and writes about Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering.</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>small</strong><br>small, .card__excerpt<br>13px / 20px, 400, Inter</div><div class="specimen__sample"><p class="small">This site holds his posts, videos, projects, talks and certifications.</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>label</strong><br>.label, nav, .btn<br>13px / 18px, 500, +0.02em, JetBrains Mono</div><div class="specimen__sample"><p class="label">Certifications</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>label-sm</strong><br>.label-sm, .kicker, .chip<br>11px / 16px, 500, +0.05em, uppercase</div><div class="specimen__sample"><p class="kicker">01 / Topics</p></div></div>
+<div class="specimen"><div class="specimen__meta"><strong>mono</strong><br>code, .facts, .breadcrumb<br>13.5px / 22px, 400, JetBrains Mono</div><div class="specimen__sample"><p class="mono" style="font-weight:400;font-size:var(--text-mono)">[ 39 posts ] v0.16.2 2026-08-09</p></div></div>
+        <h3>Line height and measure</h3>
+        <ul>
+          <li><code>--leading-tight</code> 1.2 for display and h1, <code>--leading-snug</code> 1.3 for h2, 1.4 for h3.</li>
+          <li><code>--leading-body</code> 1.7 for body and body-lg (26px on 15px, 30px on 18px, as in the round).</li>
+          <li><code>--measure</code> 68ch caps every reading column: summaries, prose, FAQ answers, transcripts.</li>
+          <li>Display and h1 are fluid, 30px on phones to 40px from about 1024px. h2 runs 22px to 28px.</li>
+        </ul>
+      </section>
+
+      <section class="docs-section" id="spacing">
+        <p class="kicker">03 / Spacing</p>
+        <h2>Spacing</h2>
+        <p>Ten steps on a 4px base. Component padding uses 4 and 5, section rhythm uses 7 and 8, the footer uses 9.</p>
+        <div class="space-row"><code>--space-1</code><div class="space-bar" style="width:4px"></div><span class="faint mono">4px</span></div>
+<div class="space-row"><code>--space-2</code><div class="space-bar" style="width:8px"></div><span class="faint mono">8px</span></div>
+<div class="space-row"><code>--space-3</code><div class="space-bar" style="width:12px"></div><span class="faint mono">12px</span></div>
+<div class="space-row"><code>--space-4</code><div class="space-bar" style="width:16px"></div><span class="faint mono">16px</span></div>
+<div class="space-row"><code>--space-5</code><div class="space-bar" style="width:24px"></div><span class="faint mono">24px</span></div>
+<div class="space-row"><code>--space-6</code><div class="space-bar" style="width:32px"></div><span class="faint mono">32px</span></div>
+<div class="space-row"><code>--space-7</code><div class="space-bar" style="width:48px"></div><span class="faint mono">48px</span></div>
+<div class="space-row"><code>--space-8</code><div class="space-bar" style="width:64px"></div><span class="faint mono">64px</span></div>
+<div class="space-row"><code>--space-9</code><div class="space-bar" style="width:96px"></div><span class="faint mono">96px</span></div>
+<div class="space-row"><code>--space-10</code><div class="space-bar" style="width:128px"></div><span class="faint mono">128px</span></div>
+      </section>
+
+      <section class="docs-section" id="layout">
+        <p class="kicker">04 / Layout</p>
+        <h2>Layout</h2>
+        <p><code>.container</code> is centered with <code>max-width: 1280px</code> and a gutter of 16px, 24px from 768 and 32px from 1280. Mobile first, breakpoints at 480, 768, 1024, 1280 and 1600.</p>
+        <div class="table-wrap">
+          <table class="table">
+            <caption>Breakpoints and what changes</caption>
+            <thead><tr><th scope="col">Width</th><th scope="col">Change</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">480</th><td>Hub grid goes to two columns. Footer goes to two columns. Book a talk button appears in the header.</td></tr>
+              <tr><th scope="row">768</th><td>Gutter 24px. Row list gets its date column. Do and don't panels sit side by side.</td></tr>
+              <tr><th scope="row">1024</th><td>Desktop nav replaces the Menu button. <code>.grid--2</code> and <code>.grid--3</code> take their explicit counts. Docs nav becomes a sticky sidebar. Footer four columns.</td></tr>
+              <tr><th scope="row">1280</th><td>Gutter 32px. <code>.grid--4</code> goes to four columns, so the hub cards sit in one row.</td></tr>
+              <tr><th scope="row">1600</th><td>Reserved. Nothing changes; the container is already at its max.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Grid</h3>
+        <p><code>.grid</code> auto-fits columns at <code>--grid-min</code> (18rem). <code>.grid--4</code> is the hub grid: one column under 480, two by two up to 1279, one row of four from 1280. It is never three plus one.</p>
+        <div class="grid grid--4 demo-grid"><div class="demo-box">hub 01</div><div class="demo-box">hub 02</div><div class="demo-box">hub 03</div><div class="demo-box">hub 04</div></div>
+        <p style="margin-top: var(--space-4)"><code>.grid--3</code> for the latest three posts, explicit at 1024 and up, auto-fit below.</p>
+        <div class="grid grid--3 demo-grid"><div class="demo-box">post</div><div class="demo-box">post</div><div class="demo-box">post</div></div>
+        <p style="margin-top: var(--space-4)"><code>.stack</code> adds vertical rhythm through <code>--stack-gap</code>. <code>.cluster</code> is a wrapping flex row. <code>.prose</code> caps the reading column. <code>.table-wrap</code> scrolls a wide table.</p>
+        <h3>Wide screens</h3>
+        <p>At 1920 and 2560 the container stays at 1280px, centered, with equal margins on both sides. The header, footer bands and the CTA band keep their full-width backgrounds while their content sits inside the container. Nothing is flush left.</p>
+      </section>
+
+      <section class="docs-section" id="shape-elevation">
+        <p class="kicker">05 / Shape and elevation</p>
+        <h2>Shape and elevation</h2>
+        <p>Corners are nearly square. Every border is 1px. There are no drop shadows on cards; the only shadow is under the sticky header.</p>
+        <div class="radius-demo">
+          <div style="border-radius: var(--radius-sm)">sm 2px</div>
+          <div style="border-radius: var(--radius-md)">md 4px</div>
+          <div style="border-radius: var(--radius-lg)">lg 8px</div>
+          <div style="border-radius: var(--radius-pill); width: 3.5rem">pill</div>
+        </div>
+        <ul style="margin-top: var(--space-4)">
+          <li><code>--radius-sm</code> buttons, chips, cards, inputs. <code>--radius-md</code> panels, code blocks, the CTA band. <code>--radius-lg</code> reserved. <code>--radius-pill</code> the status dot only.</li>
+          <li><code>--border-width</code> 1px. Hairlines use <code>--color-line</code>; controls that must read at 3:1 use <code>--color-line-strong</code>.</li>
+        </ul>
+        <h3>Shadows</h3>
+        <div class="shadow-demo">
+          <div style="box-shadow: var(--shadow-1)">shadow-1</div>
+          <div style="box-shadow: var(--shadow-2)">shadow-2</div>
+        </div>
+        <p style="margin-top: var(--space-3)"><code>--shadow-1</code> is defined and unused. <code>--shadow-2</code> sits under the sticky header. Both are darker in the dark theme.</p>
+      </section>
+
+      <section class="docs-section" id="motion">
+        <p class="kicker">06 / Motion</p>
+        <h2>Motion</h2>
+        <p>Two durations and one easing. Color, background and border changes use <code>--duration-fast</code> (120ms). The nav panel uses <code>--duration-base</code> (200ms). Easing is <code>cubic-bezier(0.2, 0, 0, 1)</code>. No entrance animations, no reveal on scroll, no pulsing dots.</p>
+        <p><span class="motion-demo">hover me: 200ms standard</span></p>
+        <h3>Reduced motion</h3>
+        <p>Under <code>prefers-reduced-motion: reduce</code> every transition and animation is cut to 0.01ms and smooth scrolling is turned off. The status dot does not animate in either mode.</p>
+      </section>
+
+      <section class="docs-section" id="iconography">
+        <p class="kicker">07 / Iconography</p>
+        <h2>Iconography</h2>
+        <p>One inline sprite per page, ten symbols, 24 unit viewBox, 2px strokes in <code>currentColor</code>. Icons are sized 1em so they follow the text around them; <code>.icon--lg</code> is 1.5em. Every icon is <code>aria-hidden</code> and the meaning is in the text next to it.</p>
+        <div class="icon-grid"><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg><span>icon-video</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg><span>icon-article</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-post"></use></svg><span>icon-post</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg><span>icon-repo</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg><span>icon-external</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg><span>icon-arrow</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><span>icon-play</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><span>icon-menu</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg><span>icon-close</span></div><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>icon-check</span></div></div>
+      </section>
+
+      <section class="docs-section" id="theming">
+        <p class="kicker">08 / Theming</p>
+        <h2>Theming</h2>
+        <p>Three choices: Light, Dark, System. The choice is stored in <code>localStorage</code> under <code>jj-theme</code>. Light and Dark set <code>data-theme</code> on <code>html</code>; System removes it, and a media query then follows the OS. The pre-paint snippet in <code>head</code> applies the stored choice before any stylesheet loads, so there is no flash. <code>shared/theme.js</code> wires every control on the page, keeps <code>aria-pressed</code> in sync, sets <code>data-theme-effective</code> and listens for OS changes while in System.</p>
+        <h3>Live control</h3>
+        <p>This is a second instance of the header control; both stay in sync.</p>
+        <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+        <h3>Pre-paint snippet</h3>
+        <pre><code>&lt;script&gt;
+(function(){var d=document.documentElement;d.classList.add(&#x27;js&#x27;);try{var s=localStorage.getItem(&#x27;jj-theme&#x27;);var def=d.getAttribute(&#x27;data-theme-default&#x27;)||&#x27;light&#x27;;var c=(s===&#x27;light&#x27;||s===&#x27;dark&#x27;||s===&#x27;system&#x27;)?s:def;if(c===&#x27;system&#x27;){d.removeAttribute(&#x27;data-theme&#x27;);}else{d.setAttribute(&#x27;data-theme&#x27;,c);}d.setAttribute(&#x27;data-theme-choice&#x27;,c);}catch(e){}})();
+&lt;/script&gt;</code></pre>
+        <h3>Selector structure</h3>
+        <p>Because the dark set also applies to any element with <code>data-theme="dark"</code>, a story frame on this page can be forced dark inside a light page.</p>
+        <pre><code>:root, [data-theme=&quot;light&quot;] { color-scheme: light; /* light semantic tokens */ }
+[data-theme=&quot;dark&quot;] { color-scheme: dark; /* dark semantic tokens */ }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme=&quot;light&quot;]):not([data-theme=&quot;dark&quot;]) { color-scheme: dark; /* dark tokens again */ }
+}</code></pre>
+        <ul>
+          <li>Storage key <code>jj-theme</code>, values <code>light</code>, <code>dark</code>, <code>system</code>.</li>
+          <li><code>data-theme-default="light"</code> on every page in this round.</li>
+          <li><code>color-scheme</code> is set with each token set so form controls and scrollbars follow.</li>
+        </ul>
+      </section>
+
+      <section class="docs-section" id="components">
+        <p class="kicker">09 / Components</p>
+        <h2>Components</h2>
+        <p>One subsection per component. Each one has a status, when to use it, an anatomy list, live stories in light and at least one in a dark frame, the canonical markup, a do and a don't, accessibility notes and the tokens it consumes. Class names are fixed by the contract.</p>
+<section class="component" id="c-skip-link">
+  <div class="component__head"><h3>Skip link</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">First focusable element on every page. Off screen until focused, then a filled accent tab at the top left. Pair with <code>.sr-only</code> for text that only screen readers need.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>a.skip-link</code> pointing at <code>#main</code></li>
+<li><code>.sr-only</code> utility for hidden captions and labels</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Focused state, rendered static</p>
+<a class="skip-link" href="#main">Skip to content</a> <span class="mono faint">shown static here, normally off screen until focused</span>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<a class="skip-link" href="#main">Skip to content</a> <span class="mono faint">shown static here, normally off screen until focused</span>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;a class=&quot;skip-link&quot; href=&quot;#main&quot;&gt;Skip to content&lt;/a&gt;
+&lt;span class=&quot;sr-only&quot;&gt;Read by screen readers only&lt;/span&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Put it before the header so it is the first tab stop.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Hide it with display none; it must be focusable.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Target <code>#main</code> must exist on the page</li>
+<li>Visible focus ring from the global rule</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent</code> <code>--color-on-accent</code> <code>--font-mono</code> <code>--z-header</code></p>
+</section>
+<section class="component" id="c-site-header">
+  <div class="component__head"><h3>Site header</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Sticky, 64px, surface background with a hairline. Wordmark is the text Jack Jin only; the emerald dot is a decorative sibling. Six nav items in JetBrains Mono, Book a talk and the theme control on the right. The nav collapses to a Menu button under 1024px and is a second row when JavaScript is off.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>a.wordmark</code> (text only)</li>
+<li><code>span.status-dot</code>, <code>aria-hidden</code></li>
+<li><code>button.nav-toggle</code> with <code>aria-expanded</code> and <code>aria-controls</code></li>
+<li><code>nav.site-nav</code> with a <code>ul</code></li>
+<li><code>.site-header__actions</code>: primary button and the theme control</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story story--flush"><p class="story__label">Desktop header, light</p>
+<div class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a><span class="status-dot" aria-hidden="true"></span>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-story"><svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>Menu</button>
+    <nav class="site-nav" id="site-nav-story" aria-label="Primary (story)">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai" aria-current="page">AEM + AI</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme (story, not wired)">
+        <button type="button" class="theme-control__btn" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="story story--flush" data-theme="dark"><p class="story__label">Desktop header, dark</p>
+<div class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a><span class="status-dot" aria-hidden="true"></span>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-story-dark"><svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>Menu</button>
+    <nav class="site-nav" id="site-nav-story-dark" aria-label="Primary (story)">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai" aria-current="page">AEM + AI</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme (story, not wired)">
+        <button type="button" class="theme-control__btn" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;header class=&quot;site-header&quot;&gt;
+  &lt;div class=&quot;container site-header__inner&quot;&gt;
+    &lt;a class=&quot;wordmark&quot; href=&quot;/&quot;&gt;Jack Jin&lt;/a&gt;&lt;span class=&quot;status-dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;button class=&quot;nav-toggle&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-nav&quot;&gt;
+      &lt;svg class=&quot;icon icon--menu&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;&lt;use href=&quot;#icon-menu&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
+      &lt;svg class=&quot;icon icon--close&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;&lt;use href=&quot;#icon-close&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
+      Menu
+    &lt;/button&gt;
+    &lt;nav class=&quot;site-nav&quot; id=&quot;site-nav&quot; aria-label=&quot;Primary&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot; aria-current=&quot;page&quot;&gt;AEM + AI&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;Talks&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;...&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    &lt;div class=&quot;site-header__actions&quot;&gt;
+      &lt;a class=&quot;btn btn--primary btn--sm&quot; href=&quot;...&quot;&gt;Book a talk&lt;/a&gt;
+      &lt;div class=&quot;theme-control&quot; role=&quot;group&quot; aria-label=&quot;Color theme&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;light&quot; aria-pressed=&quot;true&quot;&gt;Light&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;dark&quot; aria-pressed=&quot;false&quot;&gt;Dark&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;system&quot; aria-pressed=&quot;false&quot;&gt;System&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Keep all six nav items and the button in one row at 1024 and up; the header must not wrap at 1440.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Put an icon, glyph or half circle inside the wordmark element.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li><code>nav</code> has <code>aria-label="Primary"</code></li>
+<li>Current page gets <code>aria-current="page"</code></li>
+<li>Toggle exposes <code>aria-expanded</code>; the panel is a real <code>nav</code> in the DOM</li>
+<li>Below 480px the Book a talk button is hidden; the CTA band and footer carry the link</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--header-height</code> <code>--color-surface</code> <code>--color-line</code> <code>--color-emerald</code> <code>--shadow-2</code> <code>--z-header</code> <code>--font-display</code> <code>--text-label</code></p>
+</section>
+<section class="component" id="c-breadcrumb">
+  <div class="component__head"><h3>Breadcrumb</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">A real breadcrumb list with a prompt treatment: the CSS puts an emerald <code>$</code> before the trail and a <code>/</code> between items. The markup stays an ordered list so BreadcrumbList structured data can mirror it. Placed directly above the H1 on every page except home.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>nav.breadcrumb</code> with <code>aria-label="Breadcrumb"</code></li>
+<li><code>ol</code> of links, last item has <code>aria-current="page"</code> and no link</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Three levels</p>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="templates/home.html">Home</a></li>
+    <li><a href="templates/blog.html">Blog</a></li>
+    <li aria-current="page">Adobe Stardust Explained: Design Agent Skills on EDS</li>
+  </ol>
+</nav>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="templates/home.html">Home</a></li>
+    <li><a href="templates/blog.html">Blog</a></li>
+    <li aria-current="page">Adobe Stardust Explained: Design Agent Skills on EDS</li>
+  </ol>
+</nav>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;nav class=&quot;breadcrumb&quot; aria-label=&quot;Breadcrumb&quot;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current=&quot;page&quot;&gt;Adobe Stardust Explained&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Mirror the URL path.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Use a dash as the separator; the separator is CSS, never a character in the markup.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>The <code>$</code> and <code>/</code> are generated content; screen readers announce the list</li>
+<li>Last item is not a link</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-emerald</code> <code>--color-line-strong</code> <code>--color-text-muted</code> <code>--font-mono</code> <code>--text-mono</code></p>
+</section>
+<section class="component" id="c-page-head">
+  <div class="component__head"><h3>Page head and kicker</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Kicker, H1, byline and the 40 to 60 word summary. The kicker is an uppercase mono label prefixed with <code>//</code> by CSS. On home the H1 is followed by an accent positioning line instead of a byline. The story renders the title as a <code>p.page-title</code> so this page keeps one H1.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>header.page-head</code></li>
+<li><code>p.kicker</code></li>
+<li><code>h1.page-title</code></li>
+<li><code>p.byline</code> with author link and <code>time</code> elements</li>
+<li><code>p.summary</code>, 40 to 60 words</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Post head</p>
+<div class="page-head">
+  <p class="kicker">AEM + AI / Video</p>
+  <p class="page-title">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/jackjin">Jack Jin</a> &middot; Published <time datetime="2026-08-09">2026-08-09</time> &middot; Updated [date] &middot; [watch time to confirm] &middot; Video</p>
+  <p class="summary">Adobe Stardust is a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. This video walks the four steps, the human gate at prototypes, and three DA.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+</div>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Post head, dark</p>
+<div class="page-head">
+  <p class="kicker">AEM + AI / Video</p>
+  <p class="page-title">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/jackjin">Jack Jin</a> &middot; Published <time datetime="2026-08-09">2026-08-09</time> &middot; Updated [date] &middot; [watch time to confirm] &middot; Video</p>
+  <p class="summary">Adobe Stardust is a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. This video walks the four steps, the human gate at prototypes, and three DA.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+</div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;header class=&quot;page-head&quot;&gt;
+  &lt;p class=&quot;kicker&quot;&gt;AEM + AI / Video&lt;/p&gt;
+  &lt;h1 class=&quot;page-title&quot;&gt;Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)&lt;/h1&gt;
+  &lt;p class=&quot;byline&quot;&gt;By &lt;a href=&quot;...&quot;&gt;Jack Jin&lt;/a&gt; · Published &lt;time datetime=&quot;2026-08-09&quot;&gt;2026-08-09&lt;/time&gt; · Updated &lt;time datetime=&quot;...&quot;&gt;...&lt;/time&gt; · [watch time] · Video&lt;/p&gt;
+  &lt;p class=&quot;summary&quot;&gt;40 to 60 words.&lt;/p&gt;
+&lt;/header&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Write the kicker as "01 / Topics"; the slash is the separator.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Put a dash character in a kicker or a slogan in the H1.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>One H1 per page</li>
+<li>Dates use <code>time</code> with <code>datetime</code></li>
+<li>The summary is the first paragraph after the H1; no hero image between them</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--text-h1</code> <code>--text-label-sm</code> <code>--tracking-label</code> <code>--tracking-display</code> <code>--color-text-faint</code> <code>--color-accent</code> <code>--text-body-lg</code> <code>--measure</code></p>
+</section>
+<section class="component" id="c-button">
+  <div class="component__head"><h3>Button</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Mono label, 2px radius, 1px border. Primary is filled with the accent, secondary is outlined, ghost is text only. Works on <code>a</code> and <code>button</code>. Disabled is expressed with <code>aria-disabled="true"</code> so the element stays in the tab order and readable.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>.btn</code> base</li>
+<li><code>.btn--primary</code>, <code>.btn--secondary</code>, <code>.btn--ghost</code></li>
+<li><code>.btn--sm</code> modifier</li>
+<li>optional inline <code>svg.icon</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Variants, sizes, disabled, icon</p>
+<p class="cluster cluster--lg">
+  <a class="btn btn--primary" href="templates/home.html">Primary</a>
+  <a class="btn btn--secondary" href="templates/home.html">Secondary</a>
+  <a class="btn btn--ghost" href="templates/home.html">Ghost</a>
+  <button type="button" class="btn btn--primary btn--sm">Small primary</button>
+  <button type="button" class="btn btn--secondary btn--sm">Small secondary</button>
+</p>
+<p class="cluster cluster--lg">
+  <a class="btn btn--primary" href="templates/home.html" aria-disabled="true">Disabled primary</a>
+  <a class="btn btn--secondary" href="templates/home.html" aria-disabled="true">Disabled secondary</a>
+  <a class="btn btn--primary" href="templates/home.html">With icon <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a>
+</p>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<p class="cluster cluster--lg">
+  <a class="btn btn--primary" href="templates/home.html">Primary</a>
+  <a class="btn btn--secondary" href="templates/home.html">Secondary</a>
+  <a class="btn btn--ghost" href="templates/home.html">Ghost</a>
+  <button type="button" class="btn btn--primary btn--sm">Small primary</button>
+  <button type="button" class="btn btn--secondary btn--sm">Small secondary</button>
+</p>
+<p class="cluster cluster--lg">
+  <a class="btn btn--primary" href="templates/home.html" aria-disabled="true">Disabled primary</a>
+  <a class="btn btn--secondary" href="templates/home.html" aria-disabled="true">Disabled secondary</a>
+  <a class="btn btn--primary" href="templates/home.html">With icon <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a>
+</p>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;a class=&quot;btn btn--primary&quot; href=&quot;...&quot;&gt;Book a talk&lt;/a&gt;
+&lt;button type=&quot;button&quot; class=&quot;btn btn--secondary&quot;&gt;Secondary&lt;/button&gt;
+&lt;a class=&quot;btn btn--ghost&quot; href=&quot;...&quot;&gt;Ghost&lt;/a&gt;
+&lt;a class=&quot;btn btn--primary btn--sm&quot; href=&quot;...&quot;&gt;Small&lt;/a&gt;
+&lt;a class=&quot;btn btn--primary&quot; href=&quot;...&quot; aria-disabled=&quot;true&quot;&gt;Disabled&lt;/a&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use one primary button per section.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Use <code>disabled</code> on a link; use <code>aria-disabled</code>.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Min height 36px, small 28px</li>
+<li>Focus ring 2px with 2px offset in <code>--color-focus</code></li>
+<li>Text on accent measures 7.90:1 light and 7.00:1 dark</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent</code> <code>--color-accent-hover</code> <code>--color-on-accent</code> <code>--color-accent-soft</code> <code>--color-line-strong</code> <code>--radius-sm</code> <code>--font-mono</code> <code>--text-label</code></p>
+</section>
+<section class="component" id="c-chip">
+  <div class="component__head"><h3>Chip</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Uppercase mono tag with a 1px border. Topic chips carry a colored dot and text in the topic color; format chips are cyan for video, emerald for article, muted for post; status chips read from real data (upcoming, delivered). As a <code>button</code> with <code>aria-pressed</code> it is a filter toggle; as an <code>a</code> it is a topic link.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>.chip</code> base</li>
+<li><code>.chip--topic</code> with <code>data-topic</code></li>
+<li><code>.chip--format</code> with <code>data-format</code></li>
+<li><code>.chip--status</code> with optional <code>data-status</code></li>
+<li><code>aria-pressed</code> on button chips</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Topic, format, status, link, pressed</p>
+<p class="cluster">
+  <span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span>
+  <span class="chip chip--topic" data-topic="aem">AEM</span>
+  <span class="chip chip--topic" data-topic="agents">AI Agents</span>
+  <span class="chip chip--topic" data-topic="work">Working with AI</span>
+</p>
+<p class="cluster">
+  <span class="chip chip--format" data-format="video">Video</span>
+  <span class="chip chip--format" data-format="article">Article</span>
+  <span class="chip chip--format" data-format="post">Post</span>
+  <span class="chip chip--status">stable</span>
+  <span class="chip chip--status" data-status="beta">beta</span>
+  <span class="chip chip--status" data-status="upcoming">upcoming</span>
+  <span class="chip chip--status" data-status="delivered">delivered</span>
+</p>
+<p class="cluster">
+  <a class="chip chip--topic" data-topic="aem" href="templates/blog.html?topic=adobe-aem">Link chip</a>
+  <button type="button" class="chip" aria-pressed="true">Pressed</button>
+  <button type="button" class="chip" aria-pressed="false">Not pressed</button>
+</p>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<p class="cluster">
+  <span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span>
+  <span class="chip chip--topic" data-topic="aem">AEM</span>
+  <span class="chip chip--topic" data-topic="agents">AI Agents</span>
+  <span class="chip chip--topic" data-topic="work">Working with AI</span>
+</p>
+<p class="cluster">
+  <span class="chip chip--format" data-format="video">Video</span>
+  <span class="chip chip--format" data-format="article">Article</span>
+  <span class="chip chip--format" data-format="post">Post</span>
+  <span class="chip chip--status">stable</span>
+  <span class="chip chip--status" data-status="beta">beta</span>
+  <span class="chip chip--status" data-status="upcoming">upcoming</span>
+  <span class="chip chip--status" data-status="delivered">delivered</span>
+</p>
+<p class="cluster">
+  <a class="chip chip--topic" data-topic="aem" href="templates/blog.html?topic=adobe-aem">Link chip</a>
+  <button type="button" class="chip" aria-pressed="true">Pressed</button>
+  <button type="button" class="chip" aria-pressed="false">Not pressed</button>
+</p>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;span class=&quot;chip chip--topic&quot; data-topic=&quot;aem&quot;&gt;AEM&lt;/span&gt;
+&lt;span class=&quot;chip chip--format&quot; data-format=&quot;video&quot;&gt;Video&lt;/span&gt;
+&lt;span class=&quot;chip chip--status&quot; data-status=&quot;upcoming&quot;&gt;upcoming&lt;/span&gt;
+&lt;a class=&quot;chip chip--topic&quot; data-topic=&quot;aem-ai&quot; href=&quot;...&quot;&gt;AEM + AI&lt;/a&gt;
+&lt;button type=&quot;button&quot; class=&quot;chip&quot; data-filter=&quot;format&quot; data-value=&quot;video&quot; aria-pressed=&quot;false&quot;&gt;Video&lt;/button&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use links for topics (they go to a hub) and buttons for format and type toggles.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Invent a status value. Status text comes from data or from the docs status table.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Topic text colors measure at least 4.83:1 on light surfaces and 10:1 on dark</li>
+<li>Pressed state uses <code>aria-pressed</code>, not a class</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-topic-aem-ai</code> <code>--color-topic-aem</code> <code>--color-topic-agents</code> <code>--color-topic-work</code> <code>--color-cyan</code> <code>--color-emerald</code> <code>--color-accent-soft</code> <code>--text-label-sm</code></p>
+</section>
+<section class="component" id="c-card">
+  <div class="component__head"><h3>Card</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Surface panel with a hairline border and 2px radius. Three kinds: post (meta, title link, excerpt, topic footer), hub (number, title, description, bracketed counts), project (name, period, summary, facts line, link). The whole card is never a link; only the title is.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>article.card</code> plus <code>.card--post</code>, <code>.card--hub</code> or <code>.card--project</code></li>
+<li><code>.card__meta</code>, <code>.card__number</code>, <code>.card__period</code></li>
+<li><code>h3.card__title</code> with the only link</li>
+<li><code>.card__excerpt</code>, <code>.card__desc</code>, <code>.card__summary</code></li>
+<li><code>.card__footer</code>, <code>.card__counts</code>, <code>.card__facts</code>, <code>.card__link</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Post card</p>
+<article class="card card--post" data-topic="aem" data-type="technical" data-format="video" data-date="2026-08-09">
+  <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-08-09">2026-08-09</time></p>
+  <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+  <p class="card__excerpt">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. Walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three da.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+  <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+</article>
+</div>
+<div class="story"><p class="story__label">Hub card</p>
+<article class="card card--hub">
+  <p class="card__number">02</p>
+  <h3 class="card__title"><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></h3>
+  <p class="card__desc">Architecture, headless delivery and the EDS offerings, from production programs.</p>
+  <p class="card__counts"><span class="bracket">12 posts and videos (topic aem)</span></p>
+</article>
+</div>
+<div class="story"><p class="story__label">Project card</p>
+<article class="card card--project">
+  <h3 class="card__title">Anima Mesh</h3>
+  <p class="card__period"><time datetime="2026-07">Jul 2026 to present</time></p>
+  <p class="card__summary">Runs recurring back-office work from a private repo: compliance checks, bookkeeping prep, document memory, governance, research and inbound triage. A human remains the approval gate for money, filings, publishing, credentials and access.</p>
+  <p class="card__facts">Apache 2.0 &middot; v0.16.2 &middot; nine agents &middot; 36 tags in 29 days</p>
+  <p class="card__link"><a href="https://github.com/jackzhaojin/anima-mesh">anima-mesh repo <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a></p>
+</article>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Post card, dark</p>
+<article class="card card--post" data-topic="aem" data-type="technical" data-format="video" data-date="2026-08-09">
+  <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-08-09">2026-08-09</time></p>
+  <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+  <p class="card__excerpt">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. Walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three da.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+  <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+</article>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;article class=&quot;card card--post&quot;&gt;
+  &lt;p class=&quot;card__meta&quot;&gt;&lt;span class=&quot;chip chip--format&quot; data-format=&quot;video&quot;&gt;Video&lt;/span&gt; &lt;time datetime=&quot;2026-08-09&quot;&gt;2026-08-09&lt;/time&gt;&lt;/p&gt;
+  &lt;h3 class=&quot;card__title&quot;&gt;&lt;a href=&quot;...&quot;&gt;Title&lt;/a&gt;&lt;/h3&gt;
+  &lt;p class=&quot;card__excerpt&quot;&gt;...&lt;/p&gt;
+  &lt;p class=&quot;card__footer&quot;&gt;&lt;span class=&quot;chip chip--topic&quot; data-topic=&quot;aem&quot;&gt;AEM&lt;/span&gt;&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;article class=&quot;card card--hub&quot;&gt;
+  &lt;p class=&quot;card__number&quot;&gt;01&lt;/p&gt;
+  &lt;h3 class=&quot;card__title&quot;&gt;&lt;a href=&quot;...&quot;&gt;AEM + AI&lt;/a&gt;&lt;/h3&gt;
+  &lt;p class=&quot;card__desc&quot;&gt;...&lt;/p&gt;
+  &lt;p class=&quot;card__counts&quot;&gt;&lt;span class=&quot;bracket&quot;&gt;12 posts and videos&lt;/span&gt;&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;article class=&quot;card card--project&quot;&gt;
+  &lt;h3 class=&quot;card__title&quot;&gt;Anima Mesh&lt;/h3&gt;
+  &lt;p class=&quot;card__period&quot;&gt;&lt;time datetime=&quot;2026-07&quot;&gt;Jul 2026 to present&lt;/time&gt;&lt;/p&gt;
+  &lt;p class=&quot;card__summary&quot;&gt;...&lt;/p&gt;
+  &lt;p class=&quot;card__facts&quot;&gt;Apache 2.0 · v0.16.2 · nine agents&lt;/p&gt;
+  &lt;p class=&quot;card__link&quot;&gt;&lt;a href=&quot;...&quot;&gt;anima-mesh repo&lt;/a&gt;&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Keep the title as the link and the heading level one below the section heading.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Wrap the card in an anchor or add hover transforms.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Heading order: section h2, card h3</li>
+<li>Chips are decorative labels; the title carries the meaning</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-surface</code> <code>--color-line</code> <code>--color-line-strong</code> <code>--radius-sm</code> <code>--space-5</code> <code>--text-h3</code> <code>--text-small</code></p>
+</section>
+<section class="component" id="c-facts-table">
+  <div class="component__head"><h3>Facts table</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Two column key and value table in mono. Row headers are uppercase labels. Used for the facts block after a summary, for project facts and for counts by facet. Parsers lift it verbatim, so every cell is a fact or a bracketed placeholder.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>table.facts</code></li>
+<li><code>caption.sr-only</code></li>
+<li><code>th[scope=row]</code> per fact</li>
+<li><code>td</code> value, links allowed</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Project facts</p>
+<table class="facts">
+  <caption class="sr-only">Key facts</caption>
+  <tbody>
+    <tr><th scope="row">Repo</th><td><a href="https://github.com/jackzhaojin/anima-mesh">github.com/jackzhaojin/anima-mesh</a></td></tr>
+    <tr><th scope="row">License</th><td>Apache 2.0</td></tr>
+    <tr><th scope="row">Version</th><td>v0.16.2</td></tr>
+    <tr><th scope="row">Stack</th><td>TypeScript on Cloudflare Workers, Durable Objects, GitHub</td></tr>
+    <tr><th scope="row">Commits</th><td>[from git, not yet verified]</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<table class="facts">
+  <caption class="sr-only">Key facts</caption>
+  <tbody>
+    <tr><th scope="row">Repo</th><td><a href="https://github.com/jackzhaojin/anima-mesh">github.com/jackzhaojin/anima-mesh</a></td></tr>
+    <tr><th scope="row">License</th><td>Apache 2.0</td></tr>
+    <tr><th scope="row">Version</th><td>v0.16.2</td></tr>
+    <tr><th scope="row">Stack</th><td>TypeScript on Cloudflare Workers, Durable Objects, GitHub</td></tr>
+    <tr><th scope="row">Commits</th><td>[from git, not yet verified]</td></tr>
+  </tbody>
+</table>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;table class=&quot;facts&quot;&gt;
+  &lt;caption class=&quot;sr-only&quot;&gt;Key facts&lt;/caption&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Topic&lt;/th&gt;&lt;td&gt;AEM + AI&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Format&lt;/th&gt;&lt;td&gt;Video&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Keep unverified values in brackets.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Use a definition list or a div grid for facts.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li><code>scope="row"</code> on every header cell</li>
+<li>Long URLs wrap with <code>overflow-wrap: anywhere</code></li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--font-mono</code> <code>--text-mono</code> <code>--text-label-sm</code> <code>--color-line</code> <code>--color-text-faint</code></p>
+</section>
+<section class="component" id="c-data-table">
+  <div class="component__head"><h3>Data table</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Comparison and listing table inside a <code>.table-wrap</code> so it scrolls horizontally on narrow screens instead of breaking the page. Head cells are uppercase mono on the alternate background.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>div.table-wrap</code></li>
+<li><code>table.table</code> with <code>caption</code></li>
+<li><code>thead</code> with <code>th[scope=col]</code></li>
+<li><code>tbody</code> with <code>th[scope=row]</code> where the first cell names the row</li>
+<li><code>.num</code> for right aligned numbers</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Talks</p>
+<div class="table-wrap">
+  <table class="table">
+    <caption>Talks, from talks.json</caption>
+    <thead><tr><th scope="col">Event</th><th scope="col">Location</th><th scope="col">Date</th><th scope="col">Status</th></tr></thead>
+    <tbody><tr><th scope="row">adaptTo() 2026</th><td>Berlin</td><td>2026 (date to confirm)</td><td><span class="chip chip--status" data-status="upcoming">upcoming</span></td></tr><tr><th scope="row">Columbus AI Week 2026</th><td>Columbus, Ohio</td><td>September 2026</td><td><span class="chip chip--status" data-status="upcoming">upcoming</span></td></tr><tr><th scope="row">Denison University, CS 271</th><td>Granville, Ohio</td><td>April 2026</td><td><span class="chip chip--status" data-status="delivered">delivered</span></td></tr><tr><th scope="row">AI Tinkerers Columbus</th><td>Columbus, Ohio</td><td>2026-04-06</td><td><span class="chip chip--status" data-status="delivered">delivered</span></td></tr></tbody>
+  </table>
+</div>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<div class="table-wrap">
+  <table class="table">
+    <caption>Talks, from talks.json</caption>
+    <thead><tr><th scope="col">Event</th><th scope="col">Location</th><th scope="col">Date</th><th scope="col">Status</th></tr></thead>
+    <tbody><tr><th scope="row">adaptTo() 2026</th><td>Berlin</td><td>2026 (date to confirm)</td><td><span class="chip chip--status" data-status="upcoming">upcoming</span></td></tr><tr><th scope="row">Columbus AI Week 2026</th><td>Columbus, Ohio</td><td>September 2026</td><td><span class="chip chip--status" data-status="upcoming">upcoming</span></td></tr><tr><th scope="row">Denison University, CS 271</th><td>Granville, Ohio</td><td>April 2026</td><td><span class="chip chip--status" data-status="delivered">delivered</span></td></tr><tr><th scope="row">AI Tinkerers Columbus</th><td>Columbus, Ohio</td><td>2026-04-06</td><td><span class="chip chip--status" data-status="delivered">delivered</span></td></tr></tbody>
+  </table>
+</div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;div class=&quot;table-wrap&quot;&gt;
+  &lt;table class=&quot;table&quot;&gt;
+    &lt;caption&gt;What the table shows&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Column&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Column&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Row&lt;/th&gt;&lt;td&gt;Cell&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Always wrap in <code>.table-wrap</code>.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Let a wide table set the page width.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Caption is visible and describes the table</li>
+<li>Header cells carry scope</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-bg-alt</code> <code>--color-line</code> <code>--color-surface-raised</code> <code>--text-small</code> <code>--text-label-sm</code></p>
+</section>
+<section class="component" id="c-counts">
+  <div class="component__head"><h3>Counts strip</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Definition list of counts. Values render in brackets by CSS, the identity mark from the round, in mono at h3 size. Every number comes from <code>site.json</code>.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>dl.counts</code></li>
+<li>one <code>div</code> per count with <code>dt</code> and <code>dd</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Site counts</p>
+<dl class="counts">
+  <div><dt>Posts</dt><dd>39</dd></div>
+  <div><dt>Videos</dt><dd>19</dd></div>
+  <div><dt>Projects</dt><dd>12</dd></div>
+  <div><dt>Certifications</dt><dd>22</dd></div>
+  <div><dt>Talks</dt><dd>6</dd></div>
+</dl>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<dl class="counts">
+  <div><dt>Posts</dt><dd>39</dd></div>
+  <div><dt>Videos</dt><dd>19</dd></div>
+  <div><dt>Projects</dt><dd>12</dd></div>
+  <div><dt>Certifications</dt><dd>22</dd></div>
+  <div><dt>Talks</dt><dd>6</dd></div>
+</dl>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;dl class=&quot;counts&quot;&gt;
+  &lt;div&gt;&lt;dt&gt;Posts&lt;/dt&gt;&lt;dd&gt;39&lt;/dd&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;dt&gt;Videos&lt;/dt&gt;&lt;dd&gt;19&lt;/dd&gt;&lt;/div&gt;
+&lt;/dl&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Source every number.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Add brackets as characters in the markup; they are CSS.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li><code>dl</code> semantics survive the flex layout because each pair is wrapped in a <code>div</code></li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--font-mono</code> <code>--text-h3</code> <code>--text-label-sm</code> <code>--color-line</code> <code>--color-text-faint</code></p>
+</section>
+<section class="component" id="c-row-list">
+  <div class="component__head"><h3>Row list</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Ordered list of dated rows: date, title, note. Used for talks and related posts. Two columns from 768px, stacked below.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>ol.row-list</code></li>
+<li><code>time</code> or <code>span.row-list__when</code></li>
+<li><code>span.row-list__title</code> with an optional link</li>
+<li><code>span.row-list__note</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Talks and a related post</p>
+<ol class="row-list">
+  <li><time datetime="2026">2026 (date to confirm)</time><span class="row-list__title">[talk title to confirm]</span><span class="row-list__note">adaptTo() 2026 &middot; Berlin <span class="chip chip--status" data-status="upcoming">upcoming</span></span></li>
+  <li><time datetime="2026-04-06">2026-04-06</time><span class="row-list__title">OpenClaw 24/7 Development Agent</span><span class="row-list__note">AI Tinkerers Columbus &middot; Columbus, Ohio <span class="chip chip--status" data-status="delivered">delivered</span></span></li>
+  <li><time datetime="2026-08-03">2026-08-03</time><span class="row-list__title"><a href="https://www.linkedin.com/posts/jackjin_anima-mesh-ai-tinkerer-columbus-2026-08-ugcPost-7490122558491533313-m-o0/">AnimaMesh Conference Pre-Read: An Engine for Running a Company with Agents</a></span><span class="row-list__note">Pre-read deck for the AI Tinkerers Columbus talk on AnimaMesh, an engine for running a company with agents. AI Tinkerers runs a live-demos-only format, so the full deck went out ahead of the session as a flip-through companion.</span></li>
+</ol>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<ol class="row-list">
+  <li><time datetime="2026">2026 (date to confirm)</time><span class="row-list__title">[talk title to confirm]</span><span class="row-list__note">adaptTo() 2026 &middot; Berlin <span class="chip chip--status" data-status="upcoming">upcoming</span></span></li>
+  <li><time datetime="2026-04-06">2026-04-06</time><span class="row-list__title">OpenClaw 24/7 Development Agent</span><span class="row-list__note">AI Tinkerers Columbus &middot; Columbus, Ohio <span class="chip chip--status" data-status="delivered">delivered</span></span></li>
+  <li><time datetime="2026-08-03">2026-08-03</time><span class="row-list__title"><a href="https://www.linkedin.com/posts/jackjin_anima-mesh-ai-tinkerer-columbus-2026-08-ugcPost-7490122558491533313-m-o0/">AnimaMesh Conference Pre-Read: An Engine for Running a Company with Agents</a></span><span class="row-list__note">Pre-read deck for the AI Tinkerers Columbus talk on AnimaMesh, an engine for running a company with agents. AI Tinkerers runs a live-demos-only format, so the full deck went out ahead of the session as a flip-through companion.</span></li>
+</ol>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;ol class=&quot;row-list&quot;&gt;
+  &lt;li&gt;&lt;time datetime=&quot;2026-04-06&quot;&gt;2026-04-06&lt;/time&gt;&lt;span class=&quot;row-list__title&quot;&gt;&lt;a href=&quot;...&quot;&gt;Title&lt;/a&gt;&lt;/span&gt;&lt;span class=&quot;row-list__note&quot;&gt;Event · City&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use <code>time</code> with a valid <code>datetime</code> (year, year-month or full date).</p></div>
+    <div class="dont"><h4>Don't</h4><p>Link the title when there is no destination.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Reads in order: when, what, where</li>
+<li>Status chips are text, not color only</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-line</code> <code>--color-text-faint</code> <code>--color-text-muted</code> <code>--text-small</code> <code>--font-mono</code></p>
+</section>
+<section class="component" id="c-faq">
+  <div class="component__head"><h3>FAQ</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Native <code>details</code> items under an H2. The marker is a mono <code>[+]</code> that becomes <code>[-]</code> when open. Answers stay in the DOM whether open or closed.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>section.faq</code> with an <code>h2</code></li>
+<li><code>details.faq__item</code></li>
+<li><code>summary</code> question</li>
+<li>answer paragraphs</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Closed and open (heading rendered as a paragraph here)</p>
+<section class="faq">
+  <p class="h2">Questions</p>
+  <details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo.</p></details>
+  <details class="faq__item" open><summary>Where is the human gate?</summary><p>At the prototype step, before the build into EDS.</p></details>
+</section>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<section class="faq">
+  <p class="h2">Questions</p>
+  <details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo.</p></details>
+  <details class="faq__item" open><summary>Where is the human gate?</summary><p>At the prototype step, before the build into EDS.</p></details>
+</section>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;section class=&quot;faq&quot;&gt;
+  &lt;h2&gt;Questions&lt;/h2&gt;
+  &lt;details class=&quot;faq__item&quot;&gt;
+    &lt;summary&gt;Question?&lt;/summary&gt;
+    &lt;p&gt;Answer.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/section&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Ask questions the excerpt can answer.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Load answers on open.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Native disclosure semantics, keyboard operable</li>
+<li>Summary hover and focus use the accent</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-emerald</code> <code>--color-line</code> <code>--font-display</code> <code>--text-body</code> <code>--measure</code></p>
+</section>
+<section class="component" id="c-filter-bar">
+  <div class="component__head"><h3>Filter bar</h3><span class="chip chip--status" data-status="beta">beta</span></div>
+  <p class="component__desc">A form with three rows: topic links, format and type toggles, a sort select. Topic chips are links to hubs (here <code>blog.html?topic=</code>). Toggles set <code>aria-pressed</code>; <code>scripts.js</code> hides non-matching cards and mirrors state into the query string. Without JavaScript every card is visible and the topic links still work.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>form.filter-bar[data-collection]</code></li>
+<li><code>.filter-bar__row</code> with <code>.filter-bar__label</code></li>
+<li><code>a.chip--topic</code> links</li>
+<li><code>button.chip[data-filter][data-value][aria-pressed]</code></li>
+<li><code>label</code> + <code>select#sort</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Filter bar</p>
+<form class="filter-bar" data-collection action="templates/blog.html" method="get">
+  <div class="filter-bar__row"><span class="filter-bar__label">Topic</span>
+    <a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai">AEM + AI</a>
+    <a class="chip chip--topic" data-topic="aem" href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a>
+    <a class="chip chip--topic" data-topic="agents" href="templates/blog.html?topic=ai-agents">AI Agents</a>
+    <a class="chip chip--topic" data-topic="work" href="templates/blog.html?topic=working-with-ai">Working with AI</a>
+  </div>
+  <div class="filter-bar__row"><span class="filter-bar__label">Format</span>
+    <button type="button" class="chip" aria-pressed="true">All</button>
+    <button type="button" class="chip" aria-pressed="false">Video</button>
+    <button type="button" class="chip" aria-pressed="false">Article</button>
+    <button type="button" class="chip" aria-pressed="false">Post</button>
+  </div>
+  <div class="filter-bar__row"><label for="sort-story">Sort</label>
+    <select id="sort-story" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+  </div>
+</form>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<form class="filter-bar" data-collection action="templates/blog.html" method="get">
+  <div class="filter-bar__row"><span class="filter-bar__label">Topic</span>
+    <a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai">AEM + AI</a>
+    <a class="chip chip--topic" data-topic="aem" href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a>
+    <a class="chip chip--topic" data-topic="agents" href="templates/blog.html?topic=ai-agents">AI Agents</a>
+    <a class="chip chip--topic" data-topic="work" href="templates/blog.html?topic=working-with-ai">Working with AI</a>
+  </div>
+  <div class="filter-bar__row"><span class="filter-bar__label">Format</span>
+    <button type="button" class="chip" aria-pressed="true">All</button>
+    <button type="button" class="chip" aria-pressed="false">Video</button>
+    <button type="button" class="chip" aria-pressed="false">Article</button>
+    <button type="button" class="chip" aria-pressed="false">Post</button>
+  </div>
+  <div class="filter-bar__row"><label for="sort-story">Sort</label>
+    <select id="sort-story" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+  </div>
+</form>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;form class=&quot;filter-bar&quot; data-collection&gt;
+  &lt;div class=&quot;filter-bar__row&quot;&gt;&lt;span class=&quot;filter-bar__label&quot;&gt;Topic&lt;/span&gt;
+    &lt;a class=&quot;chip chip--topic&quot; data-topic=&quot;aem-ai&quot; href=&quot;blog.html?topic=aem-ai&quot;&gt;AEM + AI&lt;/a&gt; ...
+  &lt;/div&gt;
+  &lt;div class=&quot;filter-bar__row&quot;&gt;&lt;span class=&quot;filter-bar__label&quot;&gt;Format&lt;/span&gt;
+    &lt;button type=&quot;button&quot; class=&quot;chip&quot; data-filter=&quot;format&quot; data-value=&quot;all&quot; aria-pressed=&quot;true&quot;&gt;All&lt;/button&gt; ...
+  &lt;/div&gt;
+  &lt;div class=&quot;filter-bar__row&quot;&gt;&lt;label for=&quot;sort&quot;&gt;Sort&lt;/label&gt; &lt;select id=&quot;sort&quot; name=&quot;sort&quot;&gt;...&lt;/select&gt;&lt;/div&gt;
+&lt;/form&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Keep the canonical URL clean; the query string is state, not a page.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Make topic chips buttons.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Select has a visible label</li>
+<li>Toggle state is <code>aria-pressed</code></li>
+<li>Active topic link gets <code>aria-current="true"</code></li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-surface</code> <code>--color-line</code> <code>--color-line-strong</code> <code>--radius-md</code> <code>--text-label-sm</code> <code>--color-accent-soft</code></p>
+</section>
+<section class="component" id="c-pagination">
+  <div class="component__head"><h3>Pagination</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Numbered links in mono boxes; the current page is filled with the accent. Appears only past 48 items, so no template in this round uses it.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>nav.pagination</code> with <code>aria-label</code></li>
+<li><code>ol</code> of links</li>
+<li><code>aria-current="page"</code> on the current one</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Three pages</p>
+<nav class="pagination" aria-label="Pagination">
+  <ol>
+    <li><a href="templates/blog.html" aria-current="page">1</a></li>
+    <li><a href="templates/blog.html?page=2">2</a></li>
+    <li><a href="templates/blog.html?page=3">3</a></li>
+    <li><a href="templates/blog.html?page=2">Next</a></li>
+  </ol>
+</nav>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<nav class="pagination" aria-label="Pagination">
+  <ol>
+    <li><a href="templates/blog.html" aria-current="page">1</a></li>
+    <li><a href="templates/blog.html?page=2">2</a></li>
+    <li><a href="templates/blog.html?page=3">3</a></li>
+    <li><a href="templates/blog.html?page=2">Next</a></li>
+  </ol>
+</nav>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;nav class=&quot;pagination&quot; aria-label=&quot;Pagination&quot;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;...&quot; aria-current=&quot;page&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;...&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;...&quot;&gt;Next&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use real links with real hrefs.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Paginate collections under 48 items.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Current page is marked with <code>aria-current</code> and a fill, not color alone</li>
+<li>Targets are at least 36px</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent</code> <code>--color-on-accent</code> <code>--color-line</code> <code>--font-mono</code> <code>--text-small</code></p>
+</section>
+<section class="component" id="c-embed">
+  <div class="component__head"><h3>Embed</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Sixteen by nine frame on the code background with the fallback links under it. The placeholder state shows a play icon and a bracketed note; the iframe state fills the frame. A plain link is always present.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>figure.embed</code></li>
+<li><code>div.embed__frame</code> with a placeholder or an iframe with a title</li>
+<li><code>figcaption.embed__fallback</code> with watch links</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Placeholder state</p>
+<figure class="embed">
+  <div class="embed__frame"><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><p>[video embed pending: YouTube link pending]</p></div></div>
+  <figcaption class="embed__fallback"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Watch on LinkedIn</a> &middot; [YouTube link pending]</figcaption>
+</figure>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<figure class="embed">
+  <div class="embed__frame"><div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><p>[video embed pending: YouTube link pending]</p></div></div>
+  <figcaption class="embed__fallback"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Watch on LinkedIn</a> &middot; [YouTube link pending]</figcaption>
+</figure>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;figure class=&quot;embed&quot;&gt;
+  &lt;div class=&quot;embed__frame&quot;&gt;&lt;iframe src=&quot;...&quot; title=&quot;Adobe Stardust Explained&quot; loading=&quot;lazy&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+  &lt;figcaption class=&quot;embed__fallback&quot;&gt;&lt;a href=&quot;...&quot;&gt;Watch on LinkedIn&lt;/a&gt; · &lt;a href=&quot;...&quot;&gt;Watch on YouTube&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Give the iframe a title and keep the LinkedIn link.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Autoplay or hide the fallback.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Iframe <code>title</code> names the video</li>
+<li>Fallback link works without JavaScript</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-code-bg</code> <code>--color-code-text</code> <code>--color-line</code> <code>--radius-md</code> <code>--text-mono</code></p>
+</section>
+<section class="component" id="c-chapters">
+  <div class="component__head"><h3>Chapters</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Ordered list of timestamps and titles for a video. The template carries one bracketed item until the chapters are pulled from the recording.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>ol.chapters</code></li>
+<li><code>li</code> with <code>time</code> and a <code>span</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Placeholder</p>
+<ol class="chapters">
+  <li><span>[chapters to be supplied from the recording]</span></li>
+</ol>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<ol class="chapters">
+  <li><span>[chapters to be supplied from the recording]</span></li>
+</ol>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;ol class=&quot;chapters&quot;&gt;
+  &lt;li&gt;&lt;time&gt;0:00&lt;/time&gt; &lt;span&gt;What Stardust is&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use minutes and seconds in <code>time</code>.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Invent timestamps.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Order matters, so it is an <code>ol</code></li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-line</code> <code>--color-text-faint</code> <code>--font-mono</code> <code>--text-small</code></p>
+</section>
+<section class="component" id="c-transcript">
+  <div class="component__head"><h3>Transcript</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">A <code>details</code> with the full transcript in the DOM. Same marker treatment as the FAQ.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>details.transcript</code></li>
+<li><code>summary</code></li>
+<li><code>div.transcript__body</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Open</p>
+<details class="transcript" open>
+  <summary>Transcript</summary>
+  <div class="transcript__body"><p>[transcript to be supplied]</p></div>
+</details>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<details class="transcript" open>
+  <summary>Transcript</summary>
+  <div class="transcript__body"><p>[transcript to be supplied]</p></div>
+</details>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;details class=&quot;transcript&quot;&gt;
+  &lt;summary&gt;Transcript&lt;/summary&gt;
+  &lt;div class=&quot;transcript__body&quot;&gt;&lt;p&gt;...&lt;/p&gt;&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Ship the text in the HTML.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Fetch the transcript on open.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Native disclosure, keyboard operable</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-emerald</code> <code>--color-line</code> <code>--measure</code> <code>--color-text-muted</code></p>
+</section>
+<section class="component" id="c-author-box">
+  <div class="component__head"><h3>Author box</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Avatar initials on the inverse background, name in mono, role and links. Closes every post.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>aside.author-box</code></li>
+<li><code>span.avatar</code>, <code>aria-hidden</code></li>
+<li><code>.author-box__name</code>, <code>.author-box__role</code>, <code>.author-box__links</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Author box</p>
+<aside class="author-box">
+  <span class="avatar" aria-hidden="true">JJ</span>
+  <div>
+    <p class="author-box__name">Jack Jin</p>
+    <p class="author-box__role">Associate Director at Accenture, Columbus, Ohio. Adobe Certified Master, AEM Champion 2026.</p>
+    <p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a></p>
+  </div>
+</aside>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<aside class="author-box">
+  <span class="avatar" aria-hidden="true">JJ</span>
+  <div>
+    <p class="author-box__name">Jack Jin</p>
+    <p class="author-box__role">Associate Director at Accenture, Columbus, Ohio. Adobe Certified Master, AEM Champion 2026.</p>
+    <p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a></p>
+  </div>
+</aside>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;aside class=&quot;author-box&quot;&gt;
+  &lt;span class=&quot;avatar&quot; aria-hidden=&quot;true&quot;&gt;JJ&lt;/span&gt;
+  &lt;div&gt;
+    &lt;p class=&quot;author-box__name&quot;&gt;Jack Jin&lt;/p&gt;
+    &lt;p class=&quot;author-box__role&quot;&gt;...&lt;/p&gt;
+    &lt;p class=&quot;author-box__links&quot;&gt;&lt;a href=&quot;...&quot;&gt;LinkedIn&lt;/a&gt; &lt;a href=&quot;...&quot;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use a real headshot with alt text equal to the name when one is supplied.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Invent profile URLs.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Initials are decorative; the name is text next to them</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-inverse-bg</code> <code>--color-inverse-text</code> <code>--color-surface</code> <code>--color-line</code> <code>--radius-md</code></p>
+</section>
+<section class="component" id="c-callout">
+  <div class="component__head"><h3>Callout</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Note panel with a 3px left rule. Default uses the accent tint; <code>.callout--warn</code> uses the alternate background and the agents red.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>aside.callout[role=note]</code></li>
+<li><code>.callout--warn</code> modifier</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Default and warn</p>
+<aside class="callout" role="note"><p>Every number on a page comes from git history, ledgers or repo docs. Anything unverified stays in brackets.</p></aside>
+<aside class="callout callout--warn" role="note" style="margin-top: var(--space-3)"><p>Commits for Anima Mesh: [from git, not yet verified].</p></aside>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<aside class="callout" role="note"><p>Every number on a page comes from git history, ledgers or repo docs. Anything unverified stays in brackets.</p></aside>
+<aside class="callout callout--warn" role="note" style="margin-top: var(--space-3)"><p>Commits for Anima Mesh: [from git, not yet verified].</p></aside>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;aside class=&quot;callout&quot; role=&quot;note&quot;&gt;...&lt;/aside&gt;
+&lt;aside class=&quot;callout callout--warn&quot; role=&quot;note&quot;&gt;...&lt;/aside&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use it for a limitation or a caveat.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Use it for marketing.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li><code>role="note"</code></li>
+<li>Color is not the only signal; the text says what it is</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent-soft</code> <code>--color-accent</code> <code>--color-bg-alt</code> <code>--color-topic-agents</code> <code>--radius-sm</code></p>
+</section>
+<section class="component" id="c-cta-band">
+  <div class="component__head"><h3>CTA band</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Filled with the accent, text in on-accent. Factual heading, one sentence, two actions. Inside the band the primary button inverts and the secondary uses the current color.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>section.cta-band</code></li>
+<li><code>h2</code></li>
+<li>one paragraph</li>
+<li><code>p.cluster</code> with two buttons</li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Book a talk (heading rendered as a paragraph here)</p>
+<section class="cta-band">
+  <p class="h2">Book a talk</p>
+  <p>Jack speaks on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026 in Columbus.</p>
+  <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
+</section>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<section class="cta-band">
+  <p class="h2">Book a talk</p>
+  <p>Jack speaks on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026 in Columbus.</p>
+  <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
+</section>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;section class=&quot;cta-band&quot;&gt;
+  &lt;h2&gt;Book a talk&lt;/h2&gt;
+  &lt;p&gt;...&lt;/p&gt;
+  &lt;p class=&quot;cluster&quot;&gt;&lt;a class=&quot;btn btn--primary&quot; href=&quot;...&quot;&gt;Message on LinkedIn&lt;/a&gt; &lt;a class=&quot;btn btn--secondary&quot; href=&quot;...&quot;&gt;Email&lt;/a&gt;&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>State what the talk is about and where the next ones are.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Write a slogan.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Text on accent: 7.90:1 light, 7.00:1 dark</li>
+<li>Focus ring inside the band switches to on-accent</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent</code> <code>--color-on-accent</code> <code>--color-accent-hover</code> <code>--radius-md</code> <code>--space-7</code></p>
+</section>
+<section class="component" id="c-footer">
+  <div class="component__head"><h3>Footer</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Four columns on the alternate background: Topics, Sections, Elsewhere, Machine files. Column headings are H2 with the <code>//</code> prefix. The meta row carries the copyright and location.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>footer.site-footer</code></li>
+<li><code>.site-footer__grid</code> of four <code>.site-footer__col</code></li>
+<li><code>h2.site-footer__heading</code></li>
+<li><code>.site-footer__meta</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story story--flush"><p class="story__label">Footer, light (headings rendered as paragraphs here)</p>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Topics</p>
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+        <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+        <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Sections</p>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Elsewhere</p>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/">jackzhaojin.com</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Machine files</p>
+      <ul>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><span class="mono-link faint">llms.txt [planned]</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>&copy; 2026 Jack Jin &middot; Columbus, Ohio</p>
+    <p>google-stitch design system, round 2026-09-13</p>
+  </div>
+</footer>
+</div>
+<div class="story story--flush" data-theme="dark"><p class="story__label">Footer, dark</p>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Topics</p>
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+        <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+        <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Sections</p>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Elsewhere</p>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/">jackzhaojin.com</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Machine files</p>
+      <ul>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><span class="mono-link faint">llms.txt [planned]</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>&copy; 2026 Jack Jin &middot; Columbus, Ohio</p>
+    <p>google-stitch design system, round 2026-09-13</p>
+  </div>
+</footer>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;footer class=&quot;site-footer&quot;&gt;
+  &lt;div class=&quot;container site-footer__grid&quot;&gt;
+    &lt;div class=&quot;site-footer__col&quot;&gt;&lt;h2 class=&quot;site-footer__heading&quot;&gt;Topics&lt;/h2&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div class=&quot;site-footer__col&quot;&gt;&lt;h2 class=&quot;site-footer__heading&quot;&gt;Sections&lt;/h2&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div class=&quot;site-footer__col&quot;&gt;&lt;h2 class=&quot;site-footer__heading&quot;&gt;Elsewhere&lt;/h2&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div class=&quot;site-footer__col&quot;&gt;&lt;h2 class=&quot;site-footer__heading&quot;&gt;Machine files&lt;/h2&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;container site-footer__meta&quot;&gt;&lt;p&gt;© 2026 Jack Jin · Columbus, Ohio&lt;/p&gt;&lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Link only files that exist; llms.txt is marked planned.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Add a fake system status line.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Headings are real H2s so the footer has an outline</li>
+<li>Links have hover underline</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-bg-alt</code> <code>--color-line</code> <code>--color-text-faint</code> <code>--color-text-muted</code> <code>--text-small</code> <code>--text-label-sm</code></p>
+</section>
+<section class="component" id="c-icons">
+  <div class="component__head"><h3>Icons</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">One inline SVG sprite per page with ten symbols. Stroke icons at 2px, <code>currentColor</code>, sized 1em so they follow the text. Play is filled.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>svg[hidden]</code> sprite with <code>symbol</code> elements</li>
+<li><code>svg.icon</code> with <code>use</code></li>
+<li><code>.icon--sm</code>, <code>.icon--lg</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">At text size and at 24px in the accent</p>
+<p class="cluster cluster--lg"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-post"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></p><p class="cluster cluster--lg" style="font-size: 1.5rem; color: var(--color-accent)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></p>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<p class="cluster cluster--lg"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-post"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></p><p class="cluster cluster--lg" style="font-size: 1.5rem; color: var(--color-accent)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg> <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></p>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;svg hidden xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+  &lt;symbol id=&quot;icon-video&quot; viewBox=&quot;0 0 24 24&quot;&gt;...&lt;/symbol&gt;
+  ...
+&lt;/svg&gt;
+&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;&lt;use href=&quot;#icon-video&quot;&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Mark every icon <code>aria-hidden="true"</code> and put the meaning in text.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Load an icon font.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Decorative only; never the sole carrier of meaning</li>
+<li><code>focusable="false"</code> for older browsers</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>currentColor only</code></p>
+</section>
+<section class="component" id="c-theme-control">
+  <div class="component__head"><h3>Theme control</h3><span class="chip chip--status" data-status="stable">stable</span></div>
+  <p class="component__desc">Segmented group of three buttons. <code>aria-pressed</code> marks the stored choice. The shared <code>theme.js</code> wires every instance on the page. This story is not wired; the live one is in the header and in the theming section.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>div.theme-control[role=group]</code> with <code>aria-label</code></li>
+<li>three <code>button.theme-control__btn[data-set-theme]</code> with <code>aria-pressed</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">States</p>
+<div class="theme-control" role="group" aria-label="Color theme (story, not wired)">
+  <button type="button" class="theme-control__btn" aria-pressed="true">Light</button>
+  <button type="button" class="theme-control__btn" aria-pressed="false">Dark</button>
+  <button type="button" class="theme-control__btn" aria-pressed="false">System</button>
+</div>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<div class="theme-control" role="group" aria-label="Color theme (story, not wired)">
+  <button type="button" class="theme-control__btn" aria-pressed="true">Light</button>
+  <button type="button" class="theme-control__btn" aria-pressed="false">Dark</button>
+  <button type="button" class="theme-control__btn" aria-pressed="false">System</button>
+</div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;div class=&quot;theme-control&quot; role=&quot;group&quot; aria-label=&quot;Color theme&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;light&quot; aria-pressed=&quot;true&quot;&gt;Light&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;dark&quot; aria-pressed=&quot;false&quot;&gt;Dark&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;theme-control__btn&quot; data-set-theme=&quot;system&quot; aria-pressed=&quot;false&quot;&gt;System&lt;/button&gt;
+      &lt;/div&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Keep the three labels as text.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Replace the labels with sun and moon glyphs.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>Group has a name</li>
+<li>Pressed state is announced</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-accent-soft</code> <code>--color-accent</code> <code>--color-line-strong</code> <code>--color-surface-raised</code> <code>--text-label-sm</code></p>
+</section>
+      </section>
+
+      <section class="docs-section" id="patterns">
+        <p class="kicker">10 / Patterns</p>
+        <h2>Patterns</h2>
+        <h3>Page anatomy</h3>
+        <ol>
+          <li>Breadcrumb, directly above the H1, on every page except home.</li>
+          <li>One H1. On home it is the name, with the positioning line under it.</li>
+          <li>Byline with author link, published and updated dates in <code>time</code>, read or watch time, media type.</li>
+          <li>Summary of 40 to 60 words as the first paragraph. No hero image between the H1 and it.</li>
+          <li>Facts table.</li>
+          <li>Body: H2s phrased as questions, <code>ol</code> for steps, <code>table</code> for comparisons.</li>
+          <li>FAQ, related, author box.</li>
+        </ol>
+        <h3>Heading rules</h3>
+        <p>H1, then H2, then H3, never skipping. Section labels are kickers, not headings. Card titles are H3 under a section H2. Footer column titles are H2.</p>
+        <h3>Content in HTML</h3>
+        <p>Every list, table and transcript is in the initial HTML. Filters hide with the <code>hidden</code> attribute and never remove. Nothing uses an opacity zero reveal.</p>
+        <h3>Images and alt</h3>
+        <p>Alt text is one sentence naming what a diagram shows and the entities in it. Decorative images get <code>alt=""</code>. No fact lives only inside an image. Decorative SVG carries <code>aria-hidden="true"</code>.</p>
+        <h3>Theme default</h3>
+        <p><code>data-theme-default="light"</code> on every page in this round. <code>system</code> is reserved for the portfolio page later.</p>
+        <p>Why each slot exists, for humans, search and answer engines: <a href="../../../ai-docs/2026-09-13-seo-geo-redesign/seo-page-blueprint.md">seo-page-blueprint.md</a>.</p>
+      </section>
+
+      <section class="docs-section" id="templates">
+        <p class="kicker">11 / Templates</p>
+        <h2>Templates</h2>
+        <ul>
+          <li><a href="templates/home.html">home.html</a>: name, positioning line, summary, four hub cards, latest three posts, featured project with facts, credentials strip, six talks, CTA band.</li>
+          <li><a href="templates/post.html">post.html</a>: the Stardust video post with breadcrumb, byline, summary, facts, embed placeholder, chapters, body, transcript, FAQ, related and author box.</li>
+          <li><a href="templates/blog.html">blog.html</a>: all 39 posts as cards with a filter bar, counts by facet and a FAQ. No pagination under 48 items.</li>
+        </ul>
+        <p>Hub links point to <code>blog.html?topic=&lt;slug&gt;</code> because hub pages are not built in this round.</p>
+      </section>
+
+      <section class="docs-section" id="status">
+        <p class="kicker">12 / Status</p>
+        <h2>Status</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <caption>Components, status and version</caption>
+            <thead><tr><th scope="col">Component</th><th scope="col">Class</th><th scope="col">Status</th><th scope="col">Version</th></tr></thead>
+            <tbody><tr><td>Skip link</td><td><code>.skip-link</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Site header</td><td><code>.site-header</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Theme control</td><td><code>.theme-control</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Breadcrumb</td><td><code>.breadcrumb</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Page head</td><td><code>.page-head</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Kicker</td><td><code>.kicker</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Button</td><td><code>.btn</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Chip</td><td><code>.chip</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Card</td><td><code>.card</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Facts table</td><td><code>.facts</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Data table</td><td><code>.table</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Counts strip</td><td><code>.counts</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Row list</td><td><code>.row-list</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>FAQ</td><td><code>.faq</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Filter bar</td><td><code>.filter-bar</code></td><td><span class="chip chip--status" data-status="beta">beta</span></td><td>0.1.0</td></tr><tr><td>Pagination</td><td><code>.pagination</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Embed</td><td><code>.embed</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Chapters</td><td><code>.chapters</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Transcript</td><td><code>.transcript</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Author box</td><td><code>.author-box</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Callout</td><td><code>.callout</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>CTA band</td><td><code>.cta-band</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Footer</td><td><code>.site-footer</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Icons</td><td><code>.icon</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr><tr><td>Credentials strip</td><td><code>.credential-strip</code></td><td><span class="chip chip--status" data-status="beta">beta</span></td><td>0.1.0</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="docs-section" id="changelog">
+        <p class="kicker">13 / Changelog</p>
+        <h2>Changelog</h2>
+        <dl class="stack stack--sm">
+          <dt><strong>0.1.0</strong> <span class="mono faint">2026-09-13</span></dt>
+          <dd>First build from the Stitch round. Tokens in CSS and DTCG JSON for light and dark, base and component styles, this documentation page, three templates, README. Replaced three token values that failed contrast. Removed the telemetry bar, invented facts, Tailwind, Material Symbols and em dashes from the round.</dd>
+        </dl>
+      </section>
+    </div>
+  </div>
+</main>
+<script>
+/* Re-verify the contrast table from the computed tokens. Static numbers stay if this does not run. */
+(function () {
+  function lum(h) { var r = parseInt(h.slice(1, 3), 16) / 255, g = parseInt(h.slice(3, 5), 16) / 255, b = parseInt(h.slice(5, 7), 16) / 255;
+    function f(c) { return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); }
+  function ratio(a, b) { var la = lum(a), lb = lum(b), hi = Math.max(la, lb), lo = Math.min(la, lb); return (hi + 0.05) / (lo + 0.05); }
+  function hex6(v) { var m = /^#([0-9a-f]{6})/i.exec((v || '').trim()); return m ? '#' + m[1] : null; }
+  var probes = { light: document.getElementById('probe-light'), dark: document.getElementById('probe-dark') };
+  var rows = document.querySelectorAll('#contrast-table tbody tr');
+  for (var i = 0; i < rows.length; i++) {
+    var tr = rows[i];
+    for (var t in probes) {
+      var cs = getComputedStyle(probes[t]);
+      var fg = hex6(cs.getPropertyValue(tr.getAttribute('data-fg'))), bg = hex6(cs.getPropertyValue(tr.getAttribute('data-bg')));
+      var cell = tr.querySelector('[data-live="' + t + '"]');
+      if (fg && bg && cell) { cell.textContent = ratio(fg, bg).toFixed(2); }
+    }
+  }
+})();
+</script>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Topics</h2>
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+        <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+        <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Sections</h2>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Elsewhere</h2>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/">jackzhaojin.com</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Machine files</h2>
+      <ul>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><span class="mono-link faint">llms.txt [planned]</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>&copy; 2026 Jack Jin &middot; Columbus, Ohio</p>
+    <p>google-stitch design system, round 2026-09-13</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" data-theme-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVENE6BXTJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZVENE6BXTJ');
+</script>
+<title>Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS) | google-stitch | Jack Jin</title>
+<meta name="description" content="What Adobe Stardust is, how the design agent skill works on Edge Delivery Services (EDS), and how three DA.live blocks compared against a Google Stitch baseline.">
+<link rel="canonical" href="https://www.jackzhaojin.com/design-systems/2026-09-13/google-stitch/templates/post.html">
+<meta name="robots" content="noindex">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');var def=d.getAttribute('data-theme-default')||'light';var c=(s==='light'||s==='dark'||s==='system')?s:def;if(c==='system'){d.removeAttribute('data-theme');}else{d.setAttribute('data-theme',c);}d.setAttribute('data-theme-choice',c);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../components.css">
+<script src="../../shared/theme.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg hidden xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="1"/><path d="M16 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="icon-article" viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></symbol>
+  <symbol id="icon-post" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="icon-repo" viewBox="0 0 24 24"><circle cx="6" cy="4" r="2"/><circle cx="6" cy="20" r="2"/><circle cx="18" cy="8" r="2"/><path d="M6 6v12M18 10c0 4-12 2-12 8"/></symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M19 13v6H5V5h6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+</svg>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a><span class="status-dot" aria-hidden="true"></span>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="blog.html" aria-current="page">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="container page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li aria-current="page">Adobe Stardust Explained: Design Agent Skills on EDS</li>
+      </ol>
+    </nav>
+    <article class="post">
+      <header class="page-head">
+        <p class="kicker">AEM + AI / Video</p>
+        <h1 class="page-title">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</h1>
+        <p class="byline">By <a href="https://www.linkedin.com/in/jackjin">Jack Jin</a> &middot; Published <time datetime="2026-08-09">2026-08-09</time> &middot; Updated [date] &middot; [watch time to confirm] &middot; Video</p>
+        <p class="summary">Adobe Stardust is a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. This video walks the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three DA.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+      </header>
+
+      <div class="stack stack--lg">
+        <table class="facts">
+          <caption class="sr-only">Key facts</caption>
+          <tbody>
+            <tr><th scope="row">Topic</th><td><a href="blog.html?topic=aem-ai">AEM + AI</a></td></tr>
+            <tr><th scope="row">Format</th><td>Video</td></tr>
+            <tr><th scope="row">Tools</th><td>Adobe Edge Delivery Services (EDS); Stardust, a skill in the public adobe/skills repo; impeccable; DA.live; Google Stitch as the baseline</td></tr>
+            <tr><th scope="row">Related project</th><td>[Content Factory, to confirm]</td></tr>
+            <tr><th scope="row">Also on</th><td><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">LinkedIn <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a> &middot; [YouTube link pending]</td></tr>
+          </tbody>
+        </table>
+
+        <figure class="embed">
+          <div class="embed__frame">
+            <div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><p>[video embed pending: [YouTube link pending]]</p></div>
+          </div>
+          <figcaption class="embed__fallback"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Watch on LinkedIn</a> &middot; [YouTube link pending]</figcaption>
+        </figure>
+
+        <section aria-labelledby="chapters-h">
+          <h2 id="chapters-h">Chapters</h2>
+          <ol class="chapters">
+            <li><span>[chapters to be supplied from the recording]</span></li>
+          </ol>
+        </section>
+
+        <div class="prose">
+          <h2>What is Adobe Stardust?</h2>
+          <p>Adobe Stardust is a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library, and impeccable does the actual design work.</p>
+
+          <h2>How does the skill work?</h2>
+          <p>The skill runs in four steps. A human gate sits at the prototype step.</p>
+          <ol>
+            <li><strong>Extract.</strong> [detail from the recording]</li>
+            <li><strong>Direction.</strong> [detail from the recording]</li>
+            <li><strong>Prototype.</strong> The human gate. A person reviews the prototypes here before anything is built.</li>
+            <li><strong>Build into EDS.</strong> [detail from the recording]</li>
+          </ol>
+
+          <h2>How did the runs compare with the Google Stitch baseline?</h2>
+          <p>Three DA.live blocks were compared across a Google Stitch baseline and two Stardust runs.</p>
+          <div class="table-wrap">
+            <table class="table">
+              <caption>Three DA.live blocks, one Google Stitch baseline and two Stardust runs</caption>
+              <thead>
+                <tr><th scope="col">Block</th><th scope="col">Google Stitch baseline</th><th scope="col">Stardust run 1</th><th scope="col">Stardust run 2</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">[block 1, to be supplied]</th><td>[result]</td><td>[result]</td><td>[result]</td></tr>
+                <tr><th scope="row">[block 2, to be supplied]</th><td>[result]</td><td>[result]</td><td>[result]</td></tr>
+                <tr><th scope="row">[block 3, to be supplied]</th><td>[result]</td><td>[result]</td><td>[result]</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Where did it break?</h2>
+          <p>[to be supplied from the recording]</p>
+        </div>
+
+        <details class="transcript">
+          <summary>Transcript</summary>
+          <div class="transcript__body">
+            <p>[transcript to be supplied]</p>
+          </div>
+        </details>
+
+        <section class="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Questions</h2>
+          <details class="faq__item">
+            <summary>Is Adobe Stardust a product?</summary>
+            <p>No. It is a skill in the public adobe/skills repo.</p>
+          </details>
+          <details class="faq__item">
+            <summary>What does Stardust build on?</summary>
+            <p>impeccable, the 57K-star UX design skill library. impeccable does the actual design work.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Where is the human gate?</summary>
+            <p>At the prototype step, before the build into EDS.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="related-h">
+          <h2 id="related-h">Related</h2>
+          <p class="cluster"><a class="chip chip--topic" data-topic="aem-ai" href="blog.html?topic=aem-ai">AEM + AI hub</a> <a class="btn btn--secondary btn--sm" href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Discuss on LinkedIn <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a></p>
+          <ol class="row-list">
+            <li><time datetime="2026-05-24">2026-05-24</time><span class="row-list__title"><a href="https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7464766955137191936-2kip/">Theming a Brand-New EDS Site with Google Stitch + MCP</a></span><span class="row-list__note">A 3-step approach to theming a greenfield EDS site: define what the theme could be, generate it in Google Stitch, then wire the design back into the site through the Stitch MCP server. Claude Opus 4.7 driving in a single ~20-minute prompt, traced in MLflow down to the tool calls, including the call-to-action miss and the lesson to theme the site and teaser as separate passes.</span></li>
+            <li><time datetime="2026-05-17">2026-05-17</time><span class="row-list__title"><a href="https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7461912604530319361-GXTo">Adobe EDS Skills Hands-On: create-site + content-driven-development</a></span><span class="row-list__note">Hands-on walkthrough of Adobe&#x27;s create-site and content-driven-development skills inside Claude Code, with MLflow tracing the whole run. A new site bootstrap and a teaser block authored content-first, plus the rough edges and the missing theme skill gap.</span></li>
+          </ol>
+        </section>
+
+        <aside class="author-box">
+          <span class="avatar" aria-hidden="true">JJ</span>
+          <div>
+            <p class="author-box__name">Jack Jin</p>
+            <p class="author-box__role">Associate Director at Accenture, Columbus, Ohio. Adobe Certified Master, AEM Champion 2026.</p>
+            <p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a> <a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></p>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Topics</h2>
+      <ul>
+        <li><a href="blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+        <li><a href="blog.html?topic=ai-agents">AI Agents</a></li>
+        <li><a href="blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Sections</h2>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="../index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Elsewhere</h2>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/">jackzhaojin.com</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Machine files</h2>
+      <ul>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a class="mono-link" href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><span class="mono-link faint">llms.txt [planned]</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>&copy; 2026 Jack Jin &middot; Columbus, Ohio</p>
+    <p>google-stitch design system, round 2026-09-13</p>
+  </div>
+</footer>
+</body>
+</html>

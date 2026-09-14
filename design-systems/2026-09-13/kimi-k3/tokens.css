@@ -1,0 +1,180 @@
+/* kimi-k3 design system / tokens.css
+   Three tiers: primitives (--palette-*, --font-*, raw sizes) define options,
+   semantic tokens reference primitives, components consume semantic tokens only.
+   Light is the default. Dark is a second token set on the same names.
+   Selector structure follows SPEC section 4 so a nested element can be forced
+   to one theme with data-theme="light" or data-theme="dark". */
+
+/* ---------- 1. Primitives (theme independent) ---------- */
+:root {
+  /* palette: neutrals */
+  --palette-white: #ffffff;
+  --palette-paper: #fafafa;
+  --palette-paper-2: #f5f5f5;
+  --palette-paper-3: #f2f2f2;
+  --palette-gray-89: #e3e3e3;
+  --palette-gray-54: #8a8a8a;
+  --palette-gray-44: #6f6f6f;
+  --palette-gray-24: #3d3d3d;
+  --palette-ink: #0a0a0a;
+  --palette-ink-2: #101010;
+  --palette-ink-3: #171717;
+  --palette-ink-4: #262626;
+  --palette-gray-42: #6b6b6b;
+  --palette-gray-59: #979797;
+  --palette-gray-81: #cfcfcf;
+  --palette-black: #050505;
+
+  /* palette: accent and topic hues */
+  --palette-blue: #1100ff;
+  --palette-blue-deep: #0d00c4;
+  --palette-lavender: #8f8aff;
+  --palette-lavender-light: #aeaaff;
+  --palette-azure: #0b5fd6;
+  --palette-red: #c2262f;
+  --palette-ochre: #7a5c0f;
+  --palette-sky: #9db8e8;
+  --palette-rose: #ff9d9d;
+  --palette-sand: #f0cf8e;
+
+  /* fonts */
+  --font-inter: "Inter", -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-plex-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* ---------- 2. Semantic: typography ---------- */
+  --font-display: var(--font-inter);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+
+  --text-display: clamp(3rem, 8vw, 6rem);
+  --text-h1: clamp(2rem, 4.6vw, 3.4rem);
+  --text-h2: clamp(1.35rem, 2.6vw, 1.85rem);
+  --text-h3: 1.125rem;
+  --text-body-lg: clamp(1.05rem, 1.6vw, 1.25rem);
+  --text-body: 1.0625rem;
+  --text-small: 0.9375rem;
+  --text-label: 0.72rem;
+  --text-mono: 0.8125rem;
+
+  --leading-tight: 1.12;
+  --leading-body: 1.7;
+  --tracking-label: 0.12em;
+  --tracking-heading: -0.02em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* ---------- 3. Semantic: spacing (4px base) ---------- */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-7: 3rem;      /* 48px */
+  --space-8: 4rem;      /* 64px */
+  --space-9: 6rem;      /* 96px */
+  --space-10: 8rem;     /* 128px */
+
+  /* ---------- 4. Semantic: layout ---------- */
+  --container-max: 76rem;              /* 1216px */
+  --gutter: clamp(1rem, 2.5vw, 2rem);
+  --measure: 68ch;
+  --header-height: 3.5rem;
+
+  /* ---------- 5. Semantic: shape and elevation ---------- */
+  --radius-sm: 0;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-pill: 2px;                  /* this system has no pills; chips are bracketed */
+  --border-width: 1px;
+  --shadow-1: none;
+  --shadow-2: 0 1px 0 0 var(--color-line);
+
+  /* ---------- 6. Semantic: motion and stacking ---------- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --z-header: 50;
+}
+
+/* ---------- 7. Semantic: color, light (default) ---------- */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --color-bg: var(--palette-paper);
+  --color-bg-alt: var(--palette-paper-3);
+  --color-surface: var(--palette-white);
+  --color-surface-raised: var(--palette-paper-2);
+  --color-text: var(--palette-ink);
+  --color-text-muted: var(--palette-gray-24);
+  --color-text-faint: var(--palette-gray-44);
+  --color-line: var(--palette-gray-89);
+  --color-line-strong: var(--palette-gray-54);
+  --color-accent: var(--palette-blue);
+  --color-accent-hover: var(--palette-blue-deep);
+  --color-on-accent: var(--palette-white);
+  --color-accent-soft: rgba(17, 0, 255, 0.07);
+  --color-focus: var(--palette-blue);
+  --color-inverse-bg: var(--palette-ink);
+  --color-inverse-text: var(--palette-paper);
+  --color-topic-aem-ai: var(--palette-blue);
+  --color-topic-aem: var(--palette-azure);
+  --color-topic-agents: var(--palette-red);
+  --color-topic-work: var(--palette-ochre);
+  --color-mark: rgba(17, 0, 255, 0.12);
+}
+
+/* ---------- 8. Semantic: color, dark (explicit) ---------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: var(--palette-ink);
+  --color-bg-alt: var(--palette-black);
+  --color-surface: var(--palette-ink-2);
+  --color-surface-raised: var(--palette-ink-3);
+  --color-text: var(--palette-paper);
+  --color-text-muted: var(--palette-gray-81);
+  --color-text-faint: var(--palette-gray-59);
+  --color-line: var(--palette-ink-4);
+  --color-line-strong: var(--palette-gray-42);
+  --color-accent: var(--palette-lavender);
+  --color-accent-hover: var(--palette-lavender-light);
+  --color-on-accent: var(--palette-ink);
+  --color-accent-soft: rgba(143, 138, 255, 0.10);
+  --color-focus: var(--palette-lavender);
+  --color-inverse-bg: var(--palette-paper);
+  --color-inverse-text: var(--palette-ink);
+  --color-topic-aem-ai: var(--palette-lavender);
+  --color-topic-aem: var(--palette-sky);
+  --color-topic-agents: var(--palette-rose);
+  --color-topic-work: var(--palette-sand);
+  --color-mark: rgba(143, 138, 255, 0.18);
+}
+
+/* ---------- 9. Semantic: color, dark (system choice, OS prefers dark) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+    --color-bg: var(--palette-ink);
+    --color-bg-alt: var(--palette-black);
+    --color-surface: var(--palette-ink-2);
+    --color-surface-raised: var(--palette-ink-3);
+    --color-text: var(--palette-paper);
+    --color-text-muted: var(--palette-gray-81);
+    --color-text-faint: var(--palette-gray-59);
+    --color-line: var(--palette-ink-4);
+    --color-line-strong: var(--palette-gray-42);
+    --color-accent: var(--palette-lavender);
+    --color-accent-hover: var(--palette-lavender-light);
+    --color-on-accent: var(--palette-ink);
+    --color-accent-soft: rgba(143, 138, 255, 0.10);
+    --color-focus: var(--palette-lavender);
+    --color-inverse-bg: var(--palette-paper);
+    --color-inverse-text: var(--palette-ink);
+    --color-topic-aem-ai: var(--palette-lavender);
+    --color-topic-aem: var(--palette-sky);
+    --color-topic-agents: var(--palette-rose);
+    --color-topic-work: var(--palette-sand);
+    --color-mark: rgba(143, 138, 255, 0.18);
+  }
+}

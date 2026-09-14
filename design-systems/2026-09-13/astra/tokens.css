@@ -1,0 +1,206 @@
+/* Astra design system, tokens.
+   Origin: the Codex round of 2026-09-13, which Jack refers to as Astra.
+   Three tiers, one-way dependency: primitives define options, semantic tokens
+   reference primitives, components consume semantic tokens only.
+   Selector structure follows SPEC.md section 4 so a nested frame can be forced
+   to one theme with data-theme="light" or data-theme="dark". */
+
+/* 1. Primitives (theme independent) */
+:root {
+  /* Palette: whites and lavender tints */
+  --palette-white: #ffffff;
+  --palette-lavender-50: #fcfbfe;
+  --palette-lavender-100: #f5f3fa;
+  --palette-lavender-150: #f0edf6;
+  --palette-lavender-200: #eee9fa;
+  --palette-lavender-300: #dedbe7;
+  --palette-lavender-500: #8f89a3;
+
+  /* Palette: grays used for secondary text on light */
+  --palette-gray-600: #716c7d;
+  --palette-gray-700: #666171;
+
+  /* Palette: plum, the dark neutral ladder */
+  --palette-plum-50: #f8f5ff;
+  --palette-plum-100: #f2eef8;
+  --palette-plum-300: #b7afc6;
+  --palette-plum-400: #948ca6;
+  --palette-plum-500: #706786;
+  --palette-plum-600: #423b51;
+  --palette-plum-750: #292237;
+  --palette-plum-775: #282238;
+  --palette-plum-800: #2a2635;
+  --palette-plum-850: #242135;
+  --palette-plum-900: #211e2a;
+  --palette-plum-950: #18161f;
+  --palette-plum-975: #131119;
+
+  /* Palette: violet accent */
+  --palette-violet-200: #d2c8ff;
+  --palette-violet-300: #c0b3ff;
+  --palette-violet-600: #6850b5;
+  --palette-violet-700: #57429c;
+  --palette-violet-800: #302740;
+
+  /* Palette: topic hues */
+  --palette-blue-300: #9db8e8;
+  --palette-blue-600: #2f6bb3;
+  --palette-red-300: #ff9d9d;
+  --palette-red-600: #b8392f;
+  --palette-gold-300: #f0cf8e;
+  --palette-gold-700: #7a5c0f;
+
+  /* Font families */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Type scale (fluid where the vendor round was fluid) */
+  --text-display: clamp(3.5rem, 2rem + 6vw, 7rem);
+  --text-h1: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
+  --text-h2: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem);
+  --text-h3: 1.375rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.6875rem;
+  --text-mono: 0.8125rem;
+  --leading-tight: 1.14;
+  --leading-body: 1.65;
+  --tracking-label: 0.1em;
+  --tracking-display: -0.035em;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* Spacing, 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Layout */
+  --container-max: 1248px;
+  --gutter: clamp(1.375rem, 2.75vw, 2.5rem);
+  --measure: 66ch;
+  --header-height: 72px;
+
+  /* Shape */
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Stacking */
+  --z-header: 50;
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --container-max: 1320px;
+  }
+}
+
+/* 2. Semantic tokens, light (default) */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --color-bg: var(--palette-lavender-50);
+  --color-bg-alt: var(--palette-lavender-100);
+  --color-surface: var(--palette-white);
+  --color-surface-raised: var(--palette-lavender-150);
+  --color-text: var(--palette-plum-850);
+  --color-text-muted: var(--palette-gray-700);
+  --color-text-faint: var(--palette-gray-600);
+  --color-line: var(--palette-lavender-300);
+  --color-line-strong: var(--palette-lavender-500);
+  --color-accent: var(--palette-violet-600);
+  --color-accent-hover: var(--palette-violet-700);
+  --color-on-accent: var(--palette-white);
+  --color-accent-soft: var(--palette-lavender-200);
+  --color-focus: var(--palette-violet-600);
+  --color-inverse-bg: var(--palette-plum-775);
+  --color-inverse-text: var(--palette-plum-50);
+  --color-inverse-text-muted: #d1c9dd;
+  --color-inverse-accent: var(--palette-violet-300);
+  --color-inverse-line: rgba(248, 245, 255, 0.18);
+  --color-topic-aem-ai: var(--palette-violet-600);
+  --color-topic-aem: var(--palette-blue-600);
+  --color-topic-agents: var(--palette-red-600);
+  --color-topic-work: var(--palette-gold-700);
+  --shadow-1: 0 1px 2px rgba(36, 33, 53, 0.06), 0 1px 1px rgba(36, 33, 53, 0.04);
+  --shadow-2: 0 10px 30px rgba(36, 33, 53, 0.10), 0 2px 6px rgba(36, 33, 53, 0.06);
+}
+
+/* 3. Semantic tokens, dark (explicit choice) */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: var(--palette-plum-950);
+  --color-bg-alt: var(--palette-plum-975);
+  --color-surface: var(--palette-plum-900);
+  --color-surface-raised: var(--palette-plum-800);
+  --color-text: var(--palette-plum-100);
+  --color-text-muted: var(--palette-plum-300);
+  --color-text-faint: var(--palette-plum-400);
+  --color-line: var(--palette-plum-600);
+  --color-line-strong: var(--palette-plum-500);
+  --color-accent: var(--palette-violet-300);
+  --color-accent-hover: var(--palette-violet-200);
+  --color-on-accent: var(--palette-plum-950);
+  --color-accent-soft: var(--palette-violet-800);
+  --color-focus: var(--palette-violet-300);
+  --color-inverse-bg: var(--palette-plum-750);
+  --color-inverse-text: var(--palette-plum-50);
+  --color-inverse-text-muted: #d1c9dd;
+  --color-inverse-accent: var(--palette-violet-300);
+  --color-inverse-line: rgba(248, 245, 255, 0.18);
+  --color-topic-aem-ai: var(--palette-violet-300);
+  --color-topic-aem: var(--palette-blue-300);
+  --color-topic-agents: var(--palette-red-300);
+  --color-topic-work: var(--palette-gold-300);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.40), 0 1px 1px rgba(0, 0, 0, 0.30);
+  --shadow-2: 0 10px 30px rgba(0, 0, 0, 0.50), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* 4. Semantic tokens, dark (system choice, OS prefers dark). Duplicated on purpose. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+    --color-bg: var(--palette-plum-950);
+    --color-bg-alt: var(--palette-plum-975);
+    --color-surface: var(--palette-plum-900);
+    --color-surface-raised: var(--palette-plum-800);
+    --color-text: var(--palette-plum-100);
+    --color-text-muted: var(--palette-plum-300);
+    --color-text-faint: var(--palette-plum-400);
+    --color-line: var(--palette-plum-600);
+    --color-line-strong: var(--palette-plum-500);
+    --color-accent: var(--palette-violet-300);
+    --color-accent-hover: var(--palette-violet-200);
+    --color-on-accent: var(--palette-plum-950);
+    --color-accent-soft: var(--palette-violet-800);
+    --color-focus: var(--palette-violet-300);
+    --color-inverse-bg: var(--palette-plum-750);
+    --color-inverse-text: var(--palette-plum-50);
+    --color-inverse-text-muted: #d1c9dd;
+    --color-inverse-accent: var(--palette-violet-300);
+    --color-inverse-line: rgba(248, 245, 255, 0.18);
+    --color-topic-aem-ai: var(--palette-violet-300);
+    --color-topic-aem: var(--palette-blue-300);
+    --color-topic-agents: var(--palette-red-300);
+    --color-topic-work: var(--palette-gold-300);
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.40), 0 1px 1px rgba(0, 0, 0, 0.30);
+    --shadow-2: 0 10px 30px rgba(0, 0, 0, 0.50), 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+}

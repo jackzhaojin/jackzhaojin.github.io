@@ -1,0 +1,1666 @@
+<!doctype html>
+<html lang="en" data-theme-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVENE6BXTJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZVENE6BXTJ');
+</script>
+<title>Design system documentation | kimi-k3 | Jack Jin</title>
+<meta name="description" content="kimi-k3 design system for www.jackzhaojin.com: tokens in light and dark, typography, layout, every component with live stories, patterns, templates, status and changelog.">
+<link rel="canonical" href="https://www.jackzhaojin.com/design-systems/2026-09-13/kimi-k3/">
+<meta name="robots" content="noindex">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');var def=d.getAttribute('data-theme-default')||'light';var c=(s==='light'||s==='dark'||s==='system')?s:def;if(c==='system'){d.removeAttribute('data-theme');}else{d.setAttribute('data-theme',c);}d.setAttribute('data-theme-choice',c);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="components.css">
+<script src="../shared/theme.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg hidden xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12"/><path d="M16 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="icon-article" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><path d="M8 12h8M8 16h8"/></symbol>
+  <symbol id="icon-post" viewBox="0 0 24 24"><path d="M4 4h16v12H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="icon-repo" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="8" r="2"/><path d="M6 7v10"/><path d="M18 10c0 5-12 3-12 7"/></symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v6H4V6h6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+</svg>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container docs-layout">
+<nav class="docs-nav" aria-label="On this page">
+  <p class="docs-nav__heading">Contents</p>
+  <ol>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+    <li><a href="#layout">Layout</a></li>
+    <li><a href="#shape-elevation">Shape and elevation</a></li>
+    <li><a href="#motion">Motion</a></li>
+    <li><a href="#iconography">Iconography</a></li>
+    <li><a href="#theming">Theming</a></li>
+    <li><a href="#components">Components</a>
+      <ol>
+        <li><a href="#c-skip-link">Skip link</a></li>
+        <li><a href="#c-site-header">Site header</a></li>
+        <li><a href="#c-theme-control">Theme control</a></li>
+        <li><a href="#c-breadcrumb">Breadcrumb</a></li>
+        <li><a href="#c-page-head">Page head</a></li>
+        <li><a href="#c-kicker">Kicker</a></li>
+        <li><a href="#c-button">Button</a></li>
+        <li><a href="#c-chip">Chip</a></li>
+        <li><a href="#c-card">Card</a></li>
+        <li><a href="#c-facts-table">Facts table</a></li>
+        <li><a href="#c-data-table">Data table</a></li>
+        <li><a href="#c-counts-strip">Counts strip</a></li>
+        <li><a href="#c-row-list">Row list</a></li>
+        <li><a href="#c-faq">FAQ</a></li>
+        <li><a href="#c-filter-bar">Filter bar</a></li>
+        <li><a href="#c-pagination">Pagination</a></li>
+        <li><a href="#c-embed">Embed</a></li>
+        <li><a href="#c-chapters">Chapters</a></li>
+        <li><a href="#c-transcript">Transcript</a></li>
+        <li><a href="#c-author-box">Author box</a></li>
+        <li><a href="#c-callout">Callout</a></li>
+        <li><a href="#c-cta-band">CTA band</a></li>
+        <li><a href="#c-footer">Footer</a></li>
+        <li><a href="#c-icons">Icons</a></li>
+      </ol>
+    </li>
+    <li><a href="#patterns">Patterns</a></li>
+    <li><a href="#templates">Templates</a></li>
+    <li><a href="#status">Status</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+  </ol>
+</nav>
+    <div class="docs-body">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../">Design systems 2026-09-13</a></li>
+          <li aria-current="page">kimi-k3</li>
+        </ol>
+      </nav>
+      <header class="page-head">
+        <p class="kicker">Design system / round 2026-09-13 / kimi-k3</p>
+        <h1 class="page-title">kimi-k3 design system</h1>
+        <p class="byline">Version 0.1.0 · Status draft candidate · <time datetime="2026-09-13">2026-09-13</time> · Origin: the Kimi K3 round</p>
+        <p class="summary">Developer editorial: Inter for everything you read, IBM Plex Mono for everything you look up. Near-black on off-white with one electric blue, square corners, one pixel rules, "//" section labels and bracketed chips. Light by default, dark as a second token set, content always in the HTML.</p>
+      </header>
+
+<section class="docs-section" id="overview" aria-labelledby="overview-h">
+<h2 id="overview-h">Overview</h2>
+<table class="facts">
+  <caption>System facts</caption>
+  <tbody>
+    <tr><th scope="row">Name</th><td>kimi-k3</td></tr>
+    <tr><th scope="row">Origin model</th><td>Kimi K3, the vendor round of 2026-09-13</td></tr>
+    <tr><th scope="row">Origin folder</th><td><code>local-only/kimi-2026-09-13/app/</code> (site.css, design-system/index.html, the six pages)</td></tr>
+    <tr><th scope="row">Version</th><td>0.1.0</td></tr>
+    <tr><th scope="row">Status</th><td><span class="chip chip--status">draft candidate</span> one of four systems under comparison</td></tr>
+    <tr><th scope="row">Contract</th><td><a href="../SPEC.md">SPEC.md</a>, round 2026-09-13</td></tr>
+  </tbody>
+</table>
+<h3>Identity</h3>
+<p>The round read like an engineer's ledger: ink on paper, hairline rules, mono metadata, one accent. This system keeps that. One sans family (Inter) carries display, headings and body; one mono family (IBM Plex Mono) carries labels, chips, bylines, tables and code. Mono is the voice of facts, sans is the voice of prose. The accent is a single electric blue in light and a lavender in dark. Corners are square, borders are one pixel, there are no shadows. The identity marks are the accent "//" before every kicker, bracketed mono chips, an accent highlight behind one key phrase, and the wordmark's blinking underscore cursor. What was dropped from the round: em dashes as a device, the deferred theme script, the opacity-zero reveal, the invented content and the three-plus-one hub grid.</p>
+<h3>Principles</h3>
+<ol>
+  <li>Content is in the HTML. Scripts switch theme, open the nav, filter and sort. They never supply, fetch or hide content.</li>
+  <li>Ink on paper, one accent. Color says one thing: this is a link, a label or a topic.</li>
+  <li>Mono is the voice of facts. Anything that is data (dates, counts, labels, tables) is set in IBM Plex Mono.</li>
+  <li>Hairlines, square corners, no shadows. Structure comes from rules and alignment.</li>
+  <li>Facts over adjectives. Every number comes from data; unknowns stay bracketed.</li>
+</ol>
+<h3>Quick start</h3>
+<p>Three stylesheets in this order, the theme default attribute on the root element, the pre-paint snippet in the head and the shared theme script deferred. Full head in the <a href="README.md">README</a>.</p>
+<pre><code>&lt;html lang="en" data-theme-default="light"&gt;
+&lt;link rel="stylesheet" href="tokens.css"&gt;
+&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="components.css"&gt;
+&lt;script src="../shared/theme.js" defer&gt;&lt;/script&gt;</code></pre>
+</section>
+
+<section class="docs-section" id="color" aria-labelledby="color-h">
+<h2 id="color-h">Color</h2>
+<p>Primitives are named by hue and lightness and never appear in components. Semantic tokens carry meaning and are defined once per theme. Components consume semantic tokens only.</p>
+<h3>Primitive palette, light set</h3>
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch__chip" style="background:#fafafa"></div><div class="swatch__name">--palette-paper</div><div class="swatch__value">#fafafa</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#ffffff"></div><div class="swatch__name">--palette-white</div><div class="swatch__value">#ffffff</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#f5f5f5"></div><div class="swatch__name">--palette-paper-2</div><div class="swatch__value">#f5f5f5</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#f2f2f2"></div><div class="swatch__name">--palette-paper-3</div><div class="swatch__value">#f2f2f2</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#e3e3e3"></div><div class="swatch__name">--palette-gray-89</div><div class="swatch__value">#e3e3e3</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#8a8a8a"></div><div class="swatch__name">--palette-gray-54</div><div class="swatch__value">#8a8a8a</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#6f6f6f"></div><div class="swatch__name">--palette-gray-44</div><div class="swatch__value">#6f6f6f</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#3d3d3d"></div><div class="swatch__name">--palette-gray-24</div><div class="swatch__value">#3d3d3d</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#0a0a0a"></div><div class="swatch__name">--palette-ink</div><div class="swatch__value">#0a0a0a</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#1100ff"></div><div class="swatch__name">--palette-blue</div><div class="swatch__value">#1100ff</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#0d00c4"></div><div class="swatch__name">--palette-blue-deep</div><div class="swatch__value">#0d00c4</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#0b5fd6"></div><div class="swatch__name">--palette-azure</div><div class="swatch__value">#0b5fd6</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#c2262f"></div><div class="swatch__name">--palette-red</div><div class="swatch__value">#c2262f</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#7a5c0f"></div><div class="swatch__name">--palette-ochre</div><div class="swatch__value">#7a5c0f</div></div>
+</div>
+<h3>Primitive palette, dark set</h3>
+<div data-theme="dark" style="background:var(--color-bg);color:var(--color-text);padding:var(--space-4);border:var(--border-width) solid var(--color-line)">
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch__chip" style="background:#0a0a0a"></div><div class="swatch__name">--palette-ink</div><div class="swatch__value">#0a0a0a</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#050505"></div><div class="swatch__name">--palette-black</div><div class="swatch__value">#050505</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#101010"></div><div class="swatch__name">--palette-ink-2</div><div class="swatch__value">#101010</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#171717"></div><div class="swatch__name">--palette-ink-3</div><div class="swatch__value">#171717</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#262626"></div><div class="swatch__name">--palette-ink-4</div><div class="swatch__value">#262626</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#6b6b6b"></div><div class="swatch__name">--palette-gray-42</div><div class="swatch__value">#6b6b6b</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#979797"></div><div class="swatch__name">--palette-gray-59</div><div class="swatch__value">#979797</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#cfcfcf"></div><div class="swatch__name">--palette-gray-81</div><div class="swatch__value">#cfcfcf</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#fafafa"></div><div class="swatch__name">--palette-paper</div><div class="swatch__value">#fafafa</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#8f8aff"></div><div class="swatch__name">--palette-lavender</div><div class="swatch__value">#8f8aff</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#aeaaff"></div><div class="swatch__name">--palette-lavender-light</div><div class="swatch__value">#aeaaff</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#9db8e8"></div><div class="swatch__name">--palette-sky</div><div class="swatch__value">#9db8e8</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#ff9d9d"></div><div class="swatch__name">--palette-rose</div><div class="swatch__value">#ff9d9d</div></div>
+  <div class="swatch"><div class="swatch__chip" style="background:#f0cf8e"></div><div class="swatch__name">--palette-sand</div><div class="swatch__value">#f0cf8e</div></div>
+</div>
+</div>
+<h3>Semantic tokens</h3>
+<div class="table-wrap">
+<table class="table">
+  <caption>Semantic color tokens, both themes</caption>
+  <thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Use</th></tr></thead>
+  <tbody>
+<tr><th scope="row"><code>--color-bg</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#fafafa"></span>#fafafa</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0a0a0a;border-color:#3d3d3d"></span>#0a0a0a</td><td>Page background (paper)</td></tr>
+<tr><th scope="row"><code>--color-bg-alt</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#f2f2f2"></span>#f2f2f2</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#050505;border-color:#3d3d3d"></span>#050505</td><td>Alternate band</td></tr>
+<tr><th scope="row"><code>--color-surface</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#ffffff"></span>#ffffff</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#101010;border-color:#3d3d3d"></span>#101010</td><td>Cards, tables, panels</td></tr>
+<tr><th scope="row"><code>--color-surface-raised</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#f5f5f5"></span>#f5f5f5</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#171717;border-color:#3d3d3d"></span>#171717</td><td>Table header rows</td></tr>
+<tr><th scope="row"><code>--color-text</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0a0a0a"></span>#0a0a0a</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#fafafa;border-color:#3d3d3d"></span>#fafafa</td><td>Primary text (ink)</td></tr>
+<tr><th scope="row"><code>--color-text-muted</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#3d3d3d"></span>#3d3d3d</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#cfcfcf;border-color:#3d3d3d"></span>#cfcfcf</td><td>Secondary text, nav</td></tr>
+<tr><th scope="row"><code>--color-text-faint</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#6f6f6f"></span>#6f6f6f</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#979797;border-color:#3d3d3d"></span>#979797</td><td>Metadata, labels, kickers</td></tr>
+<tr><th scope="row"><code>--color-line</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#e3e3e3"></span>#e3e3e3</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#262626;border-color:#3d3d3d"></span>#262626</td><td>Hairline rules (decorative)</td></tr>
+<tr><th scope="row"><code>--color-line-strong</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#8a8a8a"></span>#8a8a8a</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#6b6b6b;border-color:#3d3d3d"></span>#6b6b6b</td><td>UI borders on buttons, chips, controls</td></tr>
+<tr><th scope="row"><code>--color-accent</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#1100ff"></span>#1100ff</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#8f8aff;border-color:#3d3d3d"></span>#8f8aff</td><td>Links, primary button, kicker mark</td></tr>
+<tr><th scope="row"><code>--color-accent-hover</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0d00c4"></span>#0d00c4</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#aeaaff;border-color:#3d3d3d"></span>#aeaaff</td><td>Hover state of accent</td></tr>
+<tr><th scope="row"><code>--color-on-accent</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#ffffff"></span>#ffffff</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0a0a0a;border-color:#3d3d3d"></span>#0a0a0a</td><td>Text on an accent fill</td></tr>
+<tr><th scope="row"><code>--color-accent-soft</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:rgba(17,0,255,0.07)"></span>rgba(17,0,255,0.07)</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:rgba(143,138,255,0.10);border-color:#3d3d3d"></span>rgba(143,138,255,0.10)</td><td>Tint behind code, avatar, embed</td></tr>
+<tr><th scope="row"><code>--color-focus</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#1100ff"></span>#1100ff</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#8f8aff;border-color:#3d3d3d"></span>#8f8aff</td><td>Focus ring</td></tr>
+<tr><th scope="row"><code>--color-inverse-bg</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0a0a0a"></span>#0a0a0a</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#fafafa;border-color:#3d3d3d"></span>#fafafa</td><td>CTA band, skip link</td></tr>
+<tr><th scope="row"><code>--color-inverse-text</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#fafafa"></span>#fafafa</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0a0a0a;border-color:#3d3d3d"></span>#0a0a0a</td><td>Text on inverse</td></tr>
+<tr><th scope="row"><code>--color-topic-aem-ai</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#1100ff"></span>#1100ff</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#8f8aff;border-color:#3d3d3d"></span>#8f8aff</td><td>Topic chip, AEM + AI</td></tr>
+<tr><th scope="row"><code>--color-topic-aem</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#0b5fd6"></span>#0b5fd6</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#9db8e8;border-color:#3d3d3d"></span>#9db8e8</td><td>Topic chip, Adobe AEM and EDS</td></tr>
+<tr><th scope="row"><code>--color-topic-agents</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#c2262f"></span>#c2262f</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#ff9d9d;border-color:#3d3d3d"></span>#ff9d9d</td><td>Topic chip, AI Agents</td></tr>
+<tr><th scope="row"><code>--color-topic-work</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#7a5c0f"></span>#7a5c0f</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:#f0cf8e;border-color:#3d3d3d"></span>#f0cf8e</td><td>Topic chip, Working with AI</td></tr>
+<tr><th scope="row"><code>--color-mark</code></th><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:rgba(17,0,255,0.12)"></span>rgba(17,0,255,0.12)</td><td><span class="swatch__chip" style="display:inline-block;width:1rem;height:1rem;vertical-align:-0.2em;margin:0 0.4em 0 0;background:rgba(143,138,255,0.18);border-color:#3d3d3d"></span>rgba(143,138,255,0.18)</td><td>Highlight behind a key phrase (extra token)</td></tr>
+  </tbody>
+</table>
+</div>
+<h3>Contrast</h3>
+<p>Measured with WCAG 2.x relative luminance on 2026-09-13. Text pairs need 4.5:1, the UI border pair needs 3:1. The last column is re-verified by a small inline script from the live computed colors when JavaScript runs.</p>
+<div class="table-wrap">
+<table class="table">
+  <caption>Contrast ratios, light and dark</caption>
+  <thead><tr><th scope="col">Pair</th><th scope="col">Tokens</th><th scope="col">Minimum</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Live check</th></tr></thead>
+  <tbody>
+<tr><th scope="row">text on bg</th><td><code>--color-text</code> on <code>--color-bg</code></td><td>4.5:1</td><td>18.97:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>18.97:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-text|--color-bg" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">text on surface</th><td><code>--color-text</code> on <code>--color-surface</code></td><td>4.5:1</td><td>19.80:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>18.23:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-text|--color-surface" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">text-muted on bg</th><td><code>--color-text-muted</code> on <code>--color-bg</code></td><td>4.5:1</td><td>10.41:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>12.71:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-text-muted|--color-bg" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">text-muted on surface</th><td><code>--color-text-muted</code> on <code>--color-surface</code></td><td>4.5:1</td><td>10.86:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>12.21:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-text-muted|--color-surface" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">text-faint on bg</th><td><code>--color-text-faint</code> on <code>--color-bg</code></td><td>4.5:1</td><td>4.81:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>6.78:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-text-faint|--color-bg" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">accent on bg</th><td><code>--color-accent</code> on <code>--color-bg</code></td><td>4.5:1</td><td>8.15:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>6.83:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-accent|--color-bg" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">on-accent on accent</th><td><code>--color-on-accent</code> on <code>--color-accent</code></td><td>4.5:1</td><td>8.51:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>6.83:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-on-accent|--color-accent" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">inverse-text on inverse-bg</th><td><code>--color-inverse-text</code> on <code>--color-inverse-bg</code></td><td>4.5:1</td><td>18.97:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>18.97:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-inverse-text|--color-inverse-bg" class="text-mono text-faint">[js]</td></tr>
+<tr><th scope="row">line-strong on bg</th><td><code>--color-line-strong</code> on <code>--color-bg</code></td><td>3:1</td><td>3.31:1 <span class="chip chip--status" data-status="pass">pass</span></td><td>3.72:1 <span class="chip chip--status" data-status="pass">pass</span></td><td data-live-pair="--color-line-strong|--color-bg" class="text-mono text-faint">[js]</td></tr>
+  </tbody>
+</table>
+</div>
+<aside class="callout" role="note"><p>Two values changed from the round to pass the border pair: line-strong is #8a8a8a in light (the round's #c9c9c9 measured 1.59:1) and #6b6b6b in dark (the round's #3d3d3d measured 1.82:1). Hairline rules keep the round's lighter values under the line token, which has no contrast requirement.</p></aside>
+<div hidden><span id="contrast-probe-light" data-theme="light"></span><span id="contrast-probe-dark" data-theme="dark"></span></div>
+</section>
+
+<section class="docs-section" id="typography" aria-labelledby="typography-h">
+<h2 id="typography-h">Typography</h2>
+<table class="facts">
+  <caption>Families</caption>
+  <tbody>
+    <tr><th scope="row">Inter 400 / 500 / 600 / 700</th><td><code>--font-display</code>, <code>--font-body</code>. Display, headings, body, card titles, buttons never.</td></tr>
+    <tr><th scope="row">IBM Plex Mono 400 / 500 / 600</th><td><code>--font-mono</code>. Wordmark, nav, kickers, chips, bylines, table labels, buttons, footer headings, code.</td></tr>
+    <tr><th scope="row">Line heights</th><td><code>--leading-tight</code> 1.12 for headings, <code>--leading-body</code> 1.7 for body; summary 1.6, cards 1.3.</td></tr>
+    <tr><th scope="row">Tracking</th><td>Headings -0.02em (display -0.035em), mono labels +0.12em (<code>--tracking-label</code>), nav +0.06em.</td></tr>
+    <tr><th scope="row">Measure</th><td><code>--measure</code> 68ch on <code>.prose</code>; the summary is capped at 62ch.</td></tr>
+  </tbody>
+</table>
+<h3>Scale</h3>
+<div class="specimen"><p class="specimen__label">display · --text-display · clamp(3rem, 8vw, 6rem) / 600 / 0.98 / -0.035em</p><p class="as-display">Jack Jin</p></div>
+<div class="specimen"><p class="specimen__label">h1 · --text-h1 · clamp(2rem, 4.6vw, 3.4rem) / 600 / 1.12 / -0.02em</p><p class="as-h1">Adobe Stardust Explained: Design Agent Skills on EDS</p></div>
+<div class="specimen"><p class="specimen__label">h2 · --text-h2 · clamp(1.35rem, 2.6vw, 1.85rem) / 600 / 1.12 / -0.02em</p><p class="as-h2">How does the skill work?</p></div>
+<div class="specimen"><p class="specimen__label">h3 · --text-h3 · 1.125rem / 600 / 1.12 / -0.01em</p><p class="as-h3">Anima Mesh</p></div>
+<div class="specimen"><p class="specimen__label">body-lg · --text-body-lg · clamp(1.05rem, 1.6vw, 1.25rem) / 400 / 1.6</p><p class="as-body-lg">Jack Jin is an Associate Director at Accenture in Columbus, Ohio, an Adobe Certified Master and an AEM Champion 2026.</p></div>
+<div class="specimen"><p class="specimen__label">body · --text-body · 1.0625rem / 400 / 1.7</p><p class="as-body">He builds AI agent systems and writes about Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. This site holds his posts, videos, projects, talks and certifications.</p></div>
+<div class="specimen"><p class="specimen__label">small · --text-small · 0.9375rem / 400 / 1.7</p><p class="as-small">Runs recurring back-office work from a private repo. A human remains the approval gate for money, filings, publishing, credentials and access.</p></div>
+<div class="specimen"><p class="specimen__label">label · --text-label · 0.72rem mono / 500 / uppercase / 0.12em</p><p class="as-label">Published 2026-08-09 · Video</p></div>
+<div class="specimen"><p class="specimen__label">mono · --text-mono · 0.8125rem mono / 400</p><p class="as-mono">By Jack Jin · Published 2026-08-09 · Updated [date]</p></div>
+</section>
+
+<section class="docs-section" id="spacing" aria-labelledby="spacing-h">
+<h2 id="spacing-h">Spacing</h2>
+<p>Ten steps on a 4px base. Inline gaps use 1 to 3, component padding 4 to 5, section rhythm 7 to 9.</p>
+<ul class="space-scale">
+<li><b>--space-1</b><span>4px</span><span class="space-scale__bar" style="width:4px"></span></li>
+<li><b>--space-2</b><span>8px</span><span class="space-scale__bar" style="width:8px"></span></li>
+<li><b>--space-3</b><span>12px</span><span class="space-scale__bar" style="width:12px"></span></li>
+<li><b>--space-4</b><span>16px</span><span class="space-scale__bar" style="width:16px"></span></li>
+<li><b>--space-5</b><span>24px</span><span class="space-scale__bar" style="width:24px"></span></li>
+<li><b>--space-6</b><span>32px</span><span class="space-scale__bar" style="width:32px"></span></li>
+<li><b>--space-7</b><span>48px</span><span class="space-scale__bar" style="width:48px"></span></li>
+<li><b>--space-8</b><span>64px</span><span class="space-scale__bar" style="width:64px"></span></li>
+<li><b>--space-9</b><span>96px</span><span class="space-scale__bar" style="width:96px"></span></li>
+<li><b>--space-10</b><span>128px</span><span class="space-scale__bar" style="width:128px"></span></li>
+</ul>
+</section>
+
+<section class="docs-section" id="layout" aria-labelledby="layout-h">
+<h2 id="layout-h">Layout</h2>
+<table class="facts">
+  <caption>Layout tokens</caption>
+  <tbody>
+    <tr><th scope="row">Container</th><td><code>--container-max</code> 76rem (1216px), centered with <code>margin-inline: auto</code></td></tr>
+    <tr><th scope="row">Gutter</th><td><code>--gutter</code> clamp(1rem, 2.5vw, 2rem): 16px at 390, about 19px at 768, 26px at 1024, 32px from 1280</td></tr>
+    <tr><th scope="row">Breakpoints</th><td>480, 768, 1024, 1280, 1600. Mobile first.</td></tr>
+    <tr><th scope="row">Header</th><td><code>--header-height</code> 3.5rem; sticky; the nav collapses below 1024</td></tr>
+  </tbody>
+</table>
+<h3>Grid</h3>
+<p><code>.grid</code> auto-fits columns of at least <code>--grid-min</code> (18rem). <code>.grid--2</code> and <code>.grid--3</code> set explicit counts from 1024; <code>.grid--4</code> is two by two from 480 and one row of four from 1280, never three plus one. <code>.grid--rules</code> removes the gap and shares hairlines between cards.</p>
+<div class="story"><p class="story__label">.grid.grid--2</p><div class="grid grid--2"><div class="demo-box">1</div><div class="demo-box">2</div></div></div>
+<div class="story"><p class="story__label">.grid.grid--3</p><div class="grid grid--3"><div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div></div></div>
+<div class="story"><p class="story__label">.grid.grid--4</p><div class="grid grid--4"><div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div></div></div>
+<div class="story"><p class="story__label">.stack and .cluster</p><div class="stack stack--sm"><div class="demo-box">stack item</div><div class="demo-box">stack item</div><div class="cluster"><span class="chip">cluster</span><span class="chip">wraps</span><span class="chip">items</span></div></div></div>
+<h3>Wide screens</h3>
+<p>At 1920 and 2560 the container stays at 1216px and centers; the margins grow equally on both sides. Section rules span the container, not the viewport, so the page reads as a centered column. Nothing sits flush left. Fluid type stops growing at 1200px (the clamp maximums), so headings do not balloon on large monitors.</p>
+</section>
+
+<section class="docs-section" id="shape-elevation" aria-labelledby="shape-h">
+<h2 id="shape-h">Shape and elevation</h2>
+<p>Square. <code>--radius-sm</code> 0 on cards, tables, buttons and chips. <code>--radius-md</code> and <code>--radius-lg</code> 2px on inline code and marks. <code>--radius-pill</code> is 2px because the system has no pills; chips are bracketed mono text instead. Every border is <code>--border-width</code> 1px. <code>--shadow-1</code> is none; <code>--shadow-2</code> is a one pixel hairline offset reserved for the sticky header.</p>
+<div class="story"><p class="story__label">Radii and border</p><div class="radius-demo"><div style="border-radius:var(--radius-sm)">sm 0</div><div style="border-radius:var(--radius-md)">md 2px</div><div style="border-radius:var(--radius-lg)">lg 2px</div><div style="border-radius:var(--radius-pill)">pill 2px</div><div style="box-shadow:var(--shadow-2)">shadow-2</div></div></div>
+</section>
+
+<section class="docs-section" id="motion" aria-labelledby="motion-h">
+<h2 id="motion-h">Motion</h2>
+<table class="facts">
+  <caption>Motion tokens</caption>
+  <tbody>
+    <tr><th scope="row"><code>--duration-fast</code></th><td>120ms: hover color and border changes</td></tr>
+    <tr><th scope="row"><code>--duration-base</code></th><td>200ms: skip link drop, card background, FAQ marker</td></tr>
+    <tr><th scope="row"><code>--ease-standard</code></th><td>cubic-bezier(0.165, 0.84, 0.44, 1), the only curve</td></tr>
+    <tr><th scope="row">Wordmark cursor</th><td>1.1s step blink, stopped under prefers-reduced-motion</td></tr>
+    <tr><th scope="row">Reduced motion</th><td>Every animation and transition is cut to 0.01ms and smooth scrolling is turned off</td></tr>
+  </tbody>
+</table>
+<div class="story"><p class="story__label">Hover the box</p><span class="motion-demo">translate 8px in 200ms</span></div>
+<p>Nothing moves on scroll. Sections are visible at load in every browser, with or without JavaScript.</p>
+</section>
+
+<section class="docs-section" id="iconography" aria-labelledby="iconography-h">
+<h2 id="iconography-h">Iconography</h2>
+<p>Ten symbols in one inline sprite per page, 24 unit viewBox, 1.5 unit stroke, square caps, no fill except the play triangle. Default size is 1em so an icon follows its text; <code>.icon--lg</code> is 1.5em, <code>.icon--xl</code> 2.5rem for the embed placeholder. Color is always currentColor.</p>
+<div class="icon-grid">
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg><span>icon-video</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg><span>icon-article</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-post"></use></svg><span>icon-post</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg><span>icon-repo</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg><span>icon-external</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg><span>icon-arrow</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><span>icon-play</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><span>icon-menu</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg><span>icon-close</span></div>
+  <div><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>icon-check</span></div>
+</div>
+<pre><code>&lt;svg class="icon" aria-hidden="true" focusable="false"&gt;&lt;use href="#icon-video"&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+</section>
+
+<section class="docs-section" id="theming" aria-labelledby="theming-h">
+<h2 id="theming-h">Theming</h2>
+<p>Light and dark are two token sets on one system; light is the default. A three-state control persists the choice under the localStorage key <code>jj-theme</code> with the values <code>light</code>, <code>dark</code> and <code>system</code>. The pre-paint snippet in the head reads the key before any stylesheet loads and sets <code>data-theme</code> on the root element, so there is no flash. <code>shared/theme.js</code> (deferred, never forked) wires the buttons, keeps <code>aria-pressed</code> in sync, sets <code>data-theme-effective</code> and follows OS changes while in System.</p>
+<div class="story"><p class="story__label">Live control</p><div class="theme-control" role="group" aria-label="Color theme">
+  <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+  <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+  <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+</div></div>
+<h3>Pre-paint snippet</h3>
+<pre><code>&lt;script&gt;
+(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');var def=d.getAttribute('data-theme-default')||'light';var c=(s==='light'||s==='dark'||s==='system')?s:def;if(c==='system'){d.removeAttribute('data-theme');}else{d.setAttribute('data-theme',c);}d.setAttribute('data-theme-choice',c);}catch(e){}})();
+&lt;/script&gt;</code></pre>
+<h3>Selector structure</h3>
+<pre><code>:root, [data-theme="light"] { color-scheme: light; /* light semantic tokens */ }
+[data-theme="dark"] { color-scheme: dark; /* dark semantic tokens */ }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) { color-scheme: dark; /* dark semantic tokens, duplicated */ }
+}</code></pre>
+<p>Because the dark set is bound to <code>[data-theme="dark"]</code> on any element, a nested frame can be forced to one theme. Every dark story on this page is a <code>div.story[data-theme="dark"]</code> inside a light page. Components read color tokens at the use site, never through a component token defined on the root, so the nested frame re-themes everything inside it.</p>
+</section>
+
+<section class="docs-section" id="components" aria-labelledby="components-h">
+<h2 id="components-h">Components</h2>
+<p>One subsection per component. Each follows the Storybook docs pattern: status, when to use it, anatomy, one live story per variant and state, at least one dark story, the canonical markup, do and don't, accessibility notes and the tokens it consumes. Class names are fixed by the round contract; modifiers may be added, never renamed.</p>
+<section class="component" id="c-skip-link" aria-labelledby="c-skip-link-h">
+<h3 id="c-skip-link-h">Skip link <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>First focusable element on every page. Hidden until focused, then it drops in at the top left in inverse colors. Pair it with the sr-only utility for text that only assistive technology needs.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>a.skip-link</code> with <code>href="#main"</code></li>
+  <li><code>main#main</code> as the target</li>
+  <li><code>.sr-only</code> utility for visually hidden text</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Focused state (shown static here)</p>
+<a class="skip-link" href="#main">Skip to content</a> <span class="sr-only">Text only for screen readers</span> <span class="text-mono text-faint">(an sr-only span sits to the left of this note)</span>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<a class="skip-link" href="#main">Skip to content</a>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
+&lt;span class="sr-only"&gt;Visually hidden text&lt;/span&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Put it before the header, first in the body.</li><li>Keep the target id stable across pages.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not hide it with display none; it must be focusable.</li><li>Do not reuse sr-only for content that sighted users need.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Appears on keyboard focus with a 2px focus ring in the focus color.</li>
+  <li>Uses inverse-bg and inverse-text, 18.97:1 in both themes.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-inverse-bg · --color-inverse-text · --font-mono · --text-mono · --duration-base · --z-header</p>
+</section>
+<section class="component" id="c-site-header" aria-labelledby="c-site-header-h">
+<h3 id="c-site-header-h">Site header <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>The sticky top bar on every page: wordmark, primary nav, the Book a talk button and the theme control. Below 1024px a Menu button toggles the nav; without JavaScript the nav is always visible.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>header.site-header</code> then <code>.container.site-header__inner</code></li>
+  <li><code>a.wordmark</code>: the text Jack Jin; the underscore cursor is CSS</li>
+  <li><code>button.nav-toggle</code> with <code>aria-expanded</code> and <code>aria-controls</code></li>
+  <li><code>nav.site-nav#site-nav</code> with a <code>ul</code> of links, <code>aria-current="page"</code> on the current one</li>
+  <li><code>.site-header__actions</code>: the primary button and the theme control</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default, current page Blog</p>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="templates/blog.html" aria-current="page">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</header>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="templates/blog.html?topic=aem-ai" aria-current="page">AEM + AI</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="https://www.jackzhaojin.com/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin">Book a talk</a>
+      <div class="theme-control" role="group" aria-label="Color theme">
+        <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+        <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+      </div>
+    </div>
+  </div>
+</header>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;header class="site-header"&gt;
+  &lt;div class="container site-header__inner"&gt;
+    &lt;a class="wordmark" href="/"&gt;Jack Jin&lt;/a&gt;
+    &lt;button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"&gt;Menu&lt;/button&gt;
+    &lt;nav class="site-nav" id="site-nav" aria-label="Primary"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="templates/blog.html?topic=aem-ai"&gt;AEM + AI&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="templates/blog.html" aria-current="page"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/portfolio/"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="templates/home.html#talks"&gt;Talks&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/certifications.html"&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    &lt;div class="site-header__actions"&gt;
+      &lt;a class="btn btn--primary btn--sm" href="https://www.linkedin.com/in/jackjin"&gt;Book a talk&lt;/a&gt;
+      &lt;div class="theme-control" role="group" aria-label="Color theme"&gt;
+        &lt;button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true"&gt;Light&lt;/button&gt;
+        &lt;button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false"&gt;Dark&lt;/button&gt;
+        &lt;button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false"&gt;System&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use real links; the nav carries the most weight for search.</li><li>Mark the current section with aria-current="page".</li><li>Keep the wordmark text only.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not put an icon, image or glyph inside the wordmark.</li><li>Do not hide the nav without JavaScript.</li><li>Do not add a fourth theme state.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Menu button exposes state through aria-expanded; the nav is labeled Primary.</li>
+  <li>The wordmark cursor blink stops under prefers-reduced-motion.</li>
+  <li>Nav text uses text-muted, 10.41:1 light and 12.71:1 dark.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--header-height · --z-header · --color-bg · --color-line · --color-text-muted · --color-accent · --font-mono · --text-mono</p>
+</section>
+<section class="component" id="c-theme-control" aria-labelledby="c-theme-control-h">
+<h3 id="c-theme-control-h">Theme control <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>The three-state Light / Dark / System control. Lives in the header actions and can be repeated anywhere on a page; shared/theme.js keeps every copy in sync.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>.theme-control</code> with <code>role="group"</code> and an <code>aria-label</code></li>
+  <li>three <code>button.theme-control__btn</code> with <code>data-set-theme</code> and <code>aria-pressed</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Live (changes this page)</p>
+<div class="theme-control" role="group" aria-label="Color theme">
+  <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+  <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+  <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+</div>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<div class="theme-control" role="group" aria-label="Color theme">
+  <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+  <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+  <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+</div>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;div class="theme-control" role="group" aria-label="Color theme"&gt;
+  &lt;button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true"&gt;Light&lt;/button&gt;
+  &lt;button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false"&gt;Dark&lt;/button&gt;
+  &lt;button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false"&gt;System&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Copy the markup verbatim; the script binds on data-set-theme.</li><li>Leave aria-pressed="true" on Light in the HTML; the script corrects it before paint.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not replace it with a two-state toggle.</li><li>Do not store the choice under any key other than jj-theme.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Pressed state is exposed through aria-pressed and shown as an ink fill.</li>
+  <li>Buttons are 32px tall and keyboard reachable in order.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-line-strong · --color-text · --color-bg · --color-text-muted · --font-mono · --text-label</p>
+</section>
+<section class="component" id="c-breadcrumb" aria-labelledby="c-breadcrumb-h">
+<h3 id="c-breadcrumb-h">Breadcrumb <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Directly above the H1 on every page except home. Mirrors the URL. Mono, with a slash between items.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>nav.breadcrumb</code> with <code>aria-label="Breadcrumb"</code></li>
+  <li>an <code>ol</code> of <code>li</code>; the last item carries <code>aria-current="page"</code> and no link</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Three levels</p>
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="templates/home.html">Home</a></li><li><a href="templates/blog.html">Blog</a></li><li aria-current="page">Adobe Stardust Explained</li></ol></nav>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="templates/home.html">Home</a></li><li aria-current="page">Blog</li></ol></nav>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;nav class="breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current="page"&gt;Blog&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Start with Home.</li><li>Use the page title, shortened, as the last item.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use it on the home page.</li><li>Do not put the separator in the HTML; CSS draws the slash.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>The list is a real ol inside a labeled nav.</li>
+  <li>Current page text uses the full text color.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--font-mono · --text-mono · --color-text-faint · --color-line-strong · --color-text</p>
+</section>
+<section class="component" id="c-page-head" aria-labelledby="c-page-head-h">
+<h3 id="c-page-head-h">Page head <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>The block under the breadcrumb: kicker, H1, byline and the 40 to 60 word summary. The summary is the answer block search engines and AI assistants lift first, so nothing sits between the H1 and it.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>header.page-head</code></li>
+  <li><code>p.kicker</code></li>
+  <li><code>h1.page-title</code> (add <code>.page-title--display</code> on home only)</li>
+  <li><code>p.byline</code> with author link and <code>time</code> elements</li>
+  <li><code>p.summary</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Post head (h1 shown as a p so this page keeps one H1)</p>
+<header class="page-head"><p class="kicker">Video / AEM + AI</p><p class="page-title" style="font-size:var(--text-h1);font-weight:var(--weight-bold);line-height:var(--leading-tight);letter-spacing:var(--tracking-heading)">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</p><p class="byline">By <a href="templates/home.html">Jack Jin</a> · Published <time datetime="2026-08-09">2026-08-09</time> · Updated <time>[date]</time> · [watch time to confirm] · Video</p><p class="summary">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the UX design skill library that does the design work.</p></header>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<header class="page-head"><p class="kicker">Collection / posts, articles and videos</p><p class="page-title" style="font-size:var(--text-h1);font-weight:var(--weight-bold);line-height:var(--leading-tight);letter-spacing:var(--tracking-heading)">Blog</p><p class="summary">39 posts by Jack Jin: 7 articles, 13 short posts and 19 videos.</p></header>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;header class="page-head"&gt;
+  &lt;p class="kicker"&gt;Video / AEM + AI&lt;/p&gt;
+  &lt;h1 class="page-title"&gt;Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)&lt;/h1&gt;
+  &lt;p class="byline"&gt;By &lt;a href="/"&gt;Jack Jin&lt;/a&gt; · Published &lt;time datetime="2026-08-09"&gt;2026-08-09&lt;/time&gt; · Updated &lt;time&gt;[date]&lt;/time&gt; · [watch time to confirm] · Video&lt;/p&gt;
+  &lt;p class="summary"&gt;40 to 60 words.&lt;/p&gt;
+&lt;/header&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep the summary between 40 and 60 words.</li><li>Show published and updated dates near the H1.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not put a hero image between the H1 and the summary.</li><li>Do not turn the H1 into a slogan.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>One H1 per page.</li>
+  <li>Dates use time elements with datetime.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--text-h1 · --text-display · --text-body-lg · --tracking-heading · --leading-tight · --color-text-muted · --color-line</p>
+</section>
+<section class="component" id="c-kicker" aria-labelledby="c-kicker-h">
+<h3 id="c-kicker-h">Kicker <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A mono, uppercase label above a heading. The identity mark is the accent "//" drawn by CSS before the text. Use a slash, not a dash, to separate parts of the label.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>p.kicker</code>; the "//" is a <code>::before</code> in the accent color</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default</p>
+<p class="kicker">Personal site / AEM + AI and agentic engineering</p>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<p class="kicker">Project / active</p>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;p class="kicker"&gt;Video / AEM + AI&lt;/p&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep it under about 50 characters.</li><li>Separate parts with a slash.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not type the "//" into the HTML.</li><li>Do not use a dash of any kind in the label.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>The "//" is generated content and is not read as meaningful text by most screen readers; the label reads on its own.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--font-mono · --text-mono · --tracking-label · --color-text-faint · --color-accent</p>
+</section>
+<section class="component" id="c-button" aria-labelledby="c-button-h">
+<h3 id="c-button-h">Button <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Mono, uppercase, square. Primary is the accent fill and appears once per view (Book a talk, LinkedIn in the CTA). Secondary is outlined. Ghost has no border. Works as a link or a button element.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>.btn</code> base</li>
+  <li><code>.btn--primary</code>, <code>.btn--secondary</code>, <code>.btn--ghost</code></li>
+  <li><code>.btn--sm</code> size</li>
+  <li>disabled through <code>aria-disabled="true"</code> (links) or <code>disabled</code> (buttons)</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Variants</p>
+<p class="cluster"><a class="btn btn--primary" href="templates/home.html#contact">Book a talk</a> <a class="btn btn--secondary" href="templates/blog.html">Secondary</a> <a class="btn btn--ghost" href="templates/blog.html">Ghost <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></a></p>
+</div>
+<div class="story">
+  <p class="story__label">Sizes and disabled</p>
+<p class="cluster"><button type="button" class="btn btn--primary btn--sm">Small primary</button> <button type="button" class="btn btn--secondary btn--sm">Small secondary</button> <a class="btn btn--primary" aria-disabled="true">Disabled link</a> <button type="button" class="btn btn--secondary" disabled>Disabled button</button></p>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<p class="cluster"><a class="btn btn--primary" href="templates/home.html#contact">Book a talk</a> <a class="btn btn--secondary" href="templates/blog.html">Secondary</a> <a class="btn btn--ghost" href="templates/blog.html">Ghost</a> <a class="btn btn--primary" aria-disabled="true">Disabled</a></p>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;a class="btn btn--primary" href="templates/blog.html"&gt;Book a talk&lt;/a&gt;
+&lt;a class="btn btn--secondary" href="templates/blog.html"&gt;Secondary&lt;/a&gt;
+&lt;button type="button" class="btn btn--ghost"&gt;Ghost&lt;/button&gt;
+&lt;a class="btn btn--primary btn--sm" aria-disabled="true"&gt;Disabled&lt;/a&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use a link when the action navigates, a button when it changes state.</li><li>Label with the destination or the action.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use more than one primary button per view.</li><li>Do not round the corners.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Hover, focus-visible and disabled states are all visible; focus uses the 2px ring.</li>
+  <li>on-accent on accent is 8.51:1 light and 6.83:1 dark.</li>
+  <li>Disabled links keep their text but drop pointer events.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-accent · --color-accent-hover · --color-on-accent · --color-line-strong · --color-accent-soft · --font-mono · --text-mono · --text-label · --duration-fast</p>
+</section>
+<section class="component" id="c-chip" aria-labelledby="c-chip-h">
+<h3 id="c-chip-h">Chip <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A mono label in square brackets: [video], [active]. Static chips are text with CSS brackets. Interactive chips (links in the topic filter, pressed buttons in format and type filters) are bordered boxes without brackets.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>.chip</code> base, brackets from <code>::before</code> and <code>::after</code></li>
+  <li><code>.chip--topic</code> with <code>data-topic</code> aem-ai, aem, agents or work</li>
+  <li><code>.chip--format</code> with <code>data-format</code> video, article or post</li>
+  <li><code>.chip--status</code>, optionally <code>data-status</code></li>
+  <li>as <code>a</code> or <code>button</code>: bordered, with <code>aria-pressed</code> on buttons</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Topic, format, status</p>
+<p class="cluster"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">Adobe AEM and EDS</span> <span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span> <span class="chip chip--format" data-format="video">Video</span> <span class="chip chip--format" data-format="article">Article</span> <span class="chip chip--format" data-format="post">Post</span> <span class="chip chip--status">active</span> <span class="chip chip--status" data-status="delivered">delivered</span></p>
+</div>
+<div class="story">
+  <p class="story__label">Interactive: link and pressed button</p>
+<p class="cluster"><a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai">AEM + AI</a> <a class="chip chip--topic" data-topic="agents" href="templates/blog.html?topic=ai-agents">AI Agents</a> <button type="button" class="chip" aria-pressed="true">All</button> <button type="button" class="chip" aria-pressed="false">Video</button></p>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<p class="cluster"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">Adobe AEM and EDS</span> <span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span> <span class="chip chip--format" data-format="video">Video</span> <span class="chip chip--status">active</span> <button type="button" class="chip" aria-pressed="true">All</button> <button type="button" class="chip" aria-pressed="false">Video</button></p>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;span class="chip chip--topic" data-topic="aem"&gt;Adobe AEM and EDS&lt;/span&gt;
+&lt;span class="chip chip--format" data-format="video"&gt;Video&lt;/span&gt;
+&lt;span class="chip chip--status"&gt;active&lt;/span&gt;
+&lt;a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai"&gt;AEM + AI&lt;/a&gt;
+&lt;button type="button" class="chip" data-filter="format" data-value="all" aria-pressed="true"&gt;All&lt;/button&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use topic chips for the four hubs only.</li><li>Use links for topic chips and buttons for format and type.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not type brackets into the text.</li><li>Do not use chips as buttons for navigation.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Every topic color passes 4.5:1 on bg in both themes (lowest is aem at 5.55:1 light).</li>
+  <li>Pressed state is aria-pressed plus an accent fill.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--font-mono · --text-label · --color-topic-aem-ai · --color-topic-aem · --color-topic-agents · --color-topic-work · --color-text-faint · --color-line-strong · --color-accent · --color-on-accent</p>
+</section>
+<section class="component" id="c-card" aria-labelledby="c-card-h">
+<h3 id="c-card-h">Card <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A bordered block with a mono meta row, a title link, an excerpt and a footer. Three kinds: post, hub (numbered) and project (period, facts line, repo link). The title is the link; the card is not, though a CSS pseudo element extends the hit area over the card. Inside .grid--rules the cards share hairlines.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>article.card</code> plus <code>.card--post</code>, <code>.card--hub</code> or <code>.card--project</code></li>
+  <li><code>p.card__meta</code> (chips and a <code>time</code>)</li>
+  <li><code>h3.card__title</code> with the link</li>
+  <li><code>p.card__excerpt</code></li>
+  <li><code>p.card__footer</code> (topic chip or counts)</li>
+  <li>hub only: <code>p.card__number</code>; project only: <code>p.card__period</code>, <code>p.card__facts</code>, <code>a.card__link</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Post card</p>
+<article class="card card--post">
+  <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-08-09">2026-08-09</time></p>
+  <h3 class="card__title"><a href="templates/post.html">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+  <p class="card__excerpt">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product.</p>
+  <p class="card__footer"><span class="chip chip--topic" data-topic="aem">Adobe AEM and EDS</span></p>
+</article>
+</div>
+<div class="story">
+  <p class="story__label">Hub card</p>
+<article class="card card--hub">
+  <p class="card__number">01</p>
+  <h3 class="card__title"><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></h3>
+  <p class="card__excerpt">AI agents, skills and MCP servers working on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and DA.live.</p>
+  <p class="card__footer"><span class="chip chip--status">flagship</span> <span>[curated: membership set per post]</span></p>
+  <svg class="icon card__arrow" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
+</article>
+</div>
+<div class="story">
+  <p class="story__label">Project card</p>
+<article class="card card--project">
+  <p class="card__period"><span class="chip chip--status">active</span> <span>Jul 2026 to present</span></p>
+  <h3 class="card__title">Anima Mesh</h3>
+  <p class="card__excerpt">Runs recurring back-office work from a private repo. A human remains the approval gate for money, filings, publishing, credentials and access.</p>
+  <p class="card__facts"><span>nine agents</span> <span>36 tags in 29 days</span> <span>v0.16.2</span></p>
+  <p class="card__footer"><a class="card__link" href="https://github.com/jackzhaojin/anima-mesh"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> github.com/jackzhaojin/anima-mesh</a></p>
+</article>
+</div>
+<div class="story">
+  <p class="story__label">Hub cards in .grid--4.grid--rules (one row from 1280px, two by two below)</p>
+<div class="grid grid--4 grid--rules"><article class="card card--hub"><p class="card__number">01</p><h3 class="card__title"><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></h3><p class="card__excerpt">AI agents, skills and MCP servers working on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and DA.live.</p><p class="card__footer"><span>[curated: membership set per post]</span></p></article><article class="card card--hub"><p class="card__number">02</p><h3 class="card__title"><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></h3><p class="card__excerpt">Architecture, headless delivery and the EDS offerings, from production programs.</p><p class="card__footer"><span>12 posts and videos (topic aem)</span></p></article><article class="card card--hub"><p class="card__number">03</p><h3 class="card__title"><a href="templates/blog.html?topic=ai-agents">AI Agents</a></h3><p class="card__excerpt">Continuous agents, harnesses, coordination approaches and safety that lives in code.</p><p class="card__footer"><span>27 posts and videos (topic ai)</span></p></article><article class="card card--hub"><p class="card__number">04</p><h3 class="card__title"><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></h3><p class="card__excerpt">Patterns of work, team enablement and careers, from a year of building with AI most days.</p><p class="card__footer"><span>17 posts and videos (type leadership)</span></p></article></div>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<div class="grid grid--2 grid--rules"><article class="card card--post">
+  <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-08-09">2026-08-09</time></p>
+  <h3 class="card__title"><a href="templates/post.html">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+  <p class="card__excerpt">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product.</p>
+  <p class="card__footer"><span class="chip chip--topic" data-topic="aem">Adobe AEM and EDS</span></p>
+</article><article class="card card--project">
+  <p class="card__period"><span class="chip chip--status">active</span> <span>Jul 2026 to present</span></p>
+  <h3 class="card__title">Anima Mesh</h3>
+  <p class="card__excerpt">Runs recurring back-office work from a private repo. A human remains the approval gate for money, filings, publishing, credentials and access.</p>
+  <p class="card__facts"><span>nine agents</span> <span>36 tags in 29 days</span> <span>v0.16.2</span></p>
+  <p class="card__footer"><a class="card__link" href="https://github.com/jackzhaojin/anima-mesh"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> github.com/jackzhaojin/anima-mesh</a></p>
+</article></div>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;article class="card card--post"&gt;
+  &lt;p class="card__meta"&gt;&lt;span class="chip chip--format" data-format="video"&gt;Video&lt;/span&gt; &lt;time datetime="2026-08-09"&gt;2026-08-09&lt;/time&gt;&lt;/p&gt;
+  &lt;h3 class="card__title"&gt;&lt;a href="templates/post.html"&gt;Adobe Stardust Explained: Design Agent Skills on EDS&lt;/a&gt;&lt;/h3&gt;
+  &lt;p class="card__excerpt"&gt;What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product.&lt;/p&gt;
+  &lt;p class="card__footer"&gt;&lt;span class="chip chip--topic" data-topic="aem"&gt;Adobe AEM and EDS&lt;/span&gt;&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep the excerpt under about 40 words.</li><li>Put the date in a time element.</li><li>Use grid--rules for a ledger of cards.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not wrap the whole card in an a element.</li><li>Do not add images to cards in this system.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Heading level inside a card is h3 under the section h2.</li>
+  <li>Chips in the footer stay clickable above the extended hit area.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-line · --color-bg · --color-surface · --color-text-muted · --color-text-faint · --color-accent · --text-small · --text-label · --space-5</p>
+</section>
+<section class="component" id="c-facts-table" aria-labelledby="c-facts-table-h">
+<h3 id="c-facts-table-h">Facts table <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Key facts as a two column table with row headers. Parsers lift it verbatim, so every value is a fact from data or a bracketed placeholder.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>table.facts</code></li>
+  <li><code>caption</code> (visible with the "//" mark, or <code>.sr-only</code>)</li>
+  <li>rows of <code>th[scope=row]</code> and <code>td</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Visible caption</p>
+<table class="facts"><caption>Key facts</caption><tbody><tr><th scope="row">Repository</th><td><a href="https://github.com/jackzhaojin/anima-mesh">github.com/jackzhaojin/anima-mesh</a></td></tr><tr><th scope="row">License</th><td>Apache 2.0</td></tr><tr><th scope="row">Version</th><td>v0.16.2</td></tr><tr><th scope="row">Commits</th><td>[from git, not yet verified]</td></tr></tbody></table>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark, sr-only caption</p>
+<table class="facts"><caption class="sr-only">Key facts</caption><tbody><tr><th scope="row">Topic</th><td>AEM + AI</td></tr><tr><th scope="row">Format</th><td><span class="chip chip--format" data-format="video">Video</span> [watch time to confirm]</td></tr></tbody></table>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;table class="facts"&gt;
+  &lt;caption class="sr-only"&gt;Key facts&lt;/caption&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Topic&lt;/th&gt;&lt;td&gt;AEM + AI&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use a real table, never a div grid.</li><li>Bracket every unknown.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not estimate numbers.</li><li>Do not drop the caption; make it sr-only if it must not show.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Row headers carry scope="row".</li>
+  <li>Label text uses text-faint, 4.81:1 light and 6.78:1 dark, on the surface.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-text-faint · --color-accent · --font-mono · --text-mono · --text-small</p>
+</section>
+<section class="component" id="c-data-table" aria-labelledby="c-data-table-h">
+<h3 id="c-data-table-h">Data table <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Comparisons and lists with a header row. Always inside .table-wrap so it scrolls sideways on narrow screens instead of breaking the page.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>div.table-wrap</code></li>
+  <li><code>table.table</code> with <code>caption</code>, <code>thead</code> and <code>tbody</code></li>
+  <li><code>th[scope=col]</code> in the head, <code>th[scope=row]</code> for row labels</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Comparison</p>
+<div class="table-wrap"><table class="table"><caption>Three DA.live blocks, one baseline, two Stardust runs</caption><thead><tr><th scope="col">DA.live block</th><th scope="col">Google Stitch baseline</th><th scope="col">Stardust run 1</th><th scope="col">Stardust run 2</th></tr></thead><tbody><tr><th scope="row">[block 1, name to confirm]</th><td>[result]</td><td>[result]</td><td>[result]</td></tr><tr><th scope="row">[block 2, name to confirm]</th><td>[result]</td><td>[result]</td><td>[result]</td></tr></tbody></table></div>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<div class="table-wrap"><table class="table"><caption>Counts</caption><thead><tr><th scope="col">Facet</th><th scope="col">Count</th></tr></thead><tbody><tr><th scope="row">Posts</th><td>39</td></tr><tr><th scope="row">Videos</th><td>19</td></tr></tbody></table></div>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table class="table"&gt;
+    &lt;caption&gt;Caption&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Column&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;th scope="row"&gt;Row&lt;/th&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Wrap every data table.</li><li>Give every table a caption.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use tables for layout.</li><li>Do not let a table set the page width.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Header cells carry scope.</li>
+  <li>The wrapper scrolls; keyboard users can scroll it when it has focusable content.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-surface-raised · --color-line · --color-text-faint · --font-mono · --text-mono · --text-small</p>
+</section>
+<section class="component" id="c-counts-strip" aria-labelledby="c-counts-strip-h">
+<h3 id="c-counts-strip-h">Counts strip <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A row of numbers with mono labels. A description list, so each pair reads as a term and a value. The .strip list variant carries the credentials on home.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>dl.counts</code> of <code>div</code> wrappers, each with <code>dt</code> and <code>dd</code></li>
+  <li>variant <code>ul.strip</code>: numbered mono cells with <code>li.strip__more</code> for the link</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Counts</p>
+<dl class="counts"><div><dt>Posts</dt><dd>39</dd></div><div><dt>Videos</dt><dd>19</dd></div><div><dt>Articles</dt><dd>7</dd></div><div><dt>Projects</dt><dd>12</dd></div><div><dt>Certifications</dt><dd>22</dd></div><div><dt>Talks</dt><dd>6</dd></div></dl>
+</div>
+<div class="story">
+  <p class="story__label">Strip variant</p>
+<ul class="strip"><li>Adobe Certified Master</li><li>AEM Champion 2026</li><li>Azure Solutions Architect Expert</li><li class="strip__more"><a href="https://www.jackzhaojin.com/certifications.html">All 22 certifications</a></li></ul>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<dl class="counts"><div><dt>Posts</dt><dd>39</dd></div><div><dt>Videos</dt><dd>19</dd></div><div><dt>Talks</dt><dd>6</dd></div></dl>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;dl class="counts"&gt;
+  &lt;div&gt;&lt;dt&gt;Posts&lt;/dt&gt;&lt;dd&gt;39&lt;/dd&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;dt&gt;Videos&lt;/dt&gt;&lt;dd&gt;19&lt;/dd&gt;&lt;/div&gt;
+&lt;/dl&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use counts from the data file.</li><li>Keep labels to one or two words.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not animate the numbers.</li><li>Do not round counts.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>dl, dt and dd give each number a name.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-text-faint · --font-mono · --text-label · --weight-bold</p>
+</section>
+<section class="component" id="c-row-list" aria-labelledby="c-row-list-h">
+<h3 id="c-row-list-h">Row list <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Dated rows for talks and related items: date, title, note. Collapses to a single column below 768px.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>ol.row-list</code></li>
+  <li><code>li</code> with an optional <code>data-status</code></li>
+  <li><code>time</code> (or <code>.row-list__date</code> when no valid datetime exists), <code>span.row-list__title</code>, <code>span.row-list__note</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Talks</p>
+<ol class="row-list"><li data-status="upcoming"><span class="row-list__date">2026 (date to confirm)</span><span class="row-list__title">adaptTo() 2026, Berlin: [talk title to confirm]</span><span class="row-list__note">upcoming</span></li><li data-status="upcoming"><time class="row-list__date" datetime="2026-09">September 2026</time><span class="row-list__title">Columbus AI Week 2026, Columbus, Ohio: Panel on Thursday, talk on Friday (titles to confirm)</span><span class="row-list__note">upcoming</span></li><li data-status="delivered"><time class="row-list__date" datetime="2026-04">April 2026</time><span class="row-list__title">Denison University, CS 271, Granville, Ohio: AI, agents and careers (guest talk)</span><span class="row-list__note">delivered</span></li></ol>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<ol class="row-list"><li data-status="delivered"><time class="row-list__date" datetime="2026-04-06">2026-04-06</time><span class="row-list__title">AI Tinkerers Columbus, Columbus, Ohio: OpenClaw 24/7 Development Agent</span><span class="row-list__note">delivered</span></li><li data-status="delivered"><time class="row-list__date" datetime="2025-09">September 2025</time><span class="row-list__title">Columbus AI Week 2025, Columbus, Ohio: AI in Professional Services</span><span class="row-list__note">delivered</span></li><li data-status="delivered"><time class="row-list__date" datetime="2024-03-28">2024-03-28</time><span class="row-list__title">Adobe Summit 2024, Las Vegas: AEM Rockstar, winner</span><span class="row-list__note">delivered</span></li></ol>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;ol class="row-list"&gt;
+  &lt;li data-status="delivered"&gt;&lt;time datetime="2026-04-06"&gt;2026-04-06&lt;/time&gt;&lt;span class="row-list__title"&gt;AI Tinkerers Columbus, Columbus, Ohio: OpenClaw 24/7 Development Agent&lt;/span&gt;&lt;span class="row-list__note"&gt;delivered&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Order upcoming first, then newest delivered.</li><li>Use a valid datetime when the date is known.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not invent a date to fill the column; write the data as given.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>An ordered list keeps the sequence for screen readers.</li>
+  <li>Status color is an addition; the note text says the status.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-text-faint · --color-accent · --font-mono · --text-mono · --text-label · --text-small</p>
+</section>
+<section class="component" id="c-faq" aria-labelledby="c-faq-h">
+<h3 id="c-faq-h">FAQ <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Two to five questions in details elements. The answer stays in the DOM whether open or closed. The Q box and the plus sign are CSS.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>section.faq</code> with an <code>h2</code></li>
+  <li><code>details.faq__item</code> with <code>summary</code> and one or more <code>p</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Closed and open</p>
+<section class="faq"><h3 style="margin-top:0">Questions</h3><details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. Stardust is a skill in the public adobe/skills repo.</p></details><details class="faq__item" open><summary>Where is the human gate in the Stardust workflow?</summary><p>At the prototype step, before the build into EDS.</p></details></section>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<section class="faq"><details class="faq__item" open><summary>How many posts are there?</summary><p>39: 7 articles, 13 short posts and 19 videos.</p></details><details class="faq__item"><summary>Where do the posts live?</summary><p>On LinkedIn.</p></details></section>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;section class="faq"&gt;
+  &lt;h2&gt;Questions&lt;/h2&gt;
+  &lt;details class="faq__item"&gt;
+    &lt;summary&gt;Question?&lt;/summary&gt;
+    &lt;p&gt;Answer.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/section&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Phrase questions the way people ask them.</li><li>Answer from facts on the page.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not load answers on open.</li><li>Do not nest headings inside summary.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Native details and summary: keyboard operable, state announced.</li>
+  <li>The plus rotates to a cross when open; no motion under reduced motion.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-line-strong · --color-accent · --color-text-muted · --font-mono · --text-label</p>
+</section>
+<section class="component" id="c-filter-bar" aria-labelledby="c-filter-bar-h">
+<h3 id="c-filter-bar-h">Filter bar <span class="chip chip--status" data-status="beta">beta</span></h3>
+<p>Collection filters. Topic chips are links to the hub queries, so they work without JavaScript. Format and type chips are buttons with aria-pressed. Sort is a select. scripts.js mirrors the state into the query string; the canonical stays clean.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>form.filter-bar[data-collection]</code></li>
+  <li><code>.filter-bar__row</code> with a <code>.filter-bar__label</code> or a <code>label</code></li>
+  <li>topic <code>a.chip.chip--topic</code>, format and type <code>button.chip[data-filter][data-value][aria-pressed]</code></li>
+  <li><code>select#sort</code></li>
+  <li><code>p.filter-bar__status[data-status]</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default (static here; live on the blog template)</p>
+<form class="filter-bar" action="templates/blog.html" method="get"><div class="filter-bar__row"><span class="filter-bar__label">Topic</span> <a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai">AEM + AI</a> <a class="chip chip--topic" data-topic="aem" href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a> <a class="chip chip--topic" data-topic="agents" href="templates/blog.html?topic=ai-agents">AI Agents</a> <a class="chip chip--topic" data-topic="work" href="templates/blog.html?topic=working-with-ai">Working with AI</a></div><div class="filter-bar__row"><span class="filter-bar__label">Format</span> <button type="button" class="chip" aria-pressed="true">All</button> <button type="button" class="chip" aria-pressed="false">Video</button> <button type="button" class="chip" aria-pressed="false">Article</button> <button type="button" class="chip" aria-pressed="false">Post</button></div><div class="filter-bar__row"><label for="sort-demo">Sort</label> <select id="sort-demo" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div><p class="filter-bar__status">Showing 39 of 39 posts.</p></form>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<form class="filter-bar" action="templates/blog.html" method="get"><div class="filter-bar__row"><span class="filter-bar__label">Topic</span> <a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai">AEM + AI</a> <a class="chip chip--topic" data-topic="work" href="templates/blog.html?topic=working-with-ai">Working with AI</a></div><div class="filter-bar__row"><span class="filter-bar__label">Format</span> <button type="button" class="chip" aria-pressed="true">All</button> <button type="button" class="chip" aria-pressed="false">Video</button></div><div class="filter-bar__row"><label for="sort-demo-dark">Sort</label> <select id="sort-demo-dark" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div></form>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;form class="filter-bar" data-collection action="blog.html" method="get"&gt;
+  &lt;div class="filter-bar__row"&gt;
+    &lt;span class="filter-bar__label"&gt;Topic&lt;/span&gt;
+    &lt;a class="chip chip--topic" data-topic="aem-ai" href="templates/blog.html?topic=aem-ai"&gt;AEM + AI&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="filter-bar__row"&gt;
+    &lt;span class="filter-bar__label"&gt;Format&lt;/span&gt;
+    &lt;button type="button" class="chip" data-filter="format" data-value="all" aria-pressed="true"&gt;All&lt;/button&gt;
+    &lt;button type="button" class="chip" data-filter="format" data-value="video" aria-pressed="false"&gt;Video&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="filter-bar__row"&gt;
+    &lt;label for="sort"&gt;Sort&lt;/label&gt;
+    &lt;select id="sort" name="sort"&gt;&lt;option value="newest"&gt;Newest first&lt;/option&gt;&lt;option value="oldest"&gt;Oldest first&lt;/option&gt;&lt;/select&gt;
+  &lt;/div&gt;
+  &lt;p class="filter-bar__status" data-status aria-live="polite"&gt;Showing 39 of 39 posts.&lt;/p&gt;
+&lt;/form&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep topic chips as links.</li><li>Write the query string only for non-default state.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not fetch posts on filter; hide and show DOM nodes.</li><li>Do not paginate under 48 items.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Buttons expose aria-pressed; the status line is aria-live polite.</li>
+  <li>The select has a visible label.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-line-strong · --color-text-faint · --font-mono · --text-label · --text-mono</p>
+</section>
+<section class="component" id="c-pagination" aria-labelledby="c-pagination-h">
+<h3 id="c-pagination-h">Pagination <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Numbered page links past 48 items. Not used on the blog template (39 posts) but part of the system.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>nav.pagination</code> with <code>aria-label="Pagination"</code></li>
+  <li>an <code>ol</code> of links; the current one carries <code>aria-current="page"</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Page 1 of 3</p>
+<nav class="pagination" aria-label="Pagination"><ol><li><a href="templates/blog.html" aria-current="page">1</a></li><li><a href="templates/blog.html?page=2">2</a></li><li><a href="templates/blog.html?page=3">3</a></li><li><a href="templates/blog.html?page=2">Next</a></li></ol></nav>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<nav class="pagination" aria-label="Pagination"><ol><li><a href="templates/blog.html">Previous</a></li><li><a href="templates/blog.html">1</a></li><li><a href="templates/blog.html?page=2" aria-current="page">2</a></li><li><a href="templates/blog.html?page=3">3</a></li></ol></nav>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;nav class="pagination" aria-label="Pagination"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="templates/blog.html" aria-current="page"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="templates/blog.html"&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="templates/blog.html"&gt;Next&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use real links with page URLs.</li><li>Show Previous and Next as words.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use it below 48 items.</li><li>Do not disable links with pointer-events only; omit them instead.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>aria-current marks the current page and gets the accent fill.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-accent · --color-on-accent · --color-accent-soft · --font-mono · --text-mono</p>
+</section>
+<section class="component" id="c-embed" aria-labelledby="c-embed-h">
+<h3 id="c-embed-h">Embed <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A 16:9 frame for a video with a plain watch link always present in the figcaption. Until a real iframe exists the frame is a striped placeholder with the play icon.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>figure.embed</code></li>
+  <li><code>div.embed__frame</code> holding an iframe with a title, or the placeholder</li>
+  <li><code>figcaption.embed__fallback</code> with the plain links</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Placeholder</p>
+<figure class="embed"><div class="embed__frame"><span class="embed__play"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg></span><span>[video embed to be supplied] · 16:9</span></div><figcaption class="embed__fallback"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Watch on LinkedIn</a> · <span>[YouTube link pending]</span></figcaption></figure>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<figure class="embed"><div class="embed__frame"><span class="embed__play"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg></span><span>[video embed to be supplied] · 16:9</span></div><figcaption class="embed__fallback"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Watch on LinkedIn</a></figcaption></figure>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;figure class="embed"&gt;
+  &lt;div class="embed__frame"&gt;[video placeholder or iframe with title]&lt;/div&gt;
+  &lt;figcaption class="embed__fallback"&gt;&lt;a href="templates/blog.html"&gt;Watch on LinkedIn&lt;/a&gt; · &lt;a href="templates/blog.html"&gt;Watch on YouTube&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Always keep a plain link under the frame.</li><li>Give the iframe a title.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not autoplay.</li><li>Do not put the embed above the summary; the answer block comes first.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>The play icon is decorative and aria-hidden; the link text carries the action.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-accent · --color-accent-soft · --color-bg · --font-mono · --text-mono</p>
+</section>
+<section class="component" id="c-chapters" aria-labelledby="c-chapters-h">
+<h3 id="c-chapters-h">Chapters <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Timestamps for a video as an ordered list. Times in the accent color, mono.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>ol.chapters</code> of <code>li</code>, each with a <code>time</code> and a <code>span</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Placeholder</p>
+<ol class="chapters"><li><time datetime="PT0S">0:00</time> <span>[chapters to be supplied from the recording]</span></li></ol>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<ol class="chapters"><li><time datetime="PT0S">0:00</time> <span>[chapters to be supplied from the recording]</span></li></ol>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;ol class="chapters"&gt;
+  &lt;li&gt;&lt;time datetime="PT0S"&gt;0:00&lt;/time&gt; &lt;span&gt;Chapter title&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use ISO durations in datetime.</li><li>Keep one line per chapter.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not invent chapters; bracket until the recording is reviewed.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Ordered list keeps the sequence.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-accent · --font-mono · --text-mono · --text-small</p>
+</section>
+<section class="component" id="c-transcript" aria-labelledby="c-transcript-h">
+<h3 id="c-transcript-h">Transcript <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>The full transcript in a details element so the page stays short but the text is in the DOM for search and assistants.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>details.transcript</code></li>
+  <li><code>summary</code> reading Transcript</li>
+  <li><code>div.transcript__body</code> with paragraphs; optional <code>span.transcript__time</code> stamps</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Closed</p>
+<details class="transcript"><summary>Transcript</summary><div class="transcript__body"><p>[transcript to be supplied]</p></div></details>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark, open</p>
+<details class="transcript" open><summary>Transcript</summary><div class="transcript__body"><span class="transcript__time">0:00</span><p>[transcript to be supplied]</p></div></details>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;details class="transcript"&gt;
+  &lt;summary&gt;Transcript&lt;/summary&gt;
+  &lt;div class="transcript__body"&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Put the whole text in the HTML.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not fetch the transcript on open.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Native disclosure; the text is available to assistive technology even when closed.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-accent · --color-text-muted · --font-mono · --text-mono · --text-small · --measure</p>
+</section>
+<section class="component" id="c-author-box" aria-labelledby="c-author-box-h">
+<h3 id="c-author-box-h">Author box <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Closes a post: a mono monogram avatar, name, role and profile links. The same author on every page.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>aside.author-box</code></li>
+  <li><code>span.avatar[aria-hidden]</code> with the initials</li>
+  <li><code>p.author-box__name</code>, <code>p.author-box__role</code>, <code>p.author-box__links</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default</p>
+<aside class="author-box"><span class="avatar" aria-hidden="true">JJ</span><div><p class="author-box__name">Jack Jin</p><p class="author-box__role">Associate Director at Accenture, Columbus, Ohio. Cloud architect, Adobe Certified Master, AEM Champion 2026.</p><p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a></p></div></aside>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<aside class="author-box"><span class="avatar" aria-hidden="true">JJ</span><div><p class="author-box__name">Jack Jin</p><p class="author-box__role">Associate Director at Accenture, Columbus, Ohio.</p><p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a></p></div></aside>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;aside class="author-box"&gt;
+  &lt;span class="avatar" aria-hidden="true"&gt;JJ&lt;/span&gt;
+  &lt;div&gt;
+    &lt;p class="author-box__name"&gt;Jack Jin&lt;/p&gt;
+    &lt;p class="author-box__role"&gt;...&lt;/p&gt;
+    &lt;p class="author-box__links"&gt;&lt;a href="templates/blog.html"&gt;LinkedIn&lt;/a&gt; &lt;a href="templates/blog.html"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Use the same role line the About page uses.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use a photo here until the approved headshot exists; the monogram stands in.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>The monogram is aria-hidden; the name is plain text.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-line-strong · --color-accent · --color-accent-soft · --color-text-muted · --font-mono</p>
+</section>
+<section class="component" id="c-callout" aria-labelledby="c-callout-h">
+<h3 id="c-callout-h">Callout <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>A short note or warning inside body copy. The label is CSS, so the markup is just the text.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>aside.callout[role=note]</code></li>
+  <li><code>.callout--warn</code> for warnings</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Note and warning</p>
+<aside class="callout" role="note"><p>Every number on this site comes from git history, ledgers or repo docs. Unknowns are bracketed.</p></aside><aside class="callout callout--warn" role="note"><p>The AEM + AI hub membership is curated per post and is not in the shared data yet; the blog filter shows the AEM topic until that set exists.</p></aside>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<aside class="callout" role="note"><p>Content is in the HTML. Scripts only switch theme, open the nav and filter.</p></aside>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;aside class="callout" role="note"&gt;&lt;p&gt;...&lt;/p&gt;&lt;/aside&gt;
+&lt;aside class="callout callout--warn" role="note"&gt;&lt;p&gt;...&lt;/p&gt;&lt;/aside&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep it to one or two sentences.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not use it for marketing asides.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>role="note" announces it as a note; the color bar is decorative.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-accent · --color-topic-agents · --color-text-muted · --font-mono · --text-label · --measure</p>
+</section>
+<section class="component" id="c-cta-band" aria-labelledby="c-cta-band-h">
+<h3 id="c-cta-band-h">CTA band <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>The inverse panel at the end of home and hub pages: a factual heading, one sentence and two buttons. Ink on paper flips to paper on ink.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>section.cta-band</code></li>
+  <li><code>h2</code>, <code>p</code>, <code>p.cluster</code> of buttons</li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default</p>
+<section class="cta-band"><h3 style="margin-top:0;font-size:var(--text-h2)">Book a talk</h3><p>Jack speaks on AEM + AI and agentic engineering. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [email address to be supplied]</a></p></section>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<section class="cta-band"><h3 style="margin-top:0;font-size:var(--text-h2)">Book a talk</h3><p>Contact through LinkedIn.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [email address to be supplied]</a></p></section>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;section class="cta-band"&gt;
+  &lt;h2&gt;Book a talk&lt;/h2&gt;
+  &lt;p&gt;...&lt;/p&gt;
+  &lt;p class="cluster"&gt;&lt;a class="btn btn--primary" href="templates/blog.html"&gt;LinkedIn&lt;/a&gt; &lt;a class="btn btn--secondary" href="templates/blog.html"&gt;Email&lt;/a&gt;&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>State what the talks cover and where the next ones are.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not write a slogan as the heading.</li><li>Do not invent an email address.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>inverse-text on inverse-bg is 18.97:1 in both themes.</li>
+  <li>Buttons keep their own contrast on the band.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-inverse-bg · --color-inverse-text · --color-accent · --color-on-accent · --space-7 · --space-6</p>
+</section>
+<section class="component" id="c-footer" aria-labelledby="c-footer-h">
+<h3 id="c-footer-h">Footer <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Four columns: Topics, Sections, Elsewhere, Machine files, then a meta row. Column headings are h2 so the outline stays intact.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>footer.site-footer</code></li>
+  <li><code>.container.site-footer__grid</code> of four <code>.site-footer__col</code> with <code>h2.site-footer__heading</code> and a <code>ul</code></li>
+  <li><code>.container.site-footer__meta</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">Default (column headings shown as p so this page keeps its outline)</p>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Topics</p>
+      <ul>
+          <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+          <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+          <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+          <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Sections</p>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Elsewhere</p>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin" rel="me">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin" rel="me">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Machine files</p>
+      <ul>
+        <li><a href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><a href="tokens.json">tokens.json</a></li>
+        <li><a href="README.md">README.md</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>© 2026 Jack Jin · Columbus, Ohio</p>
+    <p>kimi-k3 design system v0.1.0 · plain HTML, CSS and JavaScript</p>
+  </div>
+</footer>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Topics</p>
+      <ul>
+          <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+          <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+          <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+          <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Sections</p>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Elsewhere</p>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin" rel="me">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin" rel="me">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__heading">Machine files</p>
+      <ul>
+        <li><a href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><a href="tokens.json">tokens.json</a></li>
+        <li><a href="README.md">README.md</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>© 2026 Jack Jin · Columbus, Ohio</p>
+    <p>kimi-k3 design system v0.1.0 · plain HTML, CSS and JavaScript</p>
+  </div>
+</footer>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;footer class="site-footer"&gt;
+  &lt;div class="container site-footer__grid"&gt;
+    &lt;div class="site-footer__col"&gt;
+      &lt;h2 class="site-footer__heading"&gt;Topics&lt;/h2&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href="templates/blog.html?topic=aem-ai"&gt;AEM + AI&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="templates/blog.html?topic=adobe-aem"&gt;Adobe AEM and EDS&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="templates/blog.html?topic=ai-agents"&gt;AI Agents&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="templates/blog.html?topic=working-with-ai"&gt;Working with AI&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="site-footer__col"&gt;
+      &lt;h2 class="site-footer__heading"&gt;Sections&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="templates/home.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="templates/blog.html"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/portfolio/"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="templates/home.html#talks"&gt;Talks&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/certifications.html"&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="index.html"&gt;Design system&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="site-footer__col"&gt;
+      &lt;h2 class="site-footer__heading"&gt;Elsewhere&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="https://www.linkedin.com/in/jackjin" rel="me"&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://github.com/jackzhaojin" rel="me"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/certifications.html"&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="site-footer__col"&gt;
+      &lt;h2 class="site-footer__heading"&gt;Machine files&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/sitemap.xml"&gt;sitemap.xml&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://www.jackzhaojin.com/robots.txt"&gt;robots.txt&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="tokens.json"&gt;tokens.json&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="README.md"&gt;README.md&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="container site-footer__meta"&gt;
+    &lt;p&gt;© 2026 Jack Jin · Columbus, Ohio&lt;/p&gt;
+    &lt;p&gt;kimi-k3 design system v0.1.0 · plain HTML, CSS and JavaScript&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Keep every link real.</li><li>List the machine files.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not add a newsletter form.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>Column headings are real headings.</li>
+  <li>Links use text-muted at 15px and underline on hover.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">--color-surface · --color-line · --color-text-faint · --color-text-muted · --color-accent · --font-mono · --text-mono · --text-small · --text-label</p>
+</section>
+<section class="component" id="c-icons" aria-labelledby="c-icons-h">
+<h3 id="c-icons-h">Icons <span class="chip chip--status" data-status="stable">stable</span></h3>
+<p>Ten stroke icons in one inline SVG sprite per page. Referenced with use; sized in em so they follow the text. Decorative by default.</p>
+<h4>Anatomy</h4>
+<ul>
+  <li><code>svg[hidden]</code> sprite with <code>symbol</code> elements, once per page</li>
+  <li><code>svg.icon[aria-hidden][focusable=false]</code> with <code>use[href]</code></li>
+</ul>
+<h4>Stories</h4>
+<div class="story">
+  <p class="story__label">In text and in a button</p>
+<p>Watch the video <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> or read the article <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg>. <a href="https://github.com/jackzhaojin" class="btn btn--secondary btn--sm"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> Repository</a> <a href="https://www.linkedin.com/in/jackjin" class="btn btn--ghost btn--sm">External <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg></a></p>
+</div>
+<div class="story" data-theme="dark">
+  <p class="story__label">Dark</p>
+<p class="cluster"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-article"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-post"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-repo"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg> <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></p>
+</div>
+<h4>Markup</h4>
+<pre><code>&lt;svg class="icon" aria-hidden="true" focusable="false"&gt;&lt;use href="#icon-video"&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+<h4>Do and don't</h4>
+<div class="do-dont">
+  <div class="do"><p>Do</p><ul><li>Include the sprite once, right after the skip link.</li><li>Pair an icon with text.</li></ul></div>
+  <div class="dont"><p>Don't</p><ul><li>Do not load an icon font.</li><li>Do not use an icon alone as a link label.</li></ul></div>
+</div>
+<h4>Accessibility</h4>
+<ul>
+  <li>All icons are aria-hidden; meaning comes from adjacent text.</li>
+</ul>
+<h4>Tokens used</h4>
+<p class="text-mono text-faint">currentColor only; no color tokens of its own</p>
+</section>
+</section>
+
+<section class="docs-section" id="patterns" aria-labelledby="patterns-h">
+<h2 id="patterns-h">Patterns</h2>
+<h3>Page anatomy</h3>
+<ol>
+  <li>Breadcrumb, directly above the H1, on every page except home.</li>
+  <li>Kicker and H1. The H1 is the page's subject, not a slogan. Titles say Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and DA.live in full.</li>
+  <li>Byline with author link, published and updated dates, read or watch time and the media type.</li>
+  <li>Summary: the 40 to 60 word answer block, first, with nothing between it and the H1.</li>
+  <li>Facts table.</li>
+  <li>Body in a <code>.prose</code> column: H2s phrased as the questions people ask, steps in <code>ol</code>, comparisons in <code>table.table</code>.</li>
+  <li>FAQ, related links, author box.</li>
+</ol>
+<h3>Heading rules</h3>
+<p>One H1. Then H2 and H3 in order; never skip a level. Cards use h3 under a section h2. Footer columns use h2. Component subsections on this page use h3 with h4 parts.</p>
+<h3>Content in HTML</h3>
+<p>Every slot ships in the initial HTML. Tabs, accordions and carousels only when the content stays in the DOM (<code>details</code>, or <code>hidden</code> toggled by JavaScript) and the default view shows the summary, the facts table and the first section. No opacity-zero reveal patterns.</p>
+<h3>Images and alt text</h3>
+<p>Alt text is one sentence naming what a diagram shows and the entities in it. Decorative images get <code>alt=""</code>. Decorative SVG gets <code>aria-hidden="true"</code>. No fact lives only inside an image. This round uses no raster images; the monogram avatar stands in for the headshot.</p>
+<h3>Theme default</h3>
+<p>Every page in this round sets <code>data-theme-default="light"</code>. The value <code>system</code> is reserved for the portfolio page later. Never hard code <code>data-theme</code> in the HTML; the pre-paint snippet sets it.</p>
+<h3>Voice</h3>
+<p>An engineer's plain voice. No slogans, no hype, no filler adjectives. Link labels name the destination. Numbers come from data or stay bracketed. No em dashes or other unicode dashes anywhere; use a slash, a comma or a new sentence.</p>
+<p>Why each slot exists, for humans, search and AI answer engines: <a href="../../../ai-docs/2026-09-13-seo-geo-redesign/seo-page-blueprint.md">seo-page-blueprint.md</a>.</p>
+</section>
+
+<section class="docs-section" id="templates" aria-labelledby="templates-h">
+<h2 id="templates-h">Templates</h2>
+<ul>
+  <li><a href="templates/home.html">Home</a>: H1 and positioning, summary, four hub cards, latest three posts, featured project with facts, credentials strip, six talks, CTA band.</li>
+  <li><a href="templates/post.html">Post, video state</a>: the Adobe Stardust post with byline, facts, embed placeholder, chapters, question-shaped H2s, comparison table, transcript, FAQ, related, author box.</li>
+  <li><a href="templates/blog.html">Blog</a>: all 39 posts newest first, counts by facet, filter bar with query string state, FAQ. No pagination under 48 items.</li>
+</ul>
+<p>Hub links point to <code>blog.html?topic=&lt;slug&gt;</code> because hub pages are not built in this round.</p>
+</section>
+
+<section class="docs-section" id="status" aria-labelledby="status-h">
+<h2 id="status-h">Status</h2>
+<div class="table-wrap">
+<table class="table table--auto">
+  <caption>Components, status and version</caption>
+  <thead><tr><th scope="col">Component</th><th scope="col">Class</th><th scope="col">Status</th><th scope="col">Version</th></tr></thead>
+  <tbody>
+    <tr><th scope="row"><a href="#c-skip-link">Skip link</a></th><td><code>.skip-link</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-site-header">Site header</a></th><td><code>.site-header</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-theme-control">Theme control</a></th><td><code>.theme-control</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-breadcrumb">Breadcrumb</a></th><td><code>.breadcrumb</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-page-head">Page head</a></th><td><code>.page-head</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-kicker">Kicker</a></th><td><code>.kicker</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-button">Button</a></th><td><code>.button</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-chip">Chip</a></th><td><code>.chip</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-card">Card</a></th><td><code>.card</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-facts-table">Facts table</a></th><td><code>.facts</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-data-table">Data table</a></th><td><code>.table</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-counts-strip">Counts strip</a></th><td><code>.counts</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-row-list">Row list</a></th><td><code>.row-list</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-faq">FAQ</a></th><td><code>.faq__item</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-filter-bar">Filter bar</a></th><td><code>.filter-bar</code></td><td><span class="chip chip--status" data-status="beta">beta</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-pagination">Pagination</a></th><td><code>.pagination</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-embed">Embed</a></th><td><code>.embed</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-chapters">Chapters</a></th><td><code>.chapters</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-transcript">Transcript</a></th><td><code>.transcript</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-author-box">Author box</a></th><td><code>.author-box</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-callout">Callout</a></th><td><code>.callout</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-cta-band">CTA band</a></th><td><code>.cta-band</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-footer">Footer</a></th><td><code>.site-footer</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+    <tr><th scope="row"><a href="#c-icons">Icons</a></th><td><code>.icon</code></td><td><span class="chip chip--status" data-status="stable">stable</span></td><td>0.1.0</td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section class="docs-section" id="changelog" aria-labelledby="changelog-h">
+<h2 id="changelog-h">Changelog</h2>
+<ol class="row-list">
+  <li><time datetime="2026-09-13">2026-09-13</time><span class="row-list__title">0.1.0: first cut from the Kimi K3 round. Tokens in both themes, base and components, documentation site, three templates, README. line-strong darkened in both themes to pass 3:1.</span><span class="row-list__note">initial</span></li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Topics</h2>
+      <ul>
+          <li><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></li>
+          <li><a href="templates/blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+          <li><a href="templates/blog.html?topic=ai-agents">AI Agents</a></li>
+          <li><a href="templates/blog.html?topic=working-with-ai">Working with AI</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Sections</h2>
+      <ul>
+        <li><a href="templates/home.html">Home</a></li>
+        <li><a href="templates/blog.html">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="templates/home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="index.html">Design system</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Elsewhere</h2>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/jackjin" rel="me">LinkedIn</a></li>
+        <li><a href="https://github.com/jackzhaojin" rel="me">GitHub</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Machine files</h2>
+      <ul>
+        <li><a href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+        <li><a href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+        <li><a href="tokens.json">tokens.json</a></li>
+        <li><a href="README.md">README.md</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <p>© 2026 Jack Jin · Columbus, Ohio</p>
+    <p>kimi-k3 design system v0.1.0 · plain HTML, CSS and JavaScript</p>
+  </div>
+</footer>
+<script>
+(function () {
+  function lin(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function parse(s) { var m = s.match(/\d+(\.\d+)?/g); if (!m || m.length < 3) return null; return m.slice(0, 3).map(Number); }
+  function lum(rgb) { return 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]); }
+  function ratio(a, b) { var la = lum(a), lb = lum(b); var hi = Math.max(la, lb), lo = Math.min(la, lb); return (hi + 0.05) / (lo + 0.05); }
+  var probes = { light: document.getElementById('contrast-probe-light'), dark: document.getElementById('contrast-probe-dark') };
+  if (!probes.light || !probes.dark) return;
+  function val(theme, token) { var el = probes[theme]; el.style.color = 'var(' + token + ')'; return parse(getComputedStyle(el).color); }
+  var cells = document.querySelectorAll('[data-live-pair]');
+  for (var i = 0; i < cells.length; i++) {
+    var p = cells[i].getAttribute('data-live-pair').split('|');
+    var out = [];
+    ['light', 'dark'].forEach(function (th) { var f = val(th, p[0]), b = val(th, p[1]); if (f && b) out.push(th + ' ' + ratio(f, b).toFixed(2)); });
+    cells[i].textContent = out.join(' / ');
+  }
+})();
+</script>
+</body>
+</html>

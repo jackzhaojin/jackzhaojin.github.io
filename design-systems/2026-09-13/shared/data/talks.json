@@ -1,0 +1,52 @@
+{
+  "talks": [
+    {
+      "event": "adaptTo() 2026",
+      "location": "Berlin",
+      "date": "2026 (date to confirm)",
+      "title": "[talk title to confirm]",
+      "status": "upcoming",
+      "source": "LinkedIn post 2026-07-27, adaptTo() 2026 Speaker Announcement"
+    },
+    {
+      "event": "Columbus AI Week 2026",
+      "location": "Columbus, Ohio",
+      "date": "September 2026",
+      "title": "Panel on Thursday, talk on Friday (titles to confirm)",
+      "status": "upcoming",
+      "source": "LinkedIn posts 2026-08-14 and 2026-09-08"
+    },
+    {
+      "event": "Denison University, CS 271",
+      "location": "Granville, Ohio",
+      "date": "April 2026",
+      "title": "AI, agents and careers (guest talk)",
+      "status": "delivered",
+      "source": "LinkedIn post 2026-04-26"
+    },
+    {
+      "event": "AI Tinkerers Columbus",
+      "location": "Columbus, Ohio",
+      "date": "2026-04-06",
+      "title": "OpenClaw 24/7 Development Agent",
+      "status": "delivered",
+      "source": "certifications.html, Notable Presentations"
+    },
+    {
+      "event": "Columbus AI Week 2025",
+      "location": "Columbus, Ohio",
+      "date": "September 2025",
+      "title": "AI in Professional Services",
+      "status": "delivered",
+      "source": "certifications.html, Notable Presentations"
+    },
+    {
+      "event": "Adobe Summit 2024",
+      "location": "Las Vegas",
+      "date": "2024-03-28",
+      "title": "AEM Rockstar, winner",
+      "status": "delivered",
+      "source": "certifications.html, Notable Presentations"
+    }
+  ]
+}
