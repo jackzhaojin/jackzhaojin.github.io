@@ -7,68 +7,44 @@
   "overflow": "none",
   "centered": "yes",
   "theme": "pass",
-  "contrast": "all pairs pass AA; dark frames pass (153 nodes)",
+  "contrast": "all pairs pass AA; dark frames pass (155 nodes)",
   "bands": "7 bands, full bleed, distinct grounds, text passes",
   "nojs": "pass"
  },
  {
   "slug": "astra",
   "name": "Astra",
-  "static": "129/136",
-  "static_fails": [
-   "(folder): all component classes styled .band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label",
-   "(folder): band tint uses color-mix",
-   "(folder): home uses five bands across three variants 0 bands, variants []",
-   "(folder): post uses a non-plain band 0 bands, variants []",
-   "(folder): blog uses a non-plain band 0 bands, variants []",
-   "index.html: docs section #c-band",
-   "index.html: docs section #c-divider"
-  ],
+  "static": "136/136",
+  "static_fails": [],
   "overflow": "none",
   "centered": "yes",
   "theme": "pass",
-  "contrast": "all pairs pass AA; dark frames pass (175 nodes)",
-  "bands": "none",
+  "contrast": "all pairs pass AA; dark frames pass (213 nodes)",
+  "bands": "7 bands, full bleed, distinct grounds, text passes",
   "nojs": "pass"
  },
  {
   "slug": "kimi-k3",
   "name": "Kimi K3",
-  "static": "129/136",
-  "static_fails": [
-   "(folder): all component classes styled .band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label",
-   "(folder): band tint uses color-mix",
-   "(folder): home uses five bands across three variants 0 bands, variants []",
-   "(folder): post uses a non-plain band 0 bands, variants []",
-   "(folder): blog uses a non-plain band 0 bands, variants []",
-   "index.html: docs section #c-band",
-   "index.html: docs section #c-divider"
-  ],
+  "static": "136/136",
+  "static_fails": [],
   "overflow": "none",
   "centered": "yes",
   "theme": "pass",
-  "contrast": "all pairs pass AA; dark frames pass (151 nodes)",
-  "bands": "none",
+  "contrast": "all pairs pass AA; dark frames pass (162 nodes)",
+  "bands": "7 bands, full bleed, distinct grounds, text passes",
   "nojs": "pass"
  },
  {
   "slug": "google-stitch",
   "name": "Google Stitch",
-  "static": "129/136",
-  "static_fails": [
-   "(folder): all component classes styled .band, .band--alt, .band--tint, .band--inverse, .band--milestone, .divider, .divider__label",
-   "(folder): band tint uses color-mix",
-   "(folder): home uses five bands across three variants 0 bands, variants []",
-   "(folder): post uses a non-plain band 0 bands, variants []",
-   "(folder): blog uses a non-plain band 0 bands, variants []",
-   "index.html: docs section #c-band",
-   "index.html: docs section #c-divider"
-  ],
+  "static": "136/136",
+  "static_fails": [],
   "overflow": "none",
   "centered": "yes",
   "theme": "pass",
-  "contrast": "all pairs pass AA; dark frames pass (185 nodes)",
-  "bands": "none",
+  "contrast": "all pairs pass AA; dark frames pass (196 nodes)",
+  "bands": "7 bands, full bleed, distinct grounds, text passes",
   "nojs": "pass"
  }
 ]

@@ -78,6 +78,8 @@
       <li><a href="#iconography">Iconography</a></li>
       <li><a href="#theming">Theming</a></li>
       <li><a href="#components">Components</a></li>
+      <li><a href="#c-band">Section band</a></li>
+      <li><a href="#c-divider">Divider</a></li>
       <li><a href="#patterns">Patterns</a></li>
       <li><a href="#templates">Templates</a></li>
       <li><a href="#status">Status</a></li>
@@ -95,7 +97,7 @@
         </ol>
       </nav>
       <header class="page-head">
-        <p class="kicker">Design system / 0.1.0 / Beta</p>
+        <p class="kicker">Design system / 0.2.0 / Beta</p>
         <h1 class="page-title">Astra design system</h1>
         <p class="byline">Origin: the Codex round of 2026-09-13, which Jack refers to as Astra · Source folder <code>local-only/codex-design-2026-09-13/outputs/redesign/</code> · Produced by Codex (model version not recorded in the round's output) · Rebuilt to SPEC.md on 2026-09-13</p>
         <p class="summary">Astra is the design system for www.jackzhaojin.com. Serif display type on a sans body, one violet accent, lavender tint panels, a deep plum panel for featured content, numbered mono kickers and question-shaped section headings. Light and dark are two token sets on one system, light by default. Every component is documented here with live stories in both themes.</p>
@@ -503,8 +505,8 @@
         <div class="story story--wide" data-theme="dark"><p class="story__label">Dark</p><header class="site-header">
   <div class="container site-header__inner">
     <a class="wordmark" href="/">Jack Jin</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="story-nav">Menu</button>
-    <nav class="story-nav" id="story-nav" aria-label="Primary">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="story-nav-2">Menu</button>
+    <nav class="story-nav" id="story-nav-2" aria-label="Primary">
       <ul>
         <li><a href="templates/blog.html?topic=aem-ai" aria-current="page">AEM + AI</a></li>
         <li><a href="templates/blog.html">Blog</a></li>
@@ -979,7 +981,7 @@
         <h4>Anatomy</h4>
         <ul><li><code>section.faq</code> with an h2, then <code>details.faq__item</code> with a <code>summary</code> question and a paragraph answer.</li></ul>
         <h4>Stories</h4>
-        <div class="story"><p class="story__label">Closed by default</p><section class="faq">
+        <div class="story"><p class="story__label">Closed by default</p><section class="faq" aria-label="FAQ example">
   <p class="as-h2">Questions about this video</p>
   <details class="faq__item">
     <summary>Is Adobe Stardust a product?</summary>
@@ -990,7 +992,7 @@
     <p>At the prototype stage. A person reviews the prototypes before the build into Edge Delivery Services (EDS).</p>
   </details>
 </section></div>
-        <div class="story" data-theme="dark"><p class="story__label">Dark, first item open</p><section class="faq"><p class="as-h2">Questions about this video</p><details class="faq__item" open><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo. It builds on impeccable, a UX design skill library, which does the design work.</p></details><details class="faq__item"><summary>Where is the human review step?</summary><p>At the prototype stage. A person reviews the prototypes before the build into Edge Delivery Services (EDS).</p></details></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">Dark, first item open</p><section class="faq" aria-label="FAQ example 2"><p class="as-h2">Questions about this video</p><details class="faq__item" open><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo. It builds on impeccable, a UX design skill library, which does the design work.</p></details><details class="faq__item"><summary>Where is the human review step?</summary><p>At the prototype stage. A person reviews the prototypes before the build into Edge Delivery Services (EDS).</p></details></section></div>
         <h4>Markup</h4>
         <pre><code>&lt;section class=&quot;faq&quot;&gt;
   &lt;h2&gt;Questions about this video&lt;/h2&gt;
@@ -1070,8 +1072,8 @@
     <button type="button" class="chip" data-filter="type" data-value="leadership" aria-pressed="false">Leadership (17)</button>
   </div>
   <div class="filter-bar__row" data-js-only>
-    <label for="sort">Sort</label>
-    <select id="sort" name="sort">
+    <label for="sort-2">Sort</label>
+    <select id="sort-2" name="sort">
       <option value="newest">Newest first</option>
       <option value="oldest">Oldest first</option>
     </select>
@@ -1328,7 +1330,7 @@
         <h4>Anatomy</h4>
         <ul><li><code>section.cta-band</code> with a kicker, an h2, a paragraph and a <code>.cluster</code> of buttons.</li></ul>
         <h4>Stories</h4>
-        <div class="story"><p class="story__label">Default (light page)</p><section class="cta-band">
+        <div class="story"><p class="story__label">Default (light page)</p><section class="cta-band" aria-label="CTA band example">
   <p class="kicker">Speaking and contact</p>
   <p class="as-h2">Book a talk</p>
   <div>
@@ -1336,7 +1338,7 @@
     <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
   </div>
 </section></div>
-        <div class="story" data-theme="dark"><p class="story__label">Dark</p><section class="cta-band">
+        <div class="story" data-theme="dark"><p class="story__label">Dark</p><section class="cta-band" aria-label="CTA band example 2">
   <p class="kicker">Speaking and contact</p>
   <p class="as-h2">Book a talk</p>
   <div>
@@ -1359,6 +1361,60 @@
         <ul><li>Inverse text on inverse bg is 14.2:1. Focus rings switch to the inverse accent so they show on plum.</li></ul>
         <h4>Tokens</h4>
         <p class="mono">--color-inverse-bg, --color-inverse-text, --color-inverse-text-muted, --color-inverse-accent, --color-inverse-line, --panel-pad, --panel-radius</p>
+      </section>
+
+      <section class="docs-component" id="c-band">
+        <div class="docs-component__head"><h3>Section band</h3><span class="chip chip--status" data-status="stable">Stable</span><span class="mono text-faint">.band</span></div>
+        <p class="docs-component__desc">Use a full-width ground to separate page sections. Astra keeps its serif headings and lavender panels, adds the portfolio's radial and linear wash, and reserves deep plum for the inverse band. These stories fill their preview frame; template bands fill the viewport.</p>
+        <h4>Anatomy</h4>
+        <ul><li>A named <code>section.band</code> with one ground modifier and a centered <code>.container</code>.</li><li>A hairline top edge and fluid <code>--band-pad</code>. Tint adds a decorative <code>::before</code>; optional dots use <code>::after</code>.</li><li>Milestone adds a bottom edge and a serif <code>.band__numeral</code>, with half the normal padding.</li><li>Inverse resolves text, links, buttons, chips, row lists and card tokens on the plum ground. Its topic chips use the inverse violet accent.</li></ul>
+        <h4>Stories</h4>
+        <div class="story" data-theme="light"><p class="story__label">plain / light</p><section class="band band--plain" aria-labelledby="band-light-plain"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-light-plain">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="light"><p class="story__label">alt / light</p><section class="band band--alt" aria-labelledby="band-light-alt"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-light-alt">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="light"><p class="story__label">tint / light</p><section class="band band--tint" style="--band-accent: var(--color-topic-aem-ai)" aria-labelledby="band-light-tint"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-light-tint">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="light"><p class="story__label">inverse / light</p><section class="band band--inverse" aria-labelledby="band-light-inverse"><div class="container"><section class="cta-band" aria-labelledby="band-light-inverse"><p class="kicker">Speaking and contact</p><p class="as-h2" id="band-light-inverse">Book a talk</p><div><p>Talks cover Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a><a class="btn btn--secondary" href="templates/home.html#talks">Talks</a><a class="btn btn--ghost" href="templates/blog.html">Blog</a></p></div></section><p class="cluster"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span><span class="chip chip--format" data-format="video">Video</span></p><ol class="row-list"><li><time datetime="2024-03-28">2024-03-28</time><span class="row-list__title"><a href="templates/home.html#talks">Adobe Summit 2024</a></span><span class="row-list__note">Las Vegas · AEM Rockstar, winner</span></li></ol></div></section></div>
+        <div class="story" data-theme="light"><p class="story__label">milestone / light</p><section class="band band--milestone" aria-labelledby="band-light-milestone"><div class="container"><p class="band__numeral" id="band-light-milestone">2026</p><p class="text-muted">AEM Champion</p></div></section></div>
+        <div class="story" data-theme="light"><p class="story__label">tint-dots / light</p><section class="band band--tint band--dots" aria-labelledby="band-light-tint-dots"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-light-tint-dots">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">plain / dark</p><section class="band band--plain" aria-labelledby="band-dark-plain"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-dark-plain">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">alt / dark</p><section class="band band--alt" aria-labelledby="band-dark-alt"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-dark-alt">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">tint / dark</p><section class="band band--tint" style="--band-accent: var(--color-topic-aem-ai)" aria-labelledby="band-dark-tint"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-dark-tint">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">inverse / dark</p><section class="band band--inverse" aria-labelledby="band-dark-inverse"><div class="container"><section class="cta-band" aria-labelledby="band-dark-inverse"><p class="kicker">Speaking and contact</p><p class="as-h2" id="band-dark-inverse">Book a talk</p><div><p>Talks cover Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a><a class="btn btn--secondary" href="templates/home.html#talks">Talks</a><a class="btn btn--ghost" href="templates/blog.html">Blog</a></p></div></section><p class="cluster"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span><span class="chip chip--format" data-format="video">Video</span></p><ol class="row-list"><li><time datetime="2024-03-28">2024-03-28</time><span class="row-list__title"><a href="templates/home.html#talks">Adobe Summit 2024</a></span><span class="row-list__note">Las Vegas · AEM Rockstar, winner</span></li></ol></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">milestone / dark</p><section class="band band--milestone" aria-labelledby="band-dark-milestone"><div class="container"><p class="band__numeral" id="band-dark-milestone">2026</p><p class="text-muted">AEM Champion</p></div></section></div>
+        <div class="story" data-theme="dark"><p class="story__label">tint-dots / dark</p><section class="band band--tint band--dots" aria-labelledby="band-dark-tint-dots"><div class="container"><p class="kicker">01 / Topics</p><p class="as-h2" id="band-dark-tint-dots">Which topics does this site cover?</p><p class="text-muted">Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.</p><p><a href="templates/blog.html?topic=aem-ai">AEM + AI</a></p></div></section></div>
+        <h4>Canonical markup</h4>
+        <pre><code>&lt;section class=&quot;band band--tint&quot; style=&quot;--band-accent: var(--color-topic-aem-ai)&quot; aria-labelledby=&quot;h-topics&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;h2 id=&quot;h-topics&quot;&gt;Which topics does this site cover?&lt;/h2&gt;
+    &lt;p&gt;Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+        <p>Replace the modifier with <code>band--plain</code>, <code>band--alt</code>, <code>band--inverse</code> or <code>band--milestone</code>. Add <code>band--dots</code> to tint when a quiet motif suits the section. No modifier means plain.</p>
+        <h4>Do / Don't</h4>
+        <dl class="do-dont"><div class="do"><dt>Do</dt><dd>Keep the band outside the container; keep its content inside. Match a topic wash to the section's topic.</dd></div><div class="dont"><dt>Don't</dt><dd>Don't put two alternate bands together, nest bands, or use more than one inverse band per template.</dd></div></dl>
+        <h4>Accessibility</h4>
+        <ul><li>Use a real section heading and <code>aria-labelledby</code>. Story headings use paragraphs to preserve the documentation outline.</li><li>Wash and dots are decorative CSS layers, ignore pointer events and never change text color. Information must remain in HTML.</li><li>Keep normal text at 4.5:1 on the combined wash; keep controls and focus visible. Milestone numerals use solid text so a year remains readable.</li><li>The two inverse previews above are separate component examples, not a page composition. Templates allow one inverse band at most.</li></ul>
+        <h4>Tokens consumed</h4>
+        <p class="mono">--band-accent, --band-tint-strong, --band-tint-soft, --band-tint-edge, --band-pad, --color-bg, --color-bg-alt, --color-line, --color-text, --color-text-muted, --color-accent, --color-topic-aem-ai, --color-inverse-bg, --color-inverse-text, --color-inverse-text-muted, --color-inverse-accent, --color-inverse-line, --font-display, --text-display, --leading-tight, --tracking-display, --weight-regular, --border-width, --space-10</p>
+        <p>Light wash strengths: 3%, 2%, 2%. Dark and System dark: 4%, 1%, 2%. Band padding: <code>clamp(var(--space-7), 8vw, var(--space-9))</code>, or 48px to 96px. The light strengths preserve faint text and strong-line contrast on lavender white. Dark strengths are reduced from the portfolio reference to keep those pairs readable where the radial and linear layers overlap.</p>
+      </section>
+
+      <section class="docs-component" id="c-divider">
+        <div class="docs-component__head"><h3>Divider</h3><span class="chip chip--status" data-status="stable">Stable</span><span class="mono text-faint">.divider</span></div>
+        <p class="docs-component__desc">Use a labeled divider at the top of a band or between two groups within one container. The uppercase mono label continues Astra's numbered kickers. Omit the label for a single fading hairline.</p>
+        <h4>Anatomy</h4>
+        <ul><li><code>div.divider</code> with <code>role="separator"</code> and an accessible label.</li><li>Optional <code>span.divider__label</code> between two decorative fading rules. Long labels wrap instead of forcing horizontal scrolling.</li></ul>
+        <h4>Stories</h4>
+        <div class="story" data-theme="light"><p class="story__label">Labeled / light</p><div class="container"><div class="divider" role="separator" aria-label="Topics"><span class="divider__label">01 / Topics</span></div></div></div>
+        <div class="story" data-theme="light"><p class="story__label">Unlabeled / light</p><div class="container"><div class="divider" role="separator" aria-label="Topics"></div></div></div>
+        <div class="story" data-theme="dark"><p class="story__label">Labeled / dark</p><div class="container"><div class="divider" role="separator" aria-label="Topics"><span class="divider__label">01 / Topics</span></div></div></div>
+        <div class="story" data-theme="dark"><p class="story__label">Unlabeled / dark</p><div class="container"><div class="divider" role="separator" aria-label="Topics"></div></div></div>
+        <h4>Canonical markup</h4><pre><code>&lt;div class=&quot;divider&quot; role=&quot;separator&quot; aria-label=&quot;Topics&quot;&gt;
+  &lt;span class=&quot;divider__label&quot;&gt;01 / Topics&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        <h4>Do / Don't</h4>
+        <dl class="do-dont"><div class="do"><dt>Do</dt><dd>Keep the divider inside a container and give the separator a meaningful accessible name.</dd></div><div class="dont"><dt>Don't</dt><dd>Don't use a divider label as a substitute for a section heading or a full-width band.</dd></div></dl>
+        <h4>Accessibility</h4><ul><li>The label is text in the DOM, with an accessible name on the separator. Decorative hairlines carry no information.</li><li>No focus target or keyboard interaction is needed. Labels remain readable at narrow widths and in both themes.</li></ul>
+        <h4>Tokens consumed</h4><p class="mono">--font-mono, --text-label, --tracking-label, --weight-medium, --color-text-faint, --color-line-strong, --border-width, --space-3, --space-4, --space-5</p>
       </section>
 
       <section class="docs-component" id="c-footer">
@@ -1435,6 +1491,13 @@
         <li>Body: H2 sub-questions, <code>ol</code> for steps, <code>table</code> for comparisons, embed with a plain link, chapters, transcript.</li>
         <li>FAQ, related items, author box, then the footer.</li>
       </ol>
+      <h3>Section rhythm</h3>
+      <ul>
+        <li>Home: page head plain; topics tint with the AEM + AI accent; latest posts alt; featured project tint with the page accent and dots; credentials plain, opened by the labeled divider; talks tint with the Working with AI accent; CTA inverse. The contained Anima Mesh panel stays plum.</li>
+        <li>Post: breadcrumb, page head, facts, embed, chapters, body, transcript and FAQ in one plain band; related items, Discuss on LinkedIn and author box in one alt band.</li>
+        <li>Blog: breadcrumb and page head plain; featured intro and counts tint with the page accent; filters and all 39 cards plain; FAQ alt.</li>
+      </ul>
+      <p>This follows section 9 without rebalancing. Bands alone fill the viewport between header and footer; containers center their content. Each band has a top hairline and fluid padding. Adjacent bands need visibly different grounds in both themes; two alt bands never touch. Topic tints follow the topic; otherwise use the page accent. Washes never change text colors. Use at most one inverse band per template. Milestones are optional short breaks with top and bottom hairlines; none is added to these templates because no content calls for one.</p>
       <h3>Heading rules</h3>
       <ul>
         <li>One H1. H2 for sections, H3 for items inside them, never skipping a level.</li>
@@ -1495,6 +1558,8 @@
             <tr><th scope="row">Author box</th><td>.author-box</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.1.0</td></tr>
             <tr><th scope="row">Callout</th><td>.callout</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.1.0</td></tr>
             <tr><th scope="row">CTA band</th><td>.cta-band</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.1.0</td></tr>
+            <tr><th scope="row">Section band</th><td>.band</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.2.0</td></tr>
+            <tr><th scope="row">Divider</th><td>.divider</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.2.0</td></tr>
             <tr><th scope="row">Footer</th><td>.site-footer</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.1.0</td></tr>
             <tr><th scope="row">Icons</th><td>.icon</td><td><span class="chip chip--status" data-status="stable">Stable</span></td><td>0.1.0</td></tr>
           </tbody>
@@ -1507,6 +1572,7 @@
       <p class="kicker">13 / Changelog</p>
       <h2>What changed, and when?</h2>
       <ol class="row-list">
+        <li><time datetime="2026-09-14">2026-09-14</time><span class="row-list__title">0.2.0</span><span class="row-list__note">Added Section band and Divider with every variant in light and dark, per-theme wash tokens, inverse component colors, and section rhythm across all three templates. Preserved serif display, lavender panels, the plum project panel and the deep plum inverse CTA.</span></li>
         <li><time datetime="2026-09-13">2026-09-13</time><span class="row-list__title">0.1.1</span><span class="row-list__note">Fixed the dark story frames: cards rendered a light surface under dark text because the card tokens were declared on :root only. They now resolve on every themed scope. Flagship hub counts use muted text to pass 4.5:1 in dark.</span></li>
         <li><time datetime="2026-09-13">2026-09-13</time><span class="row-list__title">0.1.0</span><span class="row-list__note">First build from the Codex round. Dropped the two slogans, the half-circle mark and the card art. Added the three-state theme control, the full semantic token set in both themes, every component from the contract with stories, and the three templates from shared data. Adjusted three colors to pass AA (light faint text, light and dark strong lines). Removed pagination below 48 items.</span></li>
       </ol>

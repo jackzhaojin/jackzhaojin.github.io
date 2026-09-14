@@ -64,15 +64,20 @@
     </div>
   </div>
 </header>
-<main id="main" class="container">
+<main id="main">
+  <section class="band band--plain" aria-labelledby="home-title">
+    <div class="container">
   <header class="page-head page-head--home">
     <p class="kicker">AEM + AI / Columbus, Ohio</p>
-    <h1 class="page-title">Jack Jin<span class="page-title__dot">.</span></h1>
+    <h1 class="page-title" id="home-title">Jack Jin<span class="page-title__dot">.</span></h1>
     <p class="positioning">Associate Director at Accenture. Cloud architect. Adobe Certified Master. AEM Champion 2026.</p>
     <p class="summary">Jack Jin is an Associate Director at Accenture in Columbus, Ohio, an Adobe Certified Master and an AEM Champion 2026. He builds AI agent systems and writes about Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. This site holds his posts, videos, projects, talks and certifications.</p>
   </header>
+    </div>
+  </section>
 
-  <section class="section" id="topics" aria-labelledby="topics-title">
+  <section class="band band--tint" id="topics" aria-labelledby="topics-title" style="--band-accent: var(--color-topic-aem-ai)">
+    <div class="container">
     <div class="section__head"><div><p class="kicker">01 / Topics</p><h2 id="topics-title">Which topics does this site cover?</h2></div></div>
     <div class="grid grid--4">
 <article class="card card--hub is-flagship">
@@ -104,9 +109,11 @@
   <svg class="icon card__arrow" aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg>
 </article>
     </div>
+    </div>
   </section>
 
-  <section class="section" id="latest" aria-labelledby="latest-title">
+  <section class="band band--alt" id="latest" aria-labelledby="latest-title">
+    <div class="container">
     <div class="section__head"><div><p class="kicker">02 / Latest</p><h2 id="latest-title">What was published most recently?</h2></div><a class="section__link" href="blog.html">All 39 posts</a></div>
     <div class="grid grid--3">
 <article class="card card--post" data-topic="aem" data-type="technical" data-format="video" data-date="2026-08-09" data-hub="aem-ai">
@@ -128,9 +135,11 @@
   <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
 </article>
     </div>
+    </div>
   </section>
 
-  <section class="section" id="project" aria-labelledby="project-title">
+  <section class="band band--tint band--dots" id="project" aria-labelledby="project-title">
+    <div class="container">
     <div class="section__head"><div><p class="kicker">03 / Featured project</p><h2 id="project-title">What is being built right now?</h2></div><a class="section__link" href="https://www.jackzhaojin.com/portfolio/">All 12 projects</a></div>
     <div class="panel panel--inverse feature">
       <div>
@@ -153,10 +162,13 @@
         </tbody>
       </table>
     </div>
+    </div>
   </section>
 
-  <section class="section" id="credentials" aria-labelledby="credentials-title">
-    <div class="section__head"><div><p class="kicker">04 / Credentials</p><h2 id="credentials-title">Which credentials does Jack hold?</h2></div><a class="section__link" href="https://www.jackzhaojin.com/certifications.html">All 22 certifications</a></div>
+  <section class="band band--plain" id="credentials" aria-labelledby="credentials-title">
+    <div class="container">
+    <div class="divider" role="separator" aria-label="Credentials"><span class="divider__label">04 / Credentials</span></div>
+    <div class="section__head"><div><h2 id="credentials-title">Which credentials does Jack hold?</h2></div><a class="section__link" href="https://www.jackzhaojin.com/certifications.html">All 22 certifications</a></div>
     <ul class="credentials">
       <li>Adobe<b>Certified Master</b></li>
       <li>AEM Champion<b>2026</b></li>
@@ -164,9 +176,11 @@
       <li>Anthropic<b>Claude Certified Architect - Professional</b></li>
       <li>Full list<b><a href="https://www.jackzhaojin.com/certifications.html">All 22 certifications</a></b></li>
     </ul>
+    </div>
   </section>
 
-  <section class="section" id="talks" aria-labelledby="talks-title">
+  <section class="band band--tint" id="talks" aria-labelledby="talks-title" style="--band-accent: var(--color-topic-work)">
+    <div class="container">
     <div class="section__head"><div><p class="kicker">05 / Talks</p><h2 id="talks-title">Where has Jack spoken, and where next?</h2></div></div>
     <ol class="row-list">
 <li><span class="row-list__when">2026 (date to confirm)</span><span class="row-list__title">adaptTo() 2026</span><span class="row-list__note">Berlin · [talk title to confirm]</span><span class="chip chip--status row-list__status" data-status="upcoming">Upcoming</span></li>
@@ -176,14 +190,19 @@
 <li><span class="row-list__when">September 2025</span><span class="row-list__title">Columbus AI Week 2025</span><span class="row-list__note">Columbus, Ohio · AI in Professional Services</span><span class="chip chip--status row-list__status" data-status="delivered">Delivered</span></li>
 <li><time datetime="2024-03-28">2024-03-28</time><span class="row-list__title">Adobe Summit 2024</span><span class="row-list__note">Las Vegas · AEM Rockstar, winner</span><span class="chip chip--status row-list__status" data-status="delivered">Delivered</span></li>
     </ol>
+    </div>
   </section>
 
-  <section class="cta-band" id="contact" aria-labelledby="contact-title">
+  <section class="band band--inverse" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+  <section class="cta-band" aria-labelledby="contact-title">
     <p class="kicker">06 / Speaking and contact</p>
     <h2 id="contact-title">Book a talk</h2>
     <div>
       <p>Talks cover Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and AI agent systems. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026.</p>
       <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
+    </div>
+  </section>
     </div>
   </section>
 </main>
@@ -227,7 +246,7 @@
   </div>
   <div class="container site-footer__meta">
     <p>© 2026 Jack Jin · Columbus, Ohio</p>
-    <p>Astra design system 0.1.0</p>
+    <p>Astra design system 0.2.0</p>
   </div>
 </footer>
 </body>

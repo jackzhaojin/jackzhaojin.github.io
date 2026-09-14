@@ -833,13 +833,13 @@
       <ul><li><code>section.faq</code> with an <code>h2</code> on a page (an <code>h3</code> in this story to keep the docs outline).</li><li><code>details.faq__item</code> with a <code>summary</code> and one or more <code>p</code>.</li></ul>
       <h4>Stories</h4>
       <div class="story"><p class="story__label">closed and open</p>
-        <section class="faq"><h3>Questions about this video</h3>
+        <section class="faq" aria-label="FAQ example"><h3>Questions about this video</h3>
           <details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo.</p></details>
           <details class="faq__item" open><summary>What does Stardust build on?</summary><p>On impeccable, the 57K-star UX design skill library that does the design work.</p></details>
         </section>
       </div>
       <div class="story" data-theme="dark"><p class="story__label">dark</p>
-        <section class="faq"><h3>Questions about the blog</h3>
+        <section class="faq" aria-label="FAQ example 2"><h3>Questions about the blog</h3>
           <details class="faq__item" open><summary>How many pieces are there?</summary><p>39: 7 articles, 13 short posts and 19 videos.</p></details>
           <details class="faq__item"><summary>Where do the full posts live?</summary><p>On LinkedIn today. Each card links to its LinkedIn copy.</p></details>
         </section>
@@ -1155,8 +1155,8 @@
       <h4>Anatomy</h4>
       <ul><li><code>section.cta-band</code> with an <code>h2</code> on a page (an <code>h3</code> here), a <code>p</code> and a <code>p.cluster</code> of buttons.</li></ul>
       <h4>Stories</h4>
-      <div class="story"><p class="story__label">light</p><section class="cta-band"><h3>Book a talk</h3><p>Conferences, meetups and internal sessions. Send the event, date and audience. Two ways in, no form.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [address to be supplied]</a></p></section></div>
-      <div class="story" data-theme="dark"><p class="story__label">dark</p><section class="cta-band"><h3>Book a talk</h3><p>Conferences, meetups and internal sessions. Send the event, date and audience. Two ways in, no form.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [address to be supplied]</a></p></section></div>
+      <div class="story"><p class="story__label">light</p><section class="cta-band" aria-label="CTA band example"><h3>Book a talk</h3><p>Conferences, meetups and internal sessions. Send the event, date and audience. Two ways in, no form.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [address to be supplied]</a></p></section></div>
+      <div class="story" data-theme="dark"><p class="story__label">dark</p><section class="cta-band" aria-label="CTA band example 2"><h3>Book a talk</h3><p>Conferences, meetups and internal sessions. Send the event, date and audience. Two ways in, no form.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <a class="btn btn--secondary" aria-disabled="true">Email: [address to be supplied]</a></p></section></div>
       <h4>Markup</h4>
 <pre><code>&lt;section class="cta-band"&gt;
   &lt;h2&gt;Book a talk&lt;/h2&gt;

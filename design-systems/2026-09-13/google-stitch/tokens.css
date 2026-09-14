@@ -28,7 +28,7 @@
   --palette-slate-800: #1e293b;
   --palette-slate-700: #334155;
   --palette-slate-600: #475569;
-  --palette-slate-550: #5d6b82;
+  --palette-slate-550: #56647b;
   --palette-slate-500: #64748b;
   --palette-slate-450: #7b8798;
   --palette-slate-400: #94a3b8;
@@ -106,6 +106,7 @@
 
   /* Layout */
   --container-max: 1280px;
+  --band-pad: clamp(var(--space-7), 8vw, var(--space-9));   /* 48 to 96 */
   --gutter: 1rem;
   --measure: 68ch;
   --header-height: 4rem;
@@ -137,6 +138,9 @@
 /* Semantic tokens, light (default)                                     */
 /* ------------------------------------------------------------------ */
 :root, [data-theme="light"] {
+  --band-tint-strong: 10%;
+  --band-tint-soft: 5%;
+  --band-tint-edge: 4%;
   color-scheme: light;
   --color-bg: var(--palette-lilac-50);
   --color-bg-alt: var(--palette-slate-100);
@@ -172,6 +176,9 @@
 /* Semantic tokens, dark                                                */
 /* ------------------------------------------------------------------ */
 [data-theme="dark"] {
+  --band-tint-strong: 7%;
+  --band-tint-soft: 4%;
+  --band-tint-edge: 3%;
   color-scheme: dark;
   --color-bg: var(--palette-ink-900);
   --color-bg-alt: var(--palette-ink-950);
@@ -204,6 +211,9 @@
 /* System choice: no data-theme attribute, follow the OS. Values duplicated on purpose. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --band-tint-strong: 7%;
+    --band-tint-soft: 4%;
+    --band-tint-edge: 3%;
     color-scheme: dark;
     --color-bg: var(--palette-ink-900);
     --color-bg-alt: var(--palette-ink-950);

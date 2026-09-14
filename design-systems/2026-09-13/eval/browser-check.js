@@ -12,7 +12,7 @@ async page => {
   const out = [];
   const contrastFn = `(() => {
     function parse(c){ c=c.trim(); const m=c.match(/^#([0-9a-f]{3,8})$/i); if(m){ let h=m[1]; if(h.length===3||h.length===4) h=h.split('').map(x=>x+x).join(''); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16), h.length===8?parseInt(h.slice(6,8),16)/255:1]; }
-      const r=c.match(/rgba?\\(([^)]+)\\)/); if(r){ const p=r[1].split(',').map(s=>parseFloat(s)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; } return null; }
+      const k=c.match(/color\\(srgb\\s+([\\d.]+)\\s+([\\d.]+)\\s+([\\d.]+)(?:\\s*\\/\\s*([\\d.]+))?\\)/); if(k) return [parseFloat(k[1])*255, parseFloat(k[2])*255, parseFloat(k[3])*255, k[4]!==undefined?parseFloat(k[4]):1]; const r=c.match(/rgba?\\(([^)]+)\\)/); if(r){ const p=r[1].split(',').map(s=>parseFloat(s)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; } return null; }
     function blend(fg,bg){ const a=fg[3]; return [fg[0]*a+bg[0]*(1-a), fg[1]*a+bg[1]*(1-a), fg[2]*a+bg[2]*(1-a),1]; }
     function lum(c){ const f=v=>{v/=255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4)}; return 0.2126*f(c[0])+0.7152*f(c[1])+0.0722*f(c[2]); }
     return (fgVar,bgVar) => { const cs=getComputedStyle(document.documentElement); const el=document.createElement('div'); document.body.appendChild(el);
@@ -73,7 +73,7 @@ async page => {
     // Bands: full bleed at three widths, distinct grounds per theme, text contrast on tint and inverse bands
     try {
       const bandProbe = () => {
-        function parse(c){ const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
+        function parse(c){ const k=c.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/); if(k) return [parseFloat(k[1])*255, parseFloat(k[2])*255, parseFloat(k[3])*255, k[4]!==undefined?parseFloat(k[4]):1]; const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
         function lum(c){ const f=v=>{v/=255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4)}; return 0.2126*f(c[0])+0.7152*f(c[1])+0.0722*f(c[2]); }
         function blend(fg,bg){ const a=fg[3]; return [fg[0]*a+bg[0]*(1-a), fg[1]*a+bg[1]*(1-a), fg[2]*a+bg[2]*(1-a),1]; }
         function ratio(fg,bg){ if(fg[3]<1) fg=blend(fg,bg); const l1=lum(fg), l2=lum(bg); return Math.round(((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05))*100)/100; }
@@ -110,7 +110,7 @@ async page => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(BASE + slug + '/index.html', { waitUntil: 'load' });
       r.darkStory = await page.evaluate(() => {
-        function parse(c){ const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
+        function parse(c){ const k=c.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/); if(k) return [parseFloat(k[1])*255, parseFloat(k[2])*255, parseFloat(k[3])*255, k[4]!==undefined?parseFloat(k[4]):1]; const m=c.match(/rgba?\(([^)]+)\)/); if(!m) return null; const p=m[1].split(',').map(x=>parseFloat(x)); return [p[0],p[1],p[2], p.length>3?p[3]:1]; }
         function lum(c){ const f=v=>{v/=255; return v<=0.03928? v/12.92 : Math.pow((v+0.055)/1.055,2.4)}; return 0.2126*f(c[0])+0.7152*f(c[1])+0.0722*f(c[2]); }
         function blend(fg,bg){ const a=fg[3]; return [fg[0]*a+bg[0]*(1-a), fg[1]*a+bg[1]*(1-a), fg[2]*a+bg[2]*(1-a),1]; }
         function effBg(el){ let e=el, stack=[]; while(e && e!==document.documentElement){ const b=parse(getComputedStyle(e).backgroundColor); if(b && b[3]>0){ stack.push(b); if(b[3]>=1) break; } e=e.parentElement; } if(!stack.length||stack[stack.length-1][3]<1){ stack.push(parse(getComputedStyle(document.body).backgroundColor)||[255,255,255,1]); } let bg=stack.pop(); while(stack.length){ bg=blend(stack.pop(),bg); } return bg; }

@@ -64,7 +64,9 @@
     </div>
   </div>
 </header>
-<main id="main" class="container">
+<main id="main">
+  <section class="band band--plain" aria-labelledby="post-title">
+    <div class="container">
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <ol>
       <li><a href="home.html">Home</a></li>
@@ -75,7 +77,7 @@
 
   <header class="page-head">
     <p class="kicker">AEM + AI / Video</p>
-    <h1 class="page-title">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</h1>
+    <h1 class="page-title" id="post-title">Adobe Stardust Explained: Design Agent Skills on Edge Delivery Services (EDS)</h1>
     <p class="byline">By <a href="https://www.linkedin.com/in/jackjin">Jack Jin</a> · Published <time datetime="2026-08-09">2026-08-09</time> · Updated [date] · [watch time to confirm] · Video</p>
     <p class="summary">What Adobe Stardust is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library. A walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three DA.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
   </header>
@@ -162,6 +164,26 @@
         </details>
       </section>
 
+    </article>
+
+    <aside class="post-aside" aria-label="On this page">
+      <p class="kicker">On this page</p>
+      <ul>
+        <li><a href="#chapters">Chapters</a></li>
+        <li><a href="#what-is">What is Adobe Stardust?</a></li>
+        <li><a href="#how">How does the skill work?</a></li>
+        <li><a href="#compare">Runs compared</a></li>
+        <li><a href="#break">Where did it break?</a></li>
+        <li><a href="#faq">Questions</a></li>
+        <li><a href="#related">Related</a></li>
+      </ul>
+    </aside>
+  </div>
+    </div>
+  </section>
+  <section class="band band--alt" aria-labelledby="related">
+    <div class="container">
+      <div class="prose">
       <h2 id="related">Related</h2>
       <ol class="row-list">
         <li><span class="row-list__when">Hub</span><span class="row-list__title"><a href="blog.html?topic=aem-ai">AEM + AI</a></span><span class="row-list__note">AI agents, skills and MCP servers working on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and DA.live.</span></li>
@@ -178,21 +200,9 @@
           <p class="author-box__links"><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a> <a href="https://github.com/jackzhaojin">GitHub</a></p>
         </div>
       </aside>
-    </article>
-
-    <aside class="post-aside" aria-label="On this page">
-      <p class="kicker">On this page</p>
-      <ul>
-        <li><a href="#chapters">Chapters</a></li>
-        <li><a href="#what-is">What is Adobe Stardust?</a></li>
-        <li><a href="#how">How does the skill work?</a></li>
-        <li><a href="#compare">Runs compared</a></li>
-        <li><a href="#break">Where did it break?</a></li>
-        <li><a href="#faq">Questions</a></li>
-        <li><a href="#related">Related</a></li>
-      </ul>
-    </aside>
-  </div>
+      </div>
+    </div>
+  </section>
 </main>
 <footer class="site-footer">
   <div class="container site-footer__grid">
@@ -234,7 +244,7 @@
   </div>
   <div class="container site-footer__meta">
     <p>© 2026 Jack Jin · Columbus, Ohio</p>
-    <p>Astra design system 0.1.0</p>
+    <p>Astra design system 0.2.0</p>
   </div>
 </footer>
 </body>

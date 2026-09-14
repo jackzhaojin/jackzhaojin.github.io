@@ -116,6 +116,10 @@
 /* 2. Semantic tokens, light (default) */
 :root, [data-theme="light"] {
   color-scheme: light;
+  --band-tint-strong: 3%;
+  --band-tint-soft: 2%;
+  --band-tint-edge: 2%;
+  --band-pad: clamp(var(--space-7), 8vw, var(--space-9));
   --color-bg: var(--palette-lavender-50);
   --color-bg-alt: var(--palette-lavender-100);
   --color-surface: var(--palette-white);
@@ -146,6 +150,10 @@
 /* 3. Semantic tokens, dark (explicit choice) */
 [data-theme="dark"] {
   color-scheme: dark;
+  --band-tint-strong: 4%;
+  --band-tint-soft: 1%;
+  --band-tint-edge: 2%;
+  --band-pad: clamp(var(--space-7), 8vw, var(--space-9));
   --color-bg: var(--palette-plum-950);
   --color-bg-alt: var(--palette-plum-975);
   --color-surface: var(--palette-plum-900);
@@ -177,6 +185,10 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="dark"]) {
     color-scheme: dark;
+    --band-tint-strong: 4%;
+    --band-tint-soft: 1%;
+    --band-tint-edge: 2%;
+    --band-pad: clamp(var(--space-7), 8vw, var(--space-9));
     --color-bg: var(--palette-plum-950);
     --color-bg-alt: var(--palette-plum-975);
     --color-surface: var(--palette-plum-900);

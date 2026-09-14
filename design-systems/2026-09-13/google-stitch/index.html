@@ -162,7 +162,7 @@
         <li><a href="#iconography">Iconography</a></li>
         <li><a href="#theming">Theming</a></li>
         <li><a href="#components">Components</a>
-          <ul><li><a href="#c-skip-link">Skip link</a></li><li><a href="#c-site-header">Site header</a></li><li><a href="#c-breadcrumb">Breadcrumb</a></li><li><a href="#c-page-head">Page head</a></li><li><a href="#c-button">Button</a></li><li><a href="#c-chip">Chip</a></li><li><a href="#c-card">Card</a></li><li><a href="#c-facts-table">Facts table</a></li><li><a href="#c-data-table">Data table</a></li><li><a href="#c-counts">Counts</a></li><li><a href="#c-row-list">Row list</a></li><li><a href="#c-faq">FAQ</a></li><li><a href="#c-filter-bar">Filter bar</a></li><li><a href="#c-pagination">Pagination</a></li><li><a href="#c-embed">Embed</a></li><li><a href="#c-chapters">Chapters</a></li><li><a href="#c-transcript">Transcript</a></li><li><a href="#c-author-box">Author box</a></li><li><a href="#c-callout">Callout</a></li><li><a href="#c-cta-band">CTA band</a></li><li><a href="#c-footer">Footer</a></li><li><a href="#c-icons">Icons</a></li><li><a href="#c-theme-control">Theme control</a></li></ul>
+          <ul><li><a href="#c-skip-link">Skip link</a></li><li><a href="#c-site-header">Site header</a></li><li><a href="#c-breadcrumb">Breadcrumb</a></li><li><a href="#c-page-head">Page head</a></li><li><a href="#c-button">Button</a></li><li><a href="#c-chip">Chip</a></li><li><a href="#c-card">Card</a></li><li><a href="#c-facts-table">Facts table</a></li><li><a href="#c-data-table">Data table</a></li><li><a href="#c-counts">Counts</a></li><li><a href="#c-row-list">Row list</a></li><li><a href="#c-faq">FAQ</a></li><li><a href="#c-filter-bar">Filter bar</a></li><li><a href="#c-pagination">Pagination</a></li><li><a href="#c-embed">Embed</a></li><li><a href="#c-chapters">Chapters</a></li><li><a href="#c-transcript">Transcript</a></li><li><a href="#c-author-box">Author box</a></li><li><a href="#c-callout">Callout</a></li><li><a href="#c-band">Section band</a></li><li><a href="#c-divider">Divider</a></li><li><a href="#c-cta-band">CTA band</a></li><li><a href="#c-footer">Footer</a></li><li><a href="#c-icons">Icons</a></li><li><a href="#c-theme-control">Theme control</a></li></ul>
         </li>
         <li><a href="#patterns">Patterns</a></li>
         <li><a href="#templates">Templates</a></li>
@@ -1089,14 +1089,14 @@
   <h4>Stories</h4>
   <div class="stories">
 <div class="story"><p class="story__label">Closed and open (heading rendered as a paragraph here)</p>
-<section class="faq">
+<section class="faq" aria-label="FAQ example">
   <p class="h2">Questions</p>
   <details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo.</p></details>
   <details class="faq__item" open><summary>Where is the human gate?</summary><p>At the prototype step, before the build into EDS.</p></details>
 </section>
 </div>
 <div class="story" data-theme="dark"><p class="story__label">Dark</p>
-<section class="faq">
+<section class="faq" aria-label="FAQ example 2">
   <p class="h2">Questions</p>
   <details class="faq__item"><summary>Is Adobe Stardust a product?</summary><p>No. It is a skill in the public adobe/skills repo.</p></details>
   <details class="faq__item" open><summary>Where is the human gate?</summary><p>At the prototype step, before the build into EDS.</p></details>
@@ -1165,8 +1165,8 @@
     <button type="button" class="chip" aria-pressed="false">Article</button>
     <button type="button" class="chip" aria-pressed="false">Post</button>
   </div>
-  <div class="filter-bar__row"><label for="sort-story">Sort</label>
-    <select id="sort-story" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+  <div class="filter-bar__row"><label for="sort-story-2">Sort</label>
+    <select id="sort-story-2" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
   </div>
 </form>
 </div>
@@ -1423,6 +1423,90 @@
   <h4>Tokens</h4>
   <p class="token-list"><code>--color-accent-soft</code> <code>--color-accent</code> <code>--color-bg-alt</code> <code>--color-topic-agents</code> <code>--radius-sm</code></p>
 </section>
+<section class="component" id="c-band">
+  <div class="component__head"><h3>Section band</h3><span class="chip chip--status" data-status="beta">beta</span></div>
+  <p class="component__desc">Full-bleed ground for one section, the portfolio's chapter treatment read as a console: a 1px top rule, flat grounds, a quiet accent wash on tint bands, dots as a sparse grid. The band spans the viewport; content stays in <code>.container</code>. Bands are the only full-bleed elements between the header and the footer.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>section.band</code> (or <code>div.band</code> around a page head) with one variant: <code>.band--plain</code>, <code>.band--alt</code>, <code>.band--tint</code>, <code>.band--inverse</code>, <code>.band--milestone</code>; <code>.band--dots</code> combines with any</li>
+<li><code>div.container</code> holding the section</li>
+<li>Tint: inline <code>style="--band-accent: var(--color-topic-aem-ai)"</code> when the section belongs to a topic; defaults to the page accent</li>
+<li>Milestone: <code>p.band__numeral</code> and <code>p.band__caption</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">Plain, alt, tint with the AEM + AI accent</p>
+<div class="stack stack--sm">
+<section class="band band--plain" aria-label="plain example"><div class="container"><p class="kicker">Plain</p><p class="faint" style="margin:0">The page ground. Default when no variant is given.</p></div></section>
+<section class="band band--alt" aria-label="alt example"><div class="container"><p class="kicker">Alt</p><p class="faint" style="margin:0">The alternate ground, solid. Two alt bands never touch.</p></div></section>
+<section class="band band--tint" style="--band-accent: var(--color-topic-aem-ai)" aria-label="tint example"><div class="container"><p class="kicker">Tint / AEM + AI</p><p class="faint" style="margin:0">A wash of the section's topic color: 10% at the glow, 5% and 4% at the edges in light.</p></div></section>
+</div>
+</div>
+<div class="story"><p class="story__label">Tint with the dot grid, and inverse with the CTA band inside</p>
+<div class="stack stack--sm">
+<section class="band band--tint band--dots" aria-label="dots example"><div class="container"><p class="kicker">Tint / dots</p><p class="faint" style="margin:0">The motif layer: a 28px dot grid in the accent at half opacity. Decorative only.</p></div></section>
+<section class="band band--inverse" aria-label="inverse example"><div class="container"><div class="cta-band"><p class="cta-band__title">Book a talk</p><p>Every token is re-pointed inside the inverse band, so buttons, chips and links read without their own dark rules.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <a href="https://www.jackzhaojin.com/certifications.html">All 22 certifications</a></p></div></div></section>
+</div>
+</div>
+<div class="story"><p class="story__label">Milestone</p>
+<section class="band band--milestone" aria-label="milestone example"><div class="container"><p class="band__numeral">2026</p><p class="band__caption">Posts, videos and talks from this year</p></div></section>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark: tint, alt, inverse</p>
+<div class="stack stack--sm">
+<section class="band band--tint" style="--band-accent: var(--color-topic-work)" aria-label="dark tint example"><div class="container"><p class="kicker">Tint / Working with AI</p><p class="faint" style="margin:0">Dark uses the portfolio's own values: 7% at the glow, 4% and 3% at the edges.</p></div></section>
+<section class="band band--alt" aria-label="dark alt example"><div class="container"><p class="kicker">Alt</p><p class="faint" style="margin:0">The dark alternate ground.</p></div></section>
+<section class="band band--inverse" aria-label="dark inverse example"><div class="container"><div class="cta-band"><p class="cta-band__title">Book a talk</p><p>In dark, inverse is the light ground.</p><p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <a class="btn btn--secondary" href="https://www.jackzhaojin.com/certifications.html">Certifications</a></p></div></div></section>
+</div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;section class=&quot;band band--tint&quot; style=&quot;--band-accent: var(--color-topic-aem-ai)&quot; aria-labelledby=&quot;hubs-h&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;...&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class=&quot;band band--inverse&quot; aria-labelledby=&quot;contact-h&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;cta-band&quot;&gt;...&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class=&quot;band band--milestone&quot; aria-label=&quot;2026&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;&lt;p class=&quot;band__numeral&quot;&gt;2026&lt;/p&gt;&lt;p class=&quot;band__caption&quot;&gt;...&lt;/p&gt;&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Give every section its own band and let the tint follow the section's topic. The container goes inside the band, never the other way round.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Stack two alt bands, use more than one inverse band per page, or raise the tint until it competes with the cards on it.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li>The wash and the dots are pseudo-elements at <code>z-index: -1</code> in an isolated stacking context; they never sit over text or take pointer events</li>
+<li>Text color never changes on plain, alt or tint bands, so every contrast pair holds; inside inverse the tokens are re-pointed and re-measured in both themes</li>
+<li>A <code>section.band</code> needs <code>aria-labelledby</code> or <code>aria-label</code>; use <code>div.band</code> around a page head so the H1 is not wrapped in a second landmark</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--band-pad</code> <code>--band-tint-strong</code> <code>--band-tint-soft</code> <code>--band-tint-edge</code> <code>--band-accent</code> <code>--color-bg</code> <code>--color-bg-alt</code> <code>--color-line</code> <code>--color-inverse-bg</code> <code>--color-inverse-text</code> <code>--font-display</code></p>
+</section>
+<section class="component" id="c-divider">
+  <div class="component__head"><h3>Divider</h3><span class="chip chip--status" data-status="beta">beta</span></div>
+  <p class="component__desc">The portfolio's <code>tdiv</code>: a label between two rules that fade to the edges, with the slash-slash mark in front of the label. Opens a band whose heading is quiet, or separates two groups inside one band. Without a label it is a single fading rule.</p>
+  <h4>Anatomy</h4>
+  <ul class="anatomy"><li><code>div.divider[role=separator]</code> with an <code>aria-label</code></li>
+<li>optional <code>span.divider__label</code></li></ul>
+  <h4>Stories</h4>
+  <div class="stories">
+<div class="story"><p class="story__label">With a label, and without</p>
+<div class="divider" role="separator" aria-label="Credentials"><span class="divider__label">04 / Credentials</span></div>
+<div class="divider" role="separator" aria-label="Section break"></div>
+</div>
+<div class="story" data-theme="dark"><p class="story__label">Dark</p>
+<div class="divider" role="separator" aria-label="Talks"><span class="divider__label">05 / Talks</span></div>
+</div>
+  </div>
+  <h4>Markup</h4>
+  <pre><code>&lt;div class=&quot;divider&quot; role=&quot;separator&quot; aria-label=&quot;Credentials&quot;&gt;
+  &lt;span class=&quot;divider__label&quot;&gt;04 / Credentials&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  <div class="do-dont">
+    <div class="do"><h4>Do</h4><p>Use it where a section has no loud heading, or between two groups that share one band.</p></div>
+    <div class="dont"><h4>Don't</h4><p>Put one under every heading; the band's own rule already separates sections.</p></div>
+  </div>
+  <h4>Accessibility</h4>
+  <ul><li><code>role="separator"</code> with an <code>aria-label</code>; the label is real text, the slashes are decoration</li></ul>
+  <h4>Tokens</h4>
+  <p class="token-list"><code>--color-line-strong</code> <code>--color-text-faint</code> <code>--color-accent</code> <code>--font-mono</code> <code>--text-label</code> <code>--tracking-label</code></p>
+</section>
 <section class="component" id="c-cta-band">
   <div class="component__head"><h3>CTA band</h3><span class="chip chip--status" data-status="stable">stable</span></div>
   <p class="component__desc">Filled with the accent, text in on-accent. Factual heading, one sentence, two actions. Inside the band the primary button inverts and the secondary uses the current color.</p>
@@ -1434,14 +1518,14 @@
   <h4>Stories</h4>
   <div class="stories">
 <div class="story"><p class="story__label">Book a talk (heading rendered as a paragraph here)</p>
-<section class="cta-band">
+<section class="cta-band" aria-label="CTA band example">
   <p class="h2">Book a talk</p>
   <p>Jack speaks on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026 in Columbus.</p>
   <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
 </section>
 </div>
 <div class="story" data-theme="dark"><p class="story__label">Dark</p>
-<section class="cta-band">
+<section class="cta-band" aria-label="CTA band example 2">
   <p class="h2">Book a talk</p>
   <p>Jack speaks on Adobe Experience Manager (AEM), Edge Delivery Services (EDS) and agentic engineering. Upcoming: adaptTo() 2026 in Berlin and Columbus AI Week 2026 in Columbus.</p>
   <p class="cluster"><a class="btn btn--primary" href="https://www.linkedin.com/in/jackjin">Message on LinkedIn</a> <span class="btn btn--secondary" aria-disabled="true">[email address to be supplied]</span></p>
@@ -1673,6 +1757,31 @@
           <li>Body: H2s phrased as questions, <code>ol</code> for steps, <code>table</code> for comparisons.</li>
           <li>FAQ, related, author box.</li>
         </ol>
+        <h3>Section rhythm</h3>
+        <p>Every section between the page head and the footer is a <a href="#c-band">section band</a>, the portfolio's chapter treatment carried across the site. The ground changes at every section, so the bands do the separating.</p>
+        <div class="table-wrap"><table class="table">
+          <caption class="sr-only">Which band each section uses</caption>
+          <thead><tr><th scope="col">Template</th><th scope="col">Section</th><th scope="col">Band</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" rowspan="7">Home</th><td>Page head</td><td>plain</td></tr>
+            <tr><td>Hubs</td><td>tint, AEM + AI accent</td></tr>
+            <tr><td>Latest</td><td>alt</td></tr>
+            <tr><td>Featured project</td><td>tint with the dot grid, page accent</td></tr>
+            <tr><td>Credentials</td><td>plain, opened by a divider</td></tr>
+            <tr><td>Talks</td><td>tint, Working with AI accent</td></tr>
+            <tr><td>Contact</td><td>inverse</td></tr>
+            <tr><th scope="row" rowspan="2">Post</th><td>Everything through the FAQ</td><td>plain</td></tr>
+            <tr><td>Related and author box</td><td>alt</td></tr>
+            <tr><th scope="row" rowspan="3">Blog</th><td>Start here and counts</td><td>tint, page accent</td></tr>
+            <tr><td>Filter bar and grid</td><td>plain</td></tr>
+            <tr><td>FAQ</td><td>alt</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>Two alt bands never touch. A tint accent follows the section's topic, otherwise the page accent. One inverse band per page at most.</li>
+          <li>The wash never changes text color, so every contrast pair holds on every band. Inside inverse the tokens are re-pointed and re-measured.</li>
+          <li>Bands are the only full-bleed elements between the header and the footer. Cards, tables and panels stay inside the container.</li>
+        </ul>
         <h3>Heading rules</h3>
         <p>H1, then H2, then H3, never skipping. Section labels are kickers, not headings. Card titles are H3 under a section H2. Footer column titles are H2.</p>
         <h3>Content in HTML</h3>
@@ -1711,6 +1820,8 @@
         <p class="kicker">13 / Changelog</p>
         <h2>Changelog</h2>
         <dl class="stack stack--sm">
+          <dt><strong>0.2.0</strong> <span class="mono faint">2026-09-14</span></dt>
+          <dd>Section band and divider from the portfolio page, in the console idiom: flat grounds with a 1px top rule, a quiet accent wash on tint bands, a sparse dot grid, the divider label with the slash-slash mark, a mono milestone numeral. All three templates wrapped in bands. Inverse bands re-point the semantic tokens so buttons, chips and links read on the inverse ground.</dd>
           <dt><strong>0.1.1</strong> <span class="mono faint">2026-09-13</span></dt>
           <dd>Fixed the dark story frames: cards rendered a light surface under dark text because the card and control tokens were declared on :root only. They now resolve on every themed scope.</dd>
           <dt><strong>0.1.0</strong> <span class="mono faint">2026-09-13</span></dt>

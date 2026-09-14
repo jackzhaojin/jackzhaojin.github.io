@@ -79,6 +79,7 @@
 
   /* ---------- 4. Semantic: layout ---------- */
   --container-max: 76rem;              /* 1216px */
+  --band-pad: clamp(var(--space-7), 8vw, var(--space-9)); /* 48 to 96px */
   --gutter: clamp(1rem, 2.5vw, 2rem);
   --measure: 68ch;
   --header-height: 3.5rem;
@@ -101,6 +102,9 @@
 
 /* ---------- 7. Semantic: color, light (default) ---------- */
 :root, [data-theme="light"] {
+  --band-tint-strong: 8%;
+  --band-tint-soft: 4%;
+  --band-tint-edge: 3%;
   color-scheme: light;
   --color-bg: var(--palette-paper);
   --color-bg-alt: var(--palette-paper-3);
@@ -127,6 +131,9 @@
 
 /* ---------- 8. Semantic: color, dark (explicit) ---------- */
 [data-theme="dark"] {
+  --band-tint-strong: 7%;
+  --band-tint-soft: 4%;
+  --band-tint-edge: 3%;
   color-scheme: dark;
   --color-bg: var(--palette-ink);
   --color-bg-alt: var(--palette-black);
@@ -154,6 +161,9 @@
 /* ---------- 9. Semantic: color, dark (system choice, OS prefers dark) ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --band-tint-strong: 7%;
+    --band-tint-soft: 4%;
+    --band-tint-edge: 3%;
     color-scheme: dark;
     --color-bg: var(--palette-ink);
     --color-bg-alt: var(--palette-black);

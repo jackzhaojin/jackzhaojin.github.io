@@ -66,20 +66,26 @@
   </div>
 </header>
 
-<main id="main" class="container">
+<main id="main">
+
+<div class="band band--plain">
+<div class="container">
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <ol>
       <li><a href="home.html">Home</a></li>
       <li aria-current="page">Blog</li>
     </ol>
   </nav>
-
   <header class="page-head">
     <p class="kicker">Collection / posts, articles and videos</p>
     <h1 class="page-title">Blog</h1>
     <p class="summary">39 posts by Jack Jin: 7 articles, 13 short posts and 19 videos on Adobe Experience Manager (AEM), Edge Delivery Services (EDS), AI agents and working with AI. 27 are on the AI topic and 12 on AEM; 22 are technical and 17 are leadership posts. Titles link to LinkedIn, where the posts live today. Newest first.</p>
   </header>
+</div>
+</div>
 
+<section class="band band--tint" aria-labelledby="featured-h">
+<div class="container">
   <section aria-labelledby="featured-h">
     <h2 id="featured-h" class="sr-only">Featured</h2>
     <div class="grid grid--2">
@@ -101,8 +107,11 @@
       </table>
     </div>
   </section>
+</div>
+</section>
 
-  <h2 id="all-posts">All posts</h2>
+<section class="band band--plain" aria-label="All posts">
+<div class="container">
   <form class="filter-bar" data-collection action="blog.html" method="get">
     <div class="filter-bar__row">
       <span class="filter-bar__label">Topic</span>
@@ -388,9 +397,13 @@
   <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
 </article>
   </div>
+</div>
+</section>
 
+<section class="band band--alt" aria-labelledby="faq-h">
+<div class="container">
   <section class="faq">
-    <h2>Questions</h2>
+    <h2 id="faq-h">Questions</h2>
     <details class="faq__item">
       <summary>How many posts are there?</summary>
       <p>39: 7 articles, 13 short posts and 19 videos, published between 2025-04-13 and 2026-08-09.</p>
@@ -404,6 +417,9 @@
       <p>Two topics in the data today: AI (27 posts) and AEM (12 posts). Each post is also typed as technical (22) or leadership (17). The four hubs group posts from those facets.</p>
     </details>
   </section>
+</div>
+</section>
+
 </main>
 
 <footer class="site-footer">

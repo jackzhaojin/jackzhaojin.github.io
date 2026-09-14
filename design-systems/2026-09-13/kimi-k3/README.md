@@ -90,6 +90,10 @@ Where defined: `tokens.css`. The DTCG file `tokens.json` mirrors the values with
 
 Type scale: display `clamp(3rem, 8vw, 6rem)`, h1 `clamp(2rem, 4.6vw, 3.4rem)`, h2 `clamp(1.35rem, 2.6vw, 1.85rem)`, h3 1.125rem, body-lg `clamp(1.05rem, 1.6vw, 1.25rem)`, body 1.0625rem, small 0.9375rem, label 0.72rem, mono 0.8125rem. Headings tracked at -0.02em, mono labels at +0.12em.
 
+### Band tokens
+
+`--band-tint-strong`, `--band-tint-soft` and `--band-tint-edge` are percentages per theme: 8, 4 and 3 in light, 7, 4 and 3 in dark (the portfolio's values). Restrained on purpose; this system separates with rules, not color. `--band-pad` is the band's vertical padding, `clamp(48px, 8vw, 96px)`. `--band-accent` is set inline per section and defaults to `--color-accent`.
+
 ## Components
 
 Class names are fixed by the contract. Each is documented with live stories at `index.html#c-<name>`.
@@ -117,6 +121,8 @@ Class names are fixed by the contract. Each is documented with live stories at `
 | Transcript | `.transcript`, `.transcript__body` | stable |
 | Author box | `.author-box`, `.avatar` | stable |
 | Callout | `.callout`, `.callout--warn` | stable |
+| Section band | `.band` with `.band--plain`, `.band--alt`, `.band--tint`, `.band--inverse`, `.band--milestone`, optional `.band--dots`; `.band__numeral`, `.band__caption` | beta |
+| Divider | `.divider`, `.divider__label` | beta |
 | CTA band | `.cta-band` | stable |
 | Footer | `.site-footer` | stable |
 | Icons | `.icon` with the `svg[hidden]` sprite | stable |
@@ -144,6 +150,10 @@ Content comes only from `../shared/data/*.json`. Anything not in the data is a b
 Hub links point to `blog.html?topic=<slug>` because hub pages are not built in this round. The slugs are `aem-ai`, `adobe-aem`, `ai-agents` and `working-with-ai`. `scripts.js` maps them to the data: `adobe-aem` to topic aem, `ai-agents` to topic ai, `working-with-ai` to type leadership. The AEM + AI hub is a curated set per post that is not in the shared data yet, so that link shows the AEM topic posts until the set exists.
 
 Nav links to Portfolio, Certifications and About go to the live site because those pages are not part of this round. Talks goes to the talks section on the home template.
+
+### Section rhythm
+
+Every section between the page head and the footer is a section band. Home: page head plain; topics tint with the AEM + AI accent; latest alt; featured project tint with graph-paper dots; credentials plain, opened by a bracketed divider that carries the section number; talks tint with the Working with AI accent; contact inverse (the CTA band inside drops its own fill and its buttons re-point to the inverse ground). Post: everything through the FAQ plain; related and author box in one alt band. Blog: featured in a tint band with the page accent; filter bar and grid plain; questions alt. The full table is on the docs page under Patterns.
 
 ## Accessibility
 
@@ -201,6 +211,7 @@ Kept from the round: Inter and IBM Plex Mono, the paper and ink palette, the ele
 
 ## Status and changelog
 
-Status: 0.1.0, draft candidate. All components stable except the filter bar (beta: the AEM + AI curated set is pending).
+Status: 0.2.0, draft candidate. All components stable except the filter bar (beta: the AEM + AI curated set is pending).
 
+- 2026-09-14, 0.2.0: section band and divider from the portfolio page, in this system's idiom: flat grounds, one pixel rules, a restrained wash on tint bands, graph-paper dots, bracketed divider labels, an Inter milestone numeral. Band tokens per theme. All three templates wrapped in bands (home seven, post two, blog four). Inverse bands re-point the semantic tokens so buttons, chips and links read on the inverse ground. Docs page gained `#c-band`, `#c-divider` and a Section rhythm pattern.
 - 2026-09-13, 0.1.0: first cut from the Kimi K3 round. Tokens in both themes, base and components, documentation site with live stories, three templates from the shared data, this README. line-strong darkened in both themes to pass 3:1. Tested at 390, 768, 1024, 1440, 1920 and 2560 in light and dark, with the theme control, the mobile nav, the blog filter and with JavaScript disabled.

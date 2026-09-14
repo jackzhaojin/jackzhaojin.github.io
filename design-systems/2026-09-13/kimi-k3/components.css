@@ -796,13 +796,142 @@ a.chip[aria-current="true"] { background: var(--color-text); border-color: var(-
 .callout > :last-child { margin-bottom: 0; }
 
 /* ---------- 18. CTA band ---------- */
+
+/* ---------- Section band ---------- */
+/* Full-bleed ground per section, from the portfolio's chapter treatment.
+   Developer-editorial reading: flat grounds, one pixel rules, a restrained
+   wash on tint bands, the motif as one pixel graph-paper dots. Content
+   stays inside .container. */
+.band {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  border-top: 1px solid var(--color-line);
+  padding-block: var(--band-pad);
+}
+.band.section { padding-block: var(--band-pad); }
+.band > .container > :first-child, .band > .container > .prose > :first-child { margin-top: 0; }
+.band--plain { background: var(--color-bg); }
+.band--alt { background: var(--color-bg-alt); }
+.band--tint, .band--milestone, .band--dots { --band-accent: var(--color-accent); }
+.band--tint::before, .band--milestone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, color-mix(in srgb, var(--band-accent) var(--band-tint-strong), transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--band-accent) var(--band-tint-soft), transparent), transparent 30%, transparent 78%, color-mix(in srgb, var(--band-accent) var(--band-tint-edge), transparent));
+}
+.band--dots::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(circle 0.75px at 0.75px 0.75px, color-mix(in srgb, var(--band-accent) 40%, transparent) 99%, transparent);
+  background-size: 24px 24px;
+}
+/* Inverse band. Private copies resolve on the band against the page tokens;
+   the swap lives on the container child so no var() cycle forms. Every
+   component inside then reads on the inverse ground. */
+.band--inverse {
+  --inverse-ground: var(--color-inverse-bg);
+  --inverse-ink: var(--color-inverse-text);
+  --page-ground: var(--color-bg);
+  --page-ink: var(--color-text);
+  background: var(--inverse-ground);
+  color: var(--inverse-ink);
+  border-top-color: transparent;
+}
+.band--inverse > .container {
+  --color-bg: var(--inverse-ground);
+  --color-bg-alt: color-mix(in srgb, var(--inverse-ground) 94%, var(--inverse-ink));
+  --color-surface: color-mix(in srgb, var(--inverse-ground) 92%, var(--inverse-ink));
+  --color-surface-raised: color-mix(in srgb, var(--inverse-ground) 88%, var(--inverse-ink));
+  --color-text: var(--inverse-ink);
+  --color-text-muted: color-mix(in srgb, var(--inverse-ink) 80%, var(--inverse-ground));
+  --color-text-faint: color-mix(in srgb, var(--inverse-ink) 64%, var(--inverse-ground));
+  --color-line: color-mix(in srgb, var(--inverse-ink) 16%, transparent);
+  --color-line-strong: color-mix(in srgb, var(--inverse-ink) 44%, transparent);
+  --color-accent: var(--inverse-ink);
+  --color-accent-hover: var(--inverse-ink);
+  --color-on-accent: var(--inverse-ground);
+  --color-accent-soft: color-mix(in srgb, var(--inverse-ink) 10%, transparent);
+  --color-focus: var(--inverse-ink);
+  --color-inverse-bg: var(--page-ground);
+  --color-inverse-text: var(--page-ink);
+}
+.band--inverse .cta-band { background: transparent; color: inherit; padding: 0; margin: 0; }
+.band--inverse .cta-band .btn { border-color: var(--color-line-strong); color: var(--color-text); background: transparent; }
+.band--inverse .cta-band .btn--primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); }
+.band--inverse .cta-band .btn--primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); color: var(--color-on-accent); }
+/* Milestone: a year or a break. Inter, tight, with a bracketed mono caption. */
+.band--milestone {
+  text-align: center;
+  border-bottom: 1px solid var(--color-line);
+  padding-block: clamp(var(--space-7), 10vw, var(--space-10));
+}
+.band__numeral {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 10rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--color-text);
+}
+.band__numeral--solid { color: var(--color-text); }
+.band__caption {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+.band__caption::before { content: "[ "; }
+.band__caption::after { content: " ]"; }
+@media (max-width: 479px) { .band, .band.section { padding-block: var(--space-7); } }
+
+/* ---------- Divider ---------- */
+/* The portfolio's tdiv: a label between two rules that fade to the edges.
+   The label is bracketed, like every other lookup value in this system. */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  margin: 0 0 var(--space-5);
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-line-strong), transparent);
+}
+.divider:not(:has(.divider__label))::after { display: none; }
+.divider__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+.divider__label::before { content: "[ "; }
+.divider__label::after { content: " ]"; }
+
 .cta-band {
   background: var(--color-inverse-bg);
   color: var(--color-inverse-text);
   padding: var(--space-7) var(--space-6);
   margin: var(--space-6) 0;
 }
-.cta-band h2 { color: inherit; margin: 0 0 var(--space-4); }
+.cta-band h2, .cta-band__title { color: inherit; margin: 0 0 var(--space-4); }
+.cta-band__title { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
 .cta-band p { color: inherit; max-width: var(--measure); }
 .cta-band > p:last-child { margin-bottom: 0; }
 .cta-band .btn { border-color: var(--color-inverse-text); color: var(--color-inverse-text); background: transparent; white-space: normal; text-align: left; max-width: 100%; }

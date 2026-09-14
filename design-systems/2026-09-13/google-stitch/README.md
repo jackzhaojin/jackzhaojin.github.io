@@ -84,6 +84,10 @@ Three tiers with one way dependencies:
 
 `tokens.json` mirrors the CSS in DTCG 2025.10 shape: groups with `$type`, `$value` and `$description`, two theme sets under `color.light` and `color.dark`, primitives under `color.palette`, and shared `font`, `size`, `space`, `radius`, `shadow`, `duration` and `easing` groups. Color values are sRGB hex strings as in the SPEC example.
 
+### Band tokens
+
+`--band-tint-strong`, `--band-tint-soft` and `--band-tint-edge` are percentages per theme: 10, 5 and 4 in light (one point above the portfolio so the wash shows on the lilac ground), 7, 4 and 3 in dark (the portfolio's values). They set how much of `--band-accent` the tint wash mixes on a band's `::before` layer. `--band-pad` is the band's vertical padding, `clamp(48px, 8vw, 96px)`. `--band-accent` is set inline per section and defaults to `--color-accent`.
+
 ## Components
 
 | Name | Class | Status |
@@ -109,6 +113,8 @@ Three tiers with one way dependencies:
 | Transcript | `.transcript`, `.transcript__body` | stable |
 | Author box | `.author-box`, `.avatar` | stable |
 | Callout | `.callout`, `.callout--warn` | stable |
+| Section band | `.band` with `.band--plain`, `.band--alt`, `.band--tint`, `.band--inverse`, `.band--milestone`, optional `.band--dots`; `.band__numeral`, `.band__caption` | beta |
+| Divider | `.divider`, `.divider__label` | beta |
 | CTA band | `.cta-band` | stable |
 | Footer | `.site-footer` | stable |
 | Icons | `.icon` with the `<svg hidden>` sprite | stable |
@@ -135,6 +141,10 @@ All content comes from `../shared/data/*.json`. Anything not in the data is a br
 Hub links point to `blog.html?topic=<slug>` because hub pages are not built in this round. `scripts.js` maps the slugs: `adobe-aem` to topic aem, `ai-agents` to topic ai, `working-with-ai` to type leadership, and `aem-ai` to topic aem for now because its curated membership set is not in the data.
 
 The header hides the Book a talk button under 480px so the wordmark, theme control and Menu fit in one row; the CTA band and footer carry the same link.
+
+### Section rhythm
+
+Every section between the page head and the footer is a section band; the ground changes at every section. Home: page head plain; hubs tint with the AEM + AI accent; latest alt; featured project tint with the dot grid; credentials plain, opened by a divider that carries the section number; talks tint with the Working with AI accent; contact inverse (the CTA band inside drops its accent fill and reads on the inverse ground). Post: everything through the FAQ plain; related and author box in one alt band. Blog: start here and counts in a tint band with the page accent; the filter bar and grid plain; FAQ alt. The full table is on the docs page under Patterns.
 
 ## Accessibility
 
@@ -186,5 +196,7 @@ Structure: one H1 per page, headings never skip a level, `lang="en"`, alt on eve
 
 Status: beta. Every quality gate in SPEC section 10 was checked locally at 390, 768, 1024, 1440, 1920 and 2560 in both themes, plus the theme gates and a no JavaScript pass.
 
+- 0.2.0, 2026-09-14. Light faint text darkened from #5d6b82 to #56647b so kickers on a tint band clear 4.5:1 against the washed ground (worst case, page background mixed with 10% accent); it measured 4.36:1 before.
+- 0.2.0, 2026-09-14. Section band and divider from the portfolio page, in the console idiom: flat grounds with a 1px top rule, a quiet accent wash on tint bands, dots as a sparse grid, the divider label with the slash-slash mark, a mono milestone numeral. Band tokens per theme. All three templates wrapped in bands (home seven, post two, blog four). Inverse bands re-point the semantic tokens so buttons, chips and links read on the inverse ground. Docs page gained `#c-band`, `#c-divider` and a Section rhythm pattern.
 - 0.1.1, 2026-09-13. Fixed: cards inside the docs page's dark story frames rendered a light surface under dark-theme text (1.1:1) because `--card-bg`, `--card-line` and `--control-line` were declared on `:root` only. They now resolve on every themed scope (`:root, [data-theme]`).
 - 0.1.0, 2026-09-13. First build from the Stitch round. Tokens in CSS and DTCG JSON for light and dark, base and component styles, the documentation page, three templates, this README. Three token values replaced for contrast. Telemetry bar, invented facts, Tailwind, Material Symbols and em dashes removed.

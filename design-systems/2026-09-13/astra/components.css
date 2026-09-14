@@ -21,7 +21,8 @@
    scope, not only :root. A custom property resolves var() where it is declared,
    so a :root-only declaration would carry the light value into a
    [data-theme="dark"] story frame. */
-:root, [data-theme] {
+:root, [data-theme], .band--inverse {
+  --band-accent: var(--color-accent);
   --card-bg: var(--color-surface);
   --card-line: var(--color-line);
 }
@@ -521,3 +522,112 @@ html:not(.js) .filter-bar__row[data-js-only] { display: none; }
 .breakpoint-demo { display: grid; gap: var(--space-2); }
 .breakpoint-demo div { padding: var(--space-2) var(--space-3); background: var(--color-accent-soft); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: var(--text-mono); }
 .quick-start { margin: var(--space-4) 0 0; }
+
+/* Section bands: portfolio chapter grounds with Astra's violet wash.
+   Place bands directly in main; each owns a centered container. */
+.band {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding-block: var(--band-pad);
+  border-top: var(--border-width) solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.band--plain { background: var(--color-bg); }
+.band--alt { background: var(--color-bg-alt); }
+.band--tint::before, .band--milestone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, color-mix(in srgb, var(--band-accent) var(--band-tint-strong), transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--band-accent) var(--band-tint-soft), transparent), transparent 30%, transparent 78%, color-mix(in srgb, var(--band-accent) var(--band-tint-edge), transparent));
+}
+.band--dots::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle 1.5px at 12% 22%, color-mix(in srgb, var(--band-accent) 28%, transparent) 99%, transparent),
+    radial-gradient(circle 1.5px at 58% 18%, color-mix(in srgb, var(--band-accent) 24%, transparent) 99%, transparent),
+    radial-gradient(circle 1.5px at 90% 76%, color-mix(in srgb, var(--band-accent) 24%, transparent) 99%, transparent);
+  background-size: calc(var(--space-10) * 7) calc(var(--space-10) * 5);
+}
+/* Inverse semantic aliases resolve on this scope, including card tokens above.
+   The inverse pair stays deep plum in both themes; it never swaps to white. */
+.band--inverse {
+  --color-bg: var(--color-inverse-bg);
+  --color-bg-alt: var(--color-inverse-bg);
+  --color-surface: var(--color-inverse-bg);
+  --color-surface-raised: var(--color-inverse-bg);
+  --color-text: var(--color-inverse-text);
+  --color-text-muted: var(--color-inverse-text-muted);
+  --color-text-faint: var(--color-inverse-text-muted);
+  --color-line: var(--color-inverse-line);
+  --color-line-strong: var(--color-inverse-text-muted);
+  --color-accent: var(--color-inverse-accent);
+  --color-accent-hover: var(--color-inverse-text);
+  --color-on-accent: var(--color-inverse-bg);
+  --color-accent-soft: var(--color-inverse-bg);
+  --color-focus: var(--color-inverse-accent);
+  --color-topic-aem-ai: var(--color-inverse-accent);
+  --color-topic-aem: var(--color-inverse-accent);
+  --color-topic-agents: var(--color-inverse-accent);
+  --color-topic-work: var(--color-inverse-accent);
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+}
+.band--inverse .btn--secondary { background: transparent; }
+.band--inverse .chip--topic { border-color: currentColor; }
+.band--inverse .cta-band { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.band--milestone {
+  padding-block: calc(var(--band-pad) / 2);
+  border-bottom: var(--border-width) solid var(--color-line);
+  text-align: center;
+}
+.band__numeral {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text);
+}
+.band > .container > .page-head { margin: 0; padding: 0; border: 0; }
+.band > .container > .page-head + .post-layout { margin-top: var(--space-7); }
+.band > .container > .breadcrumb { padding-top: 0; }
+.band > .container > :last-child { margin-bottom: 0; }
+.band .section:last-child { padding-bottom: 0; }
+.band .prose > :first-child { margin-top: 0; }
+main:has(> .band) + .site-footer { margin-top: 0; }
+
+/* Divider: a wrapping mono label between two fading hairlines. */
+.divider { display: flex; align-items: center; gap: var(--space-4); margin: 0 0 var(--space-5); padding-block: var(--space-3); }
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  min-width: var(--space-4);
+  height: var(--border-width);
+  background: linear-gradient(90deg, transparent, var(--color-line-strong), transparent);
+}
+.divider:not(:has(.divider__label))::after { display: none; }
+.divider__label {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-text-faint);
+}
+/* Stories demonstrate full-width grounds inside their preview frame. */
+.story:has(> .band) { padding: 0; overflow: hidden; }
+.story:has(> .band) > .story__label { margin: 0; }

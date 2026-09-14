@@ -6,7 +6,7 @@ Astra is one of four candidate design systems for www.jackzhaojin.com, built in 
 
 This folder holds the documentation site (`index.html`), the tokens, the stylesheets, an optional filter script and three page templates built from the shared data in `../shared/data/`. Nothing here is on the sitemap and every page carries `noindex`.
 
-Version 0.1.0, status Beta.
+Version 0.2.0, status Beta.
 
 ## Identity
 
@@ -52,6 +52,8 @@ Extra semantic tokens beyond the contract: `--color-inverse-text-muted`, `--colo
 
 `tokens.json` mirrors `tokens.css`: a `palette` group of primitives, `color.light` and `color.dark` groups whose values reference the palette, and shared `font`, `size`, `space`, `layout`, `radius`, `border`, `shadow`, `duration`, `easing` and `breakpoint` groups. Each token has `$type`, `$value` and `$description`.
 
+Section band tokens live in every theme scope, including System dark. Light uses `--band-tint-strong: 3%`, `--band-tint-soft: 2%`, `--band-tint-edge: 2%`; dark uses 4%, 1%, 2%. Light strengths preserve faint text and strong-line contrast on lavender white. Dark strengths are reduced from the portfolio reference because its overlapping 7% and 4% layers put faint text at 4.42:1 and strong lines at 2.68:1 on the gold wash. The lighter wash preserves the existing text palette. `--band-pad` is `clamp(var(--space-7), 8vw, var(--space-9))` (48px to 96px). Milestone uses half that padding. The `band.light` and `band.dark` JSON groups mirror these values: percentage numbers and a CSS string for fluid padding, following the existing fluid-token convention. `--band-accent` defaults to the page accent and can be set inline to the section topic. Color-resolving component tokens are declared on `:root, [data-theme]` and resolve again inside inverse bands. Inverse topic chips use the inverse violet accent.
+
 ## Components
 
 | Component | Class | Status |
@@ -78,6 +80,8 @@ Extra semantic tokens beyond the contract: `--color-inverse-text-muted`, `--colo
 | Author box | `.author-box`, `.avatar` | Stable |
 | Callout | `.callout`, `.callout--warn` | Stable |
 | CTA band | `.cta-band` | Stable |
+| Section band | `.band`, `.band--plain`, `.band--alt`, `.band--tint`, `.band--inverse`, `.band--milestone`, `.band--dots`, `.band__numeral` | Stable |
+| Divider | `.divider`, `.divider__label` | Stable |
 | Footer | `.site-footer` | Stable |
 | Icons | `.icon` with the inline sprite | Stable |
 
@@ -96,6 +100,16 @@ Tested with Playwright: empty storage renders light; clicking Dark sets `data-th
 - `templates/home.html`: H1 "Jack Jin." with the positioning line, the 40 to 60 word summary, four hub cards in one row from 1280px and two by two below, the latest three posts, Anima Mesh on the deep plum panel with its facts table, a credentials strip, six talks as a row list (upcoming first), the CTA band.
 - `templates/post.html`: the Adobe Stardust video post. Breadcrumb, kicker, H1, byline, summary trimmed to 55 words from the 2026-08-09 excerpt, facts table, embed placeholder with the LinkedIn link, chapters, four question H2s, transcript, FAQ, related items, author box.
 - `templates/blog.html`: breadcrumb, H1 "Blog", summary, the Stardust post as the featured intro, counts by facet as a facts table, the filter bar, all 39 posts as cards newest first with titles linking to LinkedIn, a three-question FAQ. No pagination because 39 is below the 48 threshold.
+
+Section rhythm follows SPEC section 9 without rebalancing:
+
+| Template | Sections and bands, in order |
+| --- | --- |
+| Home | Page head: plain. Topics: tint with AEM + AI violet. Latest posts: alt. Featured project: tint with the page violet and dots, retaining the contained plum panel. Credentials: plain, opened by the labeled divider. Talks: tint with the Working with AI gold. CTA: inverse deep plum, with the inner CTA surface, border and padding removed. |
+| Post | Breadcrumb through FAQ: one plain band. Related, Discuss on LinkedIn and author box: one alt band. |
+| Blog | Breadcrumb and page head: plain. Featured intro and counts: tint with the page violet. Filters and all cards: plain. FAQ: alt. |
+
+Bands are the only full-width grounds between header and footer. Their containers remain centered. Adjacent grounds differ in both themes, two alt bands never touch, and there is at most one inverse band per template. A topic tint follows its topic; otherwise it uses the page accent. Washes do not change text colors. Milestone remains a documented option for supplied year markers or start-here breaks; no extra content was added to the templates. The project panel, featured intro, FAQ and author box retain Astra's existing contained surfaces.
 
 Hub links point to `blog.html?topic=<slug>` because hub pages are not built in this round. The slugs are the ones in `site.json`: `aem-ai`, `adobe-aem`, `ai-agents`, `working-with-ai`. The script also accepts `aem`, `agents` and `work` as aliases. Membership for the AEM + AI hub is provisional: the six AEM posts whose excerpts name an agent, skill or MCP server on AEM, EDS or DA.live (dated 2026-08-09, 2026-05-24, 2026-05-17, 2026-03-23, 2025-10-12, 2025-10-05) carry `data-hub="aem-ai"`. Jack should confirm or change that set.
 
@@ -141,6 +155,14 @@ Structure. One H1 per page, no skipped levels, `lang="en"`, alt on every image (
 - Nav links for Portfolio, Certifications and About point at the live site, since those pages are not part of this round.
 - Primary buttons, pressed chips and the current pagination page are filled with the ink color (light text on ink in dark mode), as the round did, rather than with the plum inverse panel color, which was too subtle against the dark page.
 
+### Section band contract notes
+
+- The command sequence writes shared eval reports and the compare page, while the folder rule forbids edits outside Astra. Run the shared tools without changing their source; preserve Astra's result row here and restore only generated files owned by this run when safe. Other builders may be updating shared results concurrently.
+- Section 10 calls the strong-only tint blend the worst case, but the radial and linear washes overlap: the upper bound is `1 - (1 - strong) * (1 - soft)`. Check that combined ground as well as the shared gate.
+- The browser distinct-ground check includes modifier class names, so different class names can pass even with identical paint. Its contrast probe checks the first matching heading or paragraph, not both, and its layout loop is not explicitly repeated in both themes. Supplemental visual and computed-style checks cover those gaps.
+- "At most one inverse per page" is read as a template composition rule. The docs need separate light and dark inverse stories. Milestone is shorter than a regular band, as section 7 describes; it uses half `--band-pad`.
+- The existing JSON format stores fluid CSS values as strings. The new padding token follows that convention; this is not a claim that CSS expressions are native DTCG dimensions.
+
 ## Sources
 
 - `../SPEC.md`, the contract, including the astra brief in section 12.
@@ -152,7 +174,16 @@ Structure. One H1 per page, no skipped levels, `lang="en"`, alt on every image (
 
 ## Status and changelog
 
-Status: 0.1.0, Beta. All quality gates from SPEC section 10 were run locally with Playwright on 2026-09-13: head contract, one H1, heading order, wordmark text, no unicode dashes, no external scripts beyond gtag, fonts from fonts.googleapis.com only, internal links resolve, no empty hash links, no horizontal overflow and equal container margins at 390, 768, 1024, 1440, 1920 and 2560 in both themes, the theme behaviour above, and with JavaScript disabled the summary, facts table, first section and nav are visible on every page.
+Status: 0.2.0, Beta. The original quality gates from SPEC section 10 were run locally with Playwright on 2026-09-13: head contract, one H1, heading order, wordmark text, no unicode dashes, no external scripts beyond gtag, fonts from fonts.googleapis.com only, internal links resolve, no empty hash links, no horizontal overflow and equal container margins at 390, 768, 1024, 1440, 1920 and 2560 in both themes, the theme behaviour above, and with JavaScript disabled the summary, facts table, first section and nav are visible on every page.
 
+Section band verification, 2026-09-14. Copied from the shared `eval/results.md` after running `eval/static-check.py`, `eval/browser-check.js` and `eval/render.py` from the round directory:
+
+| System | Static checks | Overflow | Centered at 1440+ | Theme control | Contrast AA | Bands | No JS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Astra | 136/136 | none | yes | pass | all pairs pass AA; dark frames pass (213 nodes) | 7 bands, full bleed, distinct grounds, text passes | pass |
+
+Supplemental verification: all three templates at 390, 768, 1024, 1440, 1920 and 2560 in both themes (36 views, 5,616 visible text checks) pass with the combined radial-plus-linear wash bound. Every band is full width, its direct container is centered, adjacent paint differs, and there is no horizontal overflow. Main-content text and placeholders match the original templates. Inspected screenshots at 390, 1440 and 2560 in both themes, plus both new documentation components. Separate viewport captures confirmed the long mobile blog's FAQ and footer. Captures and a preserved eval report are under `.playwright-cli/astra/` at the repository root.
+
+- 0.2.0, 2026-09-14. Added Section band and Divider, all band variants, per-theme tint strengths and padding, light and dark stories, inverse component colors, and section rhythm on the three templates. Kept serif display, violet accent, lavender panels and deep plum inverse.
 - 0.1.1, 2026-09-13. Fixed: post and project cards inside the docs page's dark story frames rendered a light surface under dark-theme text (1.14:1), because `--card-bg` and `--card-line` were declared on `:root` only and carried their resolved light values into the frame. They now resolve on every themed scope (`:root, [data-theme]`). Flagship hub counts use muted text so the dark tint panel passes 4.5:1 (was 4.4:1). Found by the Codex review of this system.
 - 0.1.0, 2026-09-13. First build from the Codex round to the shared contract. Tokens in both themes, every component with stories, three templates from shared data, contrast adjustments listed above.
