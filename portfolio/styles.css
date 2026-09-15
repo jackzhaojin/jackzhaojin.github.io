@@ -80,9 +80,25 @@
   padding: 10px 18px; z-index: 200; font-family: var(--font-mono); font-size: 13px;
 }
 .portfolio-page .skip-link:focus { left: 12px; top: 12px; }
-/* Scroll reveals were retired during the v3 migration: content is painted on
-   arrival. The .reveal and .d1-.d5 classes are inert markup left in place so
-   the chapters stay diffable against the v2 page. */
+/* Scroll reveals were retired during the v3 migration everywhere except the
+   hero, which keeps the staggered rise the page has always opened with. It is
+   above the fold, so it runs once on load and needs no observer. Outside the
+   hero the .reveal and .d1-.d5 classes are inert markup, left in place so the
+   chapters stay diffable against the v2 page. */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .portfolio-page .hero .reveal {
+    opacity: 0;
+    animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  html.js .portfolio-page .hero .d1 { animation-delay: 0.08s; }
+  html.js .portfolio-page .hero .d2 { animation-delay: 0.16s; }
+  html.js .portfolio-page .hero .d3 { animation-delay: 0.24s; }
+  html.js .portfolio-page .hero .d4 { animation-delay: 0.32s; }
+}
 .portfolio-page .year-rail {
   position: fixed;
   right: 18px; top: 50%;

@@ -472,13 +472,56 @@
   var canvas = document.getElementById("signal-field");
   if (canvas && !reducedMotion) {
     var ctx = canvas.getContext("2d");
-    var THREAD_COLORS = [
-      [192, 179, 255], // anima violet
-      [143, 216, 232], // factory cyan
-      [255, 196, 107], // cea amber
-      [159, 224, 192]  // shadow mint
-    ];
+    // The threads used to be hard-coded to the dark page's pastels. They now
+    // read the v3 project accents so they stay legible in both themes, and
+    // re-read whenever the theme changes.
+    var THREAD_TOKENS = ["--color-accent", "--color-project-cyan", "--color-project-amber", "--color-project-mint"];
+    var THREAD_COLORS = [];
+    var THREAD_ALPHA = { line: 0.16, node: 0.72 };
+    function toRGB(value) {
+      var hex = value.match(/^#([0-9a-f]{3,8})$/i);
+      if (hex) {
+        var h = hex[1];
+        if (h.length === 3 || h.length === 4) h = h.split("").map(function (c) { return c + c; }).join("");
+        return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+      }
+      var rgb = value.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+      if (rgb) return [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+      return [128, 128, 128];
+    }
+    function readTheme() {
+      var cs = getComputedStyle(document.documentElement);
+      THREAD_COLORS = THREAD_TOKENS.map(function (token) { return toRGB(cs.getPropertyValue(token).trim()); });
+      // Light surfaces need less alpha than the dark page these were drawn for.
+      var dark = document.documentElement.getAttribute("data-theme-effective") === "dark";
+      // Node alpha is capped so that even a dot sitting directly behind hero
+      // copy cannot pull the text below 4.5:1. Above roughly 0.45 in dark and
+      // 0.4 in light it can. Lines are 1px and do not move the effective
+      // background, so they keep the original weight.
+      THREAD_ALPHA = dark ? { line: 0.16, node: 0.44 } : { line: 0.13, node: 0.38 };
+    }
+    readTheme();
+    new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "data-theme-effective"] });
     var cw = 0, ch = 0, rafId = 0, canvasVisible = true;
+
+    // Boxes of the hero copy, in canvas space. The threads are erased behind
+    // these so a node can never sit under a glyph and pull its contrast down.
+    // Measured on resize rather than per frame to keep layout reads off the
+    // animation loop.
+    var copyBoxes = [];
+    var PAD_X = 12, PAD_Y = 8;
+    function measureCopy() {
+      var copy = document.querySelector(".hero-copy");
+      var rect = canvas.getBoundingClientRect();
+      copyBoxes = [];
+      if (!copy) return;
+      copy.querySelectorAll("h1, p, .hero-actions").forEach(function (el) {
+        var b = el.getBoundingClientRect();
+        if (b.width > 0 && b.height > 0) {
+          copyBoxes.push({ x: b.left - rect.left - PAD_X, y: b.top - rect.top - PAD_Y, w: b.width + PAD_X * 2, h: b.height + PAD_Y * 2 });
+        }
+      });
+    }
 
     function resizeCanvas() {
       var rect = canvas.getBoundingClientRect();
@@ -488,6 +531,23 @@
       canvas.width = Math.round(cw * dpr);
       canvas.height = Math.round(ch * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      measureCopy();
+    }
+
+    function clearBehindCopy() {
+      if (!copyBoxes.length) return;
+      ctx.save();
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "#000";
+      // Two passes: a blurred halo so the threads fade out rather than ending
+      // on a visible rectangle, then a hard core over the glyph box itself,
+      // because a blurred edge leaves enough residue to cost the faintest
+      // links their contrast margin.
+      try { ctx.filter = "blur(16px)"; } catch (e) { /* unsupported: halo is hard edged */ }
+      copyBoxes.forEach(function (b) { ctx.fillRect(b.x, b.y, b.w, b.h); });
+      try { ctx.filter = "none"; } catch (e) { /* no-op */ }
+      copyBoxes.forEach(function (b) { ctx.fillRect(b.x + PAD_X, b.y + PAD_Y, b.w - PAD_X * 2, b.h - PAD_Y * 2); });
+      ctx.restore();
     }
 
     function drawThread(index, time) {
@@ -503,7 +563,7 @@
         if (x === -40) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = "rgba(" + color.join(",") + ", 0.16)";
+      ctx.strokeStyle = "rgba(" + color.join(",") + ", " + THREAD_ALPHA.line + ")";
       ctx.lineWidth = 1;
       ctx.stroke();
 
@@ -515,7 +575,7 @@
         var pulse = 2.2 + Math.sin(time * 0.0012 + node + index) * 0.8;
         ctx.beginPath();
         ctx.arc(nx, ny, pulse, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(" + color.join(",") + ", 0.72)";
+        ctx.fillStyle = "rgba(" + color.join(",") + ", " + THREAD_ALPHA.node + ")";
         ctx.fill();
       }
     }
@@ -524,10 +584,12 @@
       if (!canvasVisible) return;
       ctx.clearRect(0, 0, cw, ch);
       for (var i = 0; i < 4; i += 1) drawThread(i, time);
+      clearBehindCopy();
       rafId = window.requestAnimationFrame(drawField);
     }
 
     resizeCanvas();
+    window.setTimeout(measureCopy, 1400);   // after the hero entrance settles
     window.addEventListener("resize", resizeCanvas, { passive: true });
     new IntersectionObserver(function (entries) {
       canvasVisible = entries[0].isIntersecting;
