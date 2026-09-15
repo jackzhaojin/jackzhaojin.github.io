@@ -1,4 +1,4 @@
-# Eval results, 2026-09-14
+# Eval results, 2026-09-15
 
 Gates from SPEC.md section 10. Static checks run on the files; browser checks run in Chromium via playwright-cli at 390, 768, 1024, 1440, 1920 and 2560 px.
 

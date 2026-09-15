@@ -69,7 +69,9 @@
 .site-header__inner {
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  /* Wider than the 22px between link items, so the name reads as identity
+     rather than as the first of five navigation entries. */
+  gap: var(--space-6);
   min-height: var(--header-height);
   flex-wrap: wrap;
   row-gap: 0;
@@ -107,22 +109,54 @@
 .nav-toggle[aria-expanded="true"] .icon--menu, .nav-toggle[aria-expanded="true"] .nav-toggle__open { display: none; }
 .nav-toggle[aria-expanded="true"] .icon--close { display: inline-block; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__close { display: inline; }
-.site-nav { display: flex; align-items: center; gap: var(--space-5); flex: 1 1 auto; min-width: 0; }
+/* Identity holds the left edge; wayfinding and the theme utility gather at the
+   right as one cluster. Previously the links sat tight against the wordmark
+   and the control was pinned far right, which split the bar into two islands
+   with a dead span between them. */
+.site-nav { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-5); flex: 1 1 auto; min-width: 0; }
 .site-nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
 /* Link rules are scoped to the list so the tools (a .btn and the theme control) keep their own styles. */
 .site-nav ul a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.05em;
   color: var(--color-text-muted);
-  padding: 6px 0;
-  border-bottom: var(--border-width) solid transparent;
   white-space: nowrap;
-  display: inline-block;
+}
+/* The current-page rule is drawn tight under the text rather than on the box
+   edge, so the link can carry a full 44px target without the mark drifting
+   away from the word it belongs to. */
+.site-nav ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: 10px;
+  height: var(--border-width);
+  background: transparent;
+  transition: background var(--duration-fast) var(--ease-standard);
 }
 .site-nav ul a:hover { color: var(--color-text); }
-.site-nav ul a[aria-current="page"] { color: var(--color-text); border-bottom-color: var(--color-accent); }
-.site-nav__tools { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
+.site-nav ul a:hover::after { background: var(--color-line-strong); }
+.site-nav ul a[aria-current="page"] { color: var(--color-text); }
+.site-nav ul a[aria-current="page"]::after { background: var(--color-accent); }
+.site-nav__tools { display: flex; align-items: center; gap: var(--space-3); }
+/* A hairline marks where wayfinding ends and the preference begins, so the
+   two sit in one cluster without reading as five navigation items. */
+.site-nav__tools::before {
+  content: "";
+  flex: none;
+  width: var(--border-width);
+  height: 24px;
+  margin-right: var(--space-5);
+  background: var(--color-line-strong);
+  opacity: 0.35;
+}
 .site-nav__tools .btn { white-space: nowrap; }
 /* The phone header row keeps one primary link beside the toggle; it is hidden
    at desktop widths, where the tools row inside the nav carries the button. */
@@ -137,6 +171,9 @@
   html.js .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
   html.js .site-nav ul a { display: flex; align-items: center; min-height: var(--target-min); padding: 10px 0; font-size: 15px; border-bottom: var(--border-width) solid var(--color-line); }
   html.js .site-nav ul a[aria-current="page"] { color: var(--color-accent); }
+  html.js .site-nav ul a::after { content: none; }
+  .site-nav { justify-content: flex-start; }
+  .site-nav__tools::before { content: none; }
   .site-nav__tools { margin-left: 0; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-4); }
   .site-nav__tools .btn { flex: 1 1 auto; min-height: var(--target-min); }
   html.js .site-nav__tools .btn { display: none; }
@@ -150,14 +187,18 @@
 .story .skip-link { position: static; display: inline-block; }
 
 /* ------------------------------------------------------------ theme control */
+/* This is a preference, not an action. On a paper ground a filled white box
+   with a strong border and an inverse chip inside made it the highest
+   contrast object in the header, so the eye landed on it before the name.
+   The group now sits on the header ground behind a hairline. */
 .theme-control {
   display: inline-flex;
   align-items: center;
   gap: 2px;
   padding: 2px;
-  border: var(--border-width) solid var(--color-line-strong);
+  border: var(--border-width) solid var(--color-line);
   border-radius: var(--button-radius);
-  background: var(--color-surface);
+  background: transparent;
 }
 .theme-control__btn {
   border: 0;
@@ -168,12 +209,21 @@
   letter-spacing: 0.04em;
   line-height: 1;
   min-height: 34px;
-  padding: 0 12px;
+  padding: 0 11px;
   border-radius: var(--radius-sm);
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 }
 .theme-control__btn:hover { color: var(--color-text); }
-.theme-control__btn[aria-pressed="true"] { background: var(--color-inverse-bg); color: var(--color-inverse-text); }
+/* The chosen state is washed in the accent rather than filled with surface
+   white, which read as a cold chip on warm paper and stayed the brightest
+   object in the bar. The accent is now the single mark for "this one is
+   active" across the header: a rule under the current page, a wash behind the
+   current theme. */
+.theme-control__btn[aria-pressed="true"] {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  box-shadow: inset 0 0 0 var(--border-width) color-mix(in srgb, var(--color-accent) 38%, transparent);
+}
 .theme-control__btn:focus-visible { outline-offset: 0; }
 
 /* ------------------------------------------------------------ breadcrumb */
