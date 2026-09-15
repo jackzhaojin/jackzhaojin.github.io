@@ -80,18 +80,9 @@
   padding: 10px 18px; z-index: 200; font-family: var(--font-mono); font-size: 13px;
 }
 .portfolio-page .skip-link:focus { left: 12px; top: 12px; }
-html.js .portfolio-page .reveal {
-  opacity: 1;
-  transform: none;
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-html.js .portfolio-page .reveal.in-view { opacity: 1; transform: none; }
-html.js .portfolio-page .d1 { transition-delay: 0.08s; }
-html.js .portfolio-page .d2 { transition-delay: 0.16s; }
-html.js .portfolio-page .d3 { transition-delay: 0.24s; }
-html.js .portfolio-page .d4 { transition-delay: 0.32s; }
-html.js .portfolio-page .d5 { transition-delay: 0.4s; }
-@media (prefers-reduced-motion: reduce) {html.js .portfolio-page .reveal { opacity: 1; transform: none; }}
+/* Scroll reveals were retired during the v3 migration: content is painted on
+   arrival. The .reveal and .d1-.d5 classes are inert markup left in place so
+   the chapters stay diffable against the v2 page. */
 .portfolio-page .year-rail {
   position: fixed;
   right: 18px; top: 50%;
@@ -106,7 +97,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   display: flex; align-items: center; gap: 8px;
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ink-faint);
 }
 .portfolio-page .year-rail a i {
@@ -129,7 +120,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
 .portfolio-page .year-rail a.active i { background: var(--dot, var(--accent)); transform: scale(1.35); }
 .portfolio-page .year-rail .rail-year {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.2em;
   color: var(--ink-faint);
   padding-right: 1px;
@@ -232,7 +223,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   bottom: 84px; left: 50%;
   transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px;
-  font-family: var(--font-mono); font-size: 10.5px;
+  font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -250,7 +241,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   position: absolute;
   bottom: 26px; left: var(--pad); right: var(--pad);
   display: flex; align-items: center; gap: 20px;
-  font-family: var(--font-mono); font-size: 10.5px;
+  font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -280,20 +271,29 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   display: flex;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--ink-faint);
   letter-spacing: 0.08em;
   padding: 0 0 12px 172px;
   min-width: 660px;
 }
+/* Flex, not grid: a sticky grid item is confined to its own track, so the
+   name column would run out of travel and scroll away on narrow screens. */
 .portfolio-page .gantt-row {
-  display: grid;
-  grid-template-columns: 172px 1fr;
+  display: flex;
   align-items: center;
   min-width: 660px;
-  padding: 3px 0;
+  padding: 5px 0;
 }
+/* The chart scrolls sideways on narrow screens, so the name column stays
+   pinned to the left edge; without it the bars scroll away from their labels. */
 .portfolio-page .gantt-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  flex: 0 0 172px;
+  background: var(--surface);
+  box-shadow: -24px 0 0 0 var(--surface);
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--ink-soft);
@@ -302,7 +302,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.portfolio-page .gantt-track { position: relative; height: 18px; }
+.portfolio-page .gantt-track { position: relative; flex: 1 1 auto; height: 18px; }
 .portfolio-page .gantt-track::before {
   content: "";
   position: absolute; inset: 8px 0;
@@ -319,10 +319,24 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   transition: transform 0.2s, background 0.2s;
   min-width: 10px;
 }
+/* The visible bar stays 14px so the chart reads as a chart; the hit area is
+   widened to the 24px WCAG minimum through a transparent overlay. */
+.portfolio-page .gantt-bar::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: 50%;
+  width: max(100%, 24px);
+  transform: translateX(-50%);
+}
 .portfolio-page .gantt-bar:hover, .portfolio-page .gantt-bar:focus-visible {
   background: color-mix(in srgb, var(--bar) 55%, transparent);
   transform: scaleY(1.15);
-  outline: none;
+}
+.portfolio-page .gantt-bar:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
 }
 .portfolio-page .gantt-bar::after {
   content: attr(data-title);
@@ -332,7 +346,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   border: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   padding: 4px 9px;
   border-radius: 5px;
   white-space: nowrap;
@@ -342,6 +356,13 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   z-index: 5;
 }
 .portfolio-page .gantt-bar:hover::after, .portfolio-page .gantt-bar:focus-visible::after { opacity: 1; }
+/* Below the desktop breakpoint the chart scrolls sideways. The tooltips are
+   laid out even at opacity 0, and they push the scrollable width past the
+   distance the pinned name column can travel, which unpins it. The sticky
+   label already names every row there, and each bar carries a full aria-label. */
+@media (max-width: 1023px) {
+  .portfolio-page .gantt-bar::after { content: none; }
+}
 .portfolio-page .gantt-now {
   position: absolute; top: 0; bottom: 0;
   width: 1px;
@@ -368,7 +389,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   margin: 0 auto;
 }
 .portfolio-page .tdiv .mono {
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -575,6 +596,25 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   transition: border-color 0.25s;
 }
 .portfolio-page .proof-links a:hover { border-color: var(--accent); }
+/* Warns before the click that this demo has no TLS, so the browser's
+   "not secure" interstitial is expected rather than alarming. */
+.portfolio-page .gantt-fallback {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 14px;
+  max-width: 62ch;
+}
+.portfolio-page .link-caveat {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
 .portfolio-page a.link-repo::before, .portfolio-page a.link-post::before, .portfolio-page a.link-live::before, .portfolio-page a.link-video::before {
   content: "";
   display: inline-block;
@@ -711,7 +751,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   border-bottom: 1px solid var(--line);
   background: var(--color-line);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -745,7 +785,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
 .portfolio-page .deck-tab:nth-child(n + 4) { border-bottom: 0; }
 .portfolio-page .deck-tab span {
   color: color-mix(in srgb, var(--accent) 62%, var(--ink-faint));
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
 }
 .portfolio-page .deck-tab::after {
@@ -793,7 +833,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
 .portfolio-page .deck-eyebrow {
   padding-top: 5px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--accent);
@@ -938,7 +978,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   align-items: baseline;
 }
 .portfolio-page .ba-row:first-child { border-top: 0; }
-.portfolio-page .ba-tag { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.portfolio-page .ba-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
 .portfolio-page .ba-mid .ba-tag { color: var(--accent); }
 .portfolio-page .ba-row p { font-size: 13.5px; color: var(--ink-soft); }
 .portfolio-page .request-flow {
@@ -1012,7 +1052,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   color: var(--accent);
   padding-top: 2px;
 }
-.portfolio-page .rung-date { display: block; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+.portfolio-page .rung-date { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
 .portfolio-page .rung-body h4 { font-family: var(--font-display); font-size: 19px; margin-bottom: 6px; }
 .portfolio-page .rung-body p { color: var(--ink-soft); font-size: 14px; }
 @media (max-width: 600px) {.portfolio-page .rung { grid-template-columns: 1fr; gap: 4px; }}
@@ -1074,7 +1114,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
 .portfolio-page .repo-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
 .portfolio-page .repo-card h4 { font-family: var(--font-mono); font-size: 14px; margin: 8px 0; color: var(--ink); }
 .portfolio-page .repo-card p { font-size: 13px; color: var(--ink-soft); }
-.portfolio-page .rc-dates { font-size: 10.5px; color: var(--accent); }
+.portfolio-page .rc-dates { font-size: 11px; color: var(--accent); }
 .portfolio-page .carousel {
   display: flex;
   gap: 18px;
@@ -1160,7 +1200,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
   justify-content: center;
   transition: background 0.3s, box-shadow 0.3s;
 }
-.portfolio-page .video-facade:hover .play { background: var(--accent); box-shadow: 0 0 30px -6px var(--accent); }
+.portfolio-page .video-facade:hover .play { background: var(--accent); box-shadow: var(--shadow-2); }
 .portfolio-page .video-facade .play::after {
   content: "";
   border-left: 16px solid var(--accent);
@@ -1203,7 +1243,7 @@ html.js .portfolio-page .d5 { transition-delay: 0.4s; }
 .portfolio-page .tool-card:hover { transform: translateY(-3px); border-color: var(--ink-faint); }
 .portfolio-page .tool-name { font-size: 12.5px; color: var(--ink); display: block; }
 .portfolio-page .tool-card p { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 12px; }
-.portfolio-page .tool-meta { font-size: 10.5px; color: var(--ink-faint); }
+.portfolio-page .tool-meta { font-size: 11px; color: var(--ink-faint); }
 .portfolio-page .lightbox {
   position: fixed;
   inset: 0;

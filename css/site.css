@@ -70,7 +70,10 @@ html:not(.js) .theme-control { display: none; }
 .portfolio-page .method-line, .portfolio-page .arc { color: var(--color-text-muted); }
 .portfolio-page .frame { padding: 0; }
 .portfolio-page .frame figcaption { padding: 16px; }
-.portfolio-page .proof-links a { min-height: 44px; display: inline-flex; align-items: center; }
+.portfolio-page .proof-links a,
+.portfolio-page .hero-links a,
+.portfolio-page .repo-callout-links a,
+.portfolio-page .repo-callout-url { min-height: 44px; display: inline-flex; align-items: center; }
 .portfolio-page .diagram-deck { box-shadow: none; }
 .portfolio-page .deck-tab { min-height: 44px; }
 .portfolio-page .deck-label, .portfolio-page .deck-position { color: var(--color-text-muted); }
@@ -78,9 +81,9 @@ html:not(.js) .theme-control { display: none; }
 .portfolio-page .chapter { isolation: isolate; }
 .portfolio-page .chapter::before { background: linear-gradient(180deg,color-mix(in srgb,var(--accent) var(--band-tint-strong),transparent),transparent 70%); }
 .portfolio-page .chapter::after { content: none; }
-.portfolio-page .reveal { opacity: 1 !important; transform: none !important; }
 html:not(.js) .portfolio-page .deck-pane,
 html:not(.js) .portfolio-page .deck-pane[hidden] { display: block !important; margin-bottom: 32px; }
+html:not(.js) #gantt,
 html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], html:not(.js) [data-carousel] { display: none; }
 @media(max-width:1023px) { html.js .site-header .nav-toggle { margin-left: auto; } .site-nav { margin-left: 0; } }
 @media(max-width:760px) {

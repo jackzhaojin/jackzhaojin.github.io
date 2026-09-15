@@ -31,7 +31,7 @@ An engineer. Not a marketer, not a salesperson, not a hype account. The work car
 
 ## Verifying changes
 
-- The reveal animations require a real browser; headless `file://` screenshots render blank. Serve locally:
+- Scroll reveals were retired in the v3 migration; content paints on arrival. The `.reveal` and `.d1`-`.d5` classes are inert markup. The Gantt chart, diagram decks, and lightbox are still drawn by script, so `file://` screenshots render them blank. Serve locally:
   `python3 -m http.server <port> --bind 127.0.0.1 --directory /Users/jackjin/dev/jackzhaojin.github.io`
 - Verify with Playwright MCP. All Playwright output goes in `.playwright-mcp/` (gitignored), never the repo root.
 - Do not commit or push unless Jack explicitly says so.
