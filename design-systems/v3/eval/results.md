@@ -4,4 +4,4 @@ Gates from SPEC.md section 10. Static checks run on the files; browser checks ru
 
 | System | Static checks | Overflow | Centered at 1440+ | Theme control | Contrast AA | Bands | No JS |
 |---|---|---|---|---|---|---|---|
-| Design system v3 | 136/136 | none | yes | pass | all pairs pass AA; dark frames pass (174 nodes) | 7 bands, full bleed, distinct grounds, text passes | pass |
+| Design system v3 | 144/144 | none | yes | pass | all pairs pass AA; dark frames pass (214 nodes) | 7 bands, full bleed, distinct grounds, text passes | pass |

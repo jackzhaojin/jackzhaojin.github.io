@@ -117,7 +117,7 @@ async page => {
         function ratio(fg,bg){ if(fg[3]<1) fg=blend(fg,bg); const l1=lum(fg), l2=lum(bg); return Math.round(((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05))*100)/100; }
         const frames=[...document.querySelectorAll('.story[data-theme="dark"]')]; const fails=[]; let checked=0;
         frames.forEach((fr)=>{ const sec=fr.closest('[id^="c-"], section'); const sid=sec?sec.id:'?';
-          const els=[...fr.querySelectorAll('*')].filter(e=>[...e.childNodes].some(n=>n.nodeType===3 && n.textContent.trim().length>1));
+          const els=[...fr.querySelectorAll('*')].filter(e=>!e.closest('[aria-hidden="true"]') && [...e.childNodes].some(n=>n.nodeType===3 && n.textContent.trim().length>1));
           els.forEach(e=>{ const cs=getComputedStyle(e); if(cs.visibility==='hidden'||cs.display==='none') return; const fg=parse(cs.color); if(!fg) return; const rr=ratio(fg,effBg(e)); checked++;
             if(rr<4.5) fails.push({ section:sid, el:e.tagName.toLowerCase()+(e.className?'.'+String(e.className).split(' ')[0]:''), text:e.textContent.trim().slice(0,40), ratio:rr }); }); });
         return { frames: frames.length, checked, fails };

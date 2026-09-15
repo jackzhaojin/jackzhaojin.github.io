@@ -41,6 +41,20 @@
   --palette-gold-700: #7d5f0e;
   --palette-gold-300: #f0cf8e;
 
+  /* project accents, from the portfolio's per-project palette (v2); 300 for dark, 700 for light */
+  --palette-cyan-300: #8fd8e8;
+  --palette-cyan-700: #1d6b7a;
+  --palette-amber-300: #ffc46b;
+  --palette-amber-700: #8a5a00;
+  --palette-leaf-300: #b3dba0;
+  --palette-leaf-700: #3b7628;
+  --palette-bronze-300: #d8b48f;
+  --palette-bronze-700: #7a4f2c;
+  --palette-mint-300: #9fe0c0;
+  --palette-mint-700: #1f6e52;
+  --palette-rose-300: #e8a9b8;
+  --palette-rose-700: #a63658;
+
   /* hairlines and tints (alpha over the page background) */
   --palette-line-warm: rgba(20, 18, 15, 0.10);
   --palette-line-warm-strong: rgba(20, 18, 15, 0.48);
@@ -147,6 +161,13 @@
   --color-topic-aem: var(--palette-blue-600);
   --color-topic-agents: var(--palette-red-600);
   --color-topic-work: var(--palette-gold-700);
+  --color-project-cyan: var(--palette-cyan-700);
+  --color-project-amber: var(--palette-amber-700);
+  --color-project-leaf: var(--palette-leaf-700);
+  --color-project-bronze: var(--palette-bronze-700);
+  --color-project-mint: var(--palette-mint-700);
+  --color-project-rose: var(--palette-rose-700);
+  --color-diagram-ground: var(--palette-warm-50);
   --shadow-1: 0 1px 2px rgba(20, 18, 15, 0.04);
   --shadow-2: 0 8px 24px rgba(20, 18, 15, 0.07);
 }
@@ -177,6 +198,13 @@
   --color-topic-aem: var(--palette-blue-300);
   --color-topic-agents: var(--palette-red-300);
   --color-topic-work: var(--palette-gold-300);
+  --color-project-cyan: var(--palette-cyan-300);
+  --color-project-amber: var(--palette-amber-300);
+  --color-project-leaf: var(--palette-leaf-300);
+  --color-project-bronze: var(--palette-bronze-300);
+  --color-project-mint: var(--palette-mint-300);
+  --color-project-rose: var(--palette-rose-300);
+  --color-diagram-ground: var(--palette-warm-50);
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.30);
   --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.40);
 }
@@ -208,6 +236,13 @@
     --color-topic-aem: var(--palette-blue-300);
     --color-topic-agents: var(--palette-red-300);
     --color-topic-work: var(--palette-gold-300);
+    --color-project-cyan: var(--palette-cyan-300);
+    --color-project-amber: var(--palette-amber-300);
+    --color-project-leaf: var(--palette-leaf-300);
+    --color-project-bronze: var(--palette-bronze-300);
+    --color-project-mint: var(--palette-mint-300);
+    --color-project-rose: var(--palette-rose-300);
+    --color-diagram-ground: var(--palette-warm-50);
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.30);
     --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.40);
   }

@@ -10,7 +10,7 @@ PAGES = ["index.html", "templates/home.html", "templates/post.html", "templates/
 TOKENS = ["--color-bg","--color-bg-alt","--color-surface","--color-surface-raised","--color-text","--color-text-muted",
   "--color-text-faint","--color-line","--color-line-strong","--color-accent","--color-accent-hover","--color-on-accent",
   "--color-accent-soft","--color-focus","--color-inverse-bg","--color-inverse-text","--color-topic-aem-ai","--color-topic-aem",
-  "--color-topic-agents","--color-topic-work","--font-display","--font-body","--font-mono","--text-display","--text-h1","--text-h2",
+  "--color-topic-agents","--color-topic-work","--color-project-cyan","--color-project-rose","--color-diagram-ground","--font-display","--font-body","--font-mono","--text-display","--text-h1","--text-h2",
   "--text-h3","--text-body-lg","--text-body","--text-small","--text-label","--text-mono","--leading-tight","--leading-body",
   "--tracking-label","--weight-regular","--weight-medium","--weight-bold","--space-1","--space-10","--container-max","--gutter",
   "--measure","--header-height","--radius-sm","--radius-md","--radius-lg","--radius-pill","--border-width","--shadow-1","--shadow-2",
@@ -20,9 +20,11 @@ COMPONENTS = [".skip-link",".sr-only",".site-header",".wordmark",".nav-toggle","
   ".chip--format",".chip--status",".card",".card--hub",".card--project",".facts",".table-wrap",".table",".counts",
   ".row-list",".faq",".faq__item",".filter-bar",".pagination",".embed",".embed__fallback",".chapters",".transcript",".author-box",
   ".callout",".cta-band",".site-footer",".icon",".story",".docs-nav",".container",".grid",".stack",".cluster",".prose",
-  ".band",".band--alt",".band--tint",".band--inverse",".band--milestone",".divider",".divider__label"]
+  ".band",".band--alt",".band--tint",".band--inverse",".band--milestone",".divider",".divider__label",
+  ".showcase",".frame",".proof-links",".link--repo",".stat",".stat-chips",".chapter-head",".method-line",".timeline",".card--tool",".proof",".panel--inverse",".grid--rules",".card--link"]
 SECTIONS = ["overview","color","typography","spacing","layout","shape-elevation","motion","iconography","theming","components",
-  "patterns","templates","status","changelog","c-button","c-card","c-facts-table","c-band","c-divider"]
+  "patterns","templates","status","changelog","c-button","c-card","c-facts-table","c-band","c-divider",
+  "c-proof","c-panel-inverse","c-showcase","c-frame","c-proof-links","c-stat","c-chapter-head","c-timeline"]
 README_HEADINGS = ["What this is","Identity","Files","How to use","Tokens","Components","Theming","Templates","Accessibility",
   "Deviations","Sources","Status"]
 PREPAINT = "(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');"

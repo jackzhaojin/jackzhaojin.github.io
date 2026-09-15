@@ -18,6 +18,8 @@
   --icon-article: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2.2' y='1.2' width='11.6' height='13.6' rx='2' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M5 5h6M5 8h6M5 11h4' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   --icon-post: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1.2' y='1.2' width='13.6' height='13.6' rx='2.6' fill='none' stroke='black' stroke-width='1.5'/%3E%3Ccircle cx='5.1' cy='5.3' r='1.15' fill='black'/%3E%3Crect x='4.2' y='7.4' width='1.8' height='4.4' fill='black'/%3E%3Cpath d='M8.2 11.8V9.2c0-2 3.4-2 3.4 0v2.6' fill='none' stroke='black' stroke-width='1.8'/%3E%3C/svg%3E");
   --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --icon-repo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='4' cy='3.5' r='1.7' fill='none' stroke='black' stroke-width='1.6'/%3E%3Ccircle cx='4' cy='12.5' r='1.7' fill='none' stroke='black' stroke-width='1.6'/%3E%3Ccircle cx='12' cy='3.5' r='1.7' fill='none' stroke='black' stroke-width='1.6'/%3E%3Cpath d='M4 5.2v5.6M12 5.2c0 3.4-4 3-6.5 4.6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  --icon-live: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6.3' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cellipse cx='8' cy='8' rx='2.6' ry='6.3' fill='none' stroke='black' stroke-width='1.3'/%3E%3Cpath d='M1.7 8h12.6M2.8 4.8h10.4M2.8 11.2h10.4' fill='none' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
 }
 
 /* ------------------------------------------------------------ icons */
@@ -1006,6 +1008,158 @@ button.chip { cursor: pointer; }
   display: flex; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;
 }
 .site-footer__meta p { margin: 0; }
+
+/* ------------------------------------------------------------ portfolio-derived components
+   Extracted 2026-09-14 from portfolio/index.html (v2) so the portfolio scroll,
+   project pages and posts share them: showcase, frame, proof links, stat chips,
+   chapter head, timeline, tool card. CSS only. A page script may animate or
+   switch them, but every one reads complete without JavaScript. Where a
+   component sits inside a tint band, it follows that band's --band-accent. */
+
+/* Showcase: a text column beside a media column. Text first in the markup;
+   the flip modifier shows the media on the left from 768px. */
+.showcase { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); align-items: center; }
+.showcase + .showcase { margin-top: clamp(var(--space-7), 8vw, var(--space-9)); }
+@media (min-width: 768px) {
+  .showcase { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(26px, 4vw, 64px); }
+  .showcase--flip .showcase__media { order: -1; }
+}
+.showcase--wide { display: block; }
+.showcase--wide .showcase__media { margin-top: var(--space-6); }
+.showcase__text { min-width: 0; }
+.showcase__media { min-width: 0; }
+.showcase__text > h3 { font-size: clamp(1.4375rem, 1.2rem + 1vw, 2rem); line-height: 1.2; }
+.showcase__text > h3 em { font-style: italic; color: var(--band-accent, var(--color-accent)); }
+.showcase__meta { margin-top: 10px; font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); line-height: 1.6; }
+.showcase__meta time { color: var(--band-accent, var(--color-accent)); }
+.showcase__lead { margin-top: 14px; font-size: 15.5px; line-height: 1.55; font-weight: var(--weight-medium); color: var(--color-text); }
+.showcase__text > p:not(.showcase__meta):not(.showcase__lead):not(.proof-links) { margin-top: 12px; font-size: 15px; line-height: 1.6; color: var(--color-text-muted); }
+.showcase__text--center { max-width: 760px; margin-inline: auto; text-align: center; }
+.showcase__text--center .proof-links, .showcase__text--center .stat-chips { justify-content: center; }
+.showcase--wide .showcase__text--center { margin-bottom: var(--space-6); }
+
+/* Frame: a bordered figure for a screenshot or a diagram, with a mono caption.
+   Diagrams are light artwork, so the diagram variant keeps a paper ground in both themes. */
+.frame { margin: 0; border: var(--border-width) solid var(--color-line); border-radius: var(--card-radius); overflow: hidden; background: var(--color-surface); }
+.frame > a { display: block; }
+.frame img { width: 100%; }
+.frame figcaption { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.02em; line-height: 1.5; color: var(--color-text-faint); padding: 10px 14px; border-top: var(--border-width) solid var(--color-line); }
+.frame--portrait { max-width: 340px; }
+.frame--diagram { max-width: 1040px; margin-inline: auto; }
+.frame--diagram > a, .frame--diagram img { background: var(--color-diagram-ground); }
+.frame + .frame { margin-top: var(--space-4); }
+
+/* Proof links: a row of mono links, each typed by its destination with an
+   icon: repo (branch), post, video, live (globe). Repos read as ink, posts and
+   videos as muted, live in the accent. The hit area grows to 44px through padding. */
+.proof-links { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; margin-top: 18px; }
+.proof-links a {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  border-bottom: var(--border-width) solid var(--color-line-strong);
+  /* inline links in a wrapping row: the hit area grows upward only, so wrapped rows never overlap */
+  padding: 10px 0 2px;
+  margin: -10px 0 0;
+}
+.proof-links a:hover { color: var(--color-text); border-color: var(--color-text); }
+.link--repo::before, .link--post::before, .link--live::before, .link--video::before {
+  content: "";
+  display: inline-block;
+  width: 12px; height: 12px;
+  margin-right: 7px;
+  vertical-align: -1.5px;
+  background: currentColor;
+  -webkit-mask: var(--licon) center / contain no-repeat;
+  mask: var(--licon) center / contain no-repeat;
+}
+.link--repo::before { --licon: var(--icon-repo); }
+.link--post::before { --licon: var(--icon-post); }
+.link--video::before { --licon: var(--icon-video); }
+.link--live::before { --licon: var(--icon-live); }
+.proof-links .link--repo { color: var(--color-text); }
+.proof-links .link--live { color: var(--band-accent, var(--color-accent)); border-color: color-mix(in srgb, var(--band-accent, var(--color-accent)) 40%, transparent); }
+.proof-links .link--live:hover { border-color: currentColor; }
+
+/* Stat chips: small evidence chips, a number in the accent and a label. The
+   block variant stacks the number over the label for a counter row. */
+.stat-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.stat {
+  display: inline-flex; align-items: baseline; gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 7px 12px;
+  background: color-mix(in srgb, var(--color-surface) 60%, transparent);
+}
+.stat b { color: var(--band-accent, var(--color-accent)); font-weight: var(--weight-bold); }
+.stat--block { flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 14px; color: var(--color-text-faint); }
+.stat--block b { font-size: 21px; line-height: 1.1; color: var(--color-text); font-variant-numeric: tabular-nums; }
+.stat--accent b { color: var(--band-accent, var(--color-accent)); }
+
+/* Chapter head: the opening of a project chapter or a project page. A decorative
+   outlined numeral, the title with an italic subtitle, the date line under the
+   title, the method line, the thesis and an optional arc paragraph. */
+.chapter-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); align-items: start; margin-bottom: clamp(var(--space-7), 6vw, var(--space-9)); }
+@media (min-width: 768px) { .chapter-head { grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 60px); } }
+.chapter-head__num {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.75rem, 9vw, 8.125rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--band-accent, var(--color-accent)) 55%, transparent);
+  user-select: none;
+}
+.chapter-head__body { min-width: 0; }
+.chapter-head h2, .chapter-head h3 { font-size: clamp(1.875rem, 1.3rem + 2.4vw, 3.375rem); line-height: 1.12; letter-spacing: -0.01em; }
+.chapter-head h2 em, .chapter-head h3 em { display: block; margin-top: 6px; font-size: 0.72em; font-style: italic; color: var(--band-accent, var(--color-accent)); }
+.chapter-head--flagship h2, .chapter-head--flagship h3 { font-size: clamp(2.125rem, 1.4rem + 3vw, 4rem); }
+.chapter-head__meta { margin-top: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-faint); line-height: 1.6; }
+.method-line { margin-top: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; line-height: 1.9; color: var(--color-text-faint); }
+.method-line b { font-weight: var(--weight-medium); color: var(--color-text-muted); border: var(--border-width) solid var(--color-line-strong); border-radius: var(--radius-sm); padding: 2px 7px; margin-right: 4px; white-space: nowrap; }
+.thesis { margin-top: 18px; max-width: 62ch; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.6; color: var(--color-text-muted); }
+.arc { margin-top: 14px; max-width: 62ch; font-size: 14px; line-height: 1.6; color: var(--color-text-faint); }
+.arc .mono { font-size: 12.5px; color: var(--band-accent, var(--color-accent)); }
+
+/* Timeline: a release ladder. A rail on the left, a dot per item, the version
+   in the accent, then the title, the date under it and one paragraph. */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: var(--border-width) solid var(--color-line-strong); }
+.timeline__era { font-family: var(--font-mono); font-size: var(--text-label); font-weight: var(--weight-medium); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--color-text-faint); padding: 18px 0 4px; }
+.timeline__item { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 16px 0; border-top: var(--border-width) solid var(--color-line); }
+.timeline__era + .timeline__item, .timeline__item:first-child { border-top: 0; }
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: -26.5px; top: 24px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1.5px solid var(--band-accent, var(--color-accent));
+}
+@media (min-width: 480px) { .timeline__item { grid-template-columns: 84px minmax(0, 1fr); gap: clamp(14px, 2.5vw, 28px); } }
+.timeline__version { font-family: var(--font-mono); font-size: 15px; font-weight: var(--weight-bold); color: var(--band-accent, var(--color-accent)); padding-top: 2px; }
+.timeline__body { min-width: 0; }
+.timeline__body h4 { font-family: var(--font-display); font-size: 19px; line-height: 1.3; }
+.timeline__date { display: block; margin-top: 4px; font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); }
+.timeline__body p { margin-top: 6px; font-size: 14px; line-height: 1.6; color: var(--color-text-muted); }
+
+/* Tool card: a compact card that is itself a link to a repo. */
+.card--tool { padding: 20px; gap: 8px; }
+a.card--tool { text-decoration: none; color: var(--color-text); }
+.card--tool .card__title { font-family: var(--font-mono); font-size: 13px; font-weight: var(--weight-medium); letter-spacing: 0.01em; line-height: 1.4; display: flex; align-items: center; gap: 7px; }
+.card--tool .card__title::before { content: ""; width: 11px; height: 11px; flex-shrink: 0; background: currentColor; opacity: 0.7; -webkit-mask: var(--icon-repo) center / contain no-repeat; mask: var(--icon-repo) center / contain no-repeat; }
+.card--tool .card__excerpt { font-size: 13px; }
+.card--tool .card__meta { margin-top: auto; padding-top: 4px; }
+a.card--tool:hover { border-color: var(--color-line-strong); }
+a.card--tool:hover .card__title { color: var(--color-accent); }
 
 /* ------------------------------------------------------------ docs site (index.html) */
 .docs-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7); align-items: start; padding-top: var(--space-6); padding-bottom: var(--space-9); }

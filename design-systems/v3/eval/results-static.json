@@ -388,6 +388,54 @@
    },
    {
     "page": "index.html",
+    "check": "docs section #c-proof",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-panel-inverse",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-showcase",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-frame",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-proof-links",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-stat",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-chapter-head",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
+    "check": "docs section #c-timeline",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "page": "index.html",
     "check": "dark story frame",
     "pass": true,
     "detail": ""
@@ -819,7 +867,7 @@
     "detail": "39"
    }
   ],
-  "passed": 136,
-  "total": 136
+  "passed": 144,
+  "total": 144
  }
 ]

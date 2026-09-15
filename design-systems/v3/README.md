@@ -51,6 +51,8 @@ Set the default theme on the root element, copy the pre-paint snippet into the h
 
 Three tiers in `tokens.css` and `tokens.json` (W3C Design Tokens format): primitives (palette, faces, raw sizes), semantic tokens (color, type, space, layout, shape, motion), component tokens in `components.css`. Light is the default; `[data-theme="dark"]` and the OS preference under the system choice supply the dark set. Band tint strengths are per theme (9/5/4 percent light, 7/4/3 dark). v3 adds `--target-min` (44px) and `--proof-label`.
 
+Project accents (v3 0.2.0): the portfolio colored each chapter with its own accent. Four of those already are topic colors (lavender is AEM + AI, coral is AI Agents, gold is Working with AI, steel blue is Adobe AEM and EDS). The other six are now primitives with a light and a dark value (cyan, amber, leaf, bronze, mint, rose; the light values pass AA on paper) and semantic tokens `--color-project-cyan` through `--color-project-rose`, meant for a chapter's `--band-accent`. `--color-diagram-ground` is paper in both themes, for light diagram artwork.
+
 Inverse surfaces (the inverse band and the inverse panel) set every semantic token again, per theme, straight from primitives. No token inside refers to a token outside, so there is no alias round trip to resolve.
 
 ## Components
@@ -69,6 +71,20 @@ Everything in the 2026-09-13 contract (skip link, header, theme control, breadcr
 | Row list | `.row-list--status` | A status column. |
 | CTA band | `.cta-band__contact`, `.cta-band__profiles` | The closing "Follow the work" band with the booking line as text. |
 | Facts table | `.facts caption` | The caption is visible ("Key facts"). |
+
+Extracted from the v2 portfolio page on 2026-09-14 (v3 0.2.0), CSS only, so the portfolio scroll, project pages and posts can share them. Page scripts may animate or switch them; every one reads complete without JavaScript.
+
+| Component | Class | From the portfolio |
+|---|---|---|
+| Showcase | `.showcase`, `--flip`, `--wide`, `__text`, `__meta`, `__lead`, `__media` | The story block (25 on the page). Text first in the markup; the meta line sits under the title. |
+| Frame | `.frame`, `--diagram`, `--portrait` | The bordered figure with a mono caption (12). The diagram variant keeps a paper ground in both themes. |
+| Proof links | `.proof-links`, `.link--repo`, `.link--post`, `.link--video`, `.link--live` | The typed link row (17 rows, 48 links). Icons are CSS masks. |
+| Stat chips | `.stat-chips`, `.stat`, `--block`, `--accent` | The stats (18) and counters (11). |
+| Chapter head | `.chapter-head`, `--flagship`, `__num`, `__body`, `__meta`, `.method-line`, `.thesis`, `.arc` | The chapter opening (11). The numeral is decorative; the date moves under the title. |
+| Timeline | `.timeline`, `__era`, `__item`, `__version`, `__body`, `__date` | The release ladder (9 rungs). |
+| Tool card | `.card--tool` | The workbench card (7), a card that is itself a link. |
+
+Left on the page, not in the system: the tabbed diagram deck and the glossary chips (one instance each, switched by script), the projects-over-time chart, the year rail and the scroll progress bar, the reveal animation. They stay page-level in `portfolio/script.js` and `portfolio/styles.css` when the page moves to v3.
 
 ## Theming
 
@@ -114,6 +130,7 @@ From the 2026-09-13 contract and the Claude Fable 5.1 base:
 
 - 2026-09-14: folder created. `PRODUCT.md` written; the content plan is under `ai-docs/`.
 - 2026-09-14, later: four-way critique done and the base chosen (Claude Fable 5.1).
+- 2026-09-14, later that night: v3 0.2.0. Seven components and six project accents extracted from the v2 portfolio page (see Components); the portfolio page itself is not migrated yet, that is roadmap step 6.
 - 2026-09-14, night: v3 0.1.0 built. Every shared defect from the critique fixed once here: the hero proves instead of pitching, pages end on "Follow the work" with no empty ground, the header is one row with 44px targets, data vocabulary is out of the copy, placeholders never render as controls. A finish review found ten items; all were applied or recorded above as deviations. `DESIGN.md` written from the shipped code. Eval results in [eval/results.md](eval/results.md).
 
 ## Roadmap
