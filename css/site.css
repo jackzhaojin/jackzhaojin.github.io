@@ -17,15 +17,22 @@ html:not(.js) .theme-control { display: none; }
 .home-intro .positioning { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.7rem); line-height: 1.25; margin: 24px 0; }
 .home-intro em { color: var(--color-accent); }
 .home-intro .summary { max-width: 58ch; }
+:root, [data-theme] { --color-adobe: #fa0f00; } /* Adobe brand red, used only for the recognition rule */
 .home-note { border-top: 1px solid var(--color-line-strong); padding-top: 24px; }
+.home-note--adobe { border-top: 2px solid var(--color-adobe); }
+.champion-banner { display: block; margin: 18px 0 6px; border: 1px solid var(--color-line); border-radius: 6px; overflow: hidden; background: #0a0a14; }
+.champion-banner img { display: block; width: 100%; height: auto; }
 .identity-list { list-style: none; padding: 0; margin: 20px 0 30px; }
 .identity-list li { padding: 14px 0; border-bottom: 1px solid var(--color-line); font-family: var(--font-display); font-size: 21px; }
+.identity-list li a { color: var(--color-text); border-bottom: 1px solid transparent; }
+.identity-list li a:hover { color: var(--color-accent); border-color: currentColor; }
+.identity-list li span { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 14px; color: var(--color-text-muted); }
 .work-feature { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 48px; margin-top: 36px; }
 .work-feature h3 { font-size: 32px; }
 .work-feature p { margin: 16px 0 24px; }
 .work-feature figure { margin: 0; }
 .work-feature img { width: 100%; height: auto; }
-.home-work-links { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 48px; }
+.home-work-links { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; margin-top: 48px; }
 .home-work-links a { border-top: 1px solid var(--color-line-strong); padding: 24px 0; }
 .home-work-links strong { display: block; font-family: var(--font-display); font-size: 23px; margin-bottom: 8px; }
 .home-work-links span { color: var(--color-text-muted); font-size: 14px; }
@@ -85,7 +92,7 @@ html:not(.js) .portfolio-page .deck-pane,
 html:not(.js) .portfolio-page .deck-pane[hidden] { display: block !important; margin-bottom: 32px; }
 html:not(.js) #gantt,
 html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], html:not(.js) [data-carousel] { display: none; }
-@media(max-width:1023px) { html.js .site-header .nav-toggle { margin-left: auto; } .site-nav { margin-left: 0; } }
+@media(max-width:1023px) { html.js .site-header .nav-toggle { margin-left: auto; } .site-nav { margin-left: 0; } .home-work-links { grid-template-columns: repeat(2,1fr); } }
 @media(max-width:760px) {
  .home-intro,.work-feature,.home-two { grid-template-columns: 1fr; gap: 36px; }
  .home-work-links { grid-template-columns: 1fr; gap: 0; margin-top: 32px; }
