@@ -55,7 +55,7 @@ Open items the builders raised, for Jack:
 - JSON-LD is not in the templates because the head contract fixes the head; add it when the chosen system is applied to real pages.
 - Claude Fable 5.1 wraps its phone header to two rows to keep the theme control visible; Google Stitch hides the Book a talk button under 480 px instead. Pick one behaviour for the site.
 
-Decision pending Jack's review of the four.
+Decision made 2026-09-14 after a four-way critique: Claude Fable 5.1 is the base for [design system v3](../v3/), with named pieces from the other three. These four folders stay as built; fixes land in v3.
 
 ### 2026-09-14: section bands
 

@@ -75,7 +75,7 @@ Ordered slots for a post; project and talk differ where noted.
 5. Facts `<table>`: topic, format, date, tools and versions, related project or talk, where else published. Project: repo, status, first and last commit, commit and tag counts, stack, build method. Talk: event, date, city, format, slides, recording.
 6. Body: H2s as sub-questions, `<ol>` steps, `<table>` comparisons, diagrams with descriptive alt. Video: embed with a plain link, chapter `<ol>` with timestamps, full transcript in the DOM.
 7. FAQ: 2 to 4 natural questions, 50 to 100 word answers.
-8. Related: hub link(s), 3 to 5 spokes with descriptive anchors, "Discuss on LinkedIn".
+8. Related: hub link(s), 3 to 5 spokes with descriptive anchors. Nothing routes the reader to LinkedIn; the site is the destination (see [content-plan-2026-09-14.md](content-plan-2026-09-14.md)).
 9. Author box: name, role, credentials, LinkedIn, GitHub, YouTube.
 10. Schema per the inventory, one `@graph` in `<head>`.
 
@@ -85,7 +85,7 @@ Ordered slots for a post; project and talk differ where noted.
 - `robots.txt` names and allows GPTBot, ChatGPT-User, OAI-SearchBot, PerplexityBot, ClaudeBot, Claude-SearchBot, Google-Extended, Bingbot; CCBot may be disallowed; keep the Sitemap line. Confirm Cloudflare's AI bot blocking and Bot Fight Mode are off. Register Bing Webmaster Tools (feeds Copilot and ChatGPT).
 - `/llms.txt`: a paragraph on who and what, then hubs and top pages with one-line descriptions, linking to `/llms-full.txt`, every post, project and talk as Markdown, regenerated on each publish. Both in the footer.
 - Markdown per page: `index.md` beside every `index.html`, advertised by `<link rel="alternate" type="text/markdown" href="index.md">` in the head and an HTTP `Link` header via a Cloudflare Transform Rule. Accept negotiation is unavailable on GitHub Pages; skip unless a Worker is adopted.
-- No JavaScript-only key actions: contact is a mailto and a LinkedIn `<a>`; speaker kit files are direct links; topic buttons are `<a>`; every embed has a plain watch link.
+- No JavaScript-only key actions: contact is a mailto, with LinkedIn as a profile link only; speaker kit files are direct links; topic buttons are `<a>`; every embed has a plain watch link.
 - `sitemap.xml` lists every indexable URL with lastmod, including pagination, excluding query strings. Real `404.html`. Run `npx is-agentic www.jackzhaojin.com` before and after.
 
 ## E. Site map

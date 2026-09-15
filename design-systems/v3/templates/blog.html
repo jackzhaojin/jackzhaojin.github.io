@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en" data-theme-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVENE6BXTJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZVENE6BXTJ');
+</script>
+<title>Blog | Design system v3 | Jack Jin</title>
+<meta name="description" content="All 39 articles, posts and videos by Jack Jin on Adobe Experience Manager (AEM), Edge Delivery Services (EDS), AI agents and working with AI, newest first.">
+<link rel="canonical" href="https://www.jackzhaojin.com/design-systems/v3/templates/blog.html">
+<meta name="robots" content="noindex">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('jj-theme');var def=d.getAttribute('data-theme-default')||'light';var c=(s==='light'||s==='dark'||s==='system')?s:def;if(c==='system'){d.removeAttribute('data-theme');}else{d.setAttribute('data-theme',c);}d.setAttribute('data-theme-choice',c);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../components.css">
+<script src="../shared/theme.js" defer></script>
+<script src="../scripts.js" defer></script>
+</head>
+<body>
+<svg hidden xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-video" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-article" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="icon-post" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7v.5M12 17v-3.5a2 2 0 0 1 4 0V17"/></symbol>
+  <symbol id="icon-repo" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M6 7.2v9.6M18 7.2c0 5-6 4.5-9.5 7"/></symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 13v6H5V6h6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">Jack Jin</a>
+    <a class="btn btn--primary btn--sm site-header__cta" href="home.html#contact">Book a talk</a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#icon-menu"></use></svg><svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg><span class="nav-toggle__open">Menu</span><span class="nav-toggle__close">Close</span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="blog.html?topic=aem-ai">AEM + AI</a></li>
+        <li><a href="blog.html" aria-current="page">Blog</a></li>
+        <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+        <li><a href="home.html#talks">Talks</a></li>
+        <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+        <li><a href="home.html#contact">Contact</a></li>
+      </ul>
+      <div class="site-nav__tools">
+        <a class="btn btn--primary btn--sm" href="home.html#contact">Book a talk</a>
+        <div class="theme-control" role="group" aria-label="Color theme">
+          <button type="button" class="theme-control__btn" data-set-theme="light" aria-pressed="true">Light</button>
+          <button type="button" class="theme-control__btn" data-set-theme="dark" aria-pressed="false">Dark</button>
+          <button type="button" class="theme-control__btn" data-set-theme="system" aria-pressed="false">System</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="band band--plain">
+<div class="container">
+  <header class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="home.html">Home</a></li><li aria-current="page">Blog</li></ol></nav>
+    <h1 class="page-title">Blog</h1>
+    <p class="byline">39 pieces&nbsp;· Newest <time datetime="2026-08-09">2026-08-09</time>&nbsp;· Oldest <time datetime="2025-04-13">2025-04-13</time></p>
+    <p class="summary">Everything Jack Jin has published since April 2025: 39 pieces, 7 articles, 13 short posts and 19 videos, newest first, on Adobe Experience Manager (AEM), Edge Delivery Services (EDS), AI agents and working with AI. Topic chips lead to the four hubs. Format and type filters narrow the grid here. Until the write-ups move here, each card opens the LinkedIn copy.</p>
+  </header>
+</div>
+</div>
+
+<section class="band band--tint" aria-labelledby="h-start">
+<div class="container">
+  <div class="section--tight">
+    <div class="section__head"><h2 id="h-start">Start here</h2><p class="muted small">The one piece to read first.</p></div>
+    <div class="panel stack stack--sm">
+      <h3 style="font-size:22px"><a href="post.html" style="color:var(--color-text)">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+      <p class="muted small">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. Walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three da.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+      <p class="cluster" style="gap:18px"><a class="text-link" href="post.html">Read the post</a></p>
+    </div>
+  </div>
+
+  <section class="section--tight" aria-labelledby="h-counts">
+    <h2 id="h-counts" class="sr-only">Counts by format and type</h2>
+    <table class="facts" style="max-width:860px">
+      <caption class="sr-only">Counts by format and type</caption>
+      <tbody>
+        <tr><th scope="row">Pieces</th><td>39</td></tr>
+        <tr><th scope="row">Format</th><td>7 articles · 13 short posts · 19 videos</td></tr>
+        <tr><th scope="row">Topic</th><td>AI 27 · AEM 12</td></tr>
+        <tr><th scope="row">Type</th><td>Technical 22 · Leadership 17</td></tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+</section>
+
+<section class="band band--plain" aria-labelledby="h-all">
+<div class="container">
+  <form class="filter-bar section--tight" data-collection aria-label="Filter and sort">
+    <div class="filter-bar__row"><span class="filter-bar__label">Topic</span> <a class="chip chip--plain" data-topic-slug="" href="blog.html">All</a> <a class="chip chip--topic" data-topic="aem-ai" data-topic-slug="aem-ai" href="blog.html?topic=aem-ai">AEM + AI</a> <a class="chip chip--topic" data-topic="aem" data-topic-slug="adobe-aem" href="blog.html?topic=adobe-aem">Adobe AEM and EDS</a> <a class="chip chip--topic" data-topic="agents" data-topic-slug="ai-agents" href="blog.html?topic=ai-agents">AI Agents</a> <a class="chip chip--topic" data-topic="work" data-topic-slug="working-with-ai" href="blog.html?topic=working-with-ai">Working with AI</a></div>
+    <div class="filter-bar__row"><span class="filter-bar__label">Format</span> <button type="button" class="chip chip--plain" data-filter="format" data-value="all" aria-pressed="true">All</button> <button type="button" class="chip chip--format" data-format="article" data-filter="format" data-value="article" aria-pressed="false">Article</button> <button type="button" class="chip chip--format" data-format="post" data-filter="format" data-value="post" aria-pressed="false">Post</button> <button type="button" class="chip chip--format" data-format="video" data-filter="format" data-value="video" aria-pressed="false">Video</button></div>
+    <div class="filter-bar__row"><span class="filter-bar__label">Type</span> <button type="button" class="chip chip--plain" data-filter="type" data-value="all" aria-pressed="true">All</button> <button type="button" class="chip chip--plain" data-filter="type" data-value="technical" aria-pressed="false">Technical</button> <button type="button" class="chip chip--plain" data-filter="type" data-value="leadership" aria-pressed="false">Leadership</button></div>
+    <div class="filter-bar__row"><label for="sort">Sort</label> <select id="sort" name="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select> <span class="filter-bar__count" id="filterCount">39 of 39 shown</span></div>
+  </form>
+
+  <div class="section--tight">
+    <h2 id="h-all" style="margin-bottom:20px">All posts, newest first</h2>
+    <div class="grid grid--3" id="postGrid">
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2026-08-09">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN">Adobe Stardust Explained: Design Agent Skills on EDS</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-08-09">2026-08-09</time></p>
+        <p class="card__excerpt">What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. Walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three da.live blocks compared across a Google Stitch baseline and two Stardust runs.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="post" data-type="technical" data-date="2026-08-03">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_anima-mesh-ai-tinkerer-columbus-2026-08-ugcPost-7490122558491533313-m-o0/">AnimaMesh Conference Pre-Read: An Engine for Running a Company with Agents</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-08-03">2026-08-03</time></p>
+        <p class="card__excerpt">Pre-read deck for the AI Tinkerers Columbus talk on AnimaMesh, an engine for running a company with agents. AI Tinkerers runs a live-demos-only format, so the full deck went out ahead of the session as a flip-through companion.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="video" data-type="technical" data-date="2026-07-21">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_i-made-four-frontier-models-compete-for-my-activity-7485508082685464577-Amsv">Top Models Compared: 4 Frontier Models, 1 Prompt</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-07-21">2026-07-21</time></p>
+        <p class="card__excerpt">Four frontier models, GPT 5.6, Kimi K3, Gemini 3.5 Flash, and Claude Fable 5, each building the same portfolio site from the exact same 1,032-line prompt on 48 files of context. A tab-by-tab walkthrough of what each one built, pen-and-paper notebook grading, and an AI-picked winner, with the final site merged from the best pieces of all four.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="article" data-type="leadership" data-date="2026-06-28">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/after-year-where-i-think-knowledge-work-heading-jack-jin-kymtc">After a Year: Where I Think Knowledge Work Is Heading</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2026-06-28">2026-06-28</time></p>
+        <p class="card__excerpt">The long-form companion to the Patterns of Work video. A year of building with AI almost every day, mapped as five layers, from one person amplified to where human and agentic managers share one context, with a spine of context, governance, observability, and evals running through all five and a shared-context foundation underneath. Includes the team-channel idea: tag an agent where the context already lives and it inherits the whole channel. Where I think knowledge work is heading, hedged where my conviction runs ahead of my receipts.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="video" data-type="leadership" data-date="2026-06-21">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7474615331701841920/">Patterns of Work: Five Layers of Working with AI</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-06-21">2026-06-21</time></p>
+        <p class="card__excerpt">An honest, unfiltered take on how we work with AI, mapped as five layers, from one person amplified up to where human and agentic managers share one common context. The real shift: it is not about data readiness, it is about getting agents to work alongside us on a shared surface, with real trust, security, observability, and governance underneath. A live hand-drawn talk, kept raw with minimal editing.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="post" data-type="technical" data-date="2026-05-31">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7466952007031910400">Continuous Executive Agent V3.0: The Second Brain</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-05-31">2026-05-31</time></p>
+        <p class="card__excerpt">Giving a 24/7 autonomous coding agent a real memory system, and why storage and retrieval are the hard part of agentic systems. A five-type memory taxonomy, automatic storage wired through lifecycle hooks, and agentic natural-language retrieval where the agent decides what past knowledge serves the goal in front of it. My first research-to-design-to-build cycle end to end. Open source.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2026-05-24">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7464766955137191936-2kip/">Theming a Brand-New EDS Site with Google Stitch + MCP</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-05-24">2026-05-24</time></p>
+        <p class="card__excerpt">A 3-step approach to theming a greenfield EDS site: define what the theme could be, generate it in Google Stitch, then wire the design back into the site through the Stitch MCP server. Claude Opus 4.7 driving in a single ~20-minute prompt, traced in MLflow down to the tool calls, including the call-to-action miss and the lesson to theme the site and teaser as separate passes.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2026-05-17">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7461912604530319361-GXTo">Adobe EDS Skills Hands-On: create-site + content-driven-development</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-05-17">2026-05-17</time></p>
+        <p class="card__excerpt">Hands-on walkthrough of Adobe's create-site and content-driven-development skills inside Claude Code, with MLflow tracing the whole run. A new site bootstrap and a teaser block authored content-first, plus the rough edges and the missing theme skill gap.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2026-05-05">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:share:7457634853090541568/">Agentic vs Deterministic: Picking Your Code / Markdown Ratio</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-05-05">2026-05-05</time></p>
+        <p class="card__excerpt">Single-graphic post on the spectrum between fully agentic markdown-driven skills and fully deterministic code, and how to pick the right ratio when building Claude Code skills.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2026-04-26">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_went-back-to-denison-university-last-week-ugcPost-7454289490795421696-PNZV">Went Back to Denison: AI, Agents, Careers Talk</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-04-26">2026-04-26</time></p>
+        <p class="card__excerpt">Returned to my alma mater Denison University to talk with CS students about AI, agents, and careers. Open-sourced repo, prompts, and slides with a live demo at jackzhaojin.github.io/denison-2026-04-24.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2026-04-20">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7452052804765958144/">AI Tinkerers Community Spotlight Feature</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-04-20">2026-04-20</time></p>
+        <p class="card__excerpt">Featured in the AI Tinkerers 23 Community Spotlights for hands-on work with continuous coding agents and applied AI experimentation in the Columbus community.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="video" data-type="leadership" data-date="2026-04-12">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aiskills-ugcPost-7449292477217284096-Y5cp">Two AI Skills for Three Team Enablement Objectives</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-04-12">2026-04-12</time></p>
+        <p class="card__excerpt">Three team enablement objectives and two reusable AI skills: Conversation Logger for capturing prompts and results, and AI Knowledge Harvester for cataloging AI work in a findable taxonomy.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="post" data-type="technical" data-date="2026-04-05">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_continuous-executive-agent-v2-1-2026-04-05-ugcPost-7446595873062674432-gmmC">AI Tinkerers Talk Eve: Continuous Coding Executive Agent v2.1 Deck Upload</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-04-05">2026-04-05</time></p>
+        <p class="card__excerpt">Full slide deck for the AI Tinkerers Columbus talk covering the 8-phase executive loop, constitution-governed safety, multi-vendor workers, and async agent communication. Open source.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2026-03-29">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7444214802408783872/">24/7 Autonomous Development Agent Demo at AI Tinkerers Columbus</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2026-03-29">2026-03-29</time></p>
+        <p class="card__excerpt">Announcing the AI Tinkerers Columbus talk on the Continuous Coding Executive Agent, a custom OpenClaw fork built for 24/7 autonomous development with five releases and 40+ features.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2026-03-23">
+        <h3 class="card__title"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7441702756140261376/">Agentic AEM Configuration: Building an EDS HLX Admin Skill for Claude Code</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-03-23">2026-03-23</time></p>
+        <p class="card__excerpt">Building a Claude Code skill for agentic AEM Edge Delivery Services HLX Admin configuration, enabling AI-driven site management and content operations.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="video" data-type="technical" data-date="2026-02-05">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_making-an-ai-driven-developments-modules-activity-7425403008705970177-iR89">Making AI-Driven Development Modules Reusable: Patterns for Agentic Development</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-02-05">2026-02-05</time></p>
+        <p class="card__excerpt">Lessons learned on building reusable AI development modules instead of rebuilding from scratch. A diagram walkthrough on patterns for agentic development and avoiding common mistakes.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="video" data-type="leadership" data-date="2026-01-29">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_agenticai-claudecode-playwright-ugcPost-7422849539122040832-tTl-">AI-Generated Stakeholder Demos with Playwright: My Harness + Agent Builds It, Then Presents It Back to Me</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-01-29">2026-01-29</time></p>
+        <p class="card__excerpt">AI builds so much I can't track it all. So I had AI demo its own work back to me using Playwright with auto-generated captions - becoming the executive stakeholder watching the sprint demo.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="video" data-type="leadership" data-date="2026-01-18">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aem-activity-7418805222657155072-Wtk4">From Ad-Hoc Prompts to Harnesses to Continuous Running Agents: My AI Architecture and Engineering Evolution</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-01-18">2026-01-18</time></p>
+        <p class="card__excerpt">Tracing the evolution of AI-assisted architecture from ad-hoc prompting to spec-driven development to harness building, and introducing the next project: a continuous running agent.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="video" data-type="technical" data-date="2026-01-05">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aiharness-activity-7414111229386035200-VyA1">From Prompts to Harness: Building Two Agentic Systems Over the Holiday Break</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2026-01-05">2026-01-05</time></p>
+        <p class="card__excerpt">Building two agentic AI systems over the holiday break: a Next.js app with Claude Agent SDK mixing deterministic workflows with agent capabilities, and a harness with planning agents that builds software.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2025-10-14">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_accenture-activity-7385848321564798976-E6kS">10 Years at Accenture: Growth, Impact, and the AI Pivot</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-10-14">2025-10-14</time></p>
+        <p class="card__excerpt">Reflecting on a decade at Accenture, from AEM tech lead to architecting the largest Adobe implementations for Fortune 100 companies, winning AEM Rockstars 2024, and pivoting into AI leadership.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2025-10-12">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_agenticai-mcp-eds-activity-7383240389757104128-ZsmO">Building Agentic AI for EDS and DA.live Content Automation: Testing MCP Servers Across Claude, Gemini, Azure OpenAI, and n8n</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-10-12">2025-10-12</time></p>
+        <p class="card__excerpt">Testing the same MCP server across Claude, Azure OpenAI, Gemini 2.5 Pro, and n8n workflows, deploying to Azure Functions and exploring plug-and-play agentic AI architecture patterns.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem-ai aem" data-format="video" data-type="technical" data-date="2025-10-05">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_eds-dalive-mcp-activity-7380821161925959680-dk3f">Building an MCP Server for EDS DA.live: AI Content Integration with Adobe's Newest AEM Offering</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-10-05">2025-10-05</time></p>
+        <p class="card__excerpt">Building a Model Context Protocol server for DA.live content integration, evolving from traditional AI workflows to an agent-based approach with real-time content modification.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem-ai">AEM + AI</span> <span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem" data-format="video" data-type="technical" data-date="2025-09-01">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aem-adobeexperiencemanager-webcaching-activity-7368473668303155200-JNvf">AEM Caching Video: Breaking Down Web Caching in Real Production Architectures</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-09-01">2025-09-01</time></p>
+        <p class="card__excerpt">Video walkthrough of AEM caching architecture with multiple CDN layers, dispatcher, and publish instances, exploring cache control headers, Fastly CDN patterns, and dispatcher configuration.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2025-08-13">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_columbusaiweek-columbusaiweek-activity-7361574491207946240-BZoS">Columbus AI Week Speaker: AI in Professional Services</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-08-13">2025-08-13</time></p>
+        <p class="card__excerpt">Accepted to speak at Columbus AI Week on how professional services firms are actually using AI to bring innovation to clients, filling a gap in the industry conversation.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2025-08-04">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_claudai-aileadership-specificationdrivendevelopment-activity-7357966885453287425-YU5R">AI curiosity: My personal journey of building, exploring, and pushing my own limits by working alongside three AI agents at the same time</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-08-04">2025-08-04</time></p>
+        <p class="card__excerpt">Personal reflection on the creative journey of collaborative development with multiple AI agents, pushing the boundaries of AI-assisted software development.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem" data-format="video" data-type="technical" data-date="2025-07-13">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_techleadership-aem-eds-activity-7350366726531731457-s8zN">AEM EDS Architecture Video: Making sense of the 3 EDS offerings - 2025 Edition</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-07-13">2025-07-13</time></p>
+        <p class="card__excerpt">Comprehensive video analysis of Adobe Experience Delivery Service (EDS) architecture patterns and the three main EDS offering variants for 2025.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem" data-format="video" data-type="technical" data-date="2025-07-12">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_techleadership-aemaacs-headlesscms-activity-7347777907085275137-2jeb">AEM Architecture Video: 3 Diagrams and 12+ Considerations on AEM Headless and Omnichannel</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-07-12">2025-07-12</time></p>
+        <p class="card__excerpt">Technical deep dive video presenting architectural diagrams and key considerations for implementing AEM headless and omnichannel solutions.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="video" data-type="leadership" data-date="2025-07-11">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7348559013199925248-j9Ws">My Third and Final Video: Scaling AI Coding and Delivery Methodology</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-07-11">2025-07-11</time></p>
+        <p class="card__excerpt">Final video in the AI coding series, focusing on scaling methodologies and delivery practices for enterprise-level AI-assisted software development.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="video" data-type="technical" data-date="2025-07-07">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345630816263118848-cd2t">AI-Coded Next.js Agent Part 2: CI/CD, Infrastructure, and Logic Diagram</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-07-07">2025-07-07</time></p>
+        <p class="card__excerpt">Follow-up video covering the infrastructure, CI/CD pipeline setup, and system architecture diagrams for the AI-coded Next.js agent project.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="video" data-type="technical" data-date="2025-07-06">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345205386179710977-_hZJ">My First Video: 100% AI-Coded, Public-Facing Next.js Agent (Release 1.0)</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="video">Video</span> <time datetime="2025-07-06">2025-07-06</time></p>
+        <p class="card__excerpt">First video showcase of a completely AI-coded Next.js application, demonstrating the full development lifecycle from concept to deployment.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="post" data-type="technical" data-date="2025-07-04">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_a2a-agenttoagent-azureai-activity-7344370505119907840-jNVM">Built My Own A2A 'Hello World' Agent with Azure AI Foundry + SSE</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-07-04">2025-07-04</time></p>
+        <p class="card__excerpt">Hands-on implementation of Agent-to-Agent (A2A) communication using Azure AI Foundry with Server-Sent Events, exploring real-time AI agent interactions.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="article" data-type="technical" data-date="2025-06-12">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/enabling-agentic-ai-agents-azure-proper-role-based-access-jack-jin-fiync">Enabling Agentic AI Agents with Azure: Proper Role-Based Access Control &amp; CI/CD Pipeline</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-06-12">2025-06-12</time></p>
+        <p class="card__excerpt">Technical deep dive into implementing secure, scalable agentic AI systems on Azure with proper RBAC, automated CI/CD pipelines, and enterprise-grade deployment strategies.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2025-06-10">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_aiwriting-llms-technicalleadership-activity-7338368193557614595-Iky6">AI Blog Writing: Technical Leadership in the LLM Era</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-06-10">2025-06-10</time></p>
+        <p class="card__excerpt">A deep dive into using AI tools effectively for technical writing without falling into the &quot;AI slop&quot; trap. Covers authentic content creation strategies and maintaining your unique voice.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem work" data-format="article" data-type="leadership" data-date="2025-06-08">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/how-adobe-eds-stacks-up-against-modern-web-jack-jin-mroyc">The Edge CMS Shift: How Adobe EDS Stacks Up Against the Modern Web</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-06-08">2025-06-08</time></p>
+        <p class="card__excerpt">Strategic analysis of the edge CMS revolution and how Adobe's Experience Delivery Service (EDS) positions against modern web development paradigms and competitive landscape.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem" data-format="article" data-type="technical" data-date="2025-06-04">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/making-sense-7-aem-capabilities-tradeoffs-narratives-why-jack-jin-gl40c">Making Sense of 7 AEM Capabilities: Tradeoffs, Narratives, and Why It Matters</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-06-04">2025-06-04</time></p>
+        <p class="card__excerpt">Comprehensive comparison and analysis of AEM's product offerings, providing decision frameworks and consulting methodology for evaluating the right AEM solution.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="article" data-type="leadership" data-date="2025-06-01">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/from-bookshelves-reasoning-tokens-reflecting-adobes-marketing-jin-gasfc">From Bookshelves to Reasoning Tokens and Reflecting on Adobe's Marketing Cloud Evolution</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-06-01">2025-06-01</time></p>
+        <p class="card__excerpt">Reflecting on the technology evolution from traditional content management to AI-driven experiences, exploring generational perspectives on Adobe's ecosystem transformation.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="aem" data-format="article" data-type="technical" data-date="2025-05-28">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/why-aem-headless-makes-sense-when-frontend-teams-lead-jack-jin-kmtlc">Why AEM Headless Makes Sense When Frontend Teams Lead the Way</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-05-28">2025-05-28</time></p>
+        <p class="card__excerpt">Technical analysis of headless CMS architecture and implementation strategies, focusing on how frontend-driven development teams can maximize AEM's capabilities.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="aem">AEM</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents work" data-format="post" data-type="leadership" data-date="2025-05-25">
+        <h3 class="card__title"><a href="https://www.linkedin.com/posts/jackjin_leadershipinai-codingwithai-appliedai-activity-7332500208129363970-Pmv8">I Have a New Hobby, and It's Coding With AI</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="post">Post</span> <time datetime="2025-05-25">2025-05-25</time></p>
+        <p class="card__excerpt">Personal insights on the career journey of AI adoption, exploring how coding with AI has become both a hobby and a professional development strategy.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span> <span class="chip chip--topic" data-topic="work">Working with AI</span></p>
+      </article>
+      <article class="card card--post" data-hubs="agents" data-format="article" data-type="technical" data-date="2025-04-13">
+        <h3 class="card__title"><a href="https://www.linkedin.com/pulse/vibe-coding-sunday-ranking-ai-tools-star-story-generation-jack-jin-cadnc">Vibe Coding on a Sunday: Ranking AI Tools for STAR Story Generation</a></h3>
+        <p class="card__meta"><span class="chip chip--format" data-format="article">Article</span> <time datetime="2025-04-13">2025-04-13</time></p>
+        <p class="card__excerpt">A hands-on comparison of AI tools for generating STAR (Situation, Task, Action, Result) stories, complete with coding workflow examples and Azure deployment insights.</p>
+        <p class="card__footer"><span class="chip chip--topic" data-topic="agents">AI Agents</span></p>
+      </article>
+    </div>
+      <p class="filter-bar__empty" id="filterEmpty" hidden>No pieces match these filters. <button type="button" class="chip chip--plain" data-filter-reset>Show all 39</button></p>
+    <p class="filter-bar__note" id="filterNote" hidden>AEM + AI is a provisional set of six pieces marked by the 2026-09-13 build. Membership per post is still to be confirmed.</p>
+  </div>
+</div>
+</section>
+
+<section class="band band--alt" aria-labelledby="h-faq">
+<div class="container">
+  <section class="faq section" style="max-width:860px">
+    <h2 id="h-faq">Questions about the blog</h2>
+    <details class="faq__item"><summary>Where do the full posts live?</summary><p>On LinkedIn today. Every title on this page links to its LinkedIn copy; the post template shows the shape a post takes on this site.</p></details>
+    <details class="faq__item"><summary>How many pieces are there?</summary><p>39: 7 articles, 13 short posts and 19 videos. 27 are on AI and 12 on AEM; 22 are technical and 17 are leadership.</p></details>
+    <details class="faq__item"><summary>Can I filter by topic?</summary><p>Topic chips are links. In this round they open this page filtered by topic, because the hub pages are not built yet. Format and type chips filter the grid and keep their state in the address bar. Without JavaScript all 39 pieces show.</p></details>
+  </section>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col"><h2 class="site-footer__heading">Topics</h2><ul>
+      <li><a href="blog.html?topic=aem-ai">AEM + AI</a></li>
+      <li><a href="blog.html?topic=adobe-aem">Adobe AEM and EDS</a></li>
+      <li><a href="blog.html?topic=ai-agents">AI Agents</a></li>
+      <li><a href="blog.html?topic=working-with-ai">Working with AI</a></li>
+    </ul></div>
+    <div class="site-footer__col"><h2 class="site-footer__heading">Sections</h2><ul>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="https://www.jackzhaojin.com/portfolio/">Portfolio</a></li>
+      <li><a href="home.html#talks">Talks</a></li>
+      <li><a href="https://www.jackzhaojin.com/certifications.html">Certifications</a></li>
+      <li><a href="home.html#contact">Contact</a></li>
+      <li><a href="../index.html">Design system</a></li>
+    </ul></div>
+    <div class="site-footer__col"><h2 class="site-footer__heading">Elsewhere</h2><ul>
+      <li><a href="https://www.linkedin.com/in/jackjin">LinkedIn</a></li>
+      <li><a href="https://github.com/jackzhaojin">GitHub</a></li>
+      <li><span class="placeholder">[YouTube link pending]</span></li>
+      <li><span class="placeholder">[Credly link pending]</span></li>
+    </ul></div>
+    <div class="site-footer__col"><h2 class="site-footer__heading">Machine files</h2><ul>
+      <li><a href="https://www.jackzhaojin.com/sitemap.xml">sitemap.xml</a></li>
+      <li><a href="https://www.jackzhaojin.com/robots.txt">robots.txt</a></li>
+      <li><span class="placeholder">[llms.txt pending]</span></li>
+    </ul></div>
+  </div>
+  <div class="container site-footer__meta"><p>© 2026 Jack Jin · Columbus, Ohio</p><p>Static HTML. No frameworks, no build step.</p></div>
+</footer>
+</body>
+</html>

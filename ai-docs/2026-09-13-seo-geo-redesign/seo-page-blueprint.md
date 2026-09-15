@@ -24,7 +24,7 @@ Keep the Search Console meta tag (S). The H1 is the name, not a slogan (S, A: en
 
 ## Profile `/about/` (ProfilePage + Person)
 
-1. Breadcrumb. 2. H1 "About Jack Jin". 3. Answer-block bio. 4. Headshot, alt is the name. 5. Facts table: role, employer, location, certifications held, speaking topics. 6. Speaker bios at 50, 100 and 200 words. 7. Speaking topics. 8. Past talks linking to `/talks/`. 9. Credentials. 10. Contact section with `id="speaking"`: mailto and LinkedIn links. 11. sameAs links: LinkedIn, GitHub, YouTube, Credly.
+1. Breadcrumb. 2. H1 "About Jack Jin". 3. Answer-block bio. 4. Headshot, alt is the name. 5. Facts table: role, employer, location, certifications held, speaking topics. 6. Speaker bios at 50, 100 and 200 words. 7. Speaking topics. 8. Past talks linking to `/talks/`. 9. Credentials. 10. Contact section with `id="speaking"`: a mailto; LinkedIn appears as a profile link, not as the contact route. 11. sameAs links: LinkedIn, GitHub, YouTube, Credly.
 
 No form that needs JavaScript to submit (A: agents act through links).
 
@@ -42,7 +42,7 @@ Certifications is a real `<table>` (name, issuer, issued, expires, status, Credl
 
 ## Post detail `/blog/{slug}/` (BlogPosting, plus VideoObject for videos, plus FAQPage)
 
-1. Breadcrumb. 2. H1. 3. Byline: author link, published, updated, read or watch time, media type. 4. Answer block as the first paragraph, no hero image between the H1 and it (A: the first passage gets lifted). 5. Facts table. 6. Body: H2 sub-questions, `<ol>` steps, `<table>` comparisons. Video: embed with a plain watch link, chapter `<ol>` with timestamps, full transcript in the DOM. 7. FAQ, 2 to 4 questions. 8. Related: hub link, 3 to 5 spokes with descriptive anchors, "Discuss on LinkedIn". 9. Author box with credentials and links.
+1. Breadcrumb. 2. H1. 3. Byline: author link, published, updated, read or watch time, media type. 4. Answer block as the first paragraph, no hero image between the H1 and it (A: the first passage gets lifted). 5. Facts table. 6. Body: H2 sub-questions, `<ol>` steps, `<table>` comparisons. Video: embed with a plain watch link, chapter `<ol>` with timestamps, full transcript in the DOM. 7. FAQ, 2 to 4 questions. 8. Related: hub link, 3 to 5 spokes with descriptive anchors; no link that sends the reader to LinkedIn. 9. Author box with credentials and profile links.
 
 The transcript may sit in `<details>` but never behind a fetch (A).
 

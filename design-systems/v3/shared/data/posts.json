@@ -1,0 +1,357 @@
+{
+  "source": "blogs.html in this repo, parsed 2026-09-13",
+  "count": 39,
+  "posts": [
+    {
+      "title": "Adobe Stardust Explained: Design Agent Skills on EDS",
+      "url": "https://www.linkedin.com/posts/jackjin_aem-edgedeliveryservices-adobestardust-activity-7492393308128731136-DNnN",
+      "date": "2026-08-09",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "What Adobe Stardust actually is: a skill in the public adobe/skills repo, not a product. It builds on impeccable, the 57K-star UX design skill library that does the actual design work. Walkthrough of the four steps (extract, direction, prototype, build into EDS), the human gate at prototypes, and three da.live blocks compared across a Google Stitch baseline and two Stardust runs."
+    },
+    {
+      "title": "AnimaMesh Conference Pre-Read: An Engine for Running a Company with Agents",
+      "url": "https://www.linkedin.com/posts/jackjin_anima-mesh-ai-tinkerer-columbus-2026-08-ugcPost-7490122558491533313-m-o0/",
+      "date": "2026-08-03",
+      "topic": "ai",
+      "type": "technical",
+      "media": "post",
+      "excerpt": "Pre-read deck for the AI Tinkerers Columbus talk on AnimaMesh, an engine for running a company with agents. AI Tinkerers runs a live-demos-only format, so the full deck went out ahead of the session as a flip-through companion."
+    },
+    {
+      "title": "Top Models Compared: 4 Frontier Models, 1 Prompt",
+      "url": "https://www.linkedin.com/posts/jackjin_i-made-four-frontier-models-compete-for-my-activity-7485508082685464577-Amsv",
+      "date": "2026-07-21",
+      "topic": "ai",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Four frontier models, GPT 5.6, Kimi K3, Gemini 3.5 Flash, and Claude Fable 5, each building the same portfolio site from the exact same 1,032-line prompt on 48 files of context. A tab-by-tab walkthrough of what each one built, pen-and-paper notebook grading, and an AI-picked winner, with the final site merged from the best pieces of all four."
+    },
+    {
+      "title": "After a Year: Where I Think Knowledge Work Is Heading",
+      "url": "https://www.linkedin.com/pulse/after-year-where-i-think-knowledge-work-heading-jack-jin-kymtc",
+      "date": "2026-06-28",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "article",
+      "excerpt": "The long-form companion to the Patterns of Work video. A year of building with AI almost every day, mapped as five layers, from one person amplified to where human and agentic managers share one context, with a spine of context, governance, observability, and evals running through all five and a shared-context foundation underneath. Includes the team-channel idea: tag an agent where the context already lives and it inherits the whole channel. Where I think knowledge work is heading, hedged where my conviction runs ahead of my receipts."
+    },
+    {
+      "title": "Patterns of Work: Five Layers of Working with AI",
+      "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7474615331701841920/",
+      "date": "2026-06-21",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "video",
+      "excerpt": "An honest, unfiltered take on how we work with AI, mapped as five layers, from one person amplified up to where human and agentic managers share one common context. The real shift: it is not about data readiness, it is about getting agents to work alongside us on a shared surface, with real trust, security, observability, and governance underneath. A live hand-drawn talk, kept raw with minimal editing."
+    },
+    {
+      "title": "Continuous Executive Agent V3.0: The Second Brain",
+      "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7466952007031910400",
+      "date": "2026-05-31",
+      "topic": "ai",
+      "type": "technical",
+      "media": "post",
+      "excerpt": "Giving a 24/7 autonomous coding agent a real memory system, and why storage and retrieval are the hard part of agentic systems. A five-type memory taxonomy, automatic storage wired through lifecycle hooks, and agentic natural-language retrieval where the agent decides what past knowledge serves the goal in front of it. My first research-to-design-to-build cycle end to end. Open source."
+    },
+    {
+      "title": "Theming a Brand-New EDS Site with Google Stitch + MCP",
+      "url": "https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7464766955137191936-2kip/",
+      "date": "2026-05-24",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "A 3-step approach to theming a greenfield EDS site: define what the theme could be, generate it in Google Stitch, then wire the design back into the site through the Stitch MCP server. Claude Opus 4.7 driving in a single ~20-minute prompt, traced in MLflow down to the tool calls, including the call-to-action miss and the lesson to theme the site and teaser as separate passes."
+    },
+    {
+      "title": "Adobe EDS Skills Hands-On: create-site + content-driven-development",
+      "url": "https://www.linkedin.com/posts/jackjin_edgedeliveryservices-aem-claudecode-ugcPost-7461912604530319361-GXTo",
+      "date": "2026-05-17",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Hands-on walkthrough of Adobe's create-site and content-driven-development skills inside Claude Code, with MLflow tracing the whole run. A new site bootstrap and a teaser block authored content-first, plus the rough edges and the missing theme skill gap."
+    },
+    {
+      "title": "Agentic vs Deterministic: Picking Your Code / Markdown Ratio",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7457634853090541568/",
+      "date": "2026-05-05",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Single-graphic post on the spectrum between fully agentic markdown-driven skills and fully deterministic code, and how to pick the right ratio when building Claude Code skills."
+    },
+    {
+      "title": "Went Back to Denison: AI, Agents, Careers Talk",
+      "url": "https://www.linkedin.com/posts/jackjin_went-back-to-denison-university-last-week-ugcPost-7454289490795421696-PNZV",
+      "date": "2026-04-26",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Returned to my alma mater Denison University to talk with CS students about AI, agents, and careers. Open-sourced repo, prompts, and slides with a live demo at jackzhaojin.github.io/denison-2026-04-24."
+    },
+    {
+      "title": "AI Tinkerers Community Spotlight Feature",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7452052804765958144/",
+      "date": "2026-04-20",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Featured in the AI Tinkerers 23 Community Spotlights for hands-on work with continuous coding agents and applied AI experimentation in the Columbus community."
+    },
+    {
+      "title": "Two AI Skills for Three Team Enablement Objectives",
+      "url": "https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aiskills-ugcPost-7449292477217284096-Y5cp",
+      "date": "2026-04-12",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "video",
+      "excerpt": "Three team enablement objectives and two reusable AI skills: Conversation Logger for capturing prompts and results, and AI Knowledge Harvester for cataloging AI work in a findable taxonomy."
+    },
+    {
+      "title": "AI Tinkerers Talk Eve: Continuous Coding Executive Agent v2.1 Deck Upload",
+      "url": "https://www.linkedin.com/posts/jackjin_continuous-executive-agent-v2-1-2026-04-05-ugcPost-7446595873062674432-gmmC",
+      "date": "2026-04-05",
+      "topic": "ai",
+      "type": "technical",
+      "media": "post",
+      "excerpt": "Full slide deck for the AI Tinkerers Columbus talk covering the 8-phase executive loop, constitution-governed safety, multi-vendor workers, and async agent communication. Open source."
+    },
+    {
+      "title": "24/7 Autonomous Development Agent Demo at AI Tinkerers Columbus",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7444214802408783872/",
+      "date": "2026-03-29",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Announcing the AI Tinkerers Columbus talk on the Continuous Coding Executive Agent, a custom OpenClaw fork built for 24/7 autonomous development with five releases and 40+ features."
+    },
+    {
+      "title": "Agentic AEM Configuration: Building an EDS HLX Admin Skill for Claude Code",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7441702756140261376/",
+      "date": "2026-03-23",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Building a Claude Code skill for agentic AEM Edge Delivery Services HLX Admin configuration, enabling AI-driven site management and content operations."
+    },
+    {
+      "title": "Making AI-Driven Development Modules Reusable: Patterns for Agentic Development",
+      "url": "https://www.linkedin.com/posts/jackjin_making-an-ai-driven-developments-modules-activity-7425403008705970177-iR89",
+      "date": "2026-02-05",
+      "topic": "ai",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Lessons learned on building reusable AI development modules instead of rebuilding from scratch. A diagram walkthrough on patterns for agentic development and avoiding common mistakes."
+    },
+    {
+      "title": "AI-Generated Stakeholder Demos with Playwright: My Harness + Agent Builds It, Then Presents It Back to Me",
+      "url": "https://www.linkedin.com/posts/jackjin_agenticai-claudecode-playwright-ugcPost-7422849539122040832-tTl-",
+      "date": "2026-01-29",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "video",
+      "excerpt": "AI builds so much I can't track it all. So I had AI demo its own work back to me using Playwright with auto-generated captions - becoming the executive stakeholder watching the sprint demo."
+    },
+    {
+      "title": "From Ad-Hoc Prompts to Harnesses to Continuous Running Agents: My AI Architecture and Engineering Evolution",
+      "url": "https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aem-activity-7418805222657155072-Wtk4",
+      "date": "2026-01-18",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "video",
+      "excerpt": "Tracing the evolution of AI-assisted architecture from ad-hoc prompting to spec-driven development to harness building, and introducing the next project: a continuous running agent."
+    },
+    {
+      "title": "From Prompts to Harness: Building Two Agentic Systems Over the Holiday Break",
+      "url": "https://www.linkedin.com/posts/jackjin_agenticai-claudecode-aiharness-activity-7414111229386035200-VyA1",
+      "date": "2026-01-05",
+      "topic": "ai",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Building two agentic AI systems over the holiday break: a Next.js app with Claude Agent SDK mixing deterministic workflows with agent capabilities, and a harness with planning agents that builds software."
+    },
+    {
+      "title": "10 Years at Accenture: Growth, Impact, and the AI Pivot",
+      "url": "https://www.linkedin.com/posts/jackjin_accenture-activity-7385848321564798976-E6kS",
+      "date": "2025-10-14",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Reflecting on a decade at Accenture, from AEM tech lead to architecting the largest Adobe implementations for Fortune 100 companies, winning AEM Rockstars 2024, and pivoting into AI leadership."
+    },
+    {
+      "title": "Building Agentic AI for EDS and DA.live Content Automation: Testing MCP Servers Across Claude, Gemini, Azure OpenAI, and n8n",
+      "url": "https://www.linkedin.com/posts/jackjin_agenticai-mcp-eds-activity-7383240389757104128-ZsmO",
+      "date": "2025-10-12",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Testing the same MCP server across Claude, Azure OpenAI, Gemini 2.5 Pro, and n8n workflows, deploying to Azure Functions and exploring plug-and-play agentic AI architecture patterns."
+    },
+    {
+      "title": "Building an MCP Server for EDS DA.live: AI Content Integration with Adobe's Newest AEM Offering",
+      "url": "https://www.linkedin.com/posts/jackjin_eds-dalive-mcp-activity-7380821161925959680-dk3f",
+      "date": "2025-10-05",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Building a Model Context Protocol server for DA.live content integration, evolving from traditional AI workflows to an agent-based approach with real-time content modification."
+    },
+    {
+      "title": "AEM Caching Video: Breaking Down Web Caching in Real Production Architectures",
+      "url": "https://www.linkedin.com/posts/jackjin_aem-adobeexperiencemanager-webcaching-activity-7368473668303155200-JNvf",
+      "date": "2025-09-01",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Video walkthrough of AEM caching architecture with multiple CDN layers, dispatcher, and publish instances, exploring cache control headers, Fastly CDN patterns, and dispatcher configuration."
+    },
+    {
+      "title": "Columbus AI Week Speaker: AI in Professional Services",
+      "url": "https://www.linkedin.com/posts/jackjin_columbusaiweek-columbusaiweek-activity-7361574491207946240-BZoS",
+      "date": "2025-08-13",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Accepted to speak at Columbus AI Week on how professional services firms are actually using AI to bring innovation to clients, filling a gap in the industry conversation."
+    },
+    {
+      "title": "AI curiosity: My personal journey of building, exploring, and pushing my own limits by working alongside three AI agents at the same time",
+      "url": "https://www.linkedin.com/posts/jackjin_claudai-aileadership-specificationdrivendevelopment-activity-7357966885453287425-YU5R",
+      "date": "2025-08-04",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Personal reflection on the creative journey of collaborative development with multiple AI agents, pushing the boundaries of AI-assisted software development."
+    },
+    {
+      "title": "AEM EDS Architecture Video: Making sense of the 3 EDS offerings - 2025 Edition",
+      "url": "https://www.linkedin.com/posts/jackjin_techleadership-aem-eds-activity-7350366726531731457-s8zN",
+      "date": "2025-07-13",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Comprehensive video analysis of Adobe Experience Delivery Service (EDS) architecture patterns and the three main EDS offering variants for 2025."
+    },
+    {
+      "title": "AEM Architecture Video: 3 Diagrams and 12+ Considerations on AEM Headless and Omnichannel",
+      "url": "https://www.linkedin.com/posts/jackjin_techleadership-aemaacs-headlesscms-activity-7347777907085275137-2jeb",
+      "date": "2025-07-12",
+      "topic": "aem",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Technical deep dive video presenting architectural diagrams and key considerations for implementing AEM headless and omnichannel solutions."
+    },
+    {
+      "title": "My Third and Final Video: Scaling AI Coding and Delivery Methodology",
+      "url": "https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7348559013199925248-j9Ws",
+      "date": "2025-07-11",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "video",
+      "excerpt": "Final video in the AI coding series, focusing on scaling methodologies and delivery practices for enterprise-level AI-assisted software development."
+    },
+    {
+      "title": "AI-Coded Next.js Agent Part 2: CI/CD, Infrastructure, and Logic Diagram",
+      "url": "https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345630816263118848-cd2t",
+      "date": "2025-07-07",
+      "topic": "ai",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "Follow-up video covering the infrastructure, CI/CD pipeline setup, and system architecture diagrams for the AI-coded Next.js agent project."
+    },
+    {
+      "title": "My First Video: 100% AI-Coded, Public-Facing Next.js Agent (Release 1.0)",
+      "url": "https://www.linkedin.com/posts/jackjin_aiengineering-agenticai-techleadership-activity-7345205386179710977-_hZJ",
+      "date": "2025-07-06",
+      "topic": "ai",
+      "type": "technical",
+      "media": "video",
+      "excerpt": "First video showcase of a completely AI-coded Next.js application, demonstrating the full development lifecycle from concept to deployment."
+    },
+    {
+      "title": "Built My Own A2A 'Hello World' Agent with Azure AI Foundry + SSE",
+      "url": "https://www.linkedin.com/posts/jackjin_a2a-agenttoagent-azureai-activity-7344370505119907840-jNVM",
+      "date": "2025-07-04",
+      "topic": "ai",
+      "type": "technical",
+      "media": "post",
+      "excerpt": "Hands-on implementation of Agent-to-Agent (A2A) communication using Azure AI Foundry with Server-Sent Events, exploring real-time AI agent interactions."
+    },
+    {
+      "title": "Enabling Agentic AI Agents with Azure: Proper Role-Based Access Control & CI/CD Pipeline",
+      "url": "https://www.linkedin.com/pulse/enabling-agentic-ai-agents-azure-proper-role-based-access-jack-jin-fiync",
+      "date": "2025-06-12",
+      "topic": "ai",
+      "type": "technical",
+      "media": "article",
+      "excerpt": "Technical deep dive into implementing secure, scalable agentic AI systems on Azure with proper RBAC, automated CI/CD pipelines, and enterprise-grade deployment strategies."
+    },
+    {
+      "title": "AI Blog Writing: Technical Leadership in the LLM Era",
+      "url": "https://www.linkedin.com/posts/jackjin_aiwriting-llms-technicalleadership-activity-7338368193557614595-Iky6",
+      "date": "2025-06-10",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "A deep dive into using AI tools effectively for technical writing without falling into the \"AI slop\" trap. Covers authentic content creation strategies and maintaining your unique voice."
+    },
+    {
+      "title": "The Edge CMS Shift: How Adobe EDS Stacks Up Against the Modern Web",
+      "url": "https://www.linkedin.com/pulse/how-adobe-eds-stacks-up-against-modern-web-jack-jin-mroyc",
+      "date": "2025-06-08",
+      "topic": "aem",
+      "type": "leadership",
+      "media": "article",
+      "excerpt": "Strategic analysis of the edge CMS revolution and how Adobe's Experience Delivery Service (EDS) positions against modern web development paradigms and competitive landscape."
+    },
+    {
+      "title": "Making Sense of 7 AEM Capabilities: Tradeoffs, Narratives, and Why It Matters",
+      "url": "https://www.linkedin.com/pulse/making-sense-7-aem-capabilities-tradeoffs-narratives-why-jack-jin-gl40c",
+      "date": "2025-06-04",
+      "topic": "aem",
+      "type": "technical",
+      "media": "article",
+      "excerpt": "Comprehensive comparison and analysis of AEM's product offerings, providing decision frameworks and consulting methodology for evaluating the right AEM solution."
+    },
+    {
+      "title": "From Bookshelves to Reasoning Tokens and Reflecting on Adobe's Marketing Cloud Evolution",
+      "url": "https://www.linkedin.com/pulse/from-bookshelves-reasoning-tokens-reflecting-adobes-marketing-jin-gasfc",
+      "date": "2025-06-01",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "article",
+      "excerpt": "Reflecting on the technology evolution from traditional content management to AI-driven experiences, exploring generational perspectives on Adobe's ecosystem transformation."
+    },
+    {
+      "title": "Why AEM Headless Makes Sense When Frontend Teams Lead the Way",
+      "url": "https://www.linkedin.com/pulse/why-aem-headless-makes-sense-when-frontend-teams-lead-jack-jin-kmtlc",
+      "date": "2025-05-28",
+      "topic": "aem",
+      "type": "technical",
+      "media": "article",
+      "excerpt": "Technical analysis of headless CMS architecture and implementation strategies, focusing on how frontend-driven development teams can maximize AEM's capabilities."
+    },
+    {
+      "title": "I Have a New Hobby, and It's Coding With AI",
+      "url": "https://www.linkedin.com/posts/jackjin_leadershipinai-codingwithai-appliedai-activity-7332500208129363970-Pmv8",
+      "date": "2025-05-25",
+      "topic": "ai",
+      "type": "leadership",
+      "media": "post",
+      "excerpt": "Personal insights on the career journey of AI adoption, exploring how coding with AI has become both a hobby and a professional development strategy."
+    },
+    {
+      "title": "Vibe Coding on a Sunday: Ranking AI Tools for STAR Story Generation",
+      "url": "https://www.linkedin.com/pulse/vibe-coding-sunday-ranking-ai-tools-star-story-generation-jack-jin-cadnc",
+      "date": "2025-04-13",
+      "topic": "ai",
+      "type": "technical",
+      "media": "article",
+      "excerpt": "A hands-on comparison of AI tools for generating STAR (Situation, Task, Action, Result) stories, complete with coding workflow examples and Azure deployment insights."
+    }
+  ]
+}
