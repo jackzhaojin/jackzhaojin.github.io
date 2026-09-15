@@ -1,5 +1,11 @@
 # Design system v3
 
+## Production integration: 2026-09-14
+
+All main public pages now consume this system's tokens, base styles and components. Production compositions are in `css/site.css`; portfolio layouts bind to v3 semantic tokens. Shared theme/navigation behavior is in `js/site.js`. The canonical sections are Technical Writing, Portfolio, Talks and Certifications; Home is reached through the wordmark. Writing is intentionally empty during migration. Old `.html` addresses use the new layout with new canonical collection URLs. No deployment was performed as part of this integration.
+
+Production navigation and publishing requirements supersede the earlier roadmap below: no booking action, Follow the work band, mandatory topic hubs or content generator. See `docs/publishing-writing.md`. The three templates here remain historical noindex design references; use production pages for the current head, header and footer.
+
 ## What this is
 
 The design system for the whole of www.jackzhaojin.com: home, the four topic hubs, blog and posts, the portfolio scroll, talks, certifications and about. Version v3 0.1.0, built 2026-09-14 from the Claude Fable 5.1 candidate of the 2026-09-13 round after a four-way critique, with named pieces from Astra, Kimi K3 and Google Stitch. Light default, dark variant, one set of semantic tokens.

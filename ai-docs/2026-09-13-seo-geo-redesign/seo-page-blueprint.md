@@ -1,5 +1,7 @@
 # Page blueprint for the design agent
 
+> Historical proposal. The production implementation follows `review-brief-2026-09-14.md` and `docs/publishing-writing.md`. Mandatory topic hubs, booking controls, machine-file footer links, fixed FAQ counts and video-only listings below do not apply. The Writing collection starts empty; the portfolio stays one continuous page. Use current production pages as the shared layout and metadata reference.
+
 Brief for whoever designs www.jackzhaojin.com: what each page type contains, in what order, and why. Visual decisions are yours (last section). Tags say who a constraint serves: (H) humans, (S) search engines, (A) AI engines and agents. Push back with reasons; the tag shows whose need is traded. Source: [seo-site-plan.md](seo-site-plan.md).
 
 ## Global constraints

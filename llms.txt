@@ -1,0 +1,19 @@
+# Jack Jin
+
+> Personal website of Jack Jin, an Associate Director at Accenture in Columbus, Ohio. His work covers AI engineering, cloud architecture, Adobe Experience Manager, and Edge Delivery Services.
+
+The pages below contain readable HTML, with original project diagrams and source links. Portfolio metrics describe historical project snapshots; they are not live repository totals. Technical Writing is being migrated and currently contains no published articles. Personal views and projects should not be attributed to Accenture.
+
+## Main pages
+
+- [Jack Jin](https://www.jackzhaojin.com/): Introduction and selected work.
+- [Portfolio](https://www.jackzhaojin.com/portfolio/): AI systems, content platforms, project histories, diagrams, and source repositories. Individual projects have stable chapter anchors.
+- [Talks](https://www.jackzhaojin.com/talks/): Conference sessions, community demos, and guest lectures with supporting event or project links.
+- [Certifications](https://www.jackzhaojin.com/certifications/): Credential records and direct verification links. Consult the issuer record for current status.
+- [Technical Writing](https://www.jackzhaojin.com/writing/): Migration notice for forthcoming on-site articles and rewritten video companions.
+
+## Discovery
+
+- [Sitemap](https://www.jackzhaojin.com/sitemap.xml): Canonical indexable pages.
+
+The design-systems directory contains development references and historical demonstrations, not the current public content archive.

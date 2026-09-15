@@ -22,37 +22,28 @@ node build-node.js platform-blueprint # explicit target
 ```
 Output goes to `blueprint-output/`. PDF generation requires `npm install -g puppeteer`.
 
-**No tests, no linter, no CI/CD.** Manual browser testing only. Commits to `main` deploy directly via GitHub Pages. After a push, `./scripts/check-site.sh` verifies the live site end to end (build state, redirects, analytics tag, Search Console verification, sitemap).
+**Validation:** `python3 scripts/check-local.py` checks HTML, links, metadata and discovery files. Use `--url http://127.0.0.1:8080` for local HTTP checks. Browser testing is required for layout and interactions. No build system, linter, or application test framework. Commits to main deploy through GitHub Pages; run `./scripts/check-site.sh` after the build completes.
 
 ## Architecture
 
-Three HTML pages, each self-contained:
-- `index.html` — landing page with navigation cards to other sections
-- `blogs.html` — blog listing with client-side filtering/sorting via `js/blog-filters.js`
-- `certifications.html` — certification display with Credly links
+Every production page uses design system v3:
+- `index.html`: personal introduction and selected work
+- `writing/index.html`: Technical Writing, currently an empty migration state
+- `portfolio/index.html`: full project portfolio, one continuous page
+- `talks/index.html`: talks and presentations, separate from credentials
+- `certifications/index.html`: all credential records and verification links
+- `blogs.html`, `certifications.html`: compatibility pages with canonical links to the new collections
+- `404.html`: error page
 
-**Shared footer** is injected via `js/includes.js` — it embeds footer HTML directly in JS (not fetched) because `fetch()` doesn't work with `file://` protocol. Pages use `<div data-include="includes/footer.html">` as mount points, but `index.html` has the footer inline instead.
-
-**Blog filtering system** (`js/blog-filters.js`): Three-dimension client-side filtering using data attributes on `.blog-item` elements:
-- `data-topic` — "ai" or "aem"
-- `data-type` — "technical" or "leadership"
-- `data-media` — "article", "post", or "video"
-- `data-date` — ISO date for sorting
-
-Filter buttons use `data-filter` (dimension) and `data-value` (value) attributes. State tracked in `currentFilters` object.
-
-**CSS theming** uses custom properties in `:root` (`css/styles.css`). Blog-specific styles are in `css/blogs.css`. Only external dependency is Font Awesome via CDN.
+Shared design assets: `design-systems/v3/tokens.css`, `base.css`, `components.css`, plus production compositions in `css/site.css`. All headers and footers are in the initial HTML. `js/site.js` manages Light / Dark / System (storage key `jj-theme`) and the mobile menu. Portfolio page-specific styles consume v3 tokens; its script owns the timeline, diagrams and image viewer. Old styles and include scripts are retained as historical files and are not loaded by production pages.
 
 ## Adding Content
 
-**New blog post:** Add an `<a>` element to `blogs.html` inside `#blogGrid`:
-```html
-<a href="..." class="blog-item"
-   data-topic="ai" data-type="technical"
-   data-media="article" data-date="2025-01-15">
-```
+Read [docs/publishing-writing.md](docs/publishing-writing.md) before publishing articles. Every entry needs complete on-site writing. Videos require a complete written companion and a verified YouTube destination. Never send article readers to LinkedIn. When filters become useful, they update the current listing in place; no facet page navigation.
 
-**New certification:** Add to `certifications.html` following existing card pattern.
+Add credentials to `certifications/index.html`, preserve issuer verification links, update the ItemList and Person credential references, and synchronize the compatibility page. Add talks to `talks/index.html` with verified source details. Keep `sitemap.xml`, the discovery index and validation inventories consistent with canonical routes.
+
+Do not add Book a talk, Follow the work, or an AEM + AI primary navigation destination. The footer is a compact LinkedIn/GitHub profile row. Preserve every portfolio chapter anchor.
 
 ## Key Constraints
 
@@ -60,7 +51,7 @@ Filter buttons use `data-filter` (dimension) and `data-value` (value) attributes
 - **No Jekyll** — deliberately avoided despite GitHub Pages support
 - **Custom domain** — configured 2026-06-14 to serve at [www.jackzhaojin.com](https://www.jackzhaojin.com). Driven by the `CNAME` file at the repo root (contents: `www.jackzhaojin.com`), which GitHub Pages reads to set the custom domain. **Do not delete `CNAME`** — it is load-bearing; removing it resets the Pages custom-domain config and breaks the site. The `github.io` subdomain still resolves. All GitHub GET endpoints were smoke tested on 2026-06-14 and are working. POST functionality has not yet been tested (pending — only test if/when POST endpoints exist).
 - **Hosting, analytics, search: read [docs/site-operations.md](docs/site-operations.md) before touching any of it.** It covers Cloudflare (DNS, redirects, cache), GitHub Pages, Google Analytics 4 (Measurement ID `G-ZVENE6BXTJ`, personal "Jack Jin" account, never a company account), Google Search Console, and the checklists for adding or changing pages. Hard rules from it:
-  - Every page carries the gtag.js snippet as the first thing after the viewport meta in `<head>`, plus a `<link rel="canonical">` and an entry in `sitemap.xml`.
+  - Every page carries the gtag.js snippet as the first thing after the viewport meta in `<head>`, plus a `<link rel="canonical">`. Canonical indexable pages also have an entry in `sitemap.xml`; compatibility and noindex pages do not.
   - **Never delete** `google57906613577fdd42.html` or the `google-site-verification` meta tag in `index.html`; they keep the Search Console property verified.
   - Wait for the Pages build to report `built` before requesting a new URL; Cloudflare caches 404s.
   - GitHub's "Enforce HTTPS" toggle is not eligible (Cloudflare terminates TLS). Expected, not a bug.

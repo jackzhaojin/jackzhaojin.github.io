@@ -1,5 +1,7 @@
 # SEO site plan for www.jackzhaojin.com
 
+> Historical proposal. The confirmed whole-site build follows `review-brief-2026-09-14.md` and `docs/publishing-writing.md`: `/writing/`, no topic hub navigation or booking action, a compact footer, and a complete written companion for every video in Writing. The portfolio remains a single page. AI-specific files and markup are not required for Google AI Search; no ranking or citation uplift is guaranteed. No generator was introduced. Old `.html` routes currently serve v3 compatibility content with new canonicals; no server redirects have been deployed.
+
 Planning only. Handoff: [seo-page-blueprint.md](seo-page-blueprint.md). Vendor prompt: [design-2026-09-13.md](design-2026-09-13.md). Skills applied in order: site-architecture, programmatic-seo, ai-seo, schema, seo-audit (crawl, canonical, pagination, facets only). Inputs: this repo, two Downloads notes, Jack's answers on 2026-09-13.
 
 ## Inputs and assumptions

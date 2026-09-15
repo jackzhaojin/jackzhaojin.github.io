@@ -16,7 +16,8 @@ SITE="https://www.jackzhaojin.com"
 GA_ID="G-ZVENE6BXTJ"
 VERIFY_FILE="google57906613577fdd42.html"
 VERIFY_META="6FfUrqzAd1GDf35t2W1QHz-2rIbSjVTKzuZwWQKJjqw"
-PAGES=("/" "/blogs.html" "/certifications.html" "/portfolio/")
+PAGES=("/" "/writing/" "/portfolio/" "/talks/" "/certifications/")
+LEGACY_PAGES=("/blogs.html" "/certifications.html")
 # Published for show-and-tell only: must serve gtag, must be noindex, must not be in the sitemap.
 NOINDEX_PAGES=("/design-systems/2026-09-13/" "/design-systems/2026-09-13/claude-fable-5-1/" "/design-systems/2026-09-13/astra/" "/design-systems/2026-09-13/kimi-k3/" "/design-systems/2026-09-13/google-stitch/" "/design-systems/v3/" "/design-systems/v3/templates/home.html")
 fail=0
@@ -44,7 +45,7 @@ for u in "http://jackzhaojin.com/" "http://www.jackzhaojin.com/" "https://jackzh
 done
 
 echo "3. Analytics tag on every page"
-for p in "${PAGES[@]}" "${NOINDEX_PAGES[@]}"; do
+for p in "${PAGES[@]}" "${LEGACY_PAGES[@]}" "${NOINDEX_PAGES[@]}"; do
   n=$(curl -s "$SITE$p?cb=$(cb)" | grep -c "gtag/js?id=$GA_ID")
   [ "$n" = "1" ] && ok "$p" || bad "$p (found $n occurrences of $GA_ID)"
 done
@@ -69,6 +70,29 @@ for p in "${NOINDEX_PAGES[@]}"; do
   echo "$page" | grep -q '<meta name="robots" content="noindex">' && ok "$p has noindex" || bad "$p missing noindex"
   echo "$sitemap" | grep -q "<loc>$SITE$p" && bad "sitemap must not list $p" || ok "$p not in sitemap"
 done
+
+echo "7. Canonical pages, legacy URLs, and discovery"
+for p in "${PAGES[@]}"; do
+  page=$(curl -s "$SITE$p?cb=$(cb)")
+  code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p?cb=$(cb)")
+  [ "$code" = "200" ] && ok "$p serves 200" || bad "$p returned $code"
+  echo "$page" | grep -q "href=\"$SITE$p\"" && ok "$p canonical URL present" || bad "$p canonical missing"
+  echo "$page" | grep -q 'application/ld+json' && ok "$p structured data" || bad "$p structured data missing"
+  echo "$page" | grep -q '/design-systems/v3/tokens.css' && ok "$p uses v3" || bad "$p missing v3 tokens"
+  echo "$page" | grep -q 'content="noindex"' && bad "$p must be indexable" || ok "$p indexable"
+done
+for p in "${LEGACY_PAGES[@]}"; do
+  case "$p" in
+    /blogs.html) destination="/writing/";;
+    /certifications.html) destination="/certifications/";;
+  esac
+  page=$(curl -sL "$SITE$p?cb=$(cb)")
+  echo "$page" | grep -q "href=\"$SITE$destination\"" && ok "$p canonical destination" || bad "$p canonical destination missing"
+  echo "$sitemap" | grep -q "<loc>$SITE$p</loc>" && bad "$p must not be in sitemap" || ok "$p absent from sitemap"
+done
+curl -s "$SITE/llms.txt?cb=$(cb)" | grep -q '^# Jack Jin' && ok "llms.txt" || bad "llms.txt missing"
+missing_code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/v3-check-intentionally-missing?cb=$(cb)")
+[ "$missing_code" = "404" ] && ok "unknown path returns 404" || bad "unknown path returned $missing_code"
 
 echo
 [ "$fail" = 0 ] && echo "All checks passed." || { echo "Some checks failed."; exit 1; }

@@ -76,7 +76,7 @@ Expected redirect behaviour (the check script tests exactly this):
 
 - Account "Jack Jin" (personal) > property "jackzhaojin.com" > web data stream "jackzhaojin.com web" for `https://www.jackzhaojin.com`. Measurement ID `G-ZVENE6BXTJ`. Enhanced measurement is on (page views, scrolls, outbound clicks, site search, video, file downloads).
 - Reporting time zone America/New_York, currency USD.
-- The tag is the standard gtag.js snippet, placed in `<head>` directly after the viewport meta so it is the first script on the page. It is present in all four pages: `index.html`, `blogs.html`, `certifications.html`, `portfolio/index.html`.
+- The tag is the standard gtag.js snippet, placed in `<head>` directly after the viewport meta so it is the first script on the page. It is present on all production pages, including Home, Writing, Portfolio, Talks, Certifications, the two compatibility pages, and 404.html.
 
 ```html
 <!-- Google tag (gtag.js) -->
@@ -110,7 +110,7 @@ Expected redirect behaviour (the check script tests exactly this):
 | `robots.txt` | allows everything, points at the sitemap. |
 | `sitemap.xml` | one `<url>` per page with a `<lastmod>` date (YYYY-MM-DD). Update `lastmod` when a page changes materially; add an entry for every new page. |
 | `<link rel="canonical">` | every page declares its own `https://www.jackzhaojin.com/...` URL. |
-| Open Graph / Twitter tags | `blogs.html` has them; the URLs use `www.jackzhaojin.com`, not `jackzhaojin.github.io`. |
+| Open Graph / Twitter tags | Every production page has them; the URLs use `www.jackzhaojin.com`, not `jackzhaojin.github.io`. |
 
 ## Checklists
 
@@ -129,7 +129,7 @@ Expected redirect behaviour (the check script tests exactly this):
 
 **Replacing the Measurement ID** (only if the GA property is recreated)
 
-- Change it in the four HTML files, in `scripts/check-site.sh` (`GA_ID`), in `CLAUDE.md`, and in this file. `grep -rn "G-" --include=*.html --include=*.sh --include=*.md .` finds every spot.
+- Change it in every production HTML page, in `scripts/check-site.sh` (`GA_ID`), in `CLAUDE.md`, and in this file. `grep -rn "G-" --include=*.html --include=*.sh --include=*.md .` finds every spot.
 
 **Moving to a different hostname**
 
@@ -152,3 +152,16 @@ Expected redirect behaviour (the check script tests exactly this):
 - **2026-06-14** Custom domain `www.jackzhaojin.com` configured via `CNAME`; Cloudflare in front.
 - **2026-09-13** Google Analytics 4 property created under the personal "Jack Jin" account and tagged on all pages (`G-ZVENE6BXTJ`). Search Console property added and verified by file, meta tag, and GA; `sitemap.xml` and `robots.txt` added and the sitemap submitted; canonical links added; Open Graph URLs moved off github.io; GA linked to Search Console. Cloudflare "Always Use HTTPS" turned on, which also fixed the HTTP 522 on the apex. `scripts/check-site.sh` added. Commits 05c2e7c, a4209a8, 3476858 plus this documentation commit.
 - **2026-09-14** `.nojekyll` added at the repo root after Jekyll converted `design-systems/v3/DESIGN.md` (YAML front matter) into a themed `DESIGN.html` and the `.md` 404ed. Design system demo pages (`/design-systems/2026-09-13/`, `/design-systems/v3/`) are live as noindex pages and listed in `NOINDEX_PAGES` of `scripts/check-site.sh`.
+
+
+## v3 route migration (2026-09-14)
+
+Production migration authorized for commit, push and live verification on 2026-09-14. Canonical pages: `/`, `/writing/`, `/portfolio/`, `/talks/`, `/certifications/`. Every production page consumes the same v3 design tokens and carries analytics, canonical/social metadata and JSON-LD. The site remains static HTML/CSS/JS, without a build step.
+
+`/blogs.html` and `/certifications.html` remain useful v3 HTML compatibility pages with canonical links to `/writing/` and `/certifications/`. They are excluded from the sitemap. These are HTTP 200 pages, not HTTP 301 redirects. No Cloudflare configuration was changed. Optional permanent redirects should be applied only after the new paths have deployed and passed validation; keep the fallback files until then.
+
+`404.html` carries noindex and uses the shared navigation. `llms.txt` is an optional curated discovery index; no citation or ranking benefit is guaranteed. robots.txt continues to allow all crawlers. No search-versus-training bot policy was changed. The footer does not expose machine files as user navigation.
+
+Local checks: `python3 scripts/check-local.py --url http://127.0.0.1:8080`, JavaScript syntax checks and manual browser review. `scripts/check-site.sh` now covers the canonical page set, compatibility canonicals, v3 assets, structured data and a real missing-path 404. Do not run it against the new live paths until Pages reports built after deployment.
+
+Future publishing: [publishing-writing.md](publishing-writing.md). The deployment preserves CNAME, .nojekyll, the Search Console verification file and meta tag, GA4 Measurement ID and the existing portfolio chapter anchors.

@@ -1,4 +1,4 @@
-/* Jack Jin — portfolio v2 · reverse-chronological project story */
+/* Jack Jin - portfolio v3 · reverse-chronological project story */
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
@@ -7,45 +7,31 @@
   /* ------------------------------------------------------ project data */
   // spans drive both the gantt and the year rail. order = page order.
   var PROJECTS = [
-    { id: "ch-anima",   label: "Anima Mesh",            start: "2026-07-05", end: "2026-08-02", color: "#c0b3ff", year: "2026", ongoing: true },
-    { id: "ch-bruce",   label: "Built with Bruce",      start: "2026-02-28", end: "2026-07-17", color: "#ff9d9d", year: "2026" },
-    { id: "ch-factory", label: "Content Factory",       start: "2025-10-04", end: "2026-06-29", color: "#8fd8e8", year: "2026" },
-    { id: "ch-kit",     label: "AI Builder Kit",        start: "2026-03-22", end: "2026-06-11", color: "#f0cf8e", year: "2026" },
-    { id: "ch-conv",    label: "Conversion Factory",    start: "2026-05-31", end: "2026-06-05", color: "#b3dba0", year: "2026" },
-    { id: "ch-cea",     label: "Continuous Exec Agent", start: "2026-01-24", end: "2026-05-31", color: "#ffc46b", year: "2026" },
-    { id: "ch-ciam",    label: "CIAM Demo",             start: "2026-02-07", end: "2026-04-12", color: "#9db8e8", year: "2026" },
-    { id: "ch-postal",  label: "Postal Portal",         start: "2025-07-12", end: "2025-07-25", color: "#d8b48f", year: "2025" },
-    { id: "ch-shadow",  label: "Shadow Pivot",          start: "2025-05-22", end: "2025-07-15", color: "#9fe0c0", year: "2025" },
-    { id: "ch-star",    label: "STAR Generator",        start: "2025-04-12", end: "2025-05-09", color: "#e8a9b8", year: "2025" }
+    { id: "ch-anima",   label: "Anima Mesh",            start: "2026-07-05", end: "2026-08-02", color: "var(--c-anima)", year: "2026", ongoing: true },
+    { id: "ch-bruce",   label: "Built with Bruce",      start: "2026-02-28", end: "2026-07-17", color: "var(--c-bruce)", year: "2026" },
+    { id: "ch-factory", label: "Content Factory",       start: "2025-10-04", end: "2026-06-29", color: "var(--c-factory)", year: "2026" },
+    { id: "ch-kit",     label: "AI Builder Kit",        start: "2026-03-22", end: "2026-06-11", color: "var(--c-kit)", year: "2026" },
+    { id: "ch-conv",    label: "Conversion Factory",    start: "2026-05-31", end: "2026-06-05", color: "var(--c-conv)", year: "2026" },
+    { id: "ch-cea",     label: "Continuous Exec Agent", start: "2026-01-24", end: "2026-05-31", color: "var(--c-cea)", year: "2026" },
+    { id: "ch-ciam",    label: "CIAM Demo",             start: "2026-02-07", end: "2026-04-12", color: "var(--c-ciam)", year: "2026" },
+    { id: "ch-postal",  label: "Postal Portal",         start: "2025-07-12", end: "2025-07-25", color: "var(--c-postal)", year: "2025" },
+    { id: "ch-shadow",  label: "Shadow Pivot",          start: "2025-05-22", end: "2025-07-15", color: "var(--c-shadow)", year: "2025" },
+    { id: "ch-star",    label: "STAR Generator",        start: "2025-04-12", end: "2025-05-09", color: "var(--c-star)", year: "2025" }
   ];
 
-  /* ---------------------------------------------------- scroll progress */
-  var progress = document.getElementById("scroll-progress");
-  function onScroll() {
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - doc.clientHeight;
-    progress.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + "%";
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  /* ------------------------------------------------------- mobile menu */
-  var toggle = document.getElementById("nav-toggle");
   var navLinks = document.getElementById("nav-links");
-  toggle.addEventListener("click", function () {
-    var open = navLinks.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-  navLinks.addEventListener("click", function (e) {
-    if (e.target.closest("a")) {
-      navLinks.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-  });
+  var progress = document.getElementById("scroll-progress");
+  function updateProgress() {
+    var page = document.documentElement;
+    var total = page.scrollHeight - page.clientHeight;
+    if (progress) progress.style.width = (total > 0 ? page.scrollTop / total * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
 
   /* --------------------------------------------------------- year rail */
   var rail = document.getElementById("year-rail");
-  if (rail) {
+  if (rail && !rail.querySelector('a')) {
     var lastYear = null;
     PROJECTS.forEach(function (p) {
       var year = p.year;
@@ -157,7 +143,7 @@
       bar.style.left = left.toFixed(2) + "%";
       bar.style.width = width.toFixed(2) + "%";
       bar.style.setProperty("--bar", p.color);
-      var range = p.start.slice(0, 7) + " → " + (p.ongoing ? "now" : p.end.slice(0, 7));
+      var range = p.start.slice(0, 7) + " to " + p.end.slice(0, 7);
       bar.setAttribute("data-title", p.label + " · " + range);
       bar.setAttribute("aria-label", p.label + ", " + range + ". Jump to project.");
       bar.addEventListener("click", function () {

@@ -1,5 +1,7 @@
 # v3 content plan
 
+> Superseded where inconsistent by `review-brief-2026-09-14.md` and `docs/publishing-writing.md`. The build launches with an empty `/writing/` collection. Every video entering that collection requires a full written companion, including videos formerly called ordinary below. There is no short-summary exception, booking action, mandatory hub set or generator requirement. See `2025-article-refresh-shortlist.md` for the reviewed migration candidates.
+
 Written 2026-09-14 from Jack's direction. A planning document: it lives with the other redesign plans under `ai-docs/`, is not linked from the site, and stays out of `design-systems/` so the demo pages carry no strategy. Companion to `design-systems/v3/PRODUCT.md` and to [seo-site-plan.md](seo-site-plan.md) and [seo-page-blueprint.md](seo-page-blueprint.md).
 
 ## Rules

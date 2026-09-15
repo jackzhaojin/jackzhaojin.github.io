@@ -2,6 +2,12 @@
 
 <!-- impeccable:product-schema 1 -->
 
+## Production direction, confirmed 2026-09-14
+
+This section supersedes conflicting hub, booking, migration and route assumptions in the earlier discovery record below. Production uses v3 on Home, Technical Writing (`/writing/`), Portfolio, Talks and Certifications. Portfolio stays one continuous page with its chapter anchors. Writing launches empty while LinkedIn articles migrate and videos receive full written companions. Topic filters added later must operate in place. No Book a talk action, Follow the work band, or AEM + AI primary navigation destination. The footer contains LinkedIn and GitHub profile links. Shared navigation and content are in the initial HTML; `js/site.js` owns Light / Dark / System and the mobile menu. No content generator or build pipeline was introduced.
+
+The current implementation and publishing contract are in `docs/publishing-writing.md` and `docs/site-operations.md`. The review brief and 2025 article shortlist are under `ai-docs/2026-09-13-seo-geo-redesign/`. Existing templates remain noindex design references; production HTML is the current content and navigation authority. The earlier record below is retained for design lineage, not as permission to restore retired features.
+
 Product record for www.jackzhaojin.com, written 2026-09-14 for design system v3. Scope: the whole site (home, hubs, blog and posts, portfolio, talks, certifications, about). Facts here come from the repository, the SEO site plan in `ai-docs/2026-09-13-seo-geo-redesign/`, and Jack's answers on 2026-09-14. Undecided facts are marked as such rather than filled in. This file lives beside the v3 work because impeccable resolves it from here; the content plan it refers to is `ai-docs/2026-09-13-seo-geo-redesign/content-plan-2026-09-14.md`.
 
 ## Platform
