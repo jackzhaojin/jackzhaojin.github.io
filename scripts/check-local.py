@@ -123,7 +123,7 @@ def main():
     check('Sitemap: ' + ORIGIN + '/sitemap.xml' in (ROOT / 'robots.txt').read_text(), 'robots sitemap reference')
     creds = [a for t, a in parsed['/certifications/'].tags if t == 'article' and 'credential-row' in a.get('class', '')]
     check(len(creds) == 22, '22 credential records preserved')
-    check(sum(t == 'article' and 'talk-row' in a.get('class', '') for t, a in parsed['/talks/'].tags) == 6, '6 talk records')
+    check(sum(t == 'article' and 'talk-row' in a.get('class', '') for t, a in parsed['/talks/'].tags) == 7, '7 talk records')
     chapters = {a['id'] for t, a in parsed['/portfolio/'].tags if t == 'section' and 'chapter' in a.get('class', '')}
     check(chapters == {'ch-anima', 'ch-bruce', 'ch-factory', 'ch-kit', 'ch-conv', 'ch-cea', 'ch-ciam', 'ch-postal', 'ch-shadow', 'ch-star', 'ch-rockstar'}, 'portfolio chapters preserved')
     check('No articles published here yet.' in texts['/writing/'], 'writing empty state')
@@ -131,7 +131,7 @@ def main():
     if ERRORS:
         print('\n'.join('FAIL: ' + e for e in ERRORS))
         raise SystemExit(1)
-    print('PASS: 8 routes; v3 assets; metadata; JSON-LD; local links, anchors and images; analytics; verification; sitemap; 22 credentials; 6 talks; 11 portfolio chapters; empty writing state.' + (' Local HTTP responses passed.' if opts.url else ''))
+    print('PASS: 8 routes; v3 assets; metadata; JSON-LD; local links, anchors and images; analytics; verification; sitemap; 22 credentials; 7 talks; 11 portfolio chapters; empty writing state.' + (' Local HTTP responses passed.' if opts.url else ''))
 
 
 if __name__ == '__main__':
