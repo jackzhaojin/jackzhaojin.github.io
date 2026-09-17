@@ -43,7 +43,7 @@ Read [docs/publishing-writing.md](docs/publishing-writing.md) before publishing 
 
 Add credentials to `certifications/index.html`, preserve issuer verification links, update the ItemList and Person credential references, and synchronize the compatibility page. Add talks to `talks/index.html` with verified source details. Keep `sitemap.xml`, the discovery index and validation inventories consistent with canonical routes.
 
-Do not add Book a talk, Follow the work, or an AEM + AI primary navigation destination. The footer is a compact LinkedIn/GitHub profile row. Preserve every portfolio chapter anchor.
+Do not add Book a talk, Follow the work, or an AEM + AI primary navigation destination. The footer is a compact row of Accenture (current employer), LinkedIn, GitHub and Certifications links; keep all four. Preserve every portfolio chapter anchor.
 
 ## Key Constraints
 
