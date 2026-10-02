@@ -137,6 +137,10 @@ def main():
     for r in articles:
         g = parsed[r].schemas[0]['@graph']
         check(any(x.get('@type') in ('Article', 'TechArticle', 'BlogPosting') and x.get('datePublished') for x in g), r + ': article datePublished')
+        # Google detects embedded video only from a real player in the HTML, and contentUrl must be the media file.
+        for v in [x for x in g if x.get('@type') == 'VideoObject']:
+            check('youtube.com/watch' not in v.get('contentUrl', '') and 'youtu.be' not in v.get('contentUrl', ''), r + ': VideoObject contentUrl must be a media file')
+            check(any(t == 'iframe' and a.get('src', '').split('?')[0] == v.get('embedUrl') for t, a in parsed[r].tags), r + ': VideoObject embedUrl needs a real iframe in the HTML')
     check(texts['/blogs.html'].count('/writing/2') == texts['/writing/'].count('/writing/2'), 'blogs.html synchronized with writing listing')
     if ERRORS:
         print('\n'.join('FAIL: ' + e for e in ERRORS))

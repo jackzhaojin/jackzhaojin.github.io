@@ -281,7 +281,7 @@
 .video__play { position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%; background: rgba(255,255,255,.92); }
 .video__play::after { content: ""; position: absolute; left: 27px; top: 21px; border: 13px solid transparent; border-left: 20px solid #1a1917; border-right: 0; }
 .video__label { position: absolute; left: 14px; bottom: 14px; color: #fff; font: 500 13px var(--font-mono); background: rgba(26,25,23,.8); padding: 5px 10px; border-radius: 999px; }
-.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 14px; display: block; }
+.video iframe { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 14px; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .cmp.is-live .cmp__pane, .pvl [data-swap] { transition: none; }

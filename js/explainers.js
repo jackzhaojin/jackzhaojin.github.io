@@ -415,6 +415,7 @@
   /* ---------- video: load YouTube only when asked ---------- */
   document.querySelectorAll('[data-video]').forEach((fig) => {
     const facade = fig.querySelector('.video__facade');
+    if (!facade) return;
     facade.addEventListener('click', (e) => {
       e.preventDefault();
       const f = document.createElement('iframe');
