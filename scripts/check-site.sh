@@ -16,7 +16,7 @@ SITE="https://www.jackzhaojin.com"
 GA_ID="G-ZVENE6BXTJ"
 VERIFY_FILE="google57906613577fdd42.html"
 VERIFY_META="6FfUrqzAd1GDf35t2W1QHz-2rIbSjVTKzuZwWQKJjqw"
-PAGES=("/" "/writing/" "/portfolio/" "/talks/" "/certifications/")
+PAGES=("/" "/writing/" "/writing/2026-09-20-aem-edge-functions-google-sign-in/" "/portfolio/" "/talks/" "/certifications/")
 LEGACY_PAGES=("/blogs.html" "/certifications.html")
 # Published for show-and-tell only: must serve gtag, must be noindex, must not be in the sitemap.
 NOINDEX_PAGES=("/design-systems/2026-09-13/" "/design-systems/2026-09-13/claude-fable-5-1/" "/design-systems/2026-09-13/astra/" "/design-systems/2026-09-13/kimi-k3/" "/design-systems/2026-09-13/google-stitch/" "/design-systems/v3/" "/design-systems/v3/templates/home.html")

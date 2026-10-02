@@ -28,7 +28,7 @@ Output goes to `blueprint-output/`. PDF generation requires `npm install -g pupp
 
 Every production page uses design system v3:
 - `index.html`: personal introduction and selected work
-- `writing/index.html`: Technical Writing, currently an empty migration state
+- `writing/index.html`: Technical Writing listing (newest first); articles live at `writing/yyyy-mm-dd-slug/` with `css/article.css`, `css/explainers.css`, `js/article.js` and `js/explainers.js`. First article: `writing/2026-09-20-aem-edge-functions-google-sign-in/`
 - `portfolio/index.html`: full project portfolio, one continuous page
 - `talks/index.html`: talks and presentations, separate from credentials
 - `certifications/index.html`: all credential records and verification links

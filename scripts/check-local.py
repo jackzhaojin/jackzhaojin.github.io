@@ -17,7 +17,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://www.jackzhaojin.com'
-ROUTES = {'/': 'index.html', '/writing/': 'writing/index.html', '/portfolio/': 'portfolio/index.html', '/talks/': 'talks/index.html', '/certifications/': 'certifications/index.html', '/blogs.html': 'blogs.html', '/certifications.html': 'certifications.html', '/404.html': '404.html'}
+ROUTES = {'/': 'index.html', '/writing/': 'writing/index.html', '/writing/2026-09-20-aem-edge-functions-google-sign-in/': 'writing/2026-09-20-aem-edge-functions-google-sign-in/index.html', '/portfolio/': 'portfolio/index.html', '/talks/': 'talks/index.html', '/certifications/': 'certifications/index.html', '/blogs.html': 'blogs.html', '/certifications.html': 'certifications.html', '/404.html': '404.html'}
 ALIASES = {'/blogs.html': '/writing/', '/certifications.html': '/certifications/'}
 # Separately deployed GitHub project sites, linked by the existing portfolio.
 PROJECT_SITES = {'/bruce-lava-dash/', '/bruce-play-ten/', '/ai-sandbox/'}
@@ -126,12 +126,22 @@ def main():
     check(sum(t == 'article' and 'talk-row' in a.get('class', '') for t, a in parsed['/talks/'].tags) == 7, '7 talk records')
     chapters = {a['id'] for t, a in parsed['/portfolio/'].tags if t == 'section' and 'chapter' in a.get('class', '')}
     check(chapters == {'ch-anima', 'ch-bruce', 'ch-factory', 'ch-kit', 'ch-conv', 'ch-cea', 'ch-ciam', 'ch-postal', 'ch-shadow', 'ch-star', 'ch-rockstar'}, 'portfolio chapters preserved')
-    check('No articles published here yet.' in texts['/writing/'], 'writing empty state')
-    check(not any(t == 'article' for t, _ in parsed['/writing/'].tags), 'no placeholder articles')
+    # Every listed article is a real routed page, dated in its slug, and the ItemList matches the listing.
+    articles = [r for r in ROUTES if r.startswith('/writing/') and r != '/writing/']
+    listed = [a['href'] for t, a in parsed['/writing/'].tags if t == 'a' and a.get('href', '').startswith('/writing/2')]
+    check(set(listed) == set(articles), 'writing listing matches article routes')
+    check(all(re.match(r'^/writing/\d{4}-\d{2}-\d{2}-[a-z0-9-]+/$', r) for r in articles), 'article slugs start with yyyy-mm-dd')
+    items = next(x for x in parsed['/writing/'].schemas[0]['@graph'] if x.get('@type') == 'ItemList')
+    check(items['numberOfItems'] == len(articles) == len(items['itemListElement']), 'writing ItemList count')
+    check({i['url'] for i in items['itemListElement']} == {ORIGIN + r for r in articles}, 'writing ItemList URLs')
+    for r in articles:
+        g = parsed[r].schemas[0]['@graph']
+        check(any(x.get('@type') in ('Article', 'TechArticle', 'BlogPosting') and x.get('datePublished') for x in g), r + ': article datePublished')
+    check(texts['/blogs.html'].count('/writing/2') == texts['/writing/'].count('/writing/2'), 'blogs.html synchronized with writing listing')
     if ERRORS:
         print('\n'.join('FAIL: ' + e for e in ERRORS))
         raise SystemExit(1)
-    print('PASS: 8 routes; v3 assets; metadata; JSON-LD; local links, anchors and images; analytics; verification; sitemap; 22 credentials; 7 talks; 11 portfolio chapters; empty writing state.' + (' Local HTTP responses passed.' if opts.url else ''))
+    print('PASS: ' + str(len(ROUTES)) + ' routes; v3 assets; metadata; JSON-LD; local links, anchors and images; analytics; verification; sitemap; 22 credentials; 7 talks; 11 portfolio chapters; ' + str(len([r for r in ROUTES if r.startswith('/writing/2')])) + ' article(s) listed.' + (' Local HTTP responses passed.' if opts.url else ''))
 
 
 if __name__ == '__main__':

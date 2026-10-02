@@ -1,0 +1,104 @@
+/* Technical Writing article layout: the reading column plus a right rail with the
+   section outline. Built on design system v3 tokens. The rail is plain HTML (a
+   details element with links), so it works without JavaScript; /js/article.js
+   adds the active section, the reading progress and the closed default on phones. */
+
+.article-head { padding-top: var(--space-6); padding-bottom: var(--space-5); }
+.article-head .page-title { max-width: 30ch; font-size: clamp(2rem, 1.4rem + 1.6vw, 2.6rem); line-height: 1.12; text-wrap: balance; margin-top: var(--space-4); }
+.article-head .byline { margin-top: var(--space-4); }
+.article-head .summary { margin-top: var(--space-5); max-width: 62ch; }
+
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) 264px;
+  justify-content: start;
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+  padding-bottom: var(--space-9);
+}
+
+/* The column is a size container, so explainers lay out for the column, not the viewport. */
+.article-body { container-type: inline-size; min-width: 0; }
+.article-body > * + * { margin-top: var(--space-4); }
+.article-body > p, .article-body > ul, .article-body > ol { max-width: var(--measure); color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.75; }
+.article-body > ul, .article-body > ol { padding-left: 1.3em; }
+.article-body > ul li + li, .article-body > ol li + li { margin-top: var(--space-2); }
+.article-body > h2 { font-size: var(--text-h2); line-height: 1.25; margin-top: var(--space-8); max-width: 30ch; text-wrap: balance; }
+.article-body > h2 + * { margin-top: var(--space-3); }
+.article-body a:not(.chap__t):not([class*="__"]) { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.article-body p code, .article-body li code, .article-body td code, .article-body figcaption code {
+  font: 500 .86em var(--font-mono); background: var(--color-accent-soft); color: var(--color-text);
+  padding: 1px 5px; border-radius: var(--radius-sm);
+}
+.article-body > .fig, .article-body > .board, .article-body > .video, .article-body > .code--static,
+.article-body > .wide, .article-body > .xwide { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.article-body > .watch + h2 { margin-top: var(--space-8); }
+.article-body .table-wrap { margin-top: var(--space-5); }
+.article-body .data { width: 100%; border-collapse: collapse; font-size: 15px; }
+.article-body .data th { text-align: left; font-weight: 600; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--color-line-strong); }
+.article-body .data td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--color-line); color: var(--color-text-muted); }
+.article-body .code-plain {
+  background: var(--palette-night-850); color: var(--palette-bone-100); border-radius: var(--radius-lg);
+  padding: 16px 18px; font: 400 13.5px/1.7 var(--font-mono); overflow-x: auto; margin-top: var(--space-5);
+}
+.article-facts { font-size: var(--text-small); color: var(--color-text-faint); }
+.article-body > p.article-facts { font-size: var(--text-small); line-height: 1.6; color: var(--color-text-faint); }
+.article-body > p.watch { max-width: none; font-size: 14px; line-height: 1.4; margin-top: var(--space-5); }
+.article-body .code .bar a { color: var(--lav); }
+.article-body .watch a { text-decoration: none; color: var(--color-text-muted); }
+.article-body .watch a:hover { color: var(--color-accent); }
+
+/* ---------- right rail ---------- */
+.article-rail { position: sticky; top: 88px; max-height: calc(100vh - 112px); overflow-y: auto; scrollbar-width: thin; padding-top: var(--space-2); }
+.rail > summary { list-style: none; cursor: pointer; font: 500 var(--text-label)/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-faint); padding: 6px 0 12px; }
+.rail > summary::-webkit-details-marker { display: none; }
+.rail__progress { height: 2px; background: var(--color-line); border-radius: 2px; overflow: hidden; margin-bottom: var(--space-4); }
+.rail__progress span { display: block; height: 100%; width: 100%; background: var(--color-accent); transform: scaleX(0); transform-origin: left center; transition: transform 120ms linear; }
+.rail__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.rail__list a {
+  display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center;
+  padding: 8px; margin: 0 -8px; border-radius: var(--radius-lg); color: var(--color-text-muted);
+  text-decoration: none; transition: background var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard);
+}
+.rail__list a:hover { background: var(--color-surface-raised); color: var(--color-text); }
+.rail__list a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 0; }
+.rail__thumb {
+  width: 72px; height: 46px; object-fit: cover; object-position: top left; border-radius: var(--radius-md);
+  border: 1px solid var(--color-line); background: var(--color-surface); opacity: .75;
+  transition: opacity var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
+}
+.rail__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rail__num { font: 500 var(--text-label)/1.2 var(--font-mono); color: var(--color-text-faint); letter-spacing: .04em; }
+.rail__title { font-size: 13.5px; line-height: 1.35; }
+.rail__list a[aria-current="true"] { background: var(--color-accent-soft); color: var(--color-text); }
+.rail__list a[aria-current="true"] .rail__thumb { opacity: 1; border-color: var(--color-accent); }
+.rail__list a[aria-current="true"] .rail__num { color: var(--color-accent); }
+.rail__links { display: grid; gap: 6px; margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--color-line); font-size: var(--text-small); }
+.rail__links a { color: var(--color-text-muted); text-decoration: none; }
+.rail__links a:hover { color: var(--color-accent); }
+
+/* Below desktop the rail becomes a collapsible outline above the article. */
+@media (max-width: 1080px) {
+  .article-layout { grid-template-columns: minmax(0, 760px); }
+  .article-rail { position: static; max-height: none; overflow: visible; order: -1; border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: 4px 16px 12px; background: var(--color-surface); }
+  .rail > summary { padding: 12px 0; display: flex; justify-content: space-between; }
+  .rail > summary::after { content: "+"; font-size: 14px; }
+  .rail[open] > summary::after { content: "\2212"; }
+  .rail__progress { display: none; }
+  .rail__list a { grid-template-columns: 56px 1fr; }
+  .rail__thumb { width: 56px; height: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail__progress span, .rail__list a, .rail__thumb { transition: none; }
+}
+@media print { .article-rail { display: none; } .article-layout { display: block; } }
+
+/* Related reading and author, at the end of the column. */
+.article-related { margin-top: var(--space-9); padding-top: var(--space-6); border-top: 1px solid var(--color-line); }
+.article-related h2 { font-size: var(--text-h3); line-height: 1.3; margin-bottom: var(--space-4); }
+.article-body .article-related .row-list a { color: var(--color-text); text-decoration: none; }
+.article-head .nowrap { white-space: nowrap; }
+.article-body .article-related .row-list a:hover { color: var(--color-accent); text-decoration: underline; }
+.article-related .author-box { margin-top: var(--space-7); }
+.article-related .author-box__links a { text-decoration: none; }

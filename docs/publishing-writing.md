@@ -16,7 +16,7 @@ All production pages load the shared design-systems/v3 tokens, base and componen
 
 ## Add an article
 
-1. Create writing/descriptive-slug/index.html using the current production head, header and footer. Replace the title, description, canonical and social metadata. Keep the analytics snippet immediately after viewport and the pre-paint theme setup before stylesheets.
+1. Create writing/yyyy-mm-dd-descriptive-slug/index.html (every published article starts with its date, for example writing/2026-09-20-aem-edge-functions-google-sign-in/) using the current production head, header and footer. Replace the title, description, canonical and social metadata. Keep the analytics snippet immediately after viewport and the pre-paint theme setup before stylesheets.
 2. Write the complete article in semantic HTML: one H1, introduction, useful H2/H3 sections, code or diagrams as needed, limitations, and links to primary evidence. The design system's post template is a visual reference, not publish-ready content.
 3. Show Jack Jin as author, original publication date, and a separate update date only when content materially changes. Do not refresh the publication date just to suggest freshness. Composite client examples must remain identified as illustrative.
 4. Use Article structured data with headline, author referencing https://www.jackzhaojin.com/#person, datePublished, dateModified when warranted, and mainEntityOfPage. Use WebPage for the page and BreadcrumbList for Home / Technical Writing / Article. Match schema to actual visible content; do not add fabricated ratings, FAQ sections or reviews.

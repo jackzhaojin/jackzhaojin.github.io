@@ -67,6 +67,22 @@ html:not(.js) .theme-control { display: none; }
 .talk-row .cluster { margin-top: 24px; gap: 30px; }
 .talk-date p { font-family: var(--font-mono); font-size: 13px; }
 .talk-event { color: var(--color-accent); }
+.writing-list { list-style: none; margin: 0; padding: 0; }
+.writing-row { display: grid; grid-template-columns: 210px minmax(0,1fr) minmax(0,320px); gap: 48px; padding: 40px 0; border-top: 1px solid var(--color-line); align-items: start; }
+.writing-list > li:first-child .writing-row { border-top: 0; padding-top: 0; }
+.writing-list > li:last-child .writing-row { padding-bottom: 0; }
+.writing-row .nowrap { white-space: nowrap; }
+.writing-row h2 { font-size: clamp(24px,2.5vw,32px); max-width: 30ch; text-wrap: balance; }
+.writing-row h2 a { color: inherit; text-decoration: none; }
+.writing-row h2 a:hover { color: var(--color-accent); }
+.writing-row p { max-width: 62ch; margin: 12px 0 0; }
+.writing-row .cluster { margin-top: 24px; gap: 30px; }
+.writing-meta { font-family: var(--font-mono); font-size: 13px; color: var(--color-text-faint); }
+.writing-row__media { display: block; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-line); background: var(--color-surface); }
+.writing-row__media img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: transform var(--duration-base) var(--ease-standard); }
+.writing-row__media:hover img { transform: scale(1.02); }
+.writing-next { max-width: 680px; padding-top: 8px; }
+.writing-next p { margin: 16px 0 0; }
 .credential-list { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; }
 .credential-row { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 24px; padding: 28px 0; border-top: 1px solid var(--color-line); }
 .credential-row img { width: 80px; height: 80px; object-fit: contain; background: var(--color-diagram-ground); border-radius: 6px; padding: 6px; }
@@ -110,6 +126,7 @@ html:not(.js) .portfolio-page .deck-pane,
 html:not(.js) .portfolio-page .deck-pane[hidden] { display: block !important; margin-bottom: 32px; }
 html:not(.js) #gantt,
 html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], html:not(.js) [data-carousel] { display: none; }
+@media(max-width:1023px) { .writing-row { grid-template-columns: 160px minmax(0,1fr); } .writing-row__media { grid-column: 2; max-width: 420px; } }
 @media(max-width:1023px) { html.js .site-header .nav-toggle { margin-left: auto; } .site-nav { margin-left: 0; } .home-work-links { grid-template-columns: repeat(2,1fr); } }
 @media(max-width:760px) {
  .home-intro,.work-feature,.home-two { grid-template-columns: 1fr; gap: 36px; }
@@ -117,6 +134,8 @@ html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], ht
  .home-note { max-width: 100%; }
  .credential-list { grid-template-columns: 1fr; }
  .talk-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+ .writing-row { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+ .writing-row__media { order: -1; grid-column: auto; max-width: none; }
  .talk-date p { margin: 0; }
  .talk-date span { display: inline-block; margin-top: 4px; }
  .footer-row { align-items: flex-start; flex-direction: column; gap: 12px; }
@@ -126,3 +145,5 @@ html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], ht
  .credential-mark { width: 64px; height: 64px; }
  .portfolio-page .hero { padding-block: 48px; }
 }
+
+@media (prefers-reduced-motion: reduce) { .writing-row__media img { transition: none; } .writing-row__media:hover img { transform: none; } }
