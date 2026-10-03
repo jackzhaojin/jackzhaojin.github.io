@@ -11,7 +11,7 @@ The pages below contain readable HTML, with original project diagrams and source
 - [Talks](https://www.jackzhaojin.com/talks/): Conference sessions, community demos, and guest lectures with supporting event or project links.
 - [Certifications](https://www.jackzhaojin.com/certifications/): Credential records and direct verification links. Consult the issuer record for current status.
 - [Technical Writing](https://www.jackzhaojin.com/writing/): Complete on-site articles, newest first.
-- [AEM Edge Functions on a Laptop](https://www.jackzhaojin.com/writing/2026-09-20-aem-edge-functions-google-sign-in/): Google sign-in, members-only pages and API data on an Edge Delivery Services site with AEM Edge Functions, with the code at a pinned commit, the JWT verification order and the platform limits. Written companion to a 12:31 video.
+- [AEM Edge Functions on a Laptop](https://www.jackzhaojin.com/writing/2026-09-20-aem-edge-functions-google-sign-in/): Google sign-in, members-only pages and API data on an Edge Delivery Services site with AEM Edge Functions, with the code at a pinned commit and the JWT verification order. Written companion to a 12:31 video.
 
 ## Discovery
 
