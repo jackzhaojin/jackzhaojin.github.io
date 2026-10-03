@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="800" y="98" text-anchor="middle" font-size="38" font-weight="bold" fill="#0f172a">The Spine: Context &#183; Governance &#183; Observability &#183; Evals</text>
+  <text x="800" y="138" text-anchor="middle" font-size="20" fill="#64748b">The same four pillars, at every layer. Sometimes identical, sometimes not.</text>
+
+  <!-- Row striping (behind everything) -->
+  <rect x="40" y="240" width="1520" height="100" rx="8" fill="#f1f5f9"/>
+  <rect x="40" y="452" width="1520" height="100" rx="8" fill="#f1f5f9"/>
+  <rect x="40" y="664" width="1520" height="100" rx="8" fill="#f1f5f9"/>
+
+  <!-- Column separators -->
+  <g stroke="#e2e8f0" stroke-width="1.5">
+    <line x1="230" y1="170" x2="230" y2="764"/>
+    <line x1="563" y1="170" x2="563" y2="764"/>
+    <line x1="896" y1="170" x2="896" y2="764"/>
+    <line x1="1229" y1="170" x2="1229" y2="764"/>
+  </g>
+
+  <!-- Header row -->
+  <text x="135" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#475569" letter-spacing="1">LAYER</text>
+  <rect x="234" y="176" width="327" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="397" y="204" text-anchor="middle" font-size="20" font-weight="bold" fill="#b45309">CONTEXT</text>
+  <rect x="567" y="176" width="327" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="730" y="204" text-anchor="middle" font-size="20" font-weight="bold" fill="#b45309">GOVERNANCE</text>
+  <rect x="900" y="176" width="327" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="1063" y="204" text-anchor="middle" font-size="20" font-weight="bold" fill="#b45309">OBSERVABILITY</text>
+  <rect x="1233" y="176" width="327" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="1396" y="204" text-anchor="middle" font-size="20" font-weight="bold" fill="#b45309">EVALS</text>
+
+  <!-- ===== Row 1: Individual ===== -->
+  <circle cx="74" cy="293" r="24" fill="#0f172a"/>
+  <text x="74" y="301" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">1</text>
+  <text x="106" y="298" font-size="16" font-weight="bold" fill="#0f172a">Individual</text>
+  <text x="252" y="297" font-size="14" fill="#334155">what my agent needs to know</text>
+  <text x="585" y="297" font-size="14" fill="#334155">what my agent may touch</text>
+  <text x="918" y="297" font-size="14" fill="#334155">what it did overnight</text>
+  <text x="1251" y="297" font-size="14" font-weight="600" fill="#b45309">is this skill any good</text>
+
+  <!-- ===== Row 2: Team ===== -->
+  <circle cx="74" cy="399" r="24" fill="#0f172a"/>
+  <text x="74" y="407" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">2</text>
+  <text x="106" y="404" font-size="16" font-weight="bold" fill="#0f172a">Team</text>
+  <text x="252" y="403" font-size="14" fill="#334155">shared across the team</text>
+  <text x="585" y="403" font-size="14" fill="#334155">shared, governed skills</text>
+  <text x="918" y="403" font-size="14" fill="#334155">see each other's agent work</text>
+  <text x="1251" y="403" font-size="14" font-weight="600" fill="#b45309">is the team actually getting better</text>
+
+  <!-- ===== Row 3: AI as IC ===== -->
+  <circle cx="74" cy="505" r="24" fill="#047857"/>
+  <text x="74" y="513" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">3</text>
+  <text x="106" y="510" font-size="16" font-weight="bold" fill="#0f172a">AI as IC</text>
+  <text x="252" y="509" font-size="14" fill="#334155">the agent's working memory</text>
+  <text x="585" y="509" font-size="14" fill="#334155">the agent owns its work</text>
+  <text x="918" y="509" font-size="14" fill="#334155">its actions are visible</text>
+  <text x="1251" y="509" font-size="14" font-weight="600" fill="#b45309">how good is this agent, at what</text>
+
+  <!-- ===== Row 4: Mgmt, siloed ===== -->
+  <circle cx="74" cy="611" r="24" fill="#0f172a"/>
+  <text x="74" y="619" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">4</text>
+  <text x="106" y="608" font-size="16" font-weight="bold" fill="#0f172a">Mgmt,</text>
+  <text x="106" y="628" font-size="16" font-weight="bold" fill="#0f172a">siloed</text>
+  <text x="252" y="615" font-size="14" fill="#334155">shared across the agent mesh</text>
+  <text x="585" y="615" font-size="14" fill="#334155">rules for agents at scale</text>
+  <text x="918" y="615" font-size="14" fill="#334155">watch the mesh, not every step</text>
+  <text x="1251" y="615" font-size="14" font-weight="600" fill="#b45309">how do you grade an agent mesh</text>
+
+  <!-- ===== Row 5: Mgmt, merged ===== -->
+  <circle cx="74" cy="717" r="24" fill="#0f172a"/>
+  <text x="74" y="725" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">5</text>
+  <text x="106" y="714" font-size="16" font-weight="bold" fill="#0f172a">Mgmt,</text>
+  <text x="106" y="734" font-size="16" font-weight="bold" fill="#0f172a">merged</text>
+  <text x="252" y="721" font-size="14" fill="#334155">one live context for humans + AI</text>
+  <text x="585" y="721" font-size="14" fill="#334155">accountable across the mesh</text>
+  <text x="918" y="721" font-size="14" fill="#334155">humans see the agentic side</text>
+  <text x="1251" y="721" font-size="14" font-weight="600" fill="#b45309">grade the human + agent delivery</text>
+
+  <!-- Footer strip -->
+  <rect x="40" y="788" width="1520" height="54" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="800" y="822" text-anchor="middle" font-size="20" font-weight="bold" fill="#b45309">Evals are the rigor to refine what you have. Not an excuse to chase the next shiny thing.</text>
+
+  <!-- Disclaimer -->
+</svg>

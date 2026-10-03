@@ -1,0 +1,69 @@
+/* Token swap lab for "Theming EDS with Google Stitch". The preview reads the real
+   values from styles/styles.css before and after commit d6355ee, at about half size.
+   Each group (colors, fonts, buttons) is a class on the preview, so the page reads
+   fine without JavaScript and shows the finished theme. */
+
+.tkl__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px 18px 0; }
+@container (min-width: 720px) { .tkl__controls { padding: 20px 28px 0; } }
+.tkl__toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.tkl__tog { border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); border-radius: 999px; padding: 7px 13px 7px 34px; font-size: 13.5px;
+  cursor: pointer; position: relative; transition: all .2s var(--ease); }
+.tkl__tog::before { content: ""; position: absolute; left: 12px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 4px; border: 1.5px solid var(--line-strong); background: var(--surface); }
+.tkl__tog[aria-checked="true"] { color: var(--ink); border-color: var(--line-strong); }
+.tkl__tog[aria-checked="true"]::before { background: var(--accent); border-color: var(--accent); box-shadow: inset 0 0 0 3px var(--surface); }
+.tkl__tog:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* the preview page: boilerplate values by default, each group class swaps in the theme */
+.tkl__page {
+  --tk-bg: #fff; --tk-light: #f8f8f8; --tk-dark: #505050; --tk-text: #131313; --tk-link: #3b63fb; --tk-eyebrow: #505050; --tk-border: #f8f8f8;
+  --tk-body: roboto, "Roboto", Arial, sans-serif; --tk-head: "Roboto Condensed", Arial, sans-serif; --tk-head-weight: 700; --tk-head-track: 0;
+  background: var(--tk-bg); color: var(--tk-text); font-family: var(--tk-body); font-size: 12px; line-height: 1.55;
+  border: 1px solid var(--line); border-radius: 12px; padding: 20px 18px 18px; min-width: 0; container-type: inline-size;
+  transition: background-color .35s var(--ease), color .35s var(--ease);
+}
+.tkl__page.c-after { --tk-light: #f5f5f7; --tk-dark: #424245; --tk-text: #1d1d1f; --tk-link: #1473e6; --tk-eyebrow: #6e6e73; --tk-border: #e8e8ed; }
+.tkl__page.f-after { --tk-body: "Source Sans 3", Arial, sans-serif; --tk-head: "Inter", Arial, sans-serif; --tk-head-track: -0.02em; }
+.tkl__page p { margin: 0; }
+.tkl__h1 { font: var(--tk-head-weight) 26px/1.2 var(--tk-head); letter-spacing: var(--tk-head-track); margin-bottom: 6px !important; }
+.tkl__h2 { font: var(--tk-head-weight) 18px/1.2 var(--tk-head); letter-spacing: var(--tk-head-track); margin: 2px 0 6px !important; }
+.tkl__p { margin-bottom: 8px !important; }
+.tkl__code { font-family: var(--font-mono); font-size: 11px; background: var(--tk-light); padding: 0 3px; border-radius: 3px; }
+.tkl__link { color: var(--tk-link); text-decoration: underline; }
+.tkl__teaser { display: flex; flex-direction: column; margin: 12px 0; border: 1px solid var(--tk-border); border-radius: 6px; overflow: hidden; background: var(--tk-light); transition: background-color .35s var(--ease), border-color .35s var(--ease); }
+@container (min-width: 380px) { .tkl__teaser { flex-direction: row; } .tkl__visual { flex: 1; } .tkl__text { flex: 1.1; } }
+.tkl__visual { min-height: 110px; background: linear-gradient(120deg, #0b2a5b, #3f8fd6 45%, #d7ecff 60%, #2a5ea8); }
+.tkl__text { padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.tkl__eyebrow { font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--tk-eyebrow); }
+.tkl__page.f-after .tkl__eyebrow { font-family: var(--tk-head); font-weight: 700; letter-spacing: .14em; }
+.tkl__ctas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px !important; }
+
+/* buttons: boilerplate shape, then the theme shape */
+.tkl__btn { display: inline-block; border: 2px solid transparent; border-radius: 2.4em; padding: .5em 1.2em; font: 500 11px/1.25 var(--tk-body); white-space: nowrap; transition: all .35s var(--ease); }
+.tkl__btn--primary { border-color: var(--tk-text); background: var(--tk-text); color: var(--tk-bg); }
+.tkl__btn--secondary { border-color: var(--tk-text); background: transparent; color: var(--tk-text); }
+.tkl__page.b-after .tkl__btn { border-width: 1.5px; border-radius: 999px; padding: .95em 2em; font: 700 9px/1.25 var(--tk-head); text-transform: uppercase; letter-spacing: .08em; }
+.tkl__page.b-after .tkl__btn--primary { border-color: var(--tk-link); background: var(--tk-link); color: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 8%); }
+
+/* the token table */
+.tkl__table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tkl__table th { text-align: left; font-weight: 600; color: var(--ink); padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line-strong); font-size: 12.5px; }
+.tkl__table td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); vertical-align: top; font-size: 12.5px; overflow-wrap: break-word; }
+.tkl__table td:first-child { font-family: var(--font-body); }
+.tkl__table td code { font: 500 11.5px var(--font-mono); color: var(--ink); background: var(--accent-tint); padding: 1px 4px; border-radius: 4px; white-space: nowrap; }
+.tkl__table td i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--c); border: 1px solid var(--line-strong); }
+.tkl__none { color: var(--muted) !important; font-style: italic; }
+.tkl__table tr td:nth-child(3) { color: var(--ink); }
+.tkl__table.is-live tr td:nth-child(2), .tkl__table.is-live tr td:nth-child(3) { transition: background .3s var(--ease); }
+.tkl__table.is-live tr[data-on="before"] td:nth-child(2), .tkl__table.is-live tr[data-on="after"] td:nth-child(3) { background: var(--accent-tint); color: var(--ink); }
+.tkl__table.is-live tr[data-on="before"] td:nth-child(3) { color: var(--muted); }
+.tkl__note { margin: 10px 0 0; font-size: 13.5px; color: var(--muted); }
+@media (max-width: 640px) { .tkl__table th:first-child, .tkl__table td:first-child { width: 38%; } }
+
+/* Quality pass, October 2026 */
+/* keep each swatch on the same line as its hex value */
+.tkl__table tr[data-g="colors"] td { white-space: nowrap; }
+/* 44px touch targets on phones */
+@media (max-width: 640px) {
+  .tkl__controls .chips button, .tkl__tog, .cmp__tabs button { min-height: 44px; }
+}
+@media (max-width: 640px) { .tkl__controls .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; } }

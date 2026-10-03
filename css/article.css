@@ -45,7 +45,7 @@
 .article-body > p.article-facts { font-size: var(--text-small); line-height: 1.6; color: var(--color-text-faint); }
 .article-body > p.watch { max-width: none; font-size: 14px; line-height: 1.4; margin-top: var(--space-5); }
 .article-body .code .bar a { color: var(--lav); }
-.article-body .watch a { text-decoration: none; color: var(--color-text-muted); }
+.article-body .watch a, .article-body .watch a:not(.chap__t):not([class*="__"]) { text-decoration: none; color: var(--color-text-muted); }
 .article-body .watch a:hover { color: var(--color-accent); }
 
 /* ---------- right rail ---------- */
@@ -61,6 +61,8 @@
   text-decoration: none; transition: background var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard);
 }
 .rail__list a:hover { background: var(--color-surface-raised); color: var(--color-text); }
+/* Sections without a main visual get a text-only entry. */
+.rail__list a.rail__plain { grid-template-columns: 1fr; }
 .rail__list a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 0; }
 .rail__thumb {
   width: 72px; height: 46px; object-fit: cover; object-position: top left; border-radius: var(--radius-md);
@@ -81,11 +83,12 @@
 @media (max-width: 1080px) {
   .article-layout { grid-template-columns: minmax(0, 760px); }
   .article-rail { position: static; max-height: none; overflow: visible; order: -1; border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: 4px 16px 12px; background: var(--color-surface); }
-  .rail > summary { padding: 12px 0; display: flex; justify-content: space-between; }
+  .rail > summary { padding: 12px 0; min-height: 44px; display: flex; align-items: center; justify-content: space-between; }
   .rail > summary::after { content: "+"; font-size: 14px; }
   .rail[open] > summary::after { content: "\2212"; }
   .rail__progress { display: none; }
   .rail__list a { grid-template-columns: 56px 1fr; }
+  .rail__list a.rail__plain { grid-template-columns: 1fr; }
   .rail__thumb { width: 56px; height: 36px; }
 }
 
@@ -102,3 +105,6 @@
 .article-body .article-related .row-list a:hover { color: var(--color-accent); text-decoration: underline; }
 .article-related .author-box { margin-top: var(--space-7); }
 .article-related .author-box__links a { text-decoration: none; }
+
+/* Code reads as typed: no font ligatures turning !== or => into glyphs. */
+.article-body pre, .article-body code { font-variant-ligatures: none; }

@@ -1,0 +1,73 @@
+/* Page styles for Part 3: the series nav and the task lab.
+   Built on the v3 tokens and the /css/explainers.css aliases. */
+
+/* ---------- series nav (Part 1 / 2 / 3) ---------- */
+.series { margin-top: var(--space-5); }
+.series__label { font: 500 var(--text-label)/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-faint); margin: 0 0 8px; }
+.series ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 760px; }
+.series li { min-width: 0; }
+.series a { display: block; height: 100%; padding: 10px 12px; border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); color: var(--color-text-muted); text-decoration: none; font-size: 14px; line-height: 1.35; transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard); }
+.series a b { display: block; font: 500 12px/1.2 var(--font-mono); color: var(--color-text-faint); margin-bottom: 3px; font-weight: 500; }
+.series a:hover { border-color: var(--color-line-strong); color: var(--color-text); }
+.series a[aria-current="page"] { border-color: var(--color-accent); background: var(--color-accent-soft); color: var(--color-text); }
+.series a[aria-current="page"] b { color: var(--color-accent); }
+.series a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+@media (max-width: 560px) { .series ol { grid-template-columns: 1fr; } }
+
+/* ---------- screenshots ---------- */
+.shot img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+.shot figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+/* ---------- figures and the commit trail ---------- */
+.shot--narrow { max-width: 460px; }
+.code--wrap .ln { white-space: pre-wrap; padding-left: 3.2em; text-indent: -3.2em; }
+.trail { list-style: none; padding: 0 !important; margin-top: var(--space-5); border-left: 2px solid var(--color-line); max-width: var(--measure); }
+.trail li { position: relative; padding: 0 0 14px 20px; color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; }
+.trail li::before { content: ""; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-accent); }
+.trail time { display: block; font: 500 12.5px var(--font-mono); color: var(--color-text-faint); }
+
+/* ---------- task lab ---------- */
+.tl__toggle { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 14px; color: var(--ink-2); }
+.tl__toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+.tl__rules { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.tl__rules li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-size: 13.5px; line-height: 1.45; color: var(--ink-2); transition: border-color .3s var(--ease), opacity .3s var(--ease); }
+.tl__rules li > span:first-child { font: 500 11.5px/1.6 var(--font-mono); color: var(--muted); }
+.tl__rules li[data-s="pass"] { border-color: var(--pass-ink); }
+.tl__rules li[data-s="fail"] { border-color: #c2433d; background: rgba(194,67,61,.06); }
+.tl__rules li[data-s="skip"] { opacity: .45; }
+.tl .verdict { min-height: 0; }
+.tl .verdict b { color: var(--bone); }
+.tl .verdict code, .tl .verdict a { color: var(--bone); }
+.tl .verdict code { background: rgba(255,255,255,.1); }
+.tl__commits { list-style: none; margin: 8px 0 0; padding: 0; font: 400 12px/1.7 var(--font-mono); color: var(--bone-2); }
+.tl__commits a { color: var(--lav) !important; }
+
+/* ---------- quality pass, October 2026 ---------- */
+/* A code chip inside a link: the underline stays on the words, the chip takes the link color. */
+.article-body a > code { display: inline-block; color: var(--color-accent); }
+/* Links on the dark code bar keep their contrast on hover. */
+.article-body .code .bar a:hover { color: var(--bone); }
+/* Screenshots open full size, which matters most on a phone. */
+.fig__open { display: block; border-radius: 12px; cursor: zoom-in; }
+.fig__open:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* Native selects in the labs, drawn to match the chips and inputs. */
+.article-body figure select { -webkit-appearance: none; appearance: none; min-height: 40px; padding: 8px 34px 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background-color: var(--bg); color: var(--ink); cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-2) 50%), linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 52%, calc(100% - 12px) 52%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; transition: border-color .2s var(--ease); }
+.article-body figure select:hover { border-color: var(--ink-2); }
+.article-body figure select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.article-body figure input[type="checkbox"] { accent-color: var(--accent); }
+.article-body figure input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Phones: 44px targets, and figure bars stack instead of squeezing the source link into a narrow column. */
+@media (max-width: 640px) {
+  .article-body .chips button, .article-body .cmp__tabs button, .article-body .pvl__switch button { min-height: 44px; }
+  .article-body figure select, .article-body figure input[type="text"] { min-height: 44px; }
+  .article-body .code .bar, .article-body .lab__bar { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+/* The commit trail: a hairline rail, the dots centered on it. */
+.trail { border-left-width: 1px; }
+.trail li::before { left: -5.5px; }
+/* A rule that doesn't apply reads as such without fading its text below contrast. */
+.tl__rules li[data-s="skip"] { opacity: 1; border-style: dashed; background: transparent; color: var(--muted); }
+.tl__toggle { cursor: pointer; }
+@media (max-width: 640px) { .tl__toggle { min-height: 44px; } }

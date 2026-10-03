@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="800" y="108" text-anchor="middle" font-size="44" font-weight="bold" fill="#0f172a">The Learning Between Layer 4 and 5</text>
+  <text x="800" y="148" text-anchor="middle" font-size="21" fill="#64748b">The hard jump is not where most people think.</text>
+
+  <!-- LEFT panel (green) -->
+  <rect x="80" y="200" width="700" height="400" rx="16" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+
+  <!-- check mark badge -->
+  <circle cx="138" cy="258" r="26" fill="#047857"/>
+  <path d="M 126 258 L 134 267 L 152 248" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="184" y="266" font-size="28" font-weight="bold" fill="#047857">AI  &#8596;  AI = easier than expected</text>
+
+  <text x="124" y="338" font-size="21" fill="#334155">&#183; shared AI-friendly interface</text>
+  <text x="124" y="378" font-size="21" fill="#334155">&#183; shared context</text>
+  <text x="124" y="418" font-size="21" fill="#334155">&#183; shared storage</text>
+
+  <line x1="124" y1="468" x2="736" y2="468" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="124" y="520" font-size="20" fill="#059669" font-style="italic">This is why the Layer 4 agent track</text>
+  <text x="124" y="552" font-size="20" fill="#059669" font-style="italic">moves fast.</text>
+
+  <!-- RIGHT panel (amber/red) -->
+  <rect x="820" y="200" width="700" height="400" rx="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- caution mark badge -->
+  <path d="M 878 234 L 906 286 L 850 286 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2" stroke-linejoin="round"/>
+  <text x="878" y="281" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">!</text>
+
+  <text x="924" y="266" font-size="28" font-weight="bold" fill="#b45309">AI  &#8596;  humans = the hard part</text>
+
+  <text x="864" y="338" font-size="21" fill="#334155">&#183; our human interfaces were never built for agents</text>
+  <text x="864" y="378" font-size="21" fill="#334155">&#183; humans read screens, click buttons, sit in meetings</text>
+  <text x="864" y="418" font-size="21" fill="#334155">&#183; drop an agent in and it works one-handed</text>
+
+  <line x1="864" y1="468" x2="1476" y2="468" stroke="#f59e0b" stroke-width="2"/>
+  <text x="864" y="520" font-size="20" fill="#b91c1c" font-style="italic">This is the real jump to Layer 5.</text>
+
+  <!-- BRIDGE element -->
+  <rect x="220" y="652" width="1160" height="158" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- forward arrow -->
+  <line x1="800" y1="600" x2="800" y2="640" stroke="#2563eb" stroke-width="3"/>
+  <path d="M 800 652 L 790 636 L 810 636 Z" fill="#2563eb"/>
+
+  <text x="800" y="700" text-anchor="middle" font-size="21" font-weight="bold" fill="#0d9488">Fix the foundation.</text>
+  <text x="800" y="740" text-anchor="middle" font-size="20" fill="#334155">Make the shared surface AI-friendly and human-friendly at once,</text>
+  <text x="800" y="772" text-anchor="middle" font-size="20" fill="#334155">and the merge gets a lot less hard.</text>
+
+  <!-- Disclaimer -->
+</svg>

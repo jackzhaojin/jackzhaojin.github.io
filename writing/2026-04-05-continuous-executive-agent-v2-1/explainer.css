@@ -1,0 +1,58 @@
+/* Failure ladder lab for the v2.1 continuous agent article. Builds on the kit's
+   .lab, .gates and .verdict styles in /css/explainers.css. */
+.ladder .lab__grid { align-items: start; }
+.ladder__count { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 10px; }
+.ladder__count b { font: 600 28px/1 var(--font-mono); color: var(--ink); }
+.ladder__count span { font-size: 14px; color: var(--muted); }
+.pips { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin-bottom: 6px; }
+.pips i { display: block; height: 10px; border-radius: 3px; background: var(--line); transition: background .25s var(--ease); }
+.pips i[data-k="fail"] { background: #c2433d; }
+.pips i[data-k="fix"] { background: var(--differs); }
+.pips i[data-k="pass"] { background: var(--pass-ink); }
+.pips__legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font: 500 11px/1.4 var(--font-mono); color: var(--muted); margin: 0 0 14px; }
+.pips__legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+.pips__legend .lg-fail::before { background: #c2433d; } .pips__legend .lg-fix::before { background: var(--differs); } .pips__legend .lg-pass::before { background: var(--pass-ink); }
+.ladder__ask { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+.ladder__ask b { color: var(--ink); }
+.ladder__btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.ladder__btns[hidden] { display: none; }
+.ladder__btns .ctl { font-size: 13.5px; }
+.ladder__btns .ctl--pass { border-color: var(--pass-ink); }
+.ladder__btns .ctl--fail { border-color: #c2433d; }
+.ladder__btns + .ladder__btns { margin-top: 8px; }
+.ladder__aux { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.ladder__aux .ctl { font-size: 13px; color: var(--ink-2); }
+.ladder .gates li[data-state="active"] { border-color: var(--accent); background: var(--accent-tint); }
+.ladder .gates li[data-state="block"] { border-color: #c2433d; background: rgba(194,67,61,.06); }
+.ladder .gates li[data-state="done"] { border-color: var(--pass-ink); }
+.ladder .gates li[data-state="block"] .gate__state { background: #c2433d; }
+.ladder .gates li[data-state="done"] .gate__state { background: #1f6e52; }
+.ladder .gates li[data-state="active"] .gate__state { background: var(--accent); }
+.ladder__log { margin: 0; padding: 12px 14px; overflow: auto; background: var(--night); border-radius: 12px; font: 400 12px/1.65 var(--font-mono); color: var(--bone-3); white-space: pre-wrap; overflow-wrap: anywhere; border: 0; }
+.ladder__log .a { color: var(--lav); } .ladder__log .d { color: var(--bone-2); } .ladder__log .x { color: var(--rose); } .ladder__log .ok { color: var(--mint); } .ladder__log .n { color: #7d7975; }
+.ladder .verdict { min-height: 0; }
+.ladder .lab__label:first-child { margin-top: 0; }
+@media (max-width: 640px) { .pips { gap: 3px; } .ladder__count b { font-size: 24px; } }
+.ladder > figcaption { margin: 0; padding: 0 18px 18px; }
+@container (min-width: 720px) { .ladder > figcaption { padding: 0 28px 22px; } }
+.ladder [hidden] { display: none !important; }
+.js .ladder__log { max-height: 260px; }
+.ladder__log { font-variant-ligatures: none; }
+
+/* Quality pass 2026-10-03: the code bar keeps its GitHub link on one line and on screen at phone width. */
+.article-body .code .bar > span { min-width: 0; overflow-wrap: anywhere; line-height: 1.45; }
+.article-body .code .bar > a { flex: none; white-space: nowrap; }
+/* Contrast: log comments pass 4.5:1 on the dark panel. */
+.ladder__log .n { color: #8f8b86; }
+/* 44px tap targets on phones. */
+@media (max-width: 640px) {
+  .ladder .ctl { min-height: 44px; padding: 0 16px; }
+  .cmp__tabs button { min-height: 44px; padding: 0 16px; }
+}
+/* Questions from the room read as questions, not run-in text. */
+.article-body > h3.qa { font-family: var(--font-body); font-size: 1.0625rem; font-weight: 600; line-height: 1.4; color: var(--ink); margin: var(--space-6, 32px) 0 var(--space-2, 8px); max-width: var(--measure); }
+.article-body > h3.qa + p { margin-top: 0; }
+/* Watch rows: room between the dashed rule and the paragraph above, and no underline running under the timestamp. */
+.article-body > p.watch { margin-top: var(--space-5) !important; padding-top: 12px; }
+.article-body p.watch a[href] { text-decoration: none; }
+.article-body p.watch a[href]:hover { text-decoration: underline; text-underline-offset: 3px; }

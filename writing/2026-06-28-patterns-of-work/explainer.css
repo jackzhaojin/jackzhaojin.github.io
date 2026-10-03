@@ -1,0 +1,95 @@
+/* "Walk the five layers" explainer for the Patterns of Work article.
+   Without JavaScript the five layers are a readable list of cards. explainer.js adds
+   the layer map with the spine beside it and shows one layer, or one pillar, at a time.
+   Built on design system v3 tokens and the explainer kit aliases. */
+
+.pow { --pow-gold: var(--palette-gold-700); --pow-gold-tint: rgba(125, 95, 14, .07); --pow-gold-line: rgba(125, 95, 14, .35); --pow-on-gold: var(--palette-warm-0); }
+[data-theme="dark"] .pow { --pow-gold: var(--palette-gold-300); --pow-gold-tint: rgba(240, 207, 142, .08); --pow-gold-line: rgba(240, 207, 142, .35); --pow-on-gold: var(--palette-night-900); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .pow { --pow-gold: var(--palette-gold-300); --pow-gold-tint: rgba(240, 207, 142, .08); --pow-gold-line: rgba(240, 207, 142, .35); --pow-on-gold: var(--palette-night-900); }
+}
+
+/* ---------- the layer cards (static, and the panel content when live) ---------- */
+.pow__data { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.pow__layer { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 18px 20px; min-width: 0; }
+.pow__layer > * + * { margin-top: 8px; }
+.pow__name { display: flex; align-items: center; gap: 10px; font: 600 1.125rem/1.3 var(--font-body); color: var(--ink); }
+.pow__n { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 13px/1 var(--font-mono); }
+.pow__layer[data-layer="3"] .pow__n { background: var(--pass-ink); color: var(--bg); }
+.pow__what { color: var(--ink-2); font-size: 15.5px; line-height: 1.6; }
+.pow__k { margin-top: 14px !important; font: 500 11.5px/1.2 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.pow__climb { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 4px; }
+.pow__climb li { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; line-height: 1.35; color: var(--ink); }
+.pow__climb li span { border: 1px solid var(--line-strong); border-radius: 8px; padding: 5px 9px; background: var(--bg); }
+.pow__climb li + li::before { content: "\2192"; color: var(--muted); padding: 0 2px; }
+.pow__climb--branch li + li::before { content: "+"; }
+/* Without the span wrappers (JavaScript off) the chips still read as a sequence. */
+.pow__climb li:not(:has(span)) { border: 1px solid var(--line-strong); border-radius: 8px; padding: 5px 9px; background: var(--bg); }
+.pow__climb li:not(:has(span)) + li::before { content: none; }
+.pow__hard { color: var(--ink); font-size: 15.5px; line-height: 1.6; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); padding: 10px 12px; }
+.pow__pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px !important; }
+.pow__pillars > div { border: 1px solid var(--pow-gold-line); background: var(--pow-gold-tint); border-radius: 10px; padding: 8px 11px; min-width: 0; }
+.pow__pillars dt { font: 600 11px/1.2 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--pow-gold); }
+.pow__pillars dd { margin: 4px 0 0; font-size: 14px; line-height: 1.4; color: var(--ink); }
+.pow__go { font-size: 14px; }
+.pow__go a { color: var(--accent); }
+
+/* ---------- live mode ---------- */
+.pow.is-live .pow__ui { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 18px; align-items: start; }
+.pow.is-live .pow__ui[hidden] { display: none; }
+.pow__map { display: grid; gap: 8px; }
+.pow__layers { display: grid; gap: 6px; }
+.pow__lbtn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 9px 12px; min-height: 46px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-2); font: 500 14px/1.25 var(--font-body); cursor: pointer;
+  transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease); }
+.pow__lbtn .pow__n { width: 24px; height: 24px; font-size: 12px; }
+.pow__lbtn:hover { border-color: var(--line-strong); color: var(--ink); }
+.pow__lbtn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-tint); color: var(--ink); }
+.pow__layers.is-pillar .pow__lbtn { border-color: var(--pow-gold-line); background: var(--pow-gold-tint); }
+.pow__spine { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 6px; border: 1px solid var(--pow-gold-line); background: var(--pow-gold-tint); border-radius: 10px; }
+.pow__spine-label { grid-column: 1 / -1; font: 600 10.5px/1.2 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--pow-gold); padding: 2px 4px 2px; }
+.pow__pbtn { border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--pow-gold); cursor: pointer;
+  font: 600 11px/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; padding: 8px 4px; min-height: 36px; transition: background .2s var(--ease), color .2s var(--ease); }
+.pow__pbtn:hover { border-color: var(--pow-gold-line); }
+.pow__pbtn[aria-pressed="true"] { background: var(--pow-gold); color: var(--pow-on-gold); }
+.pow__foundation { display: block; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink-2); font-size: 13.5px; line-height: 1.35; text-decoration: none; }
+.pow__foundation b { display: block; font: 600 11px/1.2 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.pow__foundation:hover { color: var(--ink); border-color: var(--accent); }
+.pow__lbtn:focus-visible, .pow__pbtn:focus-visible, .pow__foundation:focus-visible, .pow__row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.pow__panel { min-width: 0; }
+.pow__panel .pow__data { display: block; }
+.pow__panel .pow__layer[hidden], .pow__panel .pow__data[hidden], .pow__col[hidden] { display: none; }
+.pow__panel .pow__layer, .pow__col { animation: pow-in .2s var(--ease) both; }
+@keyframes pow-in { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+.pow__col { border: 1px solid var(--pow-gold-line); border-radius: 14px; background: var(--surface); padding: 18px 20px; }
+.pow__col > * + * { margin-top: 10px; }
+.pow__col .pow__name em { font-style: normal; color: var(--pow-gold); }
+.pow__rows { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.pow__row { display: grid; grid-template-columns: 24px minmax(0, 9.5em) minmax(0, 1fr); align-items: center; gap: 10px; width: 100%; text-align: left;
+  padding: 9px 11px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink-2); font: 400 13.5px/1.35 var(--font-body); cursor: pointer; }
+.pow__row:hover { border-color: var(--pow-gold-line); }
+.pow__row .pow__n { width: 24px; height: 24px; font-size: 12px; }
+.pow__row b { font-weight: 600; color: var(--ink); }
+.pow__hint { font-size: 13px; color: var(--muted); }
+
+@container (max-width: 620px) {
+  .pow.is-live .pow__ui { grid-template-columns: minmax(0, 1fr); }
+  .pow__pillars { grid-template-columns: minmax(0, 1fr); }
+  .pow__row { grid-template-columns: 24px minmax(0, 1fr); }
+  .pow__row b { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pow__panel .pow__layer, .pow__col { animation: none; }
+  .pow__lbtn, .pow__pbtn { transition: none; }
+}
+
+/* The notebook photo reads fine smaller than the diagrams. */
+.board.pow-photo img { max-width: 520px; margin-left: auto; margin-right: auto; }
+.board.pow-photo figcaption { max-width: 520px; margin-left: auto; margin-right: auto; }
+
+/* Quality pass, Oct 2026: 44px pillar buttons, and diagrams open full size. */
+.pow__pbtn { min-height: 44px; }
+.board a { display: block; }
+.board a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }

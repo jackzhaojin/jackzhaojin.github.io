@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <defs>
+    <linearGradient id="mergedField" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dbeafe"/>
+      <stop offset="1" stop-color="#ccfbf1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="80" y="92" font-size="44" font-weight="bold" fill="#0f172a">Layer 5 &#183; Humans and AI, Merged</text>
+  <text x="80" y="128" font-size="21" fill="#64748b">The silos from Layer 4 dissolve into one mesh. The most speculative layer, and the one I am most convinced of.</text>
+  <rect x="1330" y="72" width="190" height="34" rx="17" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="1425" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#047857">FUTURE OF WORK</text>
+
+  <!-- The wall comes down: dashed grey line with a gap -->
+  <line x1="80" y1="178" x2="640" y2="178" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10"/>
+  <line x1="960" y1="178" x2="1520" y2="178" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="800" y="184" font-size="17" fill="#94a3b8" font-style="italic" text-anchor="middle">the wall comes down</text>
+
+  <!-- Merged field -->
+  <rect x="80" y="210" width="900" height="380" rx="18" fill="url(#mergedField)" stroke="#0d9488" stroke-width="2"/>
+  <text x="110" y="246" font-size="26" font-weight="bold" fill="#0f172a">One merged field</text>
+
+  <!-- Shared context pool (center) -->
+  <rect x="380" y="350" width="300" height="100" rx="22" fill="#f8fafc" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="530" y="388" font-size="20" font-weight="bold" fill="#0f172a" text-anchor="middle">shared context</text>
+  <text x="530" y="416" font-size="17" fill="#334155" text-anchor="middle">memory + context + outputs</text>
+
+  <!-- Human manager nodes -->
+  <g>
+    <rect x="120" y="282" width="190" height="62" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="215" y="312" font-size="20" font-weight="bold" fill="#b45309" text-anchor="middle">human manager</text>
+    <text x="215" y="334" font-size="15" fill="#b45309" text-anchor="middle">judgment + intent</text>
+  </g>
+  <g>
+    <rect x="120" y="468" width="190" height="62" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="215" y="498" font-size="20" font-weight="bold" fill="#b45309" text-anchor="middle">human manager</text>
+    <text x="215" y="520" font-size="15" fill="#b45309" text-anchor="middle">priorities + trust</text>
+  </g>
+
+  <!-- Agentic manager nodes -->
+  <g>
+    <rect x="750" y="282" width="200" height="62" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+    <text x="850" y="312" font-size="20" font-weight="bold" fill="#047857" text-anchor="middle">agentic manager</text>
+    <text x="850" y="334" font-size="15" fill="#059669" text-anchor="middle">scale + recall</text>
+  </g>
+  <g>
+    <rect x="750" y="468" width="200" height="62" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+    <text x="850" y="498" font-size="20" font-weight="bold" fill="#047857" text-anchor="middle">agentic manager</text>
+    <text x="850" y="520" font-size="15" fill="#059669" text-anchor="middle">tireless execution</text>
+  </g>
+
+  <!-- Connectors to shared context pool -->
+  <g stroke="#64748b" stroke-width="2">
+    <line x1="310" y1="313" x2="382" y2="372"/>
+    <line x1="310" y1="499" x2="382" y2="430"/>
+    <line x1="750" y1="313" x2="678" y2="372"/>
+    <line x1="750" y1="499" x2="678" y2="430"/>
+  </g>
+
+  <text x="530" y="566" font-size="17" fill="#334155" text-anchor="middle">one shared pool &#183; roles mix &#183; governed and observable</text>
+
+  <!-- Human-only zone -->
+  <rect x="1010" y="210" width="510" height="170" rx="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="1040" y="250" font-size="26" font-weight="bold" fill="#b45309">stays human</text>
+  <text x="1040" y="290" font-size="21" fill="#334155">coaching</text>
+  <text x="1040" y="324" font-size="21" fill="#334155">guiding</text>
+  <text x="1040" y="358" font-size="21" fill="#334155">leading</text>
+  <text x="1280" y="290" font-size="17" fill="#64748b">the work that</text>
+  <text x="1280" y="324" font-size="17" fill="#64748b">does not</text>
+  <text x="1280" y="358" font-size="17" fill="#64748b">delegate to a model</text>
+
+  <!-- Counter-take callout -->
+  <rect x="1010" y="412" width="510" height="178" rx="18" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="1040" y="448" font-size="15" font-weight="bold" fill="#b91c1c">BLOOMBERG &#183; JUNE 2026</text>
+  <text x="1040" y="480" font-size="20" font-weight="bold" fill="#b91c1c">&#8220;Why Companies Are Cutting</text>
+  <text x="1040" y="506" font-size="20" font-weight="bold" fill="#b91c1c">Middle Managers in the AI Era&#8221;</text>
+  <text x="1040" y="544" font-size="17" font-weight="bold" fill="#b45309">An over-reaction.</text>
+  <text x="1040" y="572" font-size="16" fill="#334155">The truth sits in between: </text>
+  <text x="1258" y="572" font-size="16" font-weight="bold" fill="#047857">coordinate, not cut.</text>
+
+  <!-- Where this is heading -->
+  <rect x="80" y="630" width="1440" height="170" rx="18" fill="url(#mergedField)" stroke="#0d9488" stroke-width="2"/>
+  <text x="800" y="684" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="middle">Not cutting people. Amplifying them. Humans and AI direct the same work, as one team.</text>
+  <text x="800" y="726" font-size="20" fill="#334155" text-anchor="middle">When an agent is confident, it finishes the task. When it is not, it routes to a person.</text>
+  <text x="800" y="764" font-size="17" font-style="italic" fill="#64748b" text-anchor="middle">Still theory. The direction I am most convinced of.</text>
+
+  <!-- Disclaimer -->
+</svg>

@@ -1,0 +1,87 @@
+/* Explainers for "From Prompts to Harness": the score lab (real calculateFinalScore
+   and calculateGrade from azure-da-mcp at 0aacf6d) and the loop model (the task
+   ordering rule from the video). Built on the kit aliases in /css/explainers.css. */
+
+/* ---------- score lab ---------- */
+.blend__ctl { display: grid; gap: 18px; }
+.blend__ctl[hidden] { display: none; }
+.blend__row { display: grid; gap: 6px; }
+.blend__row label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; font-weight: 600; color: var(--ink); }
+.blend__row small { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+.blend__row output { font: 600 18px/1 var(--font-mono); color: var(--ink); min-width: 2.5ch; text-align: right; }
+.blend__row input[type="range"] { width: 100%; accent-color: var(--accent); }
+.blend__row input[type="range"]:focus-visible, .blend__fail input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.blend__row--agent output { color: var(--rose-ink, #b0344f); }
+.blend__row--det output { color: var(--det-ink, #1f5fa8); }
+.blend__fail { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: var(--ink-2); padding: 12px 14px; border: 1px dashed var(--line-strong); border-radius: 12px; cursor: pointer; }
+.blend__fail input { margin-top: 3px; accent-color: #c2433d; }
+.blend__static { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.blend__bar { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: var(--bg); border: 1px solid var(--line); }
+.blend__bar span { display: block; height: 100%; }
+.blend__bar .a { background: color-mix(in srgb, #d0453f 70%, transparent); }
+.blend__bar .d { background: color-mix(in srgb, #2f74c0 70%, transparent); }
+.blend__legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 8px 0 0; font: 500 11.5px var(--font-mono); color: var(--muted); }
+.blend__legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+.blend__legend .a i { background: #d0453f; } .blend__legend .d i { background: #2f74c0; }
+.blend__formula { margin: 16px 0 0; }
+.blend__grades { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 4px; font: 400 12.5px/1.5 var(--font-mono); color: var(--muted); }
+.blend__grades li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 10px; border-radius: 8px; border: 1px solid transparent; transition: background .25s var(--ease), border-color .25s var(--ease), opacity .25s var(--ease); }
+.blend__grades li.on { color: var(--ink); background: var(--accent-tint); border-color: var(--accent); }
+.blend.is-fallback .blend__grades { opacity: .4; }
+.blend.is-fallback .blend__bar .a { width: 0 !important; }
+.blend .verdict b { font: 600 22px/1 var(--font-mono); color: var(--bone); margin: 0 4px; }
+
+/* ---------- loop model ---------- */
+.loop__plan { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.loop__plan li { font: 500 12.5px var(--font-mono); padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); background: var(--bg); }
+.loop__plan li + li::before { content: "then "; color: var(--muted); font-weight: 400; }
+.loop__plan li.done { border-color: var(--pass-ink); color: var(--pass-ink); }
+.loop__tasks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.loop__tasks li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.loop__tasks b { font-size: 14.5px; color: var(--ink); font-weight: 600; }
+.loop__seg { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.loop__seg[hidden] { display: none; }
+.loop__seg button { border: 0; background: none; padding: 5px 10px; border-radius: 999px; font-size: 12.5px; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+.loop__seg button[aria-checked="true"] { background: var(--ink); color: var(--bg); }
+.loop__seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.loop__setting { font: 500 12px var(--font-mono); color: var(--muted); }
+.loop__queue { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; min-height: 34px; }
+.loop__queue li { font: 600 13px/1 var(--font-mono); padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg); color: var(--ink-2); transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
+.loop__queue li.sub { border-style: dashed; border-color: #c2433d; color: #b0344f; }
+.loop__queue li.now { border-color: var(--accent); background: var(--accent-tint); color: var(--ink); }
+.loop__queue li.done { border-color: var(--pass-ink); color: var(--pass-ink); }
+.loop__queue li.new { animation: loop-in .45s var(--ease) both; }
+@keyframes loop-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.loop__log { margin: 14px 0 0; padding: 14px 16px; background: var(--night); border: 0; border-radius: 12px; font: 400 12.5px/1.7 var(--font-mono); color: var(--bone-3); white-space: pre-wrap; overflow-wrap: anywhere; min-height: 13em; max-height: 20em; overflow-y: auto; }
+.loop__log .ok { color: var(--mint); } .loop__log .no { color: var(--rose); } .loop__log .det { color: #8fb8ea; }
+.loop__nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.loop__nav[hidden] { display: none; }
+
+[data-theme="dark"] .blend__row--agent output, [data-theme="dark"] .loop__queue li.sub { color: var(--rose); }
+[data-theme="dark"] .blend__row--det output { color: #8fb8ea; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .blend__row--agent output,
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .loop__queue li.sub { color: var(--rose); }
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .blend__row--det output { color: #8fb8ea; }
+}
+@media (max-width: 480px) {
+  .loop__tasks li { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loop__queue li.new { animation: none; }
+}
+.photo img { width: 100%; max-width: 420px; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
+.board--narrow img { max-width: 280px; }
+.lab > figcaption { padding: 0 18px 18px; margin-top: 0; }
+@container (min-width: 720px) { .lab > figcaption { padding: 0 28px 22px; } }
+
+/* Quality pass 2026-10-03: the code bar keeps its GitHub link on one line and on screen at phone width. */
+.article-body .code .bar > span { min-width: 0; overflow-wrap: anywhere; line-height: 1.45; }
+.article-body .code .bar > a { flex: none; white-space: nowrap; }
+/* 44px tap targets on phones. */
+@media (max-width: 640px) {
+  .loop__seg button { min-height: 44px; padding: 0 14px; }
+  .loop__nav .ctl { min-height: 44px; padding: 0 18px; }
+  .blend__fail { min-height: 44px; }
+  .blend__fail input { width: 18px; height: 18px; }
+}

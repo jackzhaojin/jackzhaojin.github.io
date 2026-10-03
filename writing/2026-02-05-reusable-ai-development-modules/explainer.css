@@ -1,0 +1,43 @@
+/* Rebuild or reuse: four stacks from Jack's patterns diagram. Colors follow his
+   diagram (red, green, blue, orange) through the v3 palette. */
+.ru { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  --c-adhoc: #a8322d; --c-spec: var(--palette-leaf-700); --c-harness: var(--palette-blue-600); --c-agent: var(--palette-amber-700); }
+[data-theme="dark"] .ru { --c-adhoc: var(--palette-red-300); --c-spec: var(--palette-leaf-300); --c-harness: var(--palette-blue-300); --c-agent: var(--palette-amber-300); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="dark"]) .ru { --c-adhoc: var(--palette-red-300); --c-spec: var(--palette-leaf-300); --c-harness: var(--palette-blue-300); --c-agent: var(--palette-amber-300); } }
+.ru__body { padding: 20px 18px 22px; display: grid; gap: 16px; }
+@container (min-width: 720px) { .ru__body { padding: 24px 28px 26px; } }
+.ru__label { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+.ru__stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@container (min-width: 640px) { .ru__stage { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.ru__col { min-width: 0; }
+.ru__head { margin: 0 0 8px; font: 500 11px/1.3 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.ru__stack { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ru__box { --c: var(--ink-2); border: 1.5px solid var(--c); border-radius: 10px; padding: 8px 10px; background: var(--bg);
+  display: flex; flex-direction: column; gap: 2px; transition: opacity .25s var(--ease), background .25s var(--ease); }
+.ru__box span { font-size: 13.5px; font-weight: 600; color: var(--c); line-height: 1.3; }
+.ru__box small { font: 500 11px var(--font-mono); color: var(--muted); }
+.ru__box--adhoc { --c: var(--c-adhoc); } .ru__box--spec { --c: var(--c-spec); } .ru__box--harness { --c: var(--c-harness); } .ru__box--agent { --c: var(--c-agent); }
+.ru__box--used { border-style: dashed; background: transparent; }
+.ru__box--used span { font-weight: 500; }
+.ru.is-live .ru__box:not(.is-on) { opacity: .45; }
+.ru__box.is-on { background: color-mix(in srgb, var(--c) 12%, var(--bg)); }
+.ru__out { margin: 0; font-weight: 600; color: var(--ink); }
+.ru__static { margin: 0; color: var(--ink-2); font-size: 15px; }
+.ru.is-live .ru__static { display: none; }
+.ru > figcaption { margin: 0; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+@container (min-width: 720px) { .ru > figcaption { padding: 14px 28px 20px; } }
+@media (prefers-reduced-motion: reduce) { .ru__box { transition: none; } }
+.ru__body > * { min-width: 0; }
+
+/* Quality pass 2026-10-03: the code bar keeps its GitHub link on one line and on screen at phone width. */
+.article-body .code .bar > span { min-width: 0; overflow-wrap: anywhere; line-height: 1.45; }
+.article-body .code .bar > a { flex: none; white-space: nowrap; }
+/* Contrast: the light-mode red and the "built here" note pass 4.5:1 on a tinted box. */
+.ru__box small { color: var(--ink-2); }
+/* 44px tap targets on phones. */
+@media (max-width: 640px) { .ru .chips button { min-height: 44px; padding: 0 16px; } }
+@media (max-width: 640px) { .ru .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; } }
+/* Watch rows: room between the dashed rule and the paragraph above, and no underline running under the timestamp. */
+.article-body > p.watch { margin-top: var(--space-5) !important; padding-top: 12px; }
+.article-body p.watch a[href] { text-decoration: none; }
+.article-body p.watch a[href]:hover { text-decoration: underline; text-underline-offset: 3px; }

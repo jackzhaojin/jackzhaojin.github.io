@@ -1,0 +1,43 @@
+/* Two views of the merge: what Jack kept, and where the final's lines came from. */
+.mg { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  --m-claude: var(--palette-amber-700); --m-kimi: var(--palette-lavender-600); --m-gpt: var(--palette-leaf-700); --m-gemini: var(--palette-blue-600);
+  --m-shared: color-mix(in srgb, var(--ink) 30%, transparent); --m-fresh: color-mix(in srgb, var(--ink) 10%, transparent); }
+[data-theme="dark"] .mg { --m-claude: var(--palette-amber-300); --m-kimi: var(--palette-lavender-300); --m-gpt: var(--palette-leaf-300); --m-gemini: var(--palette-blue-300); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="dark"]) .mg { --m-claude: var(--palette-amber-300); --m-kimi: var(--palette-lavender-300); --m-gpt: var(--palette-leaf-300); --m-gemini: var(--palette-blue-300); } }
+.mg__body { padding: 20px 18px 22px; display: grid; gap: 18px; }
+.mg__body > * { min-width: 0; }
+@container (min-width: 720px) { .mg__body { padding: 24px 28px 26px; } }
+.mg__label { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+.mg__views { display: grid; gap: 18px; }
+@container (min-width: 680px) { .mg__views { grid-template-columns: 1fr 1.3fr; gap: 28px; } }
+.mg__views > * { min-width: 0; }
+.mg__h { margin: 0 0 8px; font: 500 11px/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.mg__kept { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 15px; color: var(--ink); }
+.mg__bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+.mg__part { display: block; height: 100%; transition: opacity .25s var(--ease); }
+.mg__part + .mg__part { border-left: 1px solid var(--surface); }
+.mg__part--claude, .mg__key--claude span::before { background: var(--m-claude); }
+.mg__part--kimi, .mg__key--kimi span::before { background: var(--m-kimi); }
+.mg__part--gpt, .mg__key--gpt span::before { background: var(--m-gpt); }
+.mg__part--gemini, .mg__key--gemini span::before { background: var(--m-gemini); }
+.mg__part--shared, .mg__key--shared span::before { background: var(--m-shared); }
+.mg__part--fresh, .mg__key--fresh span::before { background: var(--m-fresh); }
+.mg__legend { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; font-size: 14px; color: var(--ink-2); }
+.mg__legend li { display: flex; justify-content: space-between; gap: 12px; padding: 2px 6px; border-radius: 6px; }
+.mg__legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; border: 1px solid var(--line); }
+.mg__legend b { font: 500 13px var(--font-mono); color: var(--ink); }
+.mg__legend li.is-on { background: var(--accent-tint); color: var(--ink); }
+.mg__lines { margin: 10px 0 0; font-weight: 600; color: var(--ink); }
+.mg__table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.mg__table th, .mg__table td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.mg__table th:first-child, .mg__table td:first-child { text-align: left; }
+.mg.is-live .mg__static { display: none; }
+.mg > figcaption { margin: 0; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+@container (min-width: 720px) { .mg > figcaption { padding: 14px 28px 20px; } }
+@media (prefers-reduced-motion: reduce) { .mg__part { transition: none; } }
+/* Notebook pages sit narrower than the column. */
+.article-body > .fig.page { max-width: 420px; }
+.fig.page img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
+
+/* Quality pass, Oct 2026: 44px tabs and chips on touch widths. */
+@media (max-width: 640px) { .article-body .chips button, .article-body [role="tab"], .cmp__tabs button { min-height: 44px; } }

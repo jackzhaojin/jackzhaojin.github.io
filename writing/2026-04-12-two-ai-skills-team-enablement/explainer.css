@@ -1,0 +1,42 @@
+/* Harvest sorter: a file path in, a knowledge-repo path and frontmatter out. */
+.hv { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.hv__body { padding: 20px 18px 22px; display: grid; gap: 16px; }
+.hv__body > * { min-width: 0; }
+@container (min-width: 720px) { .hv__body { padding: 24px 28px 26px; } }
+.hv__label { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+.hv__fields { display: grid; gap: 12px; }
+@container (min-width: 620px) { .hv__fields { grid-template-columns: 1fr 2fr 9em; } }
+.hv__field { display: grid; gap: 6px; font-size: 13px; color: var(--ink-2); min-width: 0; }
+.hv__field input, .hv__field textarea { width: 100%; font: 400 13px/1.5 var(--font-mono); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line-strong); border-radius: 8px; padding: 8px 10px; }
+.hv__field textarea { min-height: 6.5em; resize: vertical; }
+.hv__field input:focus-visible, .hv__field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.hv__dest { margin: 0; padding: 14px 16px; background: var(--night); border-radius: 12px; font: 500 13px/1.7 var(--font-mono); color: var(--bone-3); overflow-wrap: anywhere; }
+.hv__seg--file { color: var(--mint); }
+.hv__sl { color: var(--bone-3); opacity: .6; margin: 0 1px; }
+.hv__skip { color: var(--rose); }
+.hv__why { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 14px; color: var(--ink-2); }
+.hv__why code { font: 500 .9em var(--font-mono); background: var(--accent-tint); color: var(--ink); padding: 1px 5px; border-radius: 4px; }
+.hv__front { margin: 0; padding: 12px 16px; background: var(--night); border: 0; border-radius: 12px; font: 400 12.5px/1.6 var(--font-mono); color: var(--bone); white-space: pre-wrap; overflow-wrap: anywhere; }
+.hv__front:empty { display: none; }
+.hv > figcaption { margin: 0; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+@container (min-width: 720px) { .hv > figcaption { padding: 14px 28px 20px; } }
+/* Jack's prompt log excerpt reads as text, not code. */
+.article-body .code .ln.md { white-space: pre-wrap; }
+
+/* Quality pass 2026-10-03: the code bar keeps its GitHub link on one line and on screen at phone width. */
+.article-body .code .bar > span { min-width: 0; overflow-wrap: anywhere; line-height: 1.45; }
+.article-body .code .bar > a { flex: none; white-space: nowrap; }
+/* 44px tap targets on phones; 16px inputs so iOS does not zoom on focus. */
+@media (max-width: 640px) {
+  .hv .chips button { min-height: 44px; padding: 0 16px; }
+  .hv__field input { min-height: 44px; font-size: 16px; }
+  .hv__field textarea { font-size: 16px; }
+}
+@media (max-width: 640px) { .hv .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; } }
+/* Watch rows: room between the dashed rule and the paragraph above, and no underline running under the timestamp. */
+.article-body > p.watch { margin-top: var(--space-5) !important; padding-top: 12px; }
+.article-body p.watch a[href] { text-decoration: none; }
+.article-body p.watch a[href]:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Wrapped prompt-log lines hang under the text, not under the line number. */
+.article-body .code .ln.md { padding-left: 3.2em; text-indent: -3.2em; }

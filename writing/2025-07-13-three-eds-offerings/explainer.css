@@ -1,0 +1,40 @@
+/* Three EDS offerings article: trace an offering's path on Jack's diagram.
+   The image and the five steps are plain HTML; explainer.js adds the chips,
+   the highlight boxes and the per-offering step text. */
+
+.eds-map { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.eds-map__chips { margin-bottom: 14px; }
+.eds-map__img { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.eds-map__img img { display: block; width: 100%; height: auto; }
+.eds-map__hl { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); border-radius: 8px; border: 3px solid var(--palette-lavender-600); background: rgba(91, 75, 196, .12); opacity: 0; transform: scale(1.06); transition: opacity .3s var(--ease), transform .3s var(--ease); pointer-events: none; }
+.eds-map__hl.on { opacity: 1; transform: scale(1.04); }
+.eds-map__steps { margin: 16px 0 0; padding: 0; list-style: none; counter-reset: st; display: grid; gap: 8px; }
+.eds-map__steps li { counter-increment: st; position: relative; padding: 10px 12px 10px 44px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-size: 14.5px; line-height: 1.55; color: var(--ink-2); transition: opacity .25s var(--ease), border-color .25s var(--ease); }
+.eds-map__steps li::before { content: counter(st); position: absolute; left: 12px; top: 10px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); font: 500 12px/20px var(--font-mono); text-align: center; color: var(--muted); }
+.eds-map__steps b { color: var(--ink); font-weight: 600; }
+.eds-map__steps [data-o] { display: block; margin-top: 2px; }
+.eds-map__tag { font-style: normal; font: 500 12px var(--font-mono); color: var(--muted); }
+.eds-map.is-live .eds-map__steps [data-o] { display: none; }
+.eds-map.is-live .eds-map__steps [data-o].on { display: inline; }
+.eds-map.is-live .eds-map__tag { display: none; }
+.eds-map.is-live .eds-map__steps li { opacity: .45; }
+.eds-map.is-live .eds-map__steps li.on { opacity: 1; border-color: var(--accent); }
+.eds-map.is-live .eds-map__steps li.on::before { border-color: var(--accent); color: var(--accent); }
+.eds-map__say { margin: 12px 0 0; font-size: 14.5px; color: var(--ink-2); }
+.eds-map__say:empty { display: none; }
+.eds-map figcaption { margin-top: 12px; }
+@media (prefers-reduced-motion: reduce) { .eds-map__hl, .eds-map__steps li { transition: none; } }
+
+/* Quality pass, October 2026 */
+/* Offering chips wrap inside the card instead of scrolling off its edge. */
+.eds-map .eds-map__chips { flex-wrap: wrap; overflow: visible; margin: 0 0 14px; padding: 0; }
+@media (max-width: 640px) {
+  .eds-map .eds-map__chips button { min-height: 44px; }
+}
+/* Dark theme: the white diagram is dimmed a little and framed by a visible hairline. */
+:root[data-theme="dark"] .eds-map__img { border-color: var(--line-strong); }
+:root[data-theme="dark"] .eds-map__img img { filter: brightness(.88); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .eds-map__img { border-color: var(--line-strong); }
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .eds-map__img img { filter: brightness(.88); }
+}

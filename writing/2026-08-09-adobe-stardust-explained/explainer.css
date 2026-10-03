@@ -1,0 +1,65 @@
+/* Explainers for "Adobe Stardust explained": the page lifecycle lab and the
+   three-version block viewer. Built on the v3 tokens and the kit in /css/explainers.css.
+   Without JavaScript the lab shows one finished example and the viewer shows all nine panes. */
+
+/* ---------- page lifecycle lab ---------- */
+.sdl__pages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 4px; }
+@container (min-width: 520px) { .sdl__pages { grid-template-columns: 1fr 1fr; } }
+@container (min-width: 720px) { .sdl__pages { grid-template-columns: 1fr; } }
+.sdl__pages button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 7px 10px; border: 1px solid var(--line);
+  border-radius: 10px; background: var(--bg); color: var(--ink); font: 500 13px var(--font-mono); text-align: left; cursor: default; transition: border-color .2s var(--ease), background .2s var(--ease); }
+.sdl.is-live .sdl__pages button { cursor: pointer; }
+.sdl.is-live .sdl__pages button:hover { border-color: var(--line-strong); }
+.sdl__pages button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-tint); }
+.sdl__pages button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sdl__pages span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sdl__st { flex: none; font: 500 11px var(--font-mono); font-style: normal; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); }
+.sdl__st[data-st="approved"] { border-color: var(--pass-ink); color: var(--pass-ink); }
+.sdl__st[data-st="migrated"] { background: var(--pass-ink); border-color: var(--pass-ink); color: var(--bg); }
+.sdl__st[data-st="directed"], .sdl__st[data-st="prototyped"] { border-color: var(--accent); color: var(--accent); }
+
+.sdl__flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 4px; }
+.sdl__flow li { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); min-width: 0; transition: border-color .3s var(--ease), background .3s var(--ease); }
+.sdl__flow b { font: 600 12.5px var(--font-mono); color: var(--ink); }
+.sdl__flow span { font-size: 12px; line-height: 1.3; color: var(--muted); text-align: right; }
+.sdl__flow li.is-gate { border-style: dashed; border-color: var(--accent); }
+.sdl__flow li.is-done { background: var(--accent-tint); }
+.sdl__flow li.is-now { border-color: var(--accent); border-style: solid; background: var(--accent-tint); box-shadow: inset 0 0 0 1px var(--accent); }
+.sdl__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.sdl__actions .ctl { font-size: 13.5px; }
+.sdl__approve { border-color: var(--accent) !important; color: var(--accent) !important; }
+.sdl__hands { border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); border-radius: 999px; padding: 7px 13px 7px 34px; font-size: 13.5px; cursor: pointer; position: relative; }
+.sdl__hands::before { content: ""; position: absolute; left: 12px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 4px; border: 1.5px solid var(--line-strong); background: var(--surface); }
+.sdl__hands[aria-checked="true"] { color: var(--ink); border-color: var(--line-strong); }
+.sdl__hands[aria-checked="true"]::before { background: var(--accent); border-color: var(--accent); box-shadow: inset 0 0 0 3px var(--surface); }
+.sdl__hands:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sdl__reset { color: var(--muted) !important; }
+.article-body .sdl__msg code { font: 500 12px var(--font-mono); color: var(--lav); background: rgba(255,255,255,.08); }
+.sdl__msg .no { color: var(--rose); } .sdl__msg .ok { color: var(--mint); }
+.sdl__json { margin-top: 12px; font-size: 12px; max-height: 22em; overflow: auto; }
+
+/* ---------- three-version viewer ---------- */
+.vs__controls { display: grid; gap: 10px; margin-bottom: 12px; }
+.vs__tabs { margin-bottom: 0; }
+.vs__grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+@container (min-width: 640px) { .vs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.vs__pane { margin: 0; min-width: 0; }
+.vs__pane img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); }
+.vs__pane figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.vs__tag { color: var(--ink); font-weight: 600; margin-right: 4px; }
+.vs.is-live .vs__grid { grid-template-columns: 1fr; }
+.vs.is-live .vs__pane { display: none; }
+.vs.is-live .vs__pane.on { display: block; animation: vs-in .3s var(--ease) both; }
+.vs.is-live .vs__pane img { border-radius: 12px; box-shadow: 0 20px 40px -30px rgba(0,0,0,.35); }
+.vs__cap { font-size: 14px; color: var(--muted); margin-top: 12px; }
+@keyframes vs-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .vs.is-live .vs__pane.on { animation: none; } }
+
+/* Quality pass, October 2026 */
+/* 44px touch targets on phones; version chips wrap instead of scrolling */
+@media (max-width: 640px) {
+  .sdl__pages button { min-height: 44px; }
+  .sdl__actions .ctl, .sdl__hands, .vs__tabs button { min-height: 44px; }
+  .vs .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
+  .vs .chips button { min-height: 44px; }
+}

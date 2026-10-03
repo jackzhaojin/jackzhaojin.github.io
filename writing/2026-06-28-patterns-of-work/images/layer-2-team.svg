@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="80" y="96" font-size="44" font-weight="bold" fill="#0f172a">Layer 2 &#183; The Team</text>
+  <text x="80" y="138" font-size="21" fill="#64748b">Faster individuals do not add up to a faster team. The limit is coordination, and the systems make it worse.</text>
+
+  <!-- ===================== PERSON A (left), own way ===================== -->
+  <rect x="80" y="170" width="680" height="270" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <circle cx="146" cy="232" r="32" fill="#2563eb"/>
+  <circle cx="146" cy="224" r="10" fill="#ffffff"/>
+  <path d="M 129 252 a 17 15 0 0 1 34 0 Z" fill="#ffffff"/>
+  <text x="196" y="226" font-size="26" font-weight="bold" fill="#0f172a">Person A</text>
+  <text x="196" y="252" font-size="16" fill="#64748b">their own way of working</text>
+  <text x="724" y="232" text-anchor="end" font-size="40" font-weight="bold" fill="#2563eb">+300%</text>
+  <text x="724" y="258" text-anchor="end" font-size="14" fill="#94a3b8">faster, on their own</text>
+  <text x="112" y="312" font-size="20" fill="#334155">Works in markdown and Git.</text>
+  <text x="112" y="348" font-size="17" fill="#64748b">Tracks every change, line by line, in Git.</text>
+  <rect x="112" y="372" width="206" height="38" rx="19" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="215" y="397" text-anchor="middle" font-size="15" font-weight="bold" fill="#047857">runs their own agent</text>
+
+  <!-- ===================== PERSON B (right), own way ===================== -->
+  <rect x="840" y="170" width="680" height="270" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <circle cx="906" cy="232" r="32" fill="#7c3aed"/>
+  <circle cx="906" cy="224" r="10" fill="#ffffff"/>
+  <path d="M 889 252 a 17 15 0 0 1 34 0 Z" fill="#ffffff"/>
+  <text x="956" y="226" font-size="26" font-weight="bold" fill="#0f172a">Person B</text>
+  <text x="956" y="252" font-size="16" fill="#64748b">their own way of working</text>
+  <text x="1484" y="232" text-anchor="end" font-size="40" font-weight="bold" fill="#7c3aed">+300%</text>
+  <text x="1484" y="258" text-anchor="end" font-size="14" fill="#94a3b8">faster, on their own</text>
+  <text x="872" y="312" font-size="20" fill="#334155">Works in Word, PowerPoint, and Excel.</text>
+  <text x="872" y="348" font-size="17" fill="#64748b">Versions live in SharePoint and file copies.</text>
+  <rect x="872" y="372" width="206" height="38" rx="19" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="975" y="397" text-anchor="middle" font-size="15" font-weight="bold" fill="#047857">runs their own agent</text>
+
+  <!-- center plus (A + B) -->
+  <text x="800" y="318" text-anchor="middle" font-size="50" font-weight="bold" fill="#cbd5e1">+</text>
+
+  <!-- ===================== MATH BANNER (amber) ===================== -->
+  <rect x="80" y="466" width="1440" height="88" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="800" y="522" text-anchor="middle" font-size="30" font-weight="bold" fill="#b45309">+300% faster each. Together, about +150%. Speed does not add.</text>
+
+  <!-- ===================== WHY IT STALLS (neutral) ===================== -->
+  <rect x="80" y="572" width="1440" height="96" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="104" y="604" font-size="15" font-weight="bold" fill="#475569" letter-spacing="1">WHY IT STALLS</text>
+  <text x="104" y="632" font-size="18" fill="#334155">The tools were built for humans, not for agents to hand work to each other. Different formats, different systems,</text>
+  <text x="104" y="658" font-size="18" fill="#334155">and a flood of versions across every person and every agent. The wiring is missing. It is not the people.</text>
+
+  <!-- ===================== WHAT WE NEED (green) ===================== -->
+  <rect x="80" y="684" width="1440" height="96" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="104" y="716" font-size="15" font-weight="bold" fill="#047857" letter-spacing="1">WHAT WE NEED</text>
+  <text x="104" y="744" font-size="18" fill="#334155">One frictionless surface both humans and agents can read and write. A common format, shared ways of working,</text>
+  <text x="104" y="770" font-size="18" fill="#334155">and versions anyone, and any agent, can trace.</text>
+
+  <!-- Disclaimer -->
+</svg>

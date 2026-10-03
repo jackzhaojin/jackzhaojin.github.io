@@ -1,0 +1,41 @@
+/* The edge CMS shift: the CQ5 to EDS steps and the capability pivot.
+   Built on v3 tokens and the explainer kit aliases. */
+
+.eras__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; counter-reset: era; }
+.eras__step { position: relative; counter-increment: era; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 14px 12px; min-width: 0; }
+.eras__step--now { border-color: var(--accent); background: var(--accent-tint); }
+.eras__when { margin: 0; font: 500 12px/1.3 var(--font-mono); letter-spacing: .02em; color: var(--ink-2); }
+.eras__when::before { content: counter(era) " · "; color: var(--accent); }
+.eras__what { margin: 6px 0 8px; font-weight: 600; color: var(--ink); font-size: 15.5px; line-height: 1.35; }
+.eras__step ul { margin: 0; padding-left: 1.1em; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.eras__step li + li { margin-top: 3px; }
+@container (max-width: 560px) {
+  .eras__list { grid-template-columns: 1fr; }
+}
+
+.pv { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; }
+.pv__chips { margin-bottom: 14px; }
+.pv__head { margin: 0 0 8px; font: 500 12px/1.3 var(--font-mono); letter-spacing: .03em; color: var(--ink-2); text-transform: uppercase; }
+.pv__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.pv__list li { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr); gap: 4px 16px; padding: 10px 10px; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+.pv__list li.is-eds { background: var(--accent-tint); border-radius: 8px; border-bottom-color: transparent; }
+.pv__name { font-weight: 600; color: var(--ink); }
+.pv__val { color: var(--ink-2); }
+.pv__list li.is-eds .pv__val { color: var(--ink); }
+.pv .table-wrap { overflow-x: auto; margin-top: 0; }
+.pv__table { min-width: 720px; font-size: 14px; line-height: 1.45; }
+.pv__table caption { caption-side: top; text-align: left; padding: 0 0 8px; font: 500 12px/1.3 var(--font-mono); color: var(--ink-2); letter-spacing: .03em; }
+.article-body .pv__table th, .article-body .pv__table td { vertical-align: top; }
+.article-body .pv__table tbody th { font-weight: 600; width: 17%; }
+.pv__table tr.pv__eds th, .pv__table tr.pv__eds td { background: var(--accent-tint); }
+.pv > figcaption { margin-top: 12px; }
+@container (max-width: 520px) {
+  .pv__list li { grid-template-columns: 1fr; }
+}
+
+/* Quality pass, October 2026. The era steps are numbered, so the connector stubs that ran into their labels are gone. */
+/* Capability chips wrap inside the card instead of scrolling off its edge. */
+.pv .pv__chips { flex-wrap: wrap; overflow: visible; margin: 0 0 14px; padding: 0; }
+@media (max-width: 640px) {
+  .pv .pv__chips button { min-height: 44px; }
+}

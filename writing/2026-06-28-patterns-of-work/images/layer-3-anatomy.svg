@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="80" y="104" font-size="44" font-weight="bold" fill="#0f172a">Layer 3 &#183; Anatomy of an AI Individual Contributor</text>
+  <text x="80" y="140" font-size="21" fill="#64748b">Not a tool you operate. A contributor that owns its work.</text>
+
+  <!-- ============ CENTER NODE: AI IC ============ -->
+  <rect x="660" y="400" width="280" height="120" rx="22" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+  <circle cx="694" cy="434" r="16" fill="#047857"/>
+  <text x="694" y="440" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="800" y="455" font-size="34" font-weight="bold" fill="#047857" text-anchor="middle">AI IC</text>
+  <text x="800" y="488" font-size="20" fill="#334155" text-anchor="middle">an accountable contributor</text>
+
+  <!-- ============ TOP: Objective in ============ -->
+  <rect x="630" y="190" width="340" height="86" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="800" y="227" font-size="26" font-weight="bold" fill="#0f172a" text-anchor="middle">Objective in</text>
+  <text x="800" y="255" font-size="17" fill="#64748b" text-anchor="middle">a goal, scoped to a slice of real work</text>
+  <!-- arrow down into center -->
+  <defs>
+    <marker id="arrTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#059669"/>
+    </marker>
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ecfdf5"/>
+    </linearGradient>
+  </defs>
+  <line x1="800" y1="276" x2="800" y2="394" stroke="#0d9488" stroke-width="3" marker-end="url(#arrTeal)"/>
+
+  <!-- ============ RIGHT: Tools + ability to ACT ============ -->
+  <rect x="1010" y="392" width="430" height="136" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="1035" y="430" font-size="26" font-weight="bold" fill="#0f172a">Tools + the ability to ACT</text>
+  <text x="1035" y="464" font-size="20" fill="#334155">not just advise. Its actions are visible</text>
+  <text x="1035" y="492" font-size="20" fill="#334155">to humans and AI.</text>
+  <!-- arrow from center out to right (the IC acts outward) -->
+  <line x1="940" y1="460" x2="1004" y2="460" stroke="#2563eb" stroke-width="3" marker-end="url(#arrBlue)"/>
+
+  <!-- ============ LEFT: Observability out ============ -->
+  <rect x="160" y="392" width="420" height="136" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="560" y="430" font-size="26" font-weight="bold" fill="#0f172a" text-anchor="end">Observability out</text>
+  <text x="560" y="464" font-size="20" fill="#334155" text-anchor="end">humans and other agents</text>
+  <text x="560" y="492" font-size="20" fill="#334155" text-anchor="end">can see what it did</text>
+  <!-- arrow from center out to left -->
+  <line x1="660" y1="460" x2="586" y2="460" stroke="#2563eb" stroke-width="3" marker-end="url(#arrBlue)"/>
+
+  <!-- ============ MEMORY element (attached, top-right of center) ============ -->
+  <rect x="1010" y="216" width="430" height="138" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <!-- lock icon -->
+  <g>
+    <rect x="1038" y="258" width="30" height="24" rx="4" fill="#64748b"/>
+    <path d="M1043 258 v-7 a10 10 0 0 1 20 0 v7" fill="none" stroke="#64748b" stroke-width="4"/>
+    <circle cx="1053" cy="269" r="3.5" fill="#ffffff"/>
+  </g>
+  <text x="1086" y="256" font-size="26" font-weight="bold" fill="#0f172a">Memory</text>
+  <text x="1086" y="284" font-size="20" fill="#334155">episodic, stored + retrieved</text>
+  <text x="1035" y="328" font-size="17" fill="#b91c1c">the value and the liability</text>
+  <!-- connector from memory to center node (dashed, two-way affinity) -->
+  <line x1="1070" y1="354" x2="930" y2="412" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="6 5"/>
+
+  <!-- ============ BOTTOM: Feedback in (two inbound arrows) ============ -->
+  <!-- Bottom-left source: from humans -->
+  <rect x="290" y="660" width="290" height="86" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="435" y="700" font-size="26" font-weight="bold" fill="#0f172a" text-anchor="middle">Feedback in</text>
+  <text x="435" y="728" font-size="20" fill="#334155" text-anchor="middle">from humans</text>
+
+  <!-- Bottom-right source: from other AI -->
+  <rect x="1020" y="660" width="290" height="86" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="1165" y="700" font-size="26" font-weight="bold" fill="#0f172a" text-anchor="middle">Feedback in</text>
+  <text x="1165" y="728" font-size="20" fill="#334155" text-anchor="middle">from other AI</text>
+
+  <!-- two inbound arrows toward center bottom -->
+  <line x1="500" y1="660" x2="730" y2="528" stroke="#0d9488" stroke-width="3" marker-end="url(#arrTeal)"/>
+  <line x1="1100" y1="660" x2="870" y2="528" stroke="#0d9488" stroke-width="3" marker-end="url(#arrTeal)"/>
+
+  <!-- shared sub-line on feedback -->
+  <text x="800" y="616" font-size="17" fill="#64748b" text-anchor="middle">good + bad, start positive, taken in agentically</text>
+
+  <!-- ============ Accent line: lower bar to entry ============ -->
+  <text x="80" y="172" font-size="20" fill="#047857">Lower bar to entry: you can finally just ask, instead of installing skills.</text>
+
+  <!-- ============ BOTTOM SPECTRUM STRIP ============ -->
+  <rect x="80" y="772" width="1440" height="40" rx="8" fill="url(#spectrum)" stroke="#059669" stroke-width="2"/>
+  <text x="800" y="797" font-size="17" fill="#334155" text-anchor="middle">A gradient, not binary: a markdown file with an objective that stops  &#8594;  an agent trained on part of your role</text>
+
+  <!-- Disclaimer -->
+</svg>

@@ -1,0 +1,91 @@
+/* Company of Zero article: the beat simulator and the defect gate lab.
+   Builds on /css/explainers.css (.lab, .lab__bar, .chips, .verdict) and v3 tokens. */
+
+.board a { display: block; }
+.board a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+
+/* ---------- beat simulator ---------- */
+.bs__body { padding: 18px 18px 22px; display: grid; gap: 18px; }
+@container (min-width: 720px) { .bs__body { padding: 22px 26px 26px; } }
+.bs__table-wrap { overflow-x: auto; margin: 0 -18px; padding: 0 18px; }
+.bs__table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+.bs__table th, .bs__table td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink-2); }
+.bs__table thead th { font: 500 11px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.bs__table tbody th { font-weight: 500; color: var(--ink); white-space: nowrap; }
+.bs__hub { font: 500 10.5px var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 6px; margin-left: 4px; }
+.bs__tier { font: 500 12px var(--font-mono); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.bs__tier--cloud { background: color-mix(in srgb, var(--pass-ink) 14%, transparent); color: var(--pass-ink); }
+.bs__tier--laptop { background: color-mix(in srgb, var(--differs) 14%, transparent); color: var(--differs); }
+.bs__tier--gated { background: var(--accent-tint); color: var(--ink-2); }
+.bs__tgs { white-space: nowrap; }
+.bs__tg { display: inline-flex; align-items: center; gap: 5px; margin-right: 12px; font-size: 13px; cursor: pointer; }
+.bs__tg input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+.bs__tg input:disabled + span { opacity: .4; }
+.bs__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.bs__when { font: 500 13px var(--font-mono); color: var(--ink); margin-right: auto; }
+.bs__btn { border: 1px solid var(--line-strong); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 8px 16px; font-size: 14px; cursor: pointer; transition: background .2s var(--ease), border-color .2s var(--ease); }
+.bs__btn--primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.bs__btn:disabled { opacity: .4; cursor: default; }
+.bs__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bs__out { outline: none; }
+.bs__label { font: 500 11px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; }
+.bs__out > .bs__label:first-child { margin-top: 0; }
+.bs__hint { color: var(--muted); font-size: 14px; margin: 0; }
+.bs__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: run; }
+.bs__list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-size: 14px; }
+.bs__list b { color: var(--ink); font-weight: 500; font-size: 13.5px; }
+.bs__why { color: var(--muted); font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
+.bs__res { margin-left: auto; font: 500 12px var(--font-mono); }
+.bs__sub { flex-basis: 100%; font-size: 12.5px; color: var(--ink-2); }
+.bs__list li.is-ok { border-color: color-mix(in srgb, var(--pass-ink) 45%, transparent); }
+.bs__list li.is-ok .bs__res { color: var(--pass-ink); }
+.bs__list li.is-fail { border-color: rgba(194,67,61,.55); background: rgba(194,67,61,.05); }
+.bs__list li.is-fail .bs__res { color: #c2433d; }
+[data-theme="dark"] .bs__list li.is-fail .bs__res { color: var(--rose); }
+.bs__list li.is-skip { opacity: .78; }
+.bs__term { margin-top: 14px; background: var(--night); color: var(--bone); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; font: 400 12.5px/1.55 var(--font-mono); overflow-wrap: anywhere; }
+.bs__term i { font-style: normal; color: var(--bone-3); display: inline-block; min-width: 8.5em; }
+.bs__term .ok { color: var(--mint); } .bs__term .no { color: var(--rose); }
+@container (max-width: 520px) { .bs__term i { display: block; min-width: 0; } }
+
+/* ---------- defect gate lab ---------- */
+.dl__grid { display: grid; gap: 22px; padding: 18px 18px 22px; }
+@container (min-width: 760px) { .dl__grid { grid-template-columns: 1.05fr 1fr; padding: 22px 26px 26px; gap: 30px; } }
+.dl__grid > * { min-width: 0; }
+.dl textarea { width: 100%; min-height: 220px; resize: vertical; box-sizing: border-box; background: var(--night); color: var(--bone); border: 1px solid var(--night-line); border-radius: 12px; padding: 12px 14px; font: 400 12.5px/1.6 var(--font-mono); }
+.dl textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dl__opts { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 10px; font-size: 13.5px; color: var(--ink-2); }
+.dl__opts label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.dl__opts input { accent-color: var(--accent); }
+.dl__issues { margin: 6px 0 0; padding: 0; list-style: none; font-size: 13px; color: var(--ink-2); }
+.dl__issues li { padding: 6px 0; border-bottom: 1px dashed var(--line); overflow-wrap: anywhere; }
+.dl__count { font: 500 12px var(--font-mono); color: var(--bone-3); margin: 0 0 8px; }
+.dl__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.dl__steps li { display: grid; gap: 3px; padding: 10px 12px; border-radius: 10px; background: var(--night-2); color: var(--bone-2); font-size: 13.5px; border: 1px solid var(--night-line); overflow-wrap: anywhere; }
+.dl__steps b { color: var(--bone); font-weight: 500; }
+.dl__ledger { font: 500 11.5px var(--font-mono); color: var(--lav); margin-top: 4px; }
+.dl__steps li.is-file { border-left-color: var(--mint); }
+.dl__steps li.is-dup { border-left-color: var(--gold); }
+.dl__steps li.is-draft { border-left-color: var(--gold); }
+.dl__steps li.is-deny { border-left-color: var(--rose); }
+.dl .verdict { min-height: 120px; }
+.lab-note { font-size: 14px; color: var(--color-text-muted); margin-top: 10px; max-width: var(--measure); }
+.dl__first { margin-top: 0 !important; }
+.dl__who { font-size: 13px; margin: 0; color: var(--ink-2); }
+
+/* Quality pass, Oct 2026. */
+.article-body .tk-c { color: #8f8a85; }
+.article-body .code code { font-variant-ligatures: none; }
+@media (max-width: 640px) { .bs .chips button, .dl .chips button { min-height: 44px; } .bs__btn { min-height: 44px; } .dl__opts label { min-height: 44px; } }
+/* On narrow screens each agent becomes a card, so the toggles are not hidden off to the right. */
+@container (max-width: 600px) {
+  .bs__table-wrap { overflow: visible; margin: 0; padding: 0; }
+  .bs__table { min-width: 0; display: block; }
+  .bs__table thead { display: none; }
+  .bs__table tbody { display: grid; gap: 8px; }
+  .bs__table tr { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+  .bs__table th, .bs__table td { padding: 0; border: 0; }
+  .bs__table tbody th { flex-basis: 100%; }
+  .bs__table td.bs__tgs { flex-basis: 100%; white-space: normal; display: flex; flex-wrap: wrap; gap: 0 4px; }
+  .bs__tg { min-height: 44px; margin-right: 10px; }
+}

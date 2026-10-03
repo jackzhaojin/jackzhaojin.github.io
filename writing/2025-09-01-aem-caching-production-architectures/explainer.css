@@ -1,0 +1,126 @@
+/* AEM caching article: the header relay and the stale-while-revalidate timeline.
+   Built on the explainer kit aliases (/css/explainers.css) and design system v3 tokens.
+   Both figures are readable without JavaScript; explainer.js adds the controls. */
+
+/* ---------- header relay ---------- */
+.relay { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.relay__bar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 18px; border-bottom: 1px solid var(--line); font: 500 12px/1.3 var(--font-mono); color: var(--muted); }
+.relay__stack { list-style: none; margin: 0; padding: 18px; display: grid; gap: 22px; }
+.relay__layer { position: relative; display: grid; gap: 10px 16px; grid-template-columns: minmax(0, 1fr); padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.relay__layer + .relay__layer::before { content: "\2191"; position: absolute; top: -21px; left: 50%; transform: translateX(-50%); font: 500 14px/20px var(--font-mono); color: var(--muted); }
+.relay__name b { display: block; font-size: 15px; color: var(--ink); font-weight: 600; }
+.relay__name span { font: 400 12px/1.4 var(--font-mono); color: var(--muted); }
+.relay__cols { display: grid; gap: 6px; }
+.relay__cols p { margin: 0; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.relay__k { font: 500 11px/21px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.relay__cols code { font: 500 12.5px var(--font-mono); background: var(--accent-tint); color: var(--ink); padding: 1px 6px; border-radius: 6px; overflow-wrap: anywhere; }
+.relay__cols [data-returns] code { display: inline-block; margin: 0 4px 3px 0; }
+.relay__cols code.chg { background: transparent; color: var(--differs); box-shadow: inset 0 0 0 1px var(--differs); }
+.relay__layer.is-changed { border-color: var(--differs); box-shadow: 0 0 0 3px color-mix(in srgb, var(--differs) 18%, transparent); }
+.relay__ctl { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); justify-self: start; align-self: start; }
+.relay__ctl button { border: 0; background: none; padding: 6px 13px; border-radius: 999px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+.relay__ctl button[aria-checked="true"] { background: var(--ink); color: var(--bg); }
+.relay__ctl button:focus-visible, .relay__ctl input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.relay__ctl--checks { display: grid; gap: 6px; border-radius: 12px; padding: 8px 12px; }
+.relay__ctl--checks label { font-size: 13.5px; color: var(--ink-2); display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.relay__ctl--checks code { font: 500 12px var(--font-mono); }
+.relay__verdict { margin: 0 18px 4px; padding: 14px 16px; border-radius: 12px; background: var(--night); color: var(--bone); font-size: 15px; line-height: 1.55; }
+.relay__verdict p { margin: 0; color: var(--bone); }
+.relay__verdict b { color: var(--gold); font-weight: 600; }
+.relay figcaption { padding: 0 18px 16px; }
+@container (min-width: 720px) {
+  .relay__layer { grid-template-columns: 170px minmax(0, 1fr); grid-template-areas: "name ctl" "name cols"; }
+  .relay__name { grid-area: name; }
+  .relay__ctl { grid-area: ctl; }
+  .relay__cols { grid-area: cols; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .relay__cols p { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .relay__layer:not(:has(.relay__ctl:not([hidden]))) { grid-template-areas: "name cols"; }
+}
+.relay__layer > *, .relay__cols > * { min-width: 0; }
+
+/* ---------- stale-while-revalidate timeline ---------- */
+.swr { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.swr__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.swr__hdr { font: 500 13px/1.5 var(--font-mono); color: var(--ink); background: var(--accent-tint); padding: 4px 10px; border-radius: 8px; overflow-wrap: anywhere; }
+.swr__hdr .off { text-decoration: line-through; color: var(--muted); }
+.swr__demo { font: 500 11px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.swr__controls { display: grid; gap: 10px; margin-top: 16px; }
+.swr__slider { display: grid; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+.swr__slider b { color: var(--ink); }
+.swr__slider input { width: 100%; accent-color: var(--accent); }
+.swr__toggle { font-size: 14px; color: var(--ink-2); display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.swr__toggle input { accent-color: var(--accent); }
+.swr__track { position: relative; display: grid; grid-template-columns: 300fr 1800fr 600fr; height: 38px; margin-top: 16px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.swr__zone { display: flex; align-items: center; justify-content: center; font: 500 11px/1.2 var(--font-mono); text-align: center; padding: 0 4px; overflow: hidden; transition: background .3s var(--ease), color .3s var(--ease); }
+.swr__zone b { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.swr__zone--fresh { background: color-mix(in srgb, var(--pass-ink) 22%, var(--bg)); color: var(--pass-ink); }
+.swr__zone--stale { background: color-mix(in srgb, var(--differs) 18%, var(--bg)); color: var(--differs); }
+.swr__zone--old, .swr.is-off .swr__zone--stale { background: var(--bg); color: var(--muted); }
+.swr.is-off .swr__zone--stale b { visibility: hidden; }
+.swr__marker { position: absolute; top: -2px; bottom: -2px; width: 3px; margin-left: -1.5px; background: var(--accent); border-radius: 2px; left: 0; transition: left .15s linear; }
+.swr__ticks { position: relative; height: 18px; margin-top: 4px; font: 400 11px var(--font-mono); color: var(--muted); }
+.swr__ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.swr__ticks span:first-child { transform: none; }
+.swr__ticks span:last-child { transform: translateX(-100%); }
+.swr__cases { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.swr__cases li { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); transition: border-color .25s var(--ease), opacity .25s var(--ease); }
+.swr__cases b { color: var(--ink); font-weight: 600; }
+.swr.is-live .swr__cases li { opacity: .5; }
+.swr.is-live .swr__cases li[aria-current="true"] { opacity: 1; border-color: var(--accent); }
+.swr__lanes { margin-top: 14px; display: grid; gap: 6px; }
+.swr__lane { margin: 0; display: grid; grid-template-columns: 130px minmax(0, 1fr) 64px; gap: 10px; align-items: center; font: 400 12px var(--font-mono); color: var(--muted); }
+.swr__bar { height: 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.swr__fill { display: block; height: 100%; width: 0; transform-origin: left center; }
+.swr__fill--wait { background: var(--accent); }
+.swr__fill--fetch { background: var(--differs); }
+.swr__out { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--night); color: var(--bone); font-size: 14.5px; line-height: 1.5; min-height: 1.5em; }
+.swr__out:empty { display: none; }
+.swr figcaption { margin-top: 12px; }
+@container (max-width: 520px) {
+  .swr__lane { grid-template-columns: 96px minmax(0, 1fr) 52px; }
+  .swr__zone b { font-size: 10px; }
+  .swr__zone--stale b { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .relay__layer, .relay__ctl button, .swr__marker, .swr__fill, .swr__cases li, .swr__zone { transition: none; }
+}
+
+/* Quality pass, October 2026 */
+/* Dark theme: the white whiteboard images sit on a dark mat with a hairline frame, slightly dimmed, so they don't glare. */
+:root[data-theme="dark"] .article-body .board { padding: 12px; border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface); }
+:root[data-theme="dark"] .article-body .board img { filter: brightness(.88); border-color: transparent; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .article-body .board { padding: 12px; border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface); }
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .article-body .board img { filter: brightness(.88); border-color: transparent; }
+}
+/* Header names like Cache-Control never break at their hyphen. */
+.article-body > p code, .article-body > ul code, .article-body .summary code { white-space: nowrap; }
+/* Layer subtitles sit tight under the layer name. */
+.relay__name span { display: block; margin-top: 3px; line-height: 1.45; }
+/* Timeline: zone labels sit above a slim colored bar, so the marker never runs through text. */
+.swr__track { height: auto; overflow: visible; border: 0; border-radius: 0; align-items: end; }
+.swr__zone { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 6px; padding: 0; overflow: visible; background: none !important; text-align: left; }
+.swr__zone b { display: block; max-width: 100%; padding: 0 2px; overflow: visible; text-overflow: clip; }
+.swr__zone::after { content: ""; display: block; align-self: stretch; height: 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .3s var(--ease); }
+.swr__zone--fresh::after { background: color-mix(in srgb, var(--pass-ink) 26%, var(--bg)); border-left: 1px solid var(--line); border-radius: 8px 0 0 8px; }
+.swr__zone--stale::after { background: color-mix(in srgb, var(--differs) 24%, var(--bg)); }
+.swr__zone--old::after, .swr.is-off .swr__zone--stale::after { background: var(--bg); }
+.swr__zone--old::after { border-right: 1px solid var(--line); border-radius: 0 8px 8px 0; }
+.swr__zone--old { align-items: flex-end; text-align: right; }
+.swr__marker { top: auto; bottom: -5px; height: 24px; width: 4px; margin-left: -2px; box-shadow: 0 0 0 2px var(--surface); }
+.swr__ticks { margin-top: 6px; }
+@container (max-width: 520px) {
+  .swr__zone b { font-size: 10px; white-space: nowrap; }
+  .swr__zone--stale { align-items: center; }
+}
+/* Caching matrix template: the two empty columns get room, so their headings don't stack word by word. */
+.article-body .relay-matrix { table-layout: fixed; }
+.article-body .relay-matrix th:nth-child(1) { width: 26%; }
+.article-body .relay-matrix th:nth-child(2) { width: 22%; }
+.article-body .relay-matrix td:empty::after { content: "\00a0"; }
+.article-body .relay-matrix tbody td { height: 2.6em; }
+@media (max-width: 640px) {
+  .relay__ctl button { min-height: 44px; padding: 6px 14px; }
+  .relay__ctl--checks label, .swr__toggle { min-height: 44px; }
+}
+.article-body .relay-matrix td code { white-space: normal; overflow-wrap: anywhere; }

@@ -1,0 +1,49 @@
+/* Freeze-frame lab: two tracks on one clock. Uses the kit aliases from /css/explainers.css. */
+.ff { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.ff__body { padding: 20px 18px 22px; display: grid; gap: 18px; }
+@container (min-width: 720px) { .ff__body { padding: 24px 28px 26px; } }
+.ff__controls { display: grid; gap: 14px; }
+@container (min-width: 620px) { .ff__controls { grid-template-columns: 1fr 1fr auto; align-items: end; } }
+.ff__ctl { display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); min-width: 0; }
+.ff__ctl b { color: var(--ink); font-weight: 600; }
+.ff__ctl output { font: 500 13px var(--font-mono); color: var(--accent); }
+.ff__ctl input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ff__row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 14px; color: var(--ink-2); }
+.ff__row label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.ff__row input { accent-color: var(--accent); }
+.ff__scroll { overflow-x: auto; padding-bottom: 4px; }
+.ff__tracks { min-width: 560px; display: grid; gap: 10px; }
+.ff__lane { display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: center; }
+.ff__name { font: 500 11px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.ff__track { position: relative; height: 30px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.ff__seg { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--ink) 14%, transparent); border-right: 1px solid var(--surface); }
+.ff__seg--hold { background: repeating-linear-gradient(135deg, var(--differs) 0 4px, color-mix(in srgb, var(--differs) 35%, transparent) 4px 8px); }
+.ff__clip { position: absolute; top: 3px; bottom: 3px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 30%, transparent); border: 1px solid var(--accent);
+  font: 500 10px/22px var(--font-mono); color: var(--ink); text-align: center; overflow: hidden; }
+.ff__legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 0; }
+.ff__legend span::before { content: ""; display: inline-block; width: 14px; height: 10px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+.ff__legend .l-rec::before { background: color-mix(in srgb, var(--ink) 14%, transparent); }
+.ff__legend .l-hold::before { background: repeating-linear-gradient(135deg, var(--differs) 0 3px, transparent 3px 6px); border: 1px solid var(--differs); }
+.ff__legend .l-voice::before { background: color-mix(in srgb, var(--accent) 30%, transparent); border: 1px solid var(--accent); }
+.ff__summary { margin: 0; font-weight: 600; color: var(--ink); }
+.ff__list { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 14px; color: var(--ink-2); }
+.ff__t { font: 500 13px var(--font-mono); color: var(--differs); margin-right: 4px; }
+.ff .ctl { justify-self: start; }
+/* Jack's own words, quoted from his input to the harness. */
+.article-body > blockquote.pull { max-width: var(--measure); margin-left: 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.article-body > blockquote.pull p { margin: 0; color: var(--ink); font-size: 1.0625rem; line-height: 1.7; }
+.ff > figcaption { margin: 0; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+@container (min-width: 720px) { .ff > figcaption { padding: 14px 28px 20px; } }
+.ff__body > * { min-width: 0; }
+
+/* Quality pass 2026-10-03: the code bar keeps its GitHub link on one line and on screen at phone width. */
+.article-body .code .bar > span { min-width: 0; overflow-wrap: anywhere; line-height: 1.45; }
+.article-body .code .bar > a { flex: none; white-space: nowrap; }
+/* 44px tap targets on phones. */
+@media (max-width: 640px) {
+  .ff .ctl { min-height: 44px; padding: 0 18px; }
+  .ff__row label { min-height: 44px; }
+  .ff__row input[type="checkbox"] { width: 18px; height: 18px; }
+}
+/* The time column reads "16 min" on one line. */
+.table-wrap td:last-child, .table-wrap th:last-child { white-space: nowrap; }

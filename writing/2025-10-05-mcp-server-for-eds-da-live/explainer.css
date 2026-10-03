@@ -1,0 +1,79 @@
+/* Explainers for "Building an MCP Server for EDS da.live". Built on the site kit
+   (/css/explainers.css) and design system v3 tokens. Two pieces: the redrawn
+   scripted-flow board (static SVG, two layouts) and the decision lab. */
+
+:root {
+  --dg-fn: var(--palette-blue-600); --dg-api: var(--palette-rose-700); --dg-llm: var(--palette-lavender-600); --dg-mcp: var(--palette-gold-700);
+  --dg-ink: var(--color-text); --dg-line: var(--color-text-muted);
+}
+[data-theme="dark"] { --dg-fn: var(--palette-blue-300); --dg-api: var(--palette-rose-300); --dg-llm: var(--palette-lavender-300); --dg-mcp: var(--palette-gold-300); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) { --dg-fn: var(--palette-blue-300); --dg-api: var(--palette-rose-300); --dg-llm: var(--palette-lavender-300); --dg-mcp: var(--palette-gold-300); }
+}
+
+/* ---------- redrawn board ---------- */
+.dg { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 14px; padding: 18px 16px 14px; }
+.dg svg { display: block; width: 100%; height: auto; }
+.dg .svg-tall { display: none; max-width: 320px; margin: 0 auto; }
+@container (max-width: 560px) { .dg .svg-wide { display: none; } .dg .svg-tall { display: block; } }
+.dg .n rect { stroke-width: 1.5; }
+.dg .n text { font: 500 13px var(--font-body); fill: var(--dg-ink); text-anchor: middle; dominant-baseline: middle; }
+.dg .n--fn rect { fill: color-mix(in srgb, var(--dg-fn) 14%, var(--color-surface)); stroke: var(--dg-fn); }
+.dg .n--api rect { fill: color-mix(in srgb, var(--dg-api) 14%, var(--color-surface)); stroke: var(--dg-api); }
+.dg .n--llm rect { fill: color-mix(in srgb, var(--dg-llm) 16%, var(--color-surface)); stroke: var(--dg-llm); }
+.dg .e { stroke: var(--dg-line); stroke-width: 1.5; fill: none; }
+.dg .head { fill: var(--dg-line); }
+.dg__legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 10px 0 0; padding: 0; list-style: none; font: 500 12px var(--font-mono); color: var(--color-text-faint); }
+.dg__legend li::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1.5px solid currentColor; }
+.dg__legend .k-fn::before { color: var(--dg-fn); } .dg__legend .k-api::before { color: var(--dg-api); } .dg__legend .k-llm::before { color: var(--dg-llm); }
+
+/* ---------- decision lab ---------- */
+.loopx__modes { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 18px 0; }
+.loopx__modes button { border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; cursor: pointer; }
+.loopx__modes button[aria-checked="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.loopx__modes button:focus-visible, .loopx__moves button:focus-visible, .loopx__presets button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.loopx__grid { display: grid; gap: 22px; padding: 18px 18px 22px; }
+.loopx__grid > * { min-width: 0; }
+@container (min-width: 720px) { .loopx__grid { grid-template-columns: 1fr 1.25fr; gap: 30px; padding: 22px 26px 26px; } }
+.loopx__moves { display: grid; gap: 8px; }
+.loopx__moves button { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; text-align: left; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 10px 12px; cursor: pointer; font-size: 14px; }
+.loopx__moves button:hover:not([disabled]) { border-color: var(--accent); }
+.loopx__moves button[disabled] { opacity: .45; cursor: default; }
+.loopx__moves code { font: 500 12.5px var(--font-mono); }
+.loopx__moves small { color: var(--muted); font-size: 12px; }
+.loopx__presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.loopx__presets button { border: 1px dashed var(--line-strong); background: none; color: var(--ink-2); border-radius: 999px; padding: 5px 11px; font-size: 12.5px; cursor: pointer; }
+.loopx__presets button:hover { color: var(--ink); border-style: solid; }
+.loopx__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 0; }
+.loopx__stats div { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; background: var(--bg); }
+.loopx__stats dt { font: 500 11px var(--font-mono); color: var(--muted); letter-spacing: .02em; }
+.loopx__stats dd { margin: 2px 0 0; font: 600 18px var(--font-mono); color: var(--ink); }
+.loopx__log { list-style: none; margin: 0; padding: 12px 14px; background: var(--night); border-radius: 12px; min-height: 220px; max-height: 360px; overflow: auto; font: 400 12.5px/1.6 var(--font-mono); color: var(--bone-3); display: grid; gap: 8px; align-content: start; }
+.loopx__log li { display: grid; grid-template-columns: 58px 1fr; gap: 10px; }
+.loopx__log .who { color: var(--lav); }
+.loopx__log .who--code { color: var(--gold); }
+.loopx__log .who--tool { color: var(--mint); }
+.loopx__log .who--err { color: var(--rose); }
+.loopx__log b { color: var(--bone); font-weight: 500; }
+.loopx__log .static-h { display: block; grid-column: 1 / -1; color: var(--bone-2); margin-top: 4px; }
+.loopx__verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); font-size: 14.5px; line-height: 1.55; min-height: 3.2em; }
+.loopx__verdict.is-warn { border-color: var(--differs); }
+.loopx__verdict.is-ok { border-color: var(--pass-ink); }
+.loopx__log li.is-new { animation: loopx-rise .25s var(--ease) both; }
+@keyframes loopx-rise { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .loopx__log li.is-new { animation: none; } }
+@media (max-width: 640px) { .loopx__log li { grid-template-columns: 1fr; gap: 0; } }
+
+.lab > figcaption { padding: 0 18px 18px; margin-top: 0; }
+
+/* Quality pass, October 2026 */
+/* presets: quiet hairline pills instead of dashed outlines, with a pressed state */
+.loopx__presets button { border: 1px solid var(--line); background: var(--bg); padding: 6px 12px; transition: border-color .2s var(--ease), color .2s var(--ease); }
+.loopx__presets button:hover { border-color: var(--line-strong); }
+.loopx__presets button:active { background: var(--accent-tint); }
+.loopx__modes button:hover { border-color: var(--line-strong); color: var(--ink); }
+/* 44px touch targets on phones */
+@media (max-width: 640px) {
+  .loopx__modes button, .loopx__presets button { min-height: 44px; }
+  .loopx__moves button { min-height: 48px; align-items: center; }
+}

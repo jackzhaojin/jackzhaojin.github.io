@@ -1,0 +1,58 @@
+/* Seven AEM capabilities: the matrix tables and the compare-two explainer.
+   Built on v3 tokens and the explainer kit aliases. */
+
+.article-body .mx-wrap { overflow-x: auto; margin-top: var(--space-5); border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.article-body .mx-table { min-width: 620px; font-size: 14px; line-height: 1.45; }
+.article-body .mx-table caption { caption-side: top; text-align: left; padding: 12px 14px 4px; font: 500 12px/1.3 var(--font-mono); letter-spacing: .03em; color: var(--ink-2); }
+.article-body .mx-table th, .article-body .mx-table td { padding: 9px 12px; vertical-align: top; }
+.article-body .mx-table thead th { font-size: 13px; color: var(--ink); }
+.article-body .mx-table tbody th { font-weight: 600; color: var(--ink); width: 23%; }
+.article-body .mx-table em { color: var(--muted); }
+.article-body .mx-table code { font-size: .82em; }
+.article-body > h3 { font-size: var(--text-h3); line-height: 1.3; margin-top: var(--space-7); max-width: 40ch; }
+
+.mx { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; }
+.mx[hidden] { display: none; }
+.mx__controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; }
+.mx__pick { display: grid; gap: 4px; min-width: 0; flex: 1 1 220px; }
+.mx__pick span { font: 500 12px/1.2 var(--font-mono); color: var(--ink-2); letter-spacing: .02em; }
+.mx__pick select { width: 100%; font: 500 14.5px/1.3 var(--font-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 9px 10px; }
+.mx__pick select:focus-visible, .mx__only input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mx__only { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--ink-2); padding-bottom: 9px; cursor: pointer; }
+.mx__only input { accent-color: var(--accent); width: 16px; height: 16px; }
+.mx__summary { margin: 14px 0 0; font-size: 15px; color: var(--ink); }
+.mx__out { display: grid; gap: 16px; margin-top: 10px; min-width: 0; }
+.mx__table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; table-layout: fixed; }
+.mx__table caption { caption-side: top; text-align: left; padding: 6px 0; font: 500 12px/1.3 var(--font-mono); letter-spacing: .03em; color: var(--ink-2); }
+.mx__table th, .mx__table td { text-align: left; vertical-align: top; padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); overflow-wrap: break-word; hyphens: auto; }
+.mx__table thead th { font-size: 13px; font-weight: 600; color: var(--ink); border-bottom-color: var(--line-strong); }
+.mx__table thead th:first-child { width: 30%; }
+.mx__table tbody th { font-weight: 500; color: var(--ink-2); }
+.mx__table td { color: var(--ink); }
+.mx__table tr.is-diff th, .mx__table tr.is-diff td { background: color-mix(in srgb, var(--differs) 7%, transparent); }
+.mx__table tr.is-diff th { padding-left: 8px; }
+.mx__table tbody tr:not(.is-diff) th { padding-left: 8px; }
+.mx__tag { display: block; margin-top: 3px; font: 500 11px/1 var(--font-mono); color: var(--differs); letter-spacing: .03em; }
+.mx__same { color: var(--muted); }
+.mx > figcaption { margin-top: 12px; }
+@container (max-width: 480px) {
+  .mx__table thead th:first-child { width: 34%; }
+  .mx__table { font-size: 13.5px; }
+}
+.article-body .mx-table tbody th { border-bottom: 1px solid var(--line); }
+
+/* Quality pass, October 2026 */
+/* Differing rows: a tint and the "differs" tag, no accent bar on the left edge. */
+.mx__table a, .mx__table code { overflow-wrap: anywhere; hyphens: none; }
+/* Pickers: styled selects with their own chevron, full tap height. */
+.mx__pick select { appearance: none; -webkit-appearance: none; min-height: 44px; padding: 9px 38px 9px 12px; cursor: pointer; text-overflow: ellipsis;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23807a73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 12px 8px; }
+.mx__pick select:hover { border-color: var(--ink-2); }
+.mx__only { min-height: 44px; padding-bottom: 0; }
+.mx__only input { width: 18px; height: 18px; }
+/* The full matrix: equal option columns, so no column gets squeezed to one word per line. */
+.article-body .mx-table { table-layout: fixed; }
+.article-body .mx-table tbody th { width: auto; }
+.article-body .mx-table thead th:first-child { width: 20%; }
+.article-body .mx-table a, .article-body .mx-table code { overflow-wrap: anywhere; }

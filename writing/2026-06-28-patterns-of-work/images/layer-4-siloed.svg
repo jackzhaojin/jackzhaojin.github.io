@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="80" y="108" font-size="44" font-weight="bold" fill="#0f172a">Layer 4 &#183; Management, but Siloed</text>
+  <text x="80" y="148" font-size="21" fill="#64748b">Two parallel tracks. Not yet integrated.</text>
+
+  <!-- ===================== LEFT TRACK ===================== -->
+  <rect x="100" y="190" width="640" height="378" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="420" y="234" text-anchor="middle" font-size="27" font-weight="bold" fill="#2563eb">Humans manage humans</text>
+  <text x="420" y="268" text-anchor="middle" font-size="20" fill="#334155">Ancient. Well understood.</text>
+  <text x="420" y="294" text-anchor="middle" font-size="20" fill="#334155">Chain of command since the Roman days.</text>
+
+  <!-- Manager node -->
+  <circle cx="420" cy="362" r="34" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="420" cy="350" r="11" fill="#334155"/>
+  <path d="M401 380 a19 19 0 0 1 38 0 z" fill="#334155"/>
+  <text x="420" y="424" text-anchor="middle" font-size="17" font-weight="bold" fill="#2563eb">Manager</text>
+
+  <!-- chain of command lines -->
+  <line x1="420" y1="438" x2="300" y2="488" stroke="#64748b" stroke-width="3"/>
+  <line x1="420" y1="438" x2="540" y2="488" stroke="#64748b" stroke-width="3"/>
+
+  <!-- Report node 1 -->
+  <circle cx="300" cy="514" r="30" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="300" cy="504" r="9" fill="#334155"/>
+  <path d="M284 530 a16 16 0 0 1 32 0 z" fill="#334155"/>
+
+  <!-- Report node 2 -->
+  <circle cx="540" cy="514" r="30" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="540" cy="504" r="9" fill="#334155"/>
+  <path d="M524 530 a16 16 0 0 1 32 0 z" fill="#334155"/>
+
+  <text x="420" y="510" text-anchor="middle" font-size="16" fill="#64748b">stacked reports</text><text x="420" y="531" text-anchor="middle" font-size="16" fill="#64748b">clear hierarchy</text>
+
+  <!-- ===================== THE WALL ===================== -->
+  <line x1="800" y1="186" x2="800" y2="572" stroke="#64748b" stroke-width="6" stroke-dasharray="14 12" stroke-linecap="round"/>
+  <rect x="744" y="358" width="112" height="44" rx="22" fill="#0f172a"/>
+  <text x="800" y="386" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">the wall</text>
+
+  <!-- ===================== RIGHT TRACK ===================== -->
+  <rect x="860" y="190" width="640" height="378" rx="16" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="1180" y="234" text-anchor="middle" font-size="27" font-weight="bold" fill="#047857">AI manages AI</text>
+
+  <!-- Spectrum bar -->
+  <rect x="912" y="290" width="536" height="22" rx="11" fill="#ffffff" stroke="#6ee7b7" stroke-width="2"/>
+  <circle cx="912" cy="301" r="11" fill="#059669"/>
+  <circle cx="1448" cy="301" r="11" fill="#059669"/>
+  <text x="880" y="346" text-anchor="start" font-size="17" fill="#047857">one 24/7 agent</text>
+  <text x="1482" y="346" text-anchor="end" font-size="17" fill="#047857">agent-to-agent mesh</text>
+
+  <!-- agent icons along the spectrum -->
+  <rect x="1056" y="280" width="44" height="42" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="1070" cy="298" r="4" fill="#047857"/>
+  <circle cx="1086" cy="298" r="4" fill="#047857"/>
+  <rect x="1068" y="307" width="20" height="5" rx="2.5" fill="#047857"/>
+
+  <rect x="1260" y="280" width="44" height="42" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="1274" cy="298" r="4" fill="#047857"/>
+  <circle cx="1290" cy="298" r="4" fill="#047857"/>
+  <rect x="1272" y="307" width="20" height="5" rx="2.5" fill="#047857"/>
+
+  <text x="1180" y="416" text-anchor="middle" font-size="21" font-weight="bold" fill="#047857">Wide open.</text>
+  <text x="1180" y="450" text-anchor="middle" font-size="20" fill="#334155">Most of the innovation is here.</text>
+
+  <!-- ===================== NEUTRAL NOTE SPANNING BOTH ===================== -->
+  <rect x="100" y="596" width="1400" height="118" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="800" y="642" text-anchor="middle" font-size="21" fill="#334155">You don&#8217;t need advanced agents. Simple, streamlined flows count:</text>
+  <text x="800" y="682" text-anchor="middle" font-size="21" font-weight="bold" fill="#0f172a">page &#8594; research &#8594; preview/publish &#8594; legal review bots.</text>
+
+  <!-- ===================== RED TENSION STRIP ===================== -->
+  <rect x="100" y="734" width="1400" height="96" rx="16" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+  <text x="800" y="774" text-anchor="middle" font-size="21" font-weight="bold" fill="#b91c1c">Efficient, and quietly alienating.</text>
+  <text x="800" y="806" text-anchor="middle" font-size="20" fill="#b91c1c">When AI manages AI in its own silo, humans feel left out of the productivity loop.</text>
+
+  <!-- Disclaimer -->
+</svg>

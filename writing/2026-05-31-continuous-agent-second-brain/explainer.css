@@ -1,0 +1,46 @@
+/* Two labs for the V3.0 second brain article: the hook switchboard and the
+   empty-string cohort bug. Built on the kit's .lab, .chips and .verdict styles. */
+.sb .lab__grid, .eb .lab__grid { align-items: start; }
+.sb__flags { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.sb__flags label { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); cursor: pointer; }
+.sb__flags label:hover { border-color: var(--line-strong); }
+.sb__flags input { margin: 3px 0 0; accent-color: var(--color-accent); width: 16px; height: 16px; }
+.sb__flags input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sb__flags b { display: block; font-size: 14px; color: var(--ink); font-weight: 600; }
+.sb__flags code { font: 500 11.5px/1.4 var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.sb__flags .sb__master { border-style: dashed; }
+.sb__presets { margin-bottom: 10px; }
+.sb__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: st; }
+.sb__steps li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-size: 14px; color: var(--ink-2); }
+.sb__steps li b { color: var(--ink); font-weight: 600; }
+.sb__steps li small { grid-column: 1 / -1; font: 400 12px/1.5 var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.sb__steps li.hook { border-color: var(--line-strong); }
+.sb__steps li.hook[data-s="read"] { border-color: var(--color-accent); background: var(--accent-tint); }
+.sb__steps li.hook[data-s="write"] { border-color: var(--pass-ink); }
+.sb__steps li.hook[data-s="skip"] { opacity: .62; }
+.sb__tag { font: 600 10.5px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 7px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--muted); white-space: nowrap; }
+.sb__steps li[data-s="read"] .sb__tag { border-color: var(--color-accent); color: var(--color-accent); }
+.sb__steps li[data-s="write"] .sb__tag { border-color: var(--pass-ink); color: var(--pass-ink); }
+.sb__sum { margin: 12px 0 0; }
+.sb__sum p, .eb .verdict p { margin: 0; }
+.sb__sum p + p { margin-top: 6px; color: var(--bone-3); font-size: 13.5px; }
+.eb__code { margin: 0; padding: 12px 14px; background: var(--night); color: var(--bone); border-radius: 12px; font: 400 12.5px/1.75 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; border: 0; }
+.eb__code .c { color: #7d7975; } .eb__code .hl { color: var(--gold); }
+.eb__trace { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.eb__trace li { padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-size: 14px; color: var(--ink-2); }
+.eb__trace li b { display: block; font: 500 11.5px/1.4 var(--font-mono); color: var(--muted); margin-bottom: 2px; }
+.eb__trace li code { font: 500 13px var(--font-mono); color: var(--ink); overflow-wrap: anywhere; }
+.eb__trace li[data-s="bad"] { border-color: #c2433d; background: rgba(194,67,61,.06); }
+.eb__trace li[data-s="good"] { border-color: var(--pass-ink); }
+.sb > figcaption, .eb > figcaption { margin: 0; padding: 0 18px 18px; }
+@container (min-width: 720px) { .sb > figcaption, .eb > figcaption { padding: 0 28px 22px; } }
+.sb [hidden], .eb [hidden] { display: none !important; }
+.eb__code, .sb__steps small { font-variant-ligatures: none; }
+
+/* Quality pass, Oct 2026: readable code comments, no ligatures in code,
+   the plain query block wraps on phones, and 44px chips on touch widths. */
+.article-body .tk-c, .eb__code .c { color: #8f8a85; }
+.article-body .code code, .article-body .code-plain code { font-variant-ligatures: none; }
+.article-body .code-plain { white-space: pre-wrap; overflow-wrap: anywhere; }
+.article-body .code-plain code { white-space: inherit; }
+@media (max-width: 640px) { .sb .chips button, .eb .chips button { min-height: 44px; } }
