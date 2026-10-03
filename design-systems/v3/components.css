@@ -380,6 +380,8 @@ button.chip { cursor: pointer; }
 .chip[aria-pressed="true"], .chip[aria-current="true"] { background: var(--color-inverse-bg); color: var(--color-inverse-text); border-color: var(--color-inverse-bg); }
 .chip[aria-pressed="true"]::before, .chip[aria-current="true"]::before { background: var(--color-inverse-text); }
 .chip[aria-pressed="true"].chip--format::before { background: currentColor; }
+/* A selected chip keeps its inverse colors on hover; the generic hover would set text to the ground color. */
+.chip[aria-pressed="true"]:hover, .chip[aria-current="true"]:hover { color: var(--color-inverse-text); border-color: var(--color-inverse-bg); opacity: 0.88; }
 .chip--lg { padding: 8px 14px; font-size: 12px; border-radius: var(--radius-pill); border-color: var(--color-line-strong); }
 
 /* ------------------------------------------------------------ card */
