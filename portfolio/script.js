@@ -8,7 +8,7 @@
   // spans drive both the gantt and the year rail. order = page order.
   var PROJECTS = [
     { id: "ch-anima",   label: "Anima Mesh",            start: "2026-07-05", end: "2026-08-02", color: "var(--c-anima)", year: "2026", ongoing: true },
-    { id: "ch-bruce",   label: "Built with Bruce",      start: "2026-02-28", end: "2026-07-17", color: "var(--c-bruce)", year: "2026" },
+    { id: "ch-bruce",   label: "Built with Bruce",      start: "2026-02-28", end: "2026-09-12", color: "var(--c-bruce)", year: "2026" },
     { id: "ch-factory", label: "Content Factory",       start: "2025-10-04", end: "2026-06-29", color: "var(--c-factory)", year: "2026" },
     { id: "ch-kit",     label: "AI Builder Kit",        start: "2026-03-22", end: "2026-06-11", color: "var(--c-kit)", year: "2026" },
     { id: "ch-conv",    label: "Conversion Factory",    start: "2026-05-31", end: "2026-06-05", color: "var(--c-conv)", year: "2026" },
@@ -96,13 +96,13 @@
   var gantt = document.getElementById("gantt");
   if (gantt) {
     var START = Date.parse("2025-04-01");
-    var END = Date.parse("2026-08-15");
-    var CURRENT = "2026-08-02";
+    var END = Date.parse("2026-09-30");
+    var CURRENT = "2026-09-12";
     function pct(d) { return ((Date.parse(d) - START) / (END - START)) * 100; }
 
     var scale = document.createElement("div");
     scale.className = "gantt-scale";
-    ["Apr 2025", "Oct 2025", "Apr 2026", "Aug 2026"].forEach(function (t) {
+    ["Apr 2025", "Oct 2025", "Apr 2026", "Sep 2026"].forEach(function (t) {
       var s = document.createElement("span");
       s.textContent = t;
       scale.appendChild(s);

@@ -955,9 +955,9 @@
 @media (max-width: 700px) {.portfolio-page .edge-grid { grid-template-columns: 1fr; }}
 .portfolio-page .bruce-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .portfolio-page .bruce-card {
@@ -982,6 +982,10 @@
   font-style: italic;
   font-size: 17px;
   color: var(--ink-soft);
+}
+@media (max-width: 1100px) {
+  .portfolio-page .bruce-grid { grid-template-columns: 1fr 1fr; }
+  .portfolio-page .bruce-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 @media (max-width: 700px) {.portfolio-page .bruce-grid { grid-template-columns: 1fr; }}
 .portfolio-page .beforeafter .ba-rows { display: flex; flex-direction: column; gap: 0; }
