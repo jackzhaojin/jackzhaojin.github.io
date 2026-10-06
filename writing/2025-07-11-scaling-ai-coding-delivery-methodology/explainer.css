@@ -71,3 +71,7 @@
 .tl__rules li[data-s="skip"] { opacity: 1; border-style: dashed; background: transparent; color: var(--muted); }
 .tl__toggle { cursor: pointer; }
 @media (max-width: 640px) { .tl__toggle { min-height: 44px; } }
+/* Pass 2: caption under the lab, inset to match the lab grid. */
+.lab > figcaption { margin: 0; padding: 0 18px 18px; font-size: 14px; color: var(--muted); }
+@container (min-width: 720px) { .lab > figcaption { padding: 0 28px 22px; } }
+.tl__rules li { grid-template-columns: 58px minmax(0, 1fr); } .tl__rules li > span:first-child { white-space: nowrap; }

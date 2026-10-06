@@ -63,3 +63,8 @@
   .vs .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
   .vs .chips button { min-height: 44px; }
 }
+
+/* Second pass, October 4 2026: numbered prompts and the note for the eight pages left out of the list */
+.sdl__actions .sdl__steplabel { flex: 0 0 100%; margin: 0; }
+.sdl__more { font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.45; }
+.sdl__flow span { text-align: right; }

@@ -1,5 +1,5 @@
-/* Technical Writing listing: search, topic and year filters and sorting, in place.
-   Every article is in the initial HTML; without JavaScript the full list shows newest first
+/* Technical Writing listing: search, topic and year filters, in place, always newest first.
+   Every article is in the initial HTML in date order; without JavaScript the full list shows
    and the filter bar stays hidden. State lives in the URL fragment so a selection can be
    shared (#topic=aem&year=2025&q=caching), and nothing reloads or navigates. */
 (function () {
@@ -7,24 +7,21 @@
   var list = document.querySelector('.writing-list');
   if (!bar || !list) return;
 
-  var items = Array.prototype.slice.call(list.children).map(function (li, i) {
+  var items = Array.prototype.slice.call(list.children).map(function (li) {
     return {
       li: li,
       date: li.getAttribute('data-date') || '',
       topics: (li.getAttribute('data-topics') || '').split(' '),
       year: (li.getAttribute('data-date') || '').slice(0, 4),
-      title: li.getAttribute('data-title') || '',
-      text: normalize(li.getAttribute('data-search') || li.textContent),
-      order: i
+      text: normalize(li.getAttribute('data-search') || li.textContent)
     };
   });
 
   var search = bar.querySelector('#writing-search');
-  var sort = bar.querySelector('#writing-sort');
   var count = bar.querySelector('[data-count]');
   var empty = document.querySelector('[data-writing-empty]');
   var chips = Array.prototype.slice.call(bar.querySelectorAll('button[data-filter]'));
-  var defaults = { q: '', topic: 'all', year: 'all', sort: 'newest' };
+  var defaults = { q: '', topic: 'all', year: 'all' };
   var state = Object.assign({}, defaults);
   var timer;
 
@@ -40,20 +37,11 @@
     return true;
   }
 
-  function compare(a, b) {
-    if (state.sort === 'oldest') return a.date.localeCompare(b.date) || a.order - b.order;
-    if (state.sort === 'title') return a.title.localeCompare(b.title, 'en', { sensitivity: 'base' });
-    return b.date.localeCompare(a.date) || a.order - b.order;
-  }
-
   function render() {
     var shown = 0;
-    var sorted = items.slice().sort(compare);
     var first = null;
     var lastYear = null;
-    var byDate = state.sort !== 'title';
-    sorted.forEach(function (item) {
-      list.appendChild(item.li);
+    items.forEach(function (item) {
       var ok = matches(item, state);
       item.li.hidden = !ok;
       item.li.removeAttribute('data-first');
@@ -61,8 +49,7 @@
       if (!ok) return;
       shown++;
       if (!first) first = item.li;
-      // Year chapters only make sense when the list runs in date order.
-      if (byDate && item.year !== lastYear) item.li.setAttribute('data-year-mark', item.year);
+      if (item.year !== lastYear) item.li.setAttribute('data-year-mark', item.year);
       lastYear = item.year;
     });
     if (first) first.setAttribute('data-first', '');
@@ -112,9 +99,7 @@
     ['topic', 'year'].forEach(function (k) {
       if (!bar.querySelector('button[data-filter="' + k + '"][data-value="' + CSS.escape(state[k]) + '"]')) state[k] = 'all';
     });
-    if (!sort.querySelector('option[value="' + CSS.escape(state.sort) + '"]')) state.sort = 'newest';
     search.value = state.q;
-    sort.value = state.sort;
   }
 
   chips.forEach(function (chip) {
@@ -128,12 +113,10 @@
     timer = setTimeout(function () { state.q = search.value.trim(); render(); }, 120);
   });
   bar.addEventListener('submit', function (e) { e.preventDefault(); state.q = search.value.trim(); render(); });
-  sort.addEventListener('change', function () { state.sort = sort.value; render(); });
   Array.prototype.forEach.call(document.querySelectorAll('[data-writing-reset]'), function (btn) {
     btn.addEventListener('click', function () {
       state = Object.assign({}, defaults);
       search.value = '';
-      sort.value = 'newest';
       render();
       search.focus();
     });

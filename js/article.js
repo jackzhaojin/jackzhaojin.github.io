@@ -1,6 +1,6 @@
 /* Technical Writing article: the right-rail outline. The outline is plain HTML;
-   this adds the current-section highlight, the reading progress bar and the
-   collapsed default on narrow screens. */
+   this adds the current-section highlight, the reading progress bar, the
+   collapsed default on narrow screens and a self-link on each section title. */
 (function () {
   'use strict';
   var rail = document.querySelector('.rail');
@@ -33,6 +33,26 @@
       bar.style.transform = 'scaleX(' + done.toFixed(3) + ')';
     }
   }
+
+  // Every section title links to itself, so a reader can share or bookmark one part.
+  // Clicking also copies the full link when the browser allows it.
+  Array.prototype.forEach.call(body.querySelectorAll(':scope > h2[id]'), function (h) {
+    var a = document.createElement('a');
+    a.className = 'heading-link';
+    a.href = '#' + h.id;
+    a.setAttribute('aria-label', 'Link to this section: ' + h.textContent.trim());
+    a.textContent = '#';
+    a.addEventListener('click', function () {
+      var url = location.origin + location.pathname + '#' + h.id;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(function () {
+          a.setAttribute('data-copied', '');
+          setTimeout(function () { a.removeAttribute('data-copied'); }, 1600);
+        }, function () {});
+      }
+    });
+    h.appendChild(a);
+  });
 
   var ticking = false;
   function onScroll() {

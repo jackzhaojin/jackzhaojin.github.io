@@ -40,3 +40,6 @@
 .article-body p.watch a[href]:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Wrapped prompt-log lines hang under the text, not under the line number. */
 .article-body .code .ln.md { padding-left: 3.2em; text-indent: -3.2em; }
+/* Second pass, October 4: pick an example, no editing fields. The source path reads like the destination. */
+.hv__src { margin: 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; font: 500 13px/1.6 var(--font-mono); color: var(--ink-2); overflow-wrap: anywhere; }
+.hv__src .hv__seg { color: var(--ink); }

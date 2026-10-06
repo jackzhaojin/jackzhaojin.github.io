@@ -109,3 +109,7 @@
   .skl__lines label { padding: 12px; }
   .skl__lines input { width: 20px; height: 20px; margin-top: 1px; }
 }
+/* Second pass, October 4: captions inside the two labs, and a bold takeaway line first. */
+.skl > figcaption, .ccl > figcaption { margin: 0; padding: 0 18px 18px; }
+@container (min-width: 720px) { .skl > figcaption, .ccl > figcaption { padding: 0 28px 22px; } }
+.skl__note b, .ccl__why b { color: var(--ink); font-weight: 600; }

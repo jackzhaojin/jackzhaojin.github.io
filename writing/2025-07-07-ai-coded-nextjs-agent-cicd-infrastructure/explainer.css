@@ -76,3 +76,6 @@
 .br__lane[data-state="idle"] { opacity: 1; border-style: dashed; background: transparent; }
 .br__lane[data-state="idle"] h3, .br__lane[data-state="idle"] .br__trigger, .br__lane[data-state="idle"] .br__steps li { color: var(--muted); }
 .br__steps li[data-s="skip"] { opacity: 1; color: var(--muted); }
+/* Pass 2: caption under the lab, inset to match the lab grid. */
+.lab > figcaption { margin: 0; padding: 0 18px 18px; font-size: 14px; color: var(--muted); }
+@container (min-width: 720px) { .lab > figcaption { padding: 0 28px 22px; } }

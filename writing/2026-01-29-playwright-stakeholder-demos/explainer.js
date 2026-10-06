@@ -5,7 +5,8 @@
    and when a clip would start too early, hold the video on one frame until it can.
    Caption times are the script's own list; clip lengths are the 21 voice clips
    committed in the repo (demo/test-output/audio at 94b027b). The static list in the
-   page is this function's output with the script's defaults. */
+   page is this function's output with the script's defaults. October 4, 2026: the
+   gap slider and the early-start checkbox were removed; both are fixed at the script's values. */
 (() => {
   const root = document.querySelector('[data-ff]');
   if (!root) return;
@@ -63,10 +64,7 @@
 
   const $ = (s) => root.querySelector(s);
   const speedIn = $('[data-speed]');
-  const gapIn = $('[data-gap]');
-  const earlyIn = $('[data-early]');
   const speedOut = $('[data-speed-out]');
-  const gapOut = $('[data-gap-out]');
   const videoTrack = $('[data-track="video"]');
   const voiceTrack = $('[data-track="voice"]');
   const summary = $('[data-summary]');
@@ -75,10 +73,9 @@
 
   function render() {
     const speed = +speedIn.value;
-    const minGap = +gapIn.value;
-    const shift = earlyIn.checked ? -0.5 : 0;
-    speedOut.textContent = `${speed.toFixed(2)}x`;
-    gapOut.textContent = `${minGap.toFixed(1)} s`;
+    const minGap = 0.3;  // MIN_GAP in the script
+    const shift = -0.5;  // AUDIO_SHIFT in the script
+    speedOut.textContent = speed === 1 ? '1.00x, the clips as recorded' : `${speed.toFixed(2)}x, clips ${speed > 1 ? 'shorter' : 'longer'}`;
     const { freezes, clips, total, held } = calculateFreezes(speed, minGap, shift);
     const pct = (t) => `${(t / total) * 100}%`;
 
@@ -98,15 +95,16 @@
     videoTrack.innerHTML = segs.join('');
     voiceTrack.innerHTML = clips.map((c) => `<span class="ff__clip" style="left:${pct(c.start)};width:${pct(c.dur)}" title="Clip ${c.id}: ${CAPTIONS[c.id - 1][1]}">${c.id}</span>`).join('');
 
+    const lead = speed === 1 ? 'With the clips as recorded' : `At ${speed.toFixed(2)}x`;
     summary.textContent = freezes.length
-      ? `${freezes.length} freezes, ${held.toFixed(1)} s of held frames. The finished video runs about ${Math.round(total)} s, from about ${RECORDED} s recorded.`
-      : `No freezes needed. Every clip fits before the next caption. The video stays about ${RECORDED} s.`;
+      ? `${lead}, the merge holds the video ${freezes.length} ${freezes.length === 1 ? 'time' : 'times'}, ${held.toFixed(1)} s in total, so no clip talks over the next caption. The finished video runs about ${Math.round(total)} s, from about ${RECORDED} s recorded.`
+      : `${lead}, every clip ends before the next caption, so the video never has to hold. It stays about ${RECORDED} s.`;
     list.innerHTML = freezes.map((f) => `<li><span class="ff__t">${f.duration.toFixed(1)} s</span> before caption ${f.id}, "${CAPTIONS[f.id - 1][1]}", at ${fmt(f.originalTime)} in the recording</li>`).join('');
   }
 
   root.classList.add('is-live');
   root.querySelectorAll('[hidden][data-live]').forEach((el) => { el.hidden = false; });
-  [speedIn, gapIn, earlyIn].forEach((el) => el.addEventListener('input', render));
-  $('[data-reset]').addEventListener('click', () => { speedIn.value = 1; gapIn.value = 0.3; earlyIn.checked = true; render(); });
+  speedIn.addEventListener('input', render);
+  $('[data-reset]').addEventListener('click', () => { speedIn.value = 1; render(); });
   render();
 })();

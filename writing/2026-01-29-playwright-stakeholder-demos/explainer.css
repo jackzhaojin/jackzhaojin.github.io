@@ -47,3 +47,7 @@
 }
 /* The time column reads "16 min" on one line. */
 .table-wrap td:last-child, .table-wrap th:last-child { white-space: nowrap; }
+
+/* Second pass, October 4 2026: one slider and a reset button */
+@container (min-width: 620px) { .ff__controls { grid-template-columns: 1fr auto; } }
+@media (max-width: 640px) { .ff__ctl input[type="range"] { min-height: 44px; } }

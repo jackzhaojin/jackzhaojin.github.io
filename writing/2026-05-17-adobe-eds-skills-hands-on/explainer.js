@@ -24,8 +24,7 @@
     { message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'building-blocks' } }] } },
     { message: { content: [{ type: 'tool_use', name: 'Bash', input: { command: 'gh pr create' } }] } },
     { message: { content: '<command-name>/compact</command-name>' } },
-    { message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'testing-blocks' } }] } },
-    { message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'building-blocks' } }] } }
+    { message: { content: [{ type: 'tool_use', name: 'Skill', input: { skill: 'testing-blocks' } }] } }
   ];
 
   // Python str.strip() and str.lstrip('/').
@@ -122,7 +121,11 @@
       if (dropped) notes.push('Built-in commands like <code>/compact</code> are dropped.');
       if (bash) notes.push('The Bash call is a tool, not a skill.');
       if (!notes.length) notes.push('Every picked line is a skill call.');
-      noteEl.innerHTML = notes.join(' ');
+      var named = new Set(inv.map(function (i) { return i.skill; })).size;
+      var lead = named
+        ? '<b>MLflow alone names none of the ' + named + (named === 1 ? ' skill' : ' skills') + '. The hook tags ' + (named === 1 ? 'it' : named === 2 ? 'both' : 'all ' + named) + ' on the trace.</b> '
+        : '<b>No skill calls in this session, so the hook writes no tags.</b> ';
+      noteEl.innerHTML = lead + notes.join(' ');
     }
     boxes.forEach(function (b) { b.addEventListener('change', render); });
     render();
@@ -264,7 +267,15 @@
   }
 
   document.querySelectorAll('[data-contract]').forEach(function (lab) {
-    var state = { variant: 'cards-3', rows: 3, ctas: 1, eyebrow: true, extra: false };
+    // Four authoring choices. Everything else stays as the skill authored it.
+    var SCENARIOS = {
+      asis: { variant: 'cards-3', rows: 3, ctas: 1, eyebrow: true, extra: false, lead: 'Matches the contract.' },
+      banner: { variant: '', rows: 1, ctas: 1, eyebrow: true, extra: false, lead: 'Still works: the code fills in the variant.' },
+      plain: { variant: 'cards-3', rows: 3, ctas: 1, eyebrow: false, extra: false, lead: 'Breaks the eyebrow.' },
+      extra: { variant: 'cards-3', rows: 3, ctas: 1, eyebrow: true, extra: true, lead: 'Breaks the button.' }
+    };
+    var state = { scenario: 'asis' };
+    function cur() { return SCENARIOS[state.scenario]; }
     var docEl = lab.querySelector('[data-doc]');
     var whyEl = lab.querySelector('[data-why]');
     var treeEl = lab.querySelector('[data-tree]');
@@ -273,8 +284,9 @@
     lab.querySelector('[data-prevwrap]').hidden = false;
 
     function render() {
-      docEl.innerHTML = docTable(state);
-      var block = authoredBlock(state);
+      var st = cur();
+      docEl.innerHTML = docTable(st);
+      var block = authoredBlock(st);
       var variant = decorate(block);
       var lines = [];
       tree(block, 0, lines);
@@ -282,7 +294,8 @@
       prevEl.replaceChildren(block.cloneNode(true));
       prevEl.querySelectorAll('a').forEach(function (a) { a.setAttribute('tabindex', '-1'); });
 
-      var why = [];
+      var state = st;
+      var why = ['<b>' + st.lead + '</b>'];
       if (state.variant) why.push('The variant comes from the block name: <code>' + variant + '</code>.');
       else why.push('No variant in the block name, so decorate() picks one: ' + state.rows + (state.rows === 1 ? ' row means' : ' rows mean') + ' <code>' + variant + '</code>.');
       why.push(state.eyebrow ? 'A first paragraph holding only italics becomes the eyebrow.' : 'Without italics, the first paragraph stays a plain paragraph, so there is no eyebrow.');
@@ -304,7 +317,7 @@
       }
       buttons.forEach(function (b, i) {
         b.addEventListener('click', function () {
-          state[key] = key === 'variant' ? b.dataset.v : Number(b.dataset.v);
+          state[key] = b.dataset.v;
           sync(); render();
         });
         b.addEventListener('keydown', function (e) {
@@ -316,14 +329,6 @@
         });
       });
       sync();
-    });
-    lab.querySelectorAll('[data-tog]').forEach(function (t) {
-      t.addEventListener('click', function () {
-        var key = t.dataset.tog;
-        state[key] = !state[key];
-        t.setAttribute('aria-checked', String(state[key]));
-        render();
-      });
     });
     render();
   });

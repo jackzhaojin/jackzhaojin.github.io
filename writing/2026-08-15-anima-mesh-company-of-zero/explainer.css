@@ -89,3 +89,7 @@
   .bs__table td.bs__tgs { flex-basis: 100%; white-space: normal; display: flex; flex-wrap: wrap; gap: 0 4px; }
   .bs__tg { min-height: 44px; margin-right: 10px; }
 }
+
+/* Second pass, October 4 2026: plain one-line takeaways above the detail, and one switch per agent */
+.bs__takeaway, .dl__verdict { margin: 0 0 12px; font-size: 15px; line-height: 1.5; color: var(--ink); font-weight: 500; }
+.bs__na { font-size: 13px; color: var(--muted); }

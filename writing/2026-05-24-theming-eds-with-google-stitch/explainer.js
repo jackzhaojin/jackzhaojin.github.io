@@ -8,7 +8,6 @@
     var table = lab.querySelector('[data-table]');
     var note = lab.querySelector('[data-note]');
     var toggles = Array.prototype.slice.call(lab.querySelectorAll('[data-group]'));
-    var presets = Array.prototype.slice.call(lab.querySelectorAll('[data-preset] [role="radio"]'));
     var CLASS = { colors: 'c-after', fonts: 'f-after', buttons: 'b-after' };
     var state = { colors: true, fonts: true, buttons: true };
 
@@ -21,30 +20,14 @@
       table.querySelectorAll('tbody tr').forEach(function (tr) { tr.dataset.on = state[tr.dataset.g] ? 'after' : 'before'; });
       var on = Object.keys(state).filter(function (g) { return state[g]; });
       var all = on.length === 3; var none = on.length === 0;
-      presets.forEach(function (b) {
-        var checked = (b.dataset.v === 'after' && all) || (b.dataset.v === 'before' && none);
-        b.setAttribute('aria-checked', String(checked));
-        b.tabIndex = checked || (!all && !none && b.dataset.v === 'after') ? 0 : -1;
-      });
-      note.textContent = all ? 'Showing all three groups from the commit.'
-        : none ? 'Showing the boilerplate as it was before the commit.'
-        : 'Theme values for ' + on.join(' and ') + '; boilerplate for the rest.';
+      var off = Object.keys(state).filter(function (g) { return !state[g]; });
+      note.textContent = all ? 'The finished theme from the commit: Stitch colors, fonts and buttons.'
+        : none ? 'All boilerplate: the site as it looked before the commit.'
+        : 'Stitch ' + on.join(' and ') + ', boilerplate ' + off.join(' and ') + '.';
     }
 
     toggles.forEach(function (t) {
       t.addEventListener('click', function () { state[t.dataset.group] = !state[t.dataset.group]; render(); });
-    });
-    presets.forEach(function (b, i) {
-      b.addEventListener('click', function () {
-        var v = b.dataset.v === 'after';
-        Object.keys(state).forEach(function (g) { state[g] = v; });
-        render();
-      });
-      b.addEventListener('keydown', function (e) {
-        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-        e.preventDefault();
-        var n = presets[(i + 1) % presets.length]; n.click(); n.focus();
-      });
     });
     render();
   });

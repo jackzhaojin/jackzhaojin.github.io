@@ -1,7 +1,7 @@
 /* Two labs for the V3.0 second brain article.
-   1. Hook switchboard: the gating in src/agentic/memory/run-hook.ts (master switch,
-      then the per-hook flag) and the call sites in src/core/executive-loop.ts at
-      e43ae97, including the idle guard on Hook A.
+   1. Hook switchboard: the per-hook flag check in src/agentic/memory/run-hook.ts and
+      the call sites in src/core/executive-loop.ts at e43ae97, including the idle
+      guard on Hook A. Simplified in October 2026: go-live flags only, plain labels.
    2. Empty-string lab: applyDefaults() in memory-harvester/references/defaults.ts
       before and after b4f4554, and the cohort rule in classify.ts, evaluated live.
    Both figures ship a static example in the HTML; this script makes them interactive. */
@@ -12,16 +12,11 @@
   var sb = document.querySelector('[data-switchboard]');
   if (sb) {
     var HOOKS = {
-      A: { name: 'pre-work-selection', flag: 'V3_MEM_HOOK_PRE_WORK', io: 'read' },
-      B: { name: 'pre-spawn-pack', flag: 'V3_MEM_HOOK_PRE_SPAWN', io: 'read' },
-      C: { name: 'post-run-harvest', flag: 'V3_MEM_HOOK_POST_RUN', io: 'write' },
-      D: { name: 'failure-diagnosis', flag: 'V3_MEM_HOOK_FAIL_DIAG', io: 'read' },
-      E: { name: 'post-retro-harvest', flag: 'V3_MEM_HOOK_POST_RETRO', io: 'write' }
-    };
-    var PRESETS = {
-      golive: { master: true, A: false, B: true, C: true, D: true, E: true },
-      example: { master: true, A: false, B: false, C: false, D: false, E: false },
-      off: { master: false, A: false, B: false, C: false, D: false, E: false }
+      A: { name: 'before picking work', io: 'read' },
+      B: { name: 'before a worker starts', io: 'read' },
+      C: { name: 'after a run passes', io: 'write' },
+      D: { name: 'before diagnosing a failure', io: 'read' },
+      E: { name: 'after a retrospective', io: 'write' }
     };
     var boxes = {};
     Array.prototype.forEach.call(sb.querySelectorAll('input[data-flag]'), function (i) { boxes[i.dataset.flag] = i; });
@@ -29,58 +24,53 @@
     var stepsEl = sb.querySelector('[data-steps]');
     var sumEl = sb.querySelector('[data-sum]');
 
-    // runMemoryHook gating, in the same order as run-hook.ts lines 82 to 87.
-    var gate = function (letter) {
-      if (!boxes.master.checked) return { ran: false, reason: 'V3_MEMORY_ENABLED off' };
-      if (!boxes[letter].checked) return { ran: false, reason: HOOKS[letter].flag + ' off' };
-      return { ran: true };
-    };
-
     var rows, counts;
     var phase = function (title, note) { rows.push({ kind: 'phase', title: title, note: note }); };
+    // runMemoryHook() in run-hook.ts: a hook whose flag is off returns without doing anything.
     var hook = function (letter, runNote, opts) {
       var h = HOOKS[letter];
       opts = opts || {};
+      var title = 'Hook ' + letter + ', ' + h.name;
       if (opts.notCalled) {
-        rows.push({ kind: 'hook', s: 'skip', title: 'Hook ' + letter + ' · ' + h.name, tag: 'not called', note: opts.notCalled });
+        rows.push({ kind: 'hook', s: 'skip', title: title, tag: 'not called', note: opts.notCalled });
         return false;
       }
-      var g = gate(letter);
-      if (!g.ran) {
-        rows.push({ kind: 'hook', s: 'skip', title: 'Hook ' + letter + ' · ' + h.name, tag: 'skipped', note: 'runMemoryHook returns { ran: false, reason: "' + g.reason + '" }' });
+      if (!boxes[letter].checked) {
+        rows.push({ kind: 'hook', s: 'skip', title: title, tag: 'skipped', note: 'Its flag is off, so it returns without touching mem0.' });
         return false;
       }
       counts[h.io] += 1;
-      rows.push({ kind: 'hook', s: h.io, title: 'Hook ' + letter + ' · ' + h.name, tag: opts.tag || (h.io === 'read' ? 'reads mem0' : 'writes mem0'), note: runNote });
+      rows.push({ kind: 'hook', s: h.io, title: title, tag: opts.tag || (h.io === 'read' ? 'reads mem0' : 'writes mem0'), note: runNote });
       return true;
     };
 
     var build = function () {
       rows = []; counts = { read: 0, write: 0 };
       if (scenario === 'pass' || scenario === 'fail') {
-        phase('Phase 3: select work', 'A bundle is queued, so the loop may consult memory first.');
-        hook('A', '3 to 8 natural-language searches. The synthesis is only logged for audit.');
-        var packed = hook('B', 'Searches mem0 and returns a Memory Pack of 2K tokens or less.');
-        phase('Phase 4: the worker builds', packed ? 'The pack is appended to the worker\'s generated CLAUDE.md. The worker reads static markdown and never calls mem0.' : 'No pack this time. The worker starts with nothing from earlier runs.');
+        phase('Pick the next goal', 'A goal is queued, so the loop may check memory first.');
+        hook('A', '3 to 8 plain-English searches. For now the answer is only logged, not used to pick the goal.');
+        var packed = hook('B', 'Searches mem0 and builds a memory pack of 2K tokens or less.');
+        phase('The worker builds', packed ? 'The pack is added to the worker\'s CLAUDE.md. The worker reads plain markdown and never calls mem0.' : 'No pack this time. The worker starts with nothing from earlier runs.');
         if (scenario === 'pass') {
-          phase('Phase 5 and 6: validation passes', 'State, ledgers, Notion and Discord are updated.');
-          hook('C', 'The harvester decides 0 to 3 memories from this run (an episodic record, maybe a semantic or procedural lesson) and writes them.');
+          phase('Checks pass', 'State, ledgers, Notion and Discord are updated.');
+          hook('C', 'The harvester picks 0 to 3 memories from this run (a record of what happened, maybe a lesson) and writes them.');
         } else {
-          phase('Phase 5 and 6: validation fails', 'This is the third failed attempt, so Phase 7 runs.');
-          hook('D', 'Surfaces earlier failures with similar signals before diagnoseFailure() runs. Logged for audit; it writes only on a repeated-failure pattern.', { tag: 'reads, may write' });
-          phase('Phase 7: agentic diagnosis', 'diagnoseFailure() decides: retry with a fix, escalate, or keep retrying.');
+          phase('Checks fail, for the third time', 'So the loop moves on to diagnosing the failure.');
+          hook('D', 'Finds earlier failures with similar signals before the diagnosis. It writes only when it spots a repeated-failure pattern.', { tag: 'reads, may write' });
+          phase('Diagnose the failure', 'The executive decides: retry with a fix, escalate, or keep retrying.');
         }
       } else {
-        hook('A', '', { notCalled: 'The idle guard: no bundle in in-progress/P0 to P4 or ondeck, so the loop does not spend searches on nothing.' });
+        hook('A', '', { notCalled: 'Nothing is queued, so the loop doesn\'t spend searches on nothing. This guard was one of the go-live fixes.' });
         if (scenario === 'retro') {
-          phase('No work: the weekly retrospective trigger fires', 'runWeeklyRetrospective() writes a retro document.');
-          hook('E', 'Distills the new retro into reflective, semantic or procedural memories and writes them.');
+          phase('The weekly retrospective runs', 'With no work queued, the loop writes a retro document.');
+          hook('E', 'Turns the new retro into lessons and writes them to mem0.');
         } else {
-          phase('No work and no trigger', 'The loop sleeps 30 seconds and polls again.');
+          phase('Nothing to do', 'The loop sleeps 30 seconds and checks again.');
         }
       }
     };
 
+    var plural = function (n, one) { return n === 0 ? 'no hook ' + one + 's' : n === 1 ? 'one hook ' + one + 's' : (['', '', 'two', 'three', 'four', 'five'][n] || n) + ' hooks ' + one; };
     var render = function () {
       build();
       stepsEl.innerHTML = '';
@@ -94,27 +84,14 @@
       });
       sumEl.innerHTML = '';
       var p1 = document.createElement('p');
-      p1.textContent = 'This iteration: ' + counts.read + ' hook' + (counts.read === 1 ? '' : 's') + ' reading mem0, ' + counts.write + ' writing.';
-      var p2 = document.createElement('p');
-      p2.textContent = 'Worker calls to mem0: 0. Every hook runs inside the executive, and a memory failure never blocks the loop.';
-      sumEl.appendChild(p1); sumEl.appendChild(p2);
+      var txt = 'This pass: ' + plural(counts.read, 'read') + ' memory, ' + plural(counts.write, 'write') + ' it. The worker never calls mem0.';
+      p1.textContent = txt.charAt(0).toUpperCase() + txt.slice(1);
+      sumEl.appendChild(p1);
     };
 
-    var presetBtns = sb.querySelectorAll('[data-preset]');
-    var setPreset = function (key) {
-      var p = PRESETS[key];
-      boxes.master.checked = p.master;
-      'ABCDE'.split('').forEach(function (k) { boxes[k].checked = p[k]; });
-      Array.prototype.forEach.call(presetBtns, function (b) { b.setAttribute('aria-checked', String(b.dataset.preset === key)); });
-      render();
-    };
-    Array.prototype.forEach.call(presetBtns, function (b) { b.addEventListener('click', function () { setPreset(b.dataset.preset); }); });
     Object.keys(boxes).forEach(function (k) {
       boxes[k].disabled = false;
-      boxes[k].addEventListener('change', function () {
-        Array.prototype.forEach.call(presetBtns, function (b) { b.setAttribute('aria-checked', 'false'); });
-        render();
-      });
+      boxes[k].addEventListener('change', render);
     });
     var scenBtns = sb.querySelectorAll('[data-scenario]');
     Array.prototype.forEach.call(scenBtns, function (b) {
@@ -125,7 +102,7 @@
       });
     });
     sb.querySelectorAll('[data-live]').forEach(function (n) { n.hidden = false; });
-    setPreset('golive');
+    render();
   }
 
   /* ---------- 2. the empty-string cohort bug ---------- */

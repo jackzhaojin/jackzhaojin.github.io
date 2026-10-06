@@ -52,14 +52,13 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
   }
 
   var chips = Array.prototype.slice.call(lab.querySelectorAll('[data-req]'));
-  var done = lab.querySelector('#tl-done');
   var rules = Array.prototype.slice.call(lab.querySelectorAll('[data-rule]'));
   var out = lab.querySelector('[data-out]');
-  var current = 'one';
+  var current = 'chain';
 
   function render() {
     chips.forEach(function (c) { c.setAttribute('aria-checked', String(c.getAttribute('data-req') === current)); });
-    var r = decide(REQUESTS[current], done.checked);
+    var r = decide(REQUESTS[current], false);
     rules.forEach(function (li) { li.setAttribute('data-s', r.rules[li.getAttribute('data-rule')]); });
     var html = '';
     if (r.go) {
@@ -71,13 +70,14 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
         }).join('') + '</ul>';
       }
     } else {
-      html += '<p><b>' + esc(r.notes[0]) + '</b></p><p class="log">Nothing is built. Turn on "release 1.0 is complete" to see what happened on June 21, after the v1.0.0 tag.</p>';
+      html += '<p><b>' + esc(r.notes[0]) + '</b></p><p class="log">Nothing is built yet. It waited for the v1.0.0 tag on June 17, and the repo shows it done on June 21:</p><ul class="tl__commits">' + r.task.commits.map(function (c) {
+        return '<li><a href="' + GH + c[0] + '">' + c[0] + '</a> ' + c[1] + ' · ' + esc(c[2]) + '</li>';
+      }).join('') + '</ul>';
     }
     out.innerHTML = html;
   }
 
   chips.forEach(function (c) { c.addEventListener('click', function () { current = c.getAttribute('data-req'); render(); }); });
-  done.addEventListener('change', render);
   lab.querySelectorAll('[data-js]').forEach(function (el) { el.hidden = false; });
   lab.querySelectorAll('[data-nojs]').forEach(function (el) { el.hidden = true; });
   render();

@@ -114,7 +114,7 @@
     reached = 0;
     log.innerHTML = '';
     clearPath();
-    verdict.textContent = 'Caches cleared. Pick a query and a locale, then send a request.';
+    verdict.textContent = 'Started over with an empty cache. Pick a query and a locale, then send a request, and send the same persisted query twice.';
     updateCount();
   }
 
@@ -137,11 +137,19 @@
   lab.querySelector('[data-send]').addEventListener('click', send);
   lab.querySelector('[data-reset]').addEventListener('click', reset);
 
-  // Switch from the static example to the live lab.
+  // Switch from the static example to the live lab. Keep the five example
+  // requests in the log and seed the cache to match, so the first view
+  // already shows a POST, a miss and a hit.
   controls.hidden = false;
   count.hidden = false;
+  cache.add('GET /graphql/execute.json/' + QUERY + ';locale=en');
+  cache.add('GET /graphql/execute.json/' + QUERY + ';locale=de');
+  sent = 5;
+  reached = 4;
+  var seeded = [].slice.call(log.children).reverse();
   log.innerHTML = '';
-  verdict.textContent = 'Pick a query and a locale, then send a request. Try the same persisted query twice.';
+  seeded.forEach(function (tr) { log.appendChild(tr); });
+  verdict.innerHTML = '<b>Five requests so far:</b> both POSTs reached AEM, the first GET for each locale reached AEM once, and the repeat GET came from the cache. Send <code>;locale=en</code> again and AEM never sees it.';
   showReq();
   updateCount();
 })();

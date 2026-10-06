@@ -25,6 +25,12 @@
 .article-body > ul li + li, .article-body > ol li + li { margin-top: var(--space-2); }
 .article-body > h2 { font-size: var(--text-h2); line-height: 1.25; margin-top: var(--space-8); max-width: 30ch; text-wrap: balance; }
 .article-body > h2 + * { margin-top: var(--space-3); }
+.heading-link { display: inline-block; margin-left: .3em; padding: 0 .15em; font: 500 .7em/1 var(--font-mono); color: var(--color-text-faint); text-decoration: none; vertical-align: .18em; opacity: 0; transition: opacity .15s, color .15s; }
+.article-body > h2:hover .heading-link, .heading-link:focus-visible { opacity: 1; }
+.heading-link:hover { color: var(--color-accent); }
+.heading-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.heading-link[data-copied]::after { content: "Link copied"; margin-left: .6em; font: 500 12px/1 var(--font-body); letter-spacing: 0; color: var(--color-text-muted); }
+@media (hover: none) { .heading-link { opacity: .55; } }
 .article-body a:not(.chap__t):not([class*="__"]) { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 .article-body p code, .article-body li code, .article-body td code, .article-body figcaption code {
   font: 500 .86em var(--font-mono); background: var(--color-accent-soft); color: var(--color-text);

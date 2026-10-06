@@ -1,7 +1,8 @@
 /* Explainers for "Adobe Stardust explained".
    1. Page lifecycle lab: the page states and rules from Stardust's
-      reference/state-machine.md (adobe/skills at cbaeec4), seeded with the real
-      stardust/state.json from my V2 run (adapt-to-2026-demo at ead7c7f).
+      reference/state-machine.md (adobe/skills at cbaeec4), seeded with four pages
+      of the real stardust/state.json from my V2 run (adapt-to-2026-demo at ead7c7f).
+      The other eight pages were extracted, like stats; the markup says so in a note.
    2. Three-version viewer: one block and one version at a time.
    The static HTML already shows a finished example of each. */
 (function () {
@@ -14,15 +15,7 @@
     ['ai-content-blocks', '/ai-content/blocks/', 'approved'],
     ['ai-content-blocks-hero', '/ai-content/blocks/hero', 'approved'],
     ['ai-content-blocks-cards', '/ai-content/blocks/cards', 'approved'],
-    ['ai-content-blocks-stats', '/ai-content/blocks/stats', 'extracted'],
-    ['ai-content-blocks-columns', '/ai-content/blocks/columns', 'extracted'],
-    ['ai-content-blocks-quote', '/ai-content/blocks/quote', 'extracted'],
-    ['ai-content-blocks-gallery', '/ai-content/blocks/gallery', 'extracted'],
-    ['ai-content-blocks-table', '/ai-content/blocks/table', 'extracted'],
-    ['ai-content-blocks-accordion', '/ai-content/blocks/accordion', 'extracted'],
-    ['ai-content-blocks-newsletter', '/ai-content/blocks/newsletter', 'extracted'],
-    ['ai-content-blocks-author-bio', '/ai-content/blocks/author-bio', 'extracted'],
-    ['ai-content-templates-typography-paper', '/ai-content/templates/typography-paper', 'extracted']
+    ['ai-content-blocks-stats', '/ai-content/blocks/stats', 'extracted']
   ];
 
   function seedPages() {
@@ -108,7 +101,7 @@
       }
       if (name === 'migrate') {
         if (s === 'migrated') return say('This page is already ' + code('migrated') + '.');
-        if (s !== 'approved') return say('<span class="no">Refused.</span> ' + code('migrate') + ' needs an approved page, and this one is ' + code(s) + '. A page moves one state at a time, and approval of its prototype comes first.');
+        if (s !== 'approved') return say('<span class="no">Refused.</span> ' + code('migrate') + ' needs an approved page, and this one is ' + code(s) + '. A page moves one state at a time, and a person has to approve its prototype first.');
         p.status = 'migrated'; p.migratedPath = 'stardust/migrated/' + p.slug + '.html'; push(p, { status: 'migrated', at: today() });
         return say('<span class="ok">Migrated.</span> Final static HTML is written. Turning it into EDS blocks and DA content is the job of ' + code('deploy') + ' and ' + code('rollout') + '.');
       }
@@ -132,7 +125,7 @@
     });
     lab.querySelector('[data-reset]').addEventListener('click', function () {
       pages = seedPages(); handsOff = false; current = 'ai-content-blocks-stats'; render();
-      say('Back to my run: three pages approved by me, nine still ' + code('extracted') + '.');
+      say('Back to my run: the index, hero and cards pages approved by me, stats still ' + code('extracted') + '.');
     });
     render();
   });

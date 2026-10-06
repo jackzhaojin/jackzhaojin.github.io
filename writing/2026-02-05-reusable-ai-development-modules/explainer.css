@@ -19,8 +19,6 @@
 .ru__box--adhoc { --c: var(--c-adhoc); } .ru__box--spec { --c: var(--c-spec); } .ru__box--harness { --c: var(--c-harness); } .ru__box--agent { --c: var(--c-agent); }
 .ru__box--used { border-style: dashed; background: transparent; }
 .ru__box--used span { font-weight: 500; }
-.ru.is-live .ru__box:not(.is-on) { opacity: .45; }
-.ru__box.is-on { background: color-mix(in srgb, var(--c) 12%, var(--bg)); }
 .ru__out { margin: 0; font-weight: 600; color: var(--ink); }
 .ru__static { margin: 0; color: var(--ink-2); font-size: 15px; }
 .ru.is-live .ru__static { display: none; }

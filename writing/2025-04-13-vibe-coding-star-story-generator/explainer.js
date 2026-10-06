@@ -135,8 +135,12 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
 
   var lab = document.querySelector('[data-parser-lab]');
   if (!lab) return;
-  var replies = {};
-  lab.querySelectorAll('template[data-reply]').forEach(function (t) { replies[t.dataset.reply] = t.content.textContent.replace(/^\n/, ''); });
+  var replies = {}, takeaways = {};
+  lab.querySelectorAll('template[data-reply]').forEach(function (t) {
+    replies[t.dataset.reply] = t.content.textContent.replace(/^\n/, '');
+    takeaways[t.dataset.reply] = t.dataset.takeaway || '';
+  });
+  var takeawayEl = lab.querySelector('[data-takeaway]:not(template)');
   var chips = lab.querySelector('.chips');
   var buttons = Array.prototype.slice.call(chips.querySelectorAll('button'));
   var input = lab.querySelector('[data-input]');
@@ -207,14 +211,16 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
     buttons.forEach(function (b) { b.setAttribute('aria-checked', b.dataset.pick === id ? 'true' : 'false'); });
     input.value = replies[id];
     render();
+    if (takeawayEl) takeawayEl.textContent = takeaways[id] || '';
   }
 
   buttons.forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.pick); }); });
   var pending = 0;
   input.addEventListener('input', function () {
     buttons.forEach(function (b) { b.setAttribute('aria-checked', 'false'); });
+    if (takeawayEl) takeawayEl.textContent = 'Your own edit: the steps above show the path it took.';
     cancelAnimationFrame(pending);
     pending = requestAnimationFrame(render);
   });
-  pick(buttons[0].dataset.pick);
+  pick('wrapped');
 })();

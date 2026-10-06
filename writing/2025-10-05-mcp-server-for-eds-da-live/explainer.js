@@ -1,53 +1,45 @@
-/* Decision lab for "Building an MCP Server for EDS da.live".
-   Two versions of the same edit. The scripted flow follows the four phases of
-   functions/src/functions/EditContentFunction.js at 1ffb600. The tool loop follows
-   generateEdit() in functions/src/modules/LlmClient.js at 81e4cac: one model call per
-   turn, a tool_use answer runs the MCP tool and adds two messages, a text answer ends
-   the loop, and MAX_TOOL_ITERATIONS = 10 caps it with the same error message.
-   The reader's clicks stand in for the model. No network calls are made. */
+/* Two versions of the same edit for "Building an MCP Server for EDS da.live".
+   The scripted flow follows the four phases of functions/src/functions/EditContentFunction.js
+   at 1ffb600: get, build the prompt, one model call, save. The tool loop follows generateEdit()
+   in functions/src/modules/LlmClient.js at 81e4cac: one model call per turn; a tool_use answer
+   runs the MCP tool and pushes the assistant turn plus the tool_result, so every later call
+   re-sends the whole conversation; a text answer ends the loop. Nothing checks the order.
+   The scenarios are scripted model choices. No network calls are made. */
 (function () {
   'use strict';
   var lab = document.querySelector('[data-loopx]');
   if (!lab) return;
 
-  var MAX_TOOL_ITERATIONS = 10; // LlmClient.js line 12
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var log = lab.querySelector('.loopx__log');
   var verdict = lab.querySelector('.loopx__verdict');
-  var modeBtns = [].slice.call(lab.querySelectorAll('.loopx__modes button'));
-  var moveBtns = [].slice.call(lab.querySelectorAll('.loopx__moves button'));
-  var presetBtns = [].slice.call(lab.querySelectorAll('.loopx__presets button'));
   var say = lab.querySelector('[data-say]');
+  var modeBtns = [].slice.call(lab.querySelectorAll('.loopx__modes button'));
+  var scen = lab.querySelector('.loopx__scen');
+  var scenBtns = [].slice.call(scen.querySelectorAll('button'));
   var stat = {};
   [].slice.call(lab.querySelectorAll('[data-stat]')).forEach(function (el) { stat[el.dataset.stat] = el; });
 
-  var s, run = 0, mode = 'tools';
+  var SCENARIOS = {
+    order: ['get', 'save', 'final'],
+    twice: ['get', 'get', 'save', 'final'],
+    blind: ['save', 'final']
+  };
+  var run = 0, mode = 'tools', preset = 'order', s;
 
-  function reset() {
-    run++;
-    s = { calls: 0, tools: 0, messages: 1, got: false, saved: false, savedBlind: false, done: false, resend: 0 };
-    log.innerHTML = '';
-    paint();
-  }
-
-  function hint(text) {
-    var li = document.createElement('li');
-    li.innerHTML = '<span class="static-h">' + text + '</span>';
-    log.appendChild(li);
-  }
+  function times(n) { return n + (n === 1 ? ' time' : ' times'); }
 
   function paint() {
     stat.calls.textContent = s.calls;
     stat.tools.textContent = s.tools;
-    stat.messages.textContent = s.done ? '-' : s.messages;
-    stat.saved.textContent = s.saved ? 'yes' : 'no';
-    moveBtns.forEach(function (b) { b.disabled = mode !== 'tools' || s.done; });
+    stat.resend.textContent = times(s.resend);
+    stat.saved.textContent = s.saved ? (s.blind ? 'yes, unread' : 'yes') : 'no';
   }
 
-  function line(who, kind, html) {
+  function line(who, kind, text) {
     var li = document.createElement('li');
     li.className = 'is-new';
-    li.innerHTML = '<span class="who who--' + kind + '">' + who + '</span><span>' + html + '</span>';
+    li.innerHTML = '<span class="who who--' + kind + '">' + who + '</span><span>' + text + '</span>';
     log.appendChild(li);
     log.scrollTop = log.scrollHeight;
   }
@@ -57,114 +49,121 @@
     verdict.className = 'loopx__verdict' + (tone ? ' is-' + tone : '');
   }
 
-  // One model turn in the tool loop.
-  function move(kind) {
-    if (mode !== 'tools' || s.done) return;
-    if (s.calls === 0) log.innerHTML = '';
-    s.calls++;
-    var sent = s.messages;
-    var html = s.got ? ' The page HTML is in it.' : '';
-    if (s.got) s.resend++;
-    if (kind === 'final') {
-      line('call ' + s.calls, 'model', 'Sends <b>' + sent + '</b> message' + (sent > 1 ? 's' : '') + '.' + html + ' The model answers with text: <b>{ editedHtml, explanation, reasoning }</b>. No tool_use block, so the loop ends.');
-      s.done = true;
-      if (s.saved && s.savedBlind) setVerdict('Done, and something was saved. But the model saved before it read the page, so it wrote HTML it never saw. Nothing in the loop checks the order. The prompt asks for "FIRST: Call get_dalive_content".', 'warn');
-      else if (s.saved) setVerdict('Done. The model read the page, saved it and answered: the order the prompt asks for. It took ' + s.calls + ' model calls where the scripted flow takes one.', 'ok');
-      else setVerdict('Done, and nothing was saved. The function still returns 200 with the explanation, because the loop ends on any text answer. Saving is up to the model following "LAST: Call save_dalive_content".', 'warn');
-      paint();
-      return;
-    }
-    var tool = kind === 'get' ? 'get_dalive_content' : 'save_dalive_content';
-    line('call ' + s.calls, 'model', 'Sends <b>' + sent + '</b> message' + (sent > 1 ? 's' : '') + '.' + html + ' The model answers with a tool_use block: <b>' + tool + '</b>.');
-    s.tools++;
-    if (kind === 'get') {
-      s.got = true;
-      line('mcp', 'tool', 'tools/call ' + tool + ': GET admin.da.live/source/... returns the page HTML.');
-    } else {
-      if (!s.got) s.savedBlind = true;
-      s.saved = true;
-      line('mcp', 'tool', 'tools/call ' + tool + ': POST admin.da.live/source/... with the HTML the model wrote.');
-    }
-    s.messages += 2;
-    line('loop', 'code', 'Pushes the assistant turn and the tool_result, then <b>continue</b>. Next call sends ' + s.messages + ' messages.');
-    if (s.calls >= MAX_TOOL_ITERATIONS) {
-      s.done = true;
-      line('error', 'err', 'LLM did not return a final response after tool iterations');
-      setVerdict('Stopped at ' + MAX_TOOL_ITERATIONS + ' model calls without a final answer. That is the cap in LlmClient.js. The function wraps this in a retry loop, so in real life it starts over, up to 3 attempts.', 'warn');
-    } else {
-      setVerdict(s.got ? 'The page HTML now rides along on every later call, inside the tool_result. That is one reason the tool version uses more tokens.' : 'Waiting for the model’s next move.');
-    }
+  function reset() {
+    run++;
+    s = { calls: 0, tools: 0, resend: 0, got: false, saved: false, blind: false };
+    log.innerHTML = '';
     paint();
   }
 
-  function scripted() {
+  // One model call in the tool loop.
+  function move(kind) {
+    s.calls++;
+    var withPage = s.got ? ', page HTML included' : '';
+    if (s.got) s.resend++;
+    var sent = s.calls === 1 ? 'Sends the prompt' : 'Sends the whole conversation so far' + withPage;
+    if (kind === 'final') {
+      line('call ' + s.calls, 'model', sent + '. The model answers with text, so the loop ends.');
+      return;
+    }
+    var tool = kind === 'get' ? 'get_dalive_content' : 'save_dalive_content';
+    line('call ' + s.calls, 'model', sent + '. The model asks for <b>' + tool + '</b>.');
+    s.tools++;
+    if (kind === 'get') {
+      s.got = true;
+      line('tool', 'tool', 'Fetches the page HTML from admin.da.live and adds it to the conversation.');
+    } else {
+      if (!s.got) s.blind = true;
+      s.saved = true;
+      line('tool', 'tool', 'Saves the HTML the model wrote to admin.da.live.');
+    }
+  }
+
+  function finish() {
+    if (preset === 'blind') {
+      setVerdict('Saved, but the model never read the page, so it wrote HTML blind. The prompt says to get the page first. Nothing in the code enforces it. The scripted flow cannot do this.', 'warn');
+    } else if (preset === 'twice') {
+      setVerdict('Still the right result, with one more model call and one more copy of the page in every call after it. Every time I ran it, it did different things.', 'ok');
+    } else {
+      setVerdict(s.calls + ' model calls where the scripted flow makes one, and the page goes to the model ' + times(s.resend) + ' instead of once. That is where the extra time and tokens come from.', 'ok');
+    }
+  }
+
+  function playTools() {
     reset();
-    setVerdict('Running the four phases in order.');
     var id = run;
+    var seq = SCENARIOS[preset].slice();
+    setVerdict('Running the loop.');
+    (function step() {
+      if (id !== run) return;
+      if (!seq.length) { finish(); return; }
+      move(seq.shift());
+      paint();
+      if (reduce) step(); else setTimeout(step, 380);
+    })();
+  }
+
+  function playScripted() {
+    reset();
+    var id = run;
+    setVerdict('Running the four steps in order.');
     var steps = [
-      ['phase 1', 'code', 'Code calls <b>GET admin.da.live/source/...</b> and gets the page HTML.'],
-      ['phase 2', 'code', 'Code builds the prompt with the HTML inside it.'],
-      ['phase 3', 'model', 'Code calls the model <b>once</b>. It returns editedHtml. No tools are offered.'],
-      ['phase 4', 'code', 'Code calls <b>POST admin.da.live/source/...</b> with the edited HTML.']
+      ['step 1', 'code', 'Code fetches the page HTML from admin.da.live.'],
+      ['step 2', 'code', 'Code builds the prompt with the HTML inside it.'],
+      ['call 1', 'model', 'Code calls the model <b>once</b>, page HTML included. It returns the edited HTML. No tools are offered.'],
+      ['step 3', 'code', 'Code saves the edited HTML to admin.da.live.']
     ];
     var i = 0;
-    function next() {
+    (function next() {
       if (id !== run) return;
       var st = steps[i++];
       line(st[0], st[1], st[2]);
-      if (st[1] === 'model') { s.calls = 1; }
-      if (i === 4) {
-        s.saved = true; s.done = true; paint();
-        setVerdict('Same order every time: get, one model call, save. The code decides. In my test it took about 15 seconds end to end.', 'ok');
+      if (st[1] === 'model') { s.calls = 1; s.resend = 1; }
+      if (i === steps.length) {
+        s.saved = true; paint();
+        setVerdict('Same order every time: get, one model call, save. The code decides, so the order can’t go wrong. In my test this took about 15 seconds end to end.', 'ok');
         return;
       }
       paint();
-      if (reduce) next(); else setTimeout(next, 420);
-    }
-    next();
+      if (reduce) next(); else setTimeout(next, 380);
+    })();
   }
 
   function setMode(m) {
     mode = m;
     modeBtns.forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.mode === m)); });
-    presetBtns.forEach(function (b) { b.hidden = m !== 'tools' && b.dataset.preset !== 'reset'; });
+    scen.hidden = m !== 'tools';
     if (m === 'tools') {
-      say.textContent = 'You play the model. Each click is what it asks for on its next call.';
-      reset();
-      hint('Waiting for the model’s first move. Call 1 will send 1 message: the prompt.');
-      setVerdict('Pick the model’s first move, or try a preset.');
+      say.textContent = 'The model picks every step. Pick what it does:';
+      playTools();
     } else {
-      say.textContent = 'Nothing to choose here. The code calls the model once and saves whatever comes back.';
-      scripted();
+      say.textContent = 'Nothing to pick. The code runs the same four steps every time.';
+      playScripted();
     }
   }
 
-  var presets = {
-    order: ['get', 'save', 'final'],
-    twice: ['get', 'get', 'save', 'final'],
-    blind: ['save', 'final'],
-    nosave: ['get', 'final'],
-    forever: ['get', 'get', 'get', 'get', 'get', 'get', 'get', 'get', 'get', 'get']
-  };
+  function setPreset(p) {
+    preset = p;
+    scenBtns.forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.preset === p)); });
+    playTools();
+  }
 
-  function play(name) {
-    if (name === 'reset') { setMode(mode); return; }
-    reset();
-    var id = run;
-    var seq = presets[name].slice();
-    (function step() {
-      if (id !== run || !seq.length) return;
-      move(seq.shift());
-      if (reduce) step(); else setTimeout(step, 360);
-    })();
+  function arrows(btns, pick) {
+    btns.forEach(function (b, i) {
+      b.addEventListener('keydown', function (e) {
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(e.key) === -1) return;
+        e.preventDefault();
+        var n = btns[(i + (e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1) + btns.length) % btns.length];
+        n.focus(); pick(n);
+      });
+    });
   }
 
   modeBtns.forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.mode); }); });
-  moveBtns.forEach(function (b) { b.addEventListener('click', function () { run++; move(b.dataset.move); }); });
-  presetBtns.forEach(function (b) { b.addEventListener('click', function () { play(b.dataset.preset); }); });
+  scenBtns.forEach(function (b) { b.addEventListener('click', function () { setPreset(b.dataset.preset); }); });
+  arrows(modeBtns, function (b) { setMode(b.dataset.mode); });
+  arrows(scenBtns, function (b) { setPreset(b.dataset.preset); });
 
-  lab.querySelectorAll('[hidden]').forEach(function (el) { if (el.hasAttribute('data-js')) el.hidden = false; });
-  var fallback = lab.querySelector('.loopx__static');
-  if (fallback) fallback.remove();
+  lab.querySelectorAll('[data-js]').forEach(function (el) { el.hidden = false; });
   setMode('tools');
 })();

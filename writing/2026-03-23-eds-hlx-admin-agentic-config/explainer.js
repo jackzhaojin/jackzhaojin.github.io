@@ -10,6 +10,7 @@
   var chips = [].slice.call(lab.querySelectorAll('.chips button'));
   var gates = [].slice.call(lab.querySelectorAll('[data-gate]'));
   var verdict = lab.querySelector('.verdict');
+  var current = null;
 
   var RE_CURL = /curl\b/i;                                          // line 20
   var RE_METHOD = /(--request|-X)\s+(POST|PUT|DELETE|PATCH)/i;      // line 21
@@ -47,21 +48,23 @@
       else msg.textContent = '';
       msg.style.display = st === 'skip' ? 'none' : 'block';
     });
+    var note = current && current.dataset.note ? ' <span class="verdict__note">' + esc(current.dataset.note) + '</span>' : '';
     if (r.ask) {
-      verdict.innerHTML = '<p><span class="ask">ask</span> Claude Code stops and asks you, even in bypass permissions mode. The hook prints:</p><pre>' + esc(JSON.stringify(r.out, null, 2)) + '</pre>';
+      verdict.innerHTML = '<p><span class="ask">Stops for approval.</span>' + note + '</p><p class="verdict__sub">The hook prints this, and Claude Code shows the reason in its prompt:</p><pre>' + esc(JSON.stringify(r.out, null, 2)) + '</pre>';
     } else {
-      verdict.innerHTML = '<p><span class="allow">allow</span> ' + (r.empty ? 'Empty command: the script fails open and exits 0.' : 'The script exits 0 with no output, so the command runs without a prompt.') + '</p>';
+      verdict.innerHTML = '<p><span class="allow">Runs without a prompt.</span>' + (note || (r.empty ? ' Empty command: the script fails open and exits 0.' : ' The script exits 0 with no output, so Claude Code runs the command.')) + '</p>';
     }
   }
 
   chips.forEach(function (b) {
     b.addEventListener('click', function () {
       chips.forEach(function (c) { c.setAttribute('aria-checked', String(c === b)); });
+      current = b;
       box.value = b.dataset.cmd;
       render();
     });
   });
-  box.addEventListener('input', function () { chips.forEach(function (c) { c.setAttribute('aria-checked', 'false'); }); render(); });
+  box.addEventListener('input', function () { current = null; chips.forEach(function (c) { c.setAttribute('aria-checked', 'false'); }); render(); });
   lab.querySelectorAll('[hidden][data-js]').forEach(function (el) { el.hidden = false; });
   var stat = lab.querySelector('.lab__static'); if (stat) stat.remove();
   chips[1].click();

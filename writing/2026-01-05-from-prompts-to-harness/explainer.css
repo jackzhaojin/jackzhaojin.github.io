@@ -85,3 +85,7 @@
   .blend__fail { min-height: 44px; }
   .blend__fail input { width: 18px; height: 18px; }
 }
+
+/* Second pass, October 4 2026: the loop model updates on every change, with a one-line result */
+.loop__result { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+@media (max-width: 640px) { .blend__row input[type="range"] { min-height: 44px; } }

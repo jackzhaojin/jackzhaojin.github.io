@@ -96,3 +96,12 @@
 @media (max-width: 560px) { .roles thead { display: none; } .roles tr { display: block; padding: 10px 16px; border-bottom: 1px solid var(--line); } .roles tr:last-child { border-bottom: 0; } .roles td { display: block; border: 0; padding: 1px 0; } .roles td:nth-child(3)::before { content: "Role: "; color: var(--muted); } .roles td:nth-child(4)::before { content: "Scope: "; color: var(--muted); } }
 /* A portrait screenshot stays at its own width instead of upscaling past it. */
 .board--narrow { max-width: 560px; }
+/* Pass 2: the manual switches sit behind a disclosure; the scenarios are the main control. */
+.cc__more { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 6px; }
+.cc__more > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-size: 14px; color: var(--ink-2); border-radius: 8px; }
+.cc__more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cc__more[open] > summary { margin-bottom: 8px; }
+.cc__more > summary { list-style: none; gap: 10px; }
+.cc__more > summary::-webkit-details-marker { display: none; }
+.cc__more > summary::before { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .2s var(--ease); margin-left: 2px; }
+.cc__more[open] > summary::before { transform: rotate(45deg); }

@@ -82,6 +82,7 @@
   var chips = root.querySelector('.chips');
   var presetButtons = Array.prototype.slice.call(chips.querySelectorAll('button'));
   var controls = root.querySelector('[data-controls]');
+  var more = root.querySelector('[data-more]');
   var inputs = {};
   controls.querySelectorAll('[data-k]').forEach(function (el) { inputs[el.dataset.k] = el; });
   var rows = {};
@@ -89,14 +90,14 @@
   var result = root.querySelector('[data-result]');
 
   chips.hidden = false;
-  controls.hidden = false;
+  if (more) more.hidden = false;
   root.classList.add('is-live');
 
   function read() {
     return {
       envVars: inputs.envVars.checked,
       secretValid: inputs.secretValid.checked,
-      fedFile: inputs.fedFile.checked,
+      fedFile: false,
       appService: inputs.appService.checked,
       azLogin: inputs.azLogin.checked,
       mode: inputs.mode.value
@@ -106,9 +107,16 @@
   function write(s) {
     Object.keys(s).forEach(function (k) {
       if (k === 'mode') inputs.mode.value = s.mode;
-      else inputs[k].checked = s[k];
+      else if (inputs[k]) inputs[k].checked = s[k];
     });
   }
+
+  var WHO = {
+    EnvironmentCredential: 'the service principal in the environment variables',
+    WorkloadIdentityCredential: 'the workload identity',
+    ManagedIdentityCredential: 'the web app\'s own managed identity',
+    AzureCliCredential: 'whoever ran az login (me)'
+  };
 
   var LABEL = { token: 'token', error: 'stops here', unavailable: 'unavailable', unreached: 'not tried', excluded: 'left out' };
 
@@ -124,8 +132,10 @@
     });
     result.dataset.ok = r.outcome.ok ? 'yes' : 'no';
     result.textContent = r.outcome.ok
-      ? 'getToken() succeeds through ' + r.outcome.by + '.'
-      : 'getToken() throws: ' + r.outcome.msg;
+      ? 'Result: the app signs in as ' + WHO[r.outcome.by] + ', through ' + r.outcome.by + '.'
+      : r.outcome.by
+        ? 'Result: no sign-in. ' + r.outcome.by + ' rejected the secret, and the chain stops there instead of trying az login.'
+        : 'Result: no sign-in. Every credential in the chain was unavailable.';
   }
 
   function pick(id) {

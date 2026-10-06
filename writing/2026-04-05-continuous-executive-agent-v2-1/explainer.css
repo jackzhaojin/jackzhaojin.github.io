@@ -56,3 +56,12 @@
 .article-body > p.watch { margin-top: var(--space-5) !important; padding-top: 12px; }
 .article-body p.watch a[href] { text-decoration: none; }
 .article-body p.watch a[href]:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Second pass, October 4: the ladder is four outcomes to pick from, not a step-by-step game. */
+.ladder__picks { padding: 18px 18px 0; }
+@container (min-width: 720px) { .ladder__picks { padding: 24px 28px 0; } }
+.pips i[data-k="diag"] { background: var(--lav, #7a6bd1); }
+.pips__legend .lg-diag::before { background: var(--lav, #7a6bd1); }
+.ladder .verdict { margin-top: 16px; }
+.ladder .verdict p.ok { color: var(--mint); }
+.ladder .verdict p.no { color: var(--bone); }
+.js .ladder__log { max-height: 340px; }

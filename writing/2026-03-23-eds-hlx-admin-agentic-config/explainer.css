@@ -27,3 +27,6 @@
   .guard .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
   .guard .chips button { min-height: 44px; }
 }
+/* Second pass, October 4: the verdict says the outcome in words first */
+.guard .verdict .ask, .guard .verdict .allow { display: inline; margin-right: 4px; }
+.guard .verdict__sub { margin: 10px 0 0; color: var(--bone-2); font-size: 13px; }

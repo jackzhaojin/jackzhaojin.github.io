@@ -228,8 +228,10 @@ ${FENCE}`).join('\n\n'),
   /* ---------------- DOM: beat simulator ---------------- */
   const prettyDate = (iso) => new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric' }).format(new Date(iso));
 
+  // The page opens on the interesting case: one agent fails on the first morning.
+  const freshDemo = () => { const s = freshBeatState(); s.failing = ['research-watch']; return s; };
   document.querySelectorAll('[data-beatsim]').forEach((root) => {
-    let state = freshBeatState();
+    let state = freshDemo();
     let last = null;
     const rows = root.querySelector('[data-rows]');
     const out = root.querySelector('[data-out]');
@@ -246,25 +248,48 @@ ${FENCE}`).join('\n\n'),
       rows.innerHTML = AGENTS.map((a) => {
         const cloud = CLOUD_HARNESSES.has(a.harness);
         const tier = a.commercial ? 'commercial, gated' : cloud ? 'cloud' : 'laptop only';
-        const dis = a.commercial ? ' disabled' : '';
-        const box = (key, label, list) => `<label class="bs__tg"><input type="checkbox" data-k="${key}" data-a="${a.name}"${list.includes(a.name) ? ' checked' : ''}${dis}><span>${label}</span></label>`;
+        // Second pass: only the fail switch, and only where the cloud beat actually runs the agent.
+        const box = cloud && !a.commercial
+          ? `<label class="bs__tg"><input type="checkbox" data-k="fail" data-a="${a.name}"${state.failing.includes(a.name) ? ' checked' : ''}><span>fails today</span></label>`
+          : `<span class="bs__na">not run by the cloud beat</span>`;
         return `<tr><th scope="row"><span class="mono">${a.name}</span>${a.name === HUB ? ' <span class="bs__hub">hub</span>' : ''}</th>
           <td>${a.heartbeat}</td><td><span class="bs__tier bs__tier--${a.commercial ? 'gated' : cloud ? 'cloud' : 'laptop'}">${tier}</span></td>
-          <td class="bs__tgs">${box('fail', 'fails today', state.failing)}${box('pause', 'pause', state.schedule.pause)}${box('wake', 'wake', state.schedule.wake)}</td></tr>`;
+          <td class="bs__tgs">${box}</td></tr>`;
       }).join('');
     }
 
     function li(cls, html) { return `<li class="${cls}">${html}</li>`; }
+    // The engine's own reason strings, said in plain words.
+    function plain(reason) {
+      let m;
+      if ((m = reason.match(/^(\w+): (\d+)h since last run$/))) return `${m[1]}: last ran ${Math.round(m[2] / 24)} days ago, so it is due`;
+      if ((m = reason.match(/^(\w+): ran (\d+)h ago/))) return `${m[1]}: ran ${Math.floor(m[2] / 24)} days ago, not due yet`;
+      if (/^DUE \(/.test(reason)) return 'due, but it only runs on my laptop, so the brief reminds me to run it';
+      if (/laptop-tier harness .* not run in cloud/.test(reason)) return 'only runs on my laptop, and not due today';
+      if (/^commercial/.test(reason)) return 'commercial agent, stays off until its activation gates open';
+      if (reason === 'never run') return 'never run yet, so it is due';
+      return reason;
+    }
+    function takeaway(r) {
+      const names = (list) => list.map((x) => x.agent).join(' and ');
+      const blocked = r.tierBlocked.length ? ` The brief also reminds me to run ${names(r.tierBlocked)} on my laptop.` : '';
+      if (r.failures.length) {
+        return `${names(r.failures)} failed, and the beat kept going: ${r.runs.length} agent${r.runs.length === 1 ? '' : 's'} still ran, the brief went out, and a separate failure DM names ${names(r.failures)}. It never logged a finished run, so it is due again at the next beat.`;
+      }
+      if (!r.runs.length) return 'Nobody was due, so nothing ran and nothing was sent.';
+      return `Every due agent ran and the brief went out. No failure DM was sent, so silence means success.${blocked}`;
+    }
     function renderResult(r) {
-      if (!r) { out.innerHTML = `<p class="bs__hint">Set up the day, then run the beat.</p>`; return; }
+      if (!r) { out.innerHTML = `<p class="bs__hint">Tick or untick "fails today", then run the beat.</p>`; return; }
       const order = r.due.map((d) => {
         const fail = r.failures.find((f) => f.agent === d.agent);
         const run = r.runs.find((x) => x.agent === d.agent);
-        const note = run && run.notes ? `<span class="bs__sub">scheduler notes in its prompt: ${run.notes.join(', ')}</span>` : '';
-        return li(fail ? 'is-fail' : 'is-ok', `<b class="mono">${d.agent}</b> <span class="bs__why">${esc(d.reason)}</span><span class="bs__res">${fail ? 'failed, the beat continues' : 'report written'}</span>${note}`);
+        const note = run && run.notes ? `<span class="bs__sub">its prompt includes a note to remind me about ${run.notes.join(' and ')}</span>` : '';
+        return li(fail ? 'is-fail' : 'is-ok', `<b class="mono">${d.agent}</b> <span class="bs__why">${esc(plain(d.reason))}</span><span class="bs__res">${fail ? 'failed, the beat continues' : 'report written'}</span>${note}`);
       }).join('');
-      const skipped = r.skipped.map((s) => li('is-skip', `<b class="mono">${s.agent}</b> <span class="bs__why">${esc(s.reason)}</span>`)).join('');
+      const skipped = r.skipped.map((s) => li('is-skip', `<b class="mono">${s.agent}</b> <span class="bs__why">${esc(plain(s.reason))}</span>`)).join('');
       out.innerHTML = `
+        <p class="bs__takeaway">${esc(takeaway(r))}</p>
         <p class="bs__label">Due, in run order</p><ol class="bs__list">${order || li('is-skip', 'Nobody is due.')}</ol>
         <p class="bs__label">Skipped</p><ul class="bs__list">${skipped}</ul>
         <div class="bs__term" role="group" aria-label="What the beat leaves behind">
@@ -288,7 +313,7 @@ ${FENCE}`).join('\n\n'),
     });
     runBtn.addEventListener('click', () => { last = runBeat(state); renderResult(last); renderRows(); sync(); out.focus({ preventScroll: true }); });
     nextBtn.addEventListener('click', () => { state.now = new Date(Date.parse(state.now) + 86400000).toISOString(); state.failing = []; last = null; renderRows(); renderResult(null); sync(); });
-    resetBtn.addEventListener('click', () => { state = freshBeatState(); last = null; renderRows(); renderResult(null); sync(); });
+    resetBtn.addEventListener('click', () => { state = freshDemo(); last = null; renderRows(); renderResult(null); sync(); });
     renderRows(); renderResult(null); sync();
   });
 
@@ -298,15 +323,27 @@ ${FENCE}`).join('\n\n'),
     const out = root.querySelector('[data-out]');
     const chips = [...root.querySelectorAll('[data-scenario]')];
     const agents = [...root.querySelectorAll('[data-agent]')];
-    const token = root.querySelector('[data-token]');
     root.querySelectorAll('[hidden][data-live]').forEach((el) => el.removeAttribute('hidden'));
     ta.removeAttribute('readonly');
     let agent = 'chief-of-staff';
     let timer = 0;
 
+    // One plain sentence for the outcome, above the engine's own ledger lines.
+    function verdict(r) {
+      const k = r.steps.map((x) => x.kind);
+      if (k[0] === 'none') return 'No report block, so nothing leaves the private brain.';
+      if (k.length === 1 && k[0] === 'deny' && r.reports.length && agent !== 'chief-of-staff') return 'Stopped at check 1: this agent is not allowed to file engine issues. Nothing leaves the brain.';
+      const filed = k.filter((x) => x === 'file').length;
+      const capped = k.filter((x) => x === 'deny').length;
+      if (k.includes('draft')) return 'Stopped at check 2: the report names one of the brain's people, so it is never filed. It becomes a private draft in the brain instead.';
+      if (k.includes('dup')) return 'Stopped at check 3: the same bug is already an open issue, so no second issue is filed.';
+      if (capped && filed) return `Check 4: ${filed} filed, and the rest refused by the cap of two per run.`;
+      if (capped) return 'Refused before filing. Nothing leaves the brain.';
+      return 'Passes all four checks: this would become a public issue on the engine.';
+    }
     function render() {
-      const r = applyDefects(ta.value, agent, token.checked);
-      const head = `<p class="dl__count">${r.reports.length} defect-report block${r.reports.length === 1 ? '' : 's'} parsed</p>`;
+      const r = applyDefects(ta.value, agent, true);
+      const head = `<p class="dl__verdict">${esc(verdict(r))}</p><p class="dl__count">${r.reports.length} defect-report block${r.reports.length === 1 ? '' : 's'} parsed</p>`;
       out.innerHTML = head + '<ol class="dl__steps">' + r.steps.map((s) => {
         if (s.kind === 'none') return `<li class="is-skip">${esc(s.text)}</li>`;
         const title = `<b>${esc(s.title)}</b>`;
@@ -326,7 +363,6 @@ ${FENCE}`).join('\n\n'),
       agents.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
       render();
     }));
-    token.addEventListener('change', render);
     ta.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(render, 150); chips.forEach((b) => b.setAttribute('aria-checked', 'false')); });
     pick(chips[0]);
   });

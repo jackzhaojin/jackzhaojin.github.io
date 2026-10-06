@@ -119,3 +119,6 @@
 /* A skipped step reads as skipped without fading its text below contrast. */
 .psteps li[data-state="off"] { opacity: 1; border-style: dashed; background: transparent; }
 .psteps li[data-state="off"] b, .psteps li[data-state="off"] .ps__msg { color: var(--muted); }
+/* Pass 2: the one-line takeaway under the HTTP status */
+.pl__takeaway { margin: 0 0 10px; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.pl__takeaway:empty { display: none; }

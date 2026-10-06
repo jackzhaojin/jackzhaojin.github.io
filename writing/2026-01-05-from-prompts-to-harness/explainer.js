@@ -48,8 +48,8 @@
       if (failed) {
         barD.style.width = d + '%';
         formula.textContent = 'catch {\n  // Fallback to deterministic-only\n  score: deterministic.score  // ' + d + '\n}';
-        verdict.innerHTML = '<p>Score <b>' + d + '</b> from the scan alone</p>' +
-          '<span class="log">findings: one per axe-core violation, "Fix &lt;rule&gt;: &lt;help&gt;". No summary, strengths or quick wins, and no grade.</span>';
+        verdict.innerHTML = '<p>Score <b>' + d + '</b>, from the scan alone</p>' +
+          '<span class="log">The agent step failed, so the report keeps the scan\'s ' + d + ' on its own: one finding per axe-core violation, no summary and no grade.</span>';
         grades.forEach((g) => g.classList.remove('on'));
         return;
       }
@@ -59,8 +59,11 @@
       barD.style.width = (d * 0.3) + '%';
       const exact = Math.round((a * 0.7 + d * 0.3) * 10) / 10;
       formula.textContent = 'Math.round(' + a + ' * 0.7 + ' + d + ' * 0.3)\n= Math.round(' + exact + ')\n= ' + score;
-      verdict.innerHTML = '<p>Final score <b>' + score + '</b> ' + grade + '</p>' +
-        '<span class="log">the agent counts for 70%, the scan for 30%</span>';
+      const gap = score - d;
+      const pull = gap === 0 ? 'The two scores agree, so the blend matches the scan.'
+        : 'The agent\'s ' + (gap < 0 ? 'lower' : 'higher') + ' score ' + (gap < 0 ? 'pulls' : 'lifts') + ' the result ' + Math.abs(gap) + (Math.abs(gap) === 1 ? ' point ' : ' points ') + (gap < 0 ? 'under' : 'over') + ' the scan.';
+      verdict.innerHTML = '<p>Final score <b>' + score + '</b>, ' + grade.replace('-', ' ') + '</p>' +
+        '<span class="log">70% of the agent\'s ' + a + ' plus 30% of the scan\'s ' + d + '. ' + pull + '</span>';
       grades.forEach((g) => g.classList.toggle('on', g.dataset.grade === grade));
     };
     [det, agt, fail].forEach((el) => el.addEventListener('input', render));
@@ -72,20 +75,61 @@
      The ordering rule from the video: planning agents run why, what, how, when;
      the loop then takes tasks in order; a task's validator can log defects as
      subtasks (2.1, 2.2), and the loop picks those up before it moves to task 3.
-     A model of the rule only. It does not run any agents. */
+     A model of the rule only. It does not run any agents. Any change re-runs the
+     whole model at once, so the default already shows a subtask being picked up. */
   document.querySelectorAll('[data-loop]').forEach((fig) => {
     const segs = [...fig.querySelectorAll('.loop__seg')];
     const settings = [...fig.querySelectorAll('.loop__setting')];
-    const nav = fig.querySelector('.loop__nav');
     const queueEl = fig.querySelector('.loop__queue');
     const logEl = fig.querySelector('.loop__log');
-    const planEl = [...fig.querySelectorAll('.loop__plan li')];
-    const stepBtn = fig.querySelector('[data-step]');
-    const runBtn = fig.querySelector('[data-run]');
-    const resetBtn = fig.querySelector('[data-reset]');
-    if (!queueEl || !logEl || !nav) return;
+    const resultEl = fig.querySelector('[data-loop-result]');
+    if (!queueEl || !logEl) return;
 
     const defects = {};
+    const run = (changed) => {
+      const queue = segs.map((sg) => sg.dataset.task);
+      const lines = [['loop: run planning agents in order: why, what, how, when', 'det']];
+      const subs = [];
+      for (let pos = 0; pos < queue.length; pos++) {
+        const t = queue[pos];
+        lines.push(['loop: next available task is ' + t, 'det']);
+        const n = t.includes('.') ? 0 : (defects[t] || 0);
+        if (n > 0) {
+          const fresh = Array.from({ length: n }, (_, i) => t + '.' + (i + 1));
+          queue.splice(pos + 1, 0, ...fresh);
+          subs.push(...fresh);
+          lines.push(['  validate: ' + n + (n === 1 ? ' defect' : ' defects') + ' logged, created ' + fresh.join(' and '), 'no']);
+          const nextPlanned = queue.slice(pos + 1).find((q) => !q.includes('.'));
+          lines.push(['loop: ' + fresh[0] + ' exists, so it runs before ' + (nextPlanned ? nextPlanned : 'the run ends'), 'det']);
+        } else {
+          lines.push(['  validate: passed', 'ok']);
+        }
+      }
+      lines.push(['loop: no tasks left, run complete', 'det']);
+      queueEl.innerHTML = '';
+      queue.forEach((t) => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        li.classList.add('done');
+        if (t.includes('.')) li.classList.add('sub');
+        if (changed && subs.includes(t) && !reduce) li.classList.add('new');
+        queueEl.appendChild(li);
+      });
+      logEl.textContent = '';
+      lines.forEach(([text, cls]) => {
+        const span = document.createElement('span');
+        span.style.display = 'block';
+        span.className = cls;
+        span.textContent = text;
+        logEl.appendChild(span);
+      });
+      if (resultEl) {
+        resultEl.textContent = 'Run order ' + queue.join(', ') + ': ' + (subs.length
+          ? 'each defect became a subtask (' + subs.join(', ') + '), and the loop ran each one right after its parent task.'
+          : 'no defects, so the loop ran the plan as written.');
+      }
+    };
+
     segs.forEach((seg) => {
       seg.hidden = false;
       const task = seg.dataset.task;
@@ -95,96 +139,10 @@
       buttons.forEach((b) => b.addEventListener('click', () => {
         buttons.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
         defects[task] = Number(b.dataset.n);
-        reset();
+        run(true);
       }));
     });
-    settings.forEach((s) => { s.hidden = true; });
-    nav.hidden = false;
-
-    let queue, pos, planned, runId = 0;
-    const tasks = () => segs.map((s) => s.dataset.task);
-
-    const drawQueue = (fresh) => {
-      queueEl.innerHTML = '';
-      queue.forEach((t, i) => {
-        const li = document.createElement('li');
-        li.textContent = t;
-        if (t.includes('.')) li.classList.add('sub');
-        if (i < pos) li.classList.add('done');
-        if (i === pos && planned && pos < queue.length) li.classList.add('now');
-        if (fresh && fresh.includes(t) && !reduce) li.classList.add('new');
-        queueEl.appendChild(li);
-      });
-    };
-    const line = (text, cls) => {
-      const span = document.createElement('span');
-      span.style.display = 'block';
-      if (cls) span.className = cls;
-      span.textContent = text;
-      logEl.appendChild(span);
-      logEl.scrollTop = logEl.scrollHeight;
-    };
-    const finished = () => planned && pos >= queue.length;
-    const syncButtons = () => {
-      stepBtn.disabled = finished();
-      runBtn.disabled = finished();
-    };
-
-    function reset() {
-      runId++;
-      queue = tasks().slice();
-      pos = 0;
-      planned = false;
-      planEl.forEach((p) => p.classList.remove('done'));
-      logEl.textContent = '';
-      line('loop ready: a plan of ' + queue.length + ' tasks, nothing run yet', 'det');
-      drawQueue();
-      syncButtons();
-    }
-
-    const step = () => {
-      if (!planned) {
-        planned = true;
-        planEl.forEach((p) => p.classList.add('done'));
-        line('loop: run planning agents in order: why, what, how, when', 'det');
-        line('  handoff: plan written, ' + queue.length + ' tasks sized by the how');
-        drawQueue();
-        syncButtons();
-        return;
-      }
-      if (finished()) return;
-      const t = queue[pos];
-      line('loop: next available task is ' + t, 'det');
-      line('  research: spec for task ' + t);
-      line('  build: code, Playwright checks, ad hoc + e2e tests');
-      const n = t.includes('.') ? 0 : (defects[t] || 0);
-      let fresh = [];
-      if (n > 0) {
-        fresh = Array.from({ length: n }, (_, i) => t + '.' + (i + 1));
-        queue.splice(pos + 1, 0, ...fresh);
-        line('  validate: ' + n + (n === 1 ? ' defect' : ' defects') + ' logged, created ' + fresh.join(' and '), 'no');
-      } else {
-        line('  validate: passed', 'ok');
-      }
-      pos++;
-      if (finished()) {
-        line('loop: no tasks left, run complete', 'det');
-      } else if (fresh.length) {
-        line('loop: ' + fresh[0] + ' exists, so it runs before ' + (queue.slice(pos).find((q) => !q.includes('.')) || 'the end'), 'det');
-      }
-      drawQueue(fresh);
-      syncButtons();
-    };
-
-    stepBtn.addEventListener('click', () => { runId++; step(); });
-    runBtn.addEventListener('click', async () => {
-      const id = ++runId;
-      while (!finished() && id === runId) {
-        step();
-        if (!reduce) await new Promise((r) => setTimeout(r, 650));
-      }
-    });
-    resetBtn.addEventListener('click', reset);
-    reset();
+    settings.forEach((st) => { st.hidden = true; });
+    run(false);
   });
 })();

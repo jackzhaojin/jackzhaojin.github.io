@@ -19,9 +19,7 @@
   const stage = root.querySelector('[data-stage]');
   const out = root.querySelector('[data-out]');
   const modeBtns = [...root.querySelectorAll('[data-mode]')];
-  const pieceBtns = [...root.querySelectorAll('[data-piece]')];
   let mode = 'rebuild';
-  let piece = 'adhoc';
 
   function render() {
     let built = 0;
@@ -32,7 +30,7 @@
         if (mode === 'rebuild') { kind = 'built'; built += 1; }
         else if (!firstBuilt.has(p.id)) { kind = 'built'; firstBuilt.add(p.id); built += 1; }
         else kind = 'used';
-        const on = p.id === piece ? ' is-on' : '';
+        const on = '';
         const tag = kind === 'built' ? 'built here' : 'reused';
         return `<li class="ru__box ru__box--${p.id} ru__box--${kind}${on}"><span>${p.name}</span><small>${tag}</small></li>`;
       }).join('');
@@ -40,22 +38,14 @@
     });
     stage.innerHTML = cols.join('');
 
-    const p = PIECES.find((x) => x.id === piece);
-    const users = PIECES.length - PIECES.indexOf(p); // patterns that contain this piece
-    const lines = mode === 'rebuild'
-      ? `${p.name} is built ${users === 1 ? 'once' : `${users} times`}, once inside every pattern that needs it. Pieces built across all four patterns: ${built}.`
-      : `${p.name} is built once and used by ${users === 1 ? 'one pattern' : `${users} patterns`}. Pieces built across all four patterns: ${built}.`;
-    out.textContent = lines;
+    out.textContent = mode === 'rebuild'
+      ? `${built} pieces built across the four patterns. Ad hoc prompting alone is built 4 times, once inside every pattern.`
+      : `${built} pieces built, each one once. Every pattern above the first reuses the one below it, so ad hoc prompting is built once and used 4 times.`;
   }
 
   modeBtns.forEach((b) => b.addEventListener('click', () => {
     mode = b.dataset.mode;
     modeBtns.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
-    render();
-  }));
-  pieceBtns.forEach((b) => b.addEventListener('click', () => {
-    piece = b.dataset.piece;
-    pieceBtns.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
     render();
   }));
   root.querySelectorAll('[hidden][data-live]').forEach((el) => { el.hidden = false; });

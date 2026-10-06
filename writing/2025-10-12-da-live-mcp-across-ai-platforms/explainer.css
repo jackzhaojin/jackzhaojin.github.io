@@ -1,6 +1,6 @@
 /* Explainers for "One da.live MCP Server Across Claude, Gemini, Azure OpenAI and n8n".
    Built on the site kit (/css/explainers.css) and design system v3 tokens:
-   the dialect switcher and the session lab. */
+   the tool format switcher and the endpoint table. */
 
 .xp-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
 .xp-tabs button { border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; cursor: pointer; }
@@ -25,22 +25,11 @@
 .dia__pre mark { background: rgba(240,207,142,.18); color: var(--gold); border-radius: 3px; padding: 0 2px; }
 .dia__note { margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 
-/* session lab */
-.sess__controls { display: grid; gap: 14px; padding: 16px 18px 0; }
-.sess__group { display: grid; gap: 6px; }
-.sess__group > span { font: 500 11.5px var(--font-mono); color: var(--muted); letter-spacing: .02em; }
-.sess__out { display: grid; gap: 14px; padding: 16px 18px 20px; }
-.sess__out > * { min-width: 0; }
-@container (min-width: 720px) { .sess__out { grid-template-columns: 1fr 1fr; } }
-.sess__status { font: 600 14px var(--font-mono); margin: 0 0 8px; }
-.sess__status.ok { color: var(--pass-ink); } .sess__status.no { color: #b0344f; }
-[data-theme="dark"] .sess__status.no { color: var(--rose); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="dark"]) .sess__status.no { color: var(--rose); } }
-.sess__why { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
-.sess__code .ln.on { opacity: 1; background: rgba(192,179,255,.09); border-left-color: var(--lav); }
-.sess__code.has-focus .ln { opacity: .4; }
-.sess__code.has-focus .ln.on { opacity: 1; }
-.sess__code pre { max-height: 300px; }
+/* endpoint table (replaced the session lab, October 2026) */
+.sess-table { overflow-x: auto; }
+.sess-table caption { caption-side: bottom; text-align: left; font-size: 13px; color: var(--muted); padding-top: 8px; }
+.sess-table th[scope="row"] { font-weight: 500; color: var(--ink-2); }
+.sess-table td, .sess-table th { vertical-align: top; }
 
 .lab > figcaption { padding: 0 18px 18px; margin-top: 0; }
 

@@ -18,10 +18,9 @@
   };
 
   const $ = (s) => root.querySelector(s);
-  const repoIn = $('[data-repo]');
-  const pathIn = $('[data-path]');
-  const textIn = $('[data-text]');
-  const dateIn = $('[data-date]');
+  const src = $('[data-src]');
+  const DATE = '2026-04-12';
+  let current = null;
   const result = $('[data-result]');
   const why = $('[data-why]');
   const front = $('[data-front]');
@@ -60,15 +59,13 @@
   }
 
   function render() {
-    const repo = repoIn.value.trim() || 'my-repo';
-    const path = pathIn.value.trim().replace(/^\.?\//, '');
-    const text = textIn.value;
-    const date = dateIn.value || '2026-04-12';
-    chips.forEach((c) => c.setAttribute('aria-checked', String(SAMPLES[c.dataset.sample].path === path && SAMPLES[c.dataset.sample].repo === repo)));
-    if (!path) { result.textContent = 'Type a path to sort.'; why.innerHTML = ''; front.textContent = ''; return; }
+    const { repo, path, text } = SAMPLES[current];
+    const date = DATE;
+    chips.forEach((c) => c.setAttribute('aria-checked', String(c.dataset.sample === current)));
+    src.innerHTML = `<span class="hv__seg">${esc(repo)}</span> <span class="hv__sl">:</span> ${esc(path)}`;
     const ex = exclusion(path);
     if (ex) {
-      result.innerHTML = '<span class="hv__skip">Not harvested</span>';
+      result.innerHTML = '<span class="hv__skip">Not harvested. It stays only in the source repo.</span>';
       why.innerHTML = `<li>Skipped: ${ex}.</li>`;
       front.textContent = '';
       return;
@@ -92,11 +89,9 @@
   }
 
   chips.forEach((c) => c.addEventListener('click', () => {
-    const s = SAMPLES[c.dataset.sample];
-    repoIn.value = s.repo; pathIn.value = s.path; textIn.value = s.text;
+    current = c.dataset.sample;
     render();
   }));
-  [repoIn, pathIn, textIn, dateIn].forEach((el) => el.addEventListener('input', render));
   root.querySelectorAll('[hidden][data-live]').forEach((el) => { el.hidden = false; });
   root.classList.add('is-live');
   chips[0].click();

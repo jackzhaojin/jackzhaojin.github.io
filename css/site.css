@@ -172,8 +172,6 @@ html:not(.js) .theme-control { display: none; }
 .writing-filter .chip { min-height: 36px; }
 .writing-filter .chip__n { font-size: 11px; opacity: .6; margin-left: 2px; }
 .writing-filter .chip.is-zero { opacity: .45; }
-.writing-filter__sort { display: flex; gap: 10px; align-items: center; margin-left: auto; }
-.writing-filter__sort label { flex: none; }
 .writing-filter .filter-bar__count { margin-left: 0; }
 @media (max-width: 760px) {
   .writing-filter { padding: 14px 0 14px 16px; gap: 10px; }
@@ -182,10 +180,6 @@ html:not(.js) .theme-control { display: none; }
   .writing-filter .filter-bar__label { flex: 0 0 52px; }
   .writing-filter .filter-bar__row > .cluster { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 16px 2px 2px; }
   .writing-filter .filter-bar__row > .cluster::-webkit-scrollbar { display: none; }
-  .writing-filter__sort { padding-right: 16px; }
-  .writing-filter .filter-bar__row:last-child { flex-wrap: wrap; row-gap: 10px; }
-  .writing-filter .filter-bar__row:last-child > .cluster { flex: 1 1 0; min-width: 0; }
-  .writing-filter__sort { flex-basis: 100%; }
 }
 .writing-empty { margin-bottom: var(--space-6); }
 .writing-empty[hidden] { display: none; }
@@ -239,7 +233,6 @@ html:not(.js) .deck-tabs, html:not(.js) .replay, html:not(.js) [data-replay], ht
  .home-note { max-width: 100%; }
  .credential-list { grid-template-columns: 1fr; }
  .talk-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
- .writing-filter__sort { margin-left: 0; }
  .talk-date p { margin: 0; }
  .talk-date span { display: inline-block; margin-top: 4px; }
  .footer-row { align-items: flex-start; flex-direction: column; gap: 12px; }

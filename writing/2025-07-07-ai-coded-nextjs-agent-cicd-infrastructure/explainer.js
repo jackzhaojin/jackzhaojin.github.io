@@ -59,7 +59,7 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
-  var input = lab.querySelector('#br-branch');
+  var current = 'release/1.0.0';
   var chips = Array.prototype.slice.call(lab.querySelectorAll('[data-branch]'));
   var lanes = { main: lab.querySelector('[data-lane="main"]'), release: lab.querySelector('[data-lane="release"]') };
   var land = lab.querySelector('[data-land]');
@@ -79,7 +79,7 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
   }
 
   function render() {
-    var branch = input.value.trim();
+    var branch = current;
     chips.forEach(function (c) { c.setAttribute('aria-checked', String(c.getAttribute('data-branch') === branch)); });
     if (!branch) { land.innerHTML = '<p>Type a branch name.</p>'; paint(lanes.main, null, false, 'Waiting for a branch.'); paint(lanes.release, null, false, 'Waiting for a branch.'); return; }
     var r = run(branch);
@@ -96,9 +96,8 @@ document.querySelectorAll('.code--prose .ln').forEach(function (l) { l.textConte
   }
 
   chips.forEach(function (c) {
-    c.addEventListener('click', function () { input.value = c.getAttribute('data-branch'); render(); });
+    c.addEventListener('click', function () { current = c.getAttribute('data-branch'); render(); });
   });
-  input.addEventListener('input', render);
   lab.querySelectorAll('[data-js]').forEach(function (el) { el.hidden = false; });
   lab.querySelectorAll('[data-nojs]').forEach(function (el) { el.hidden = true; });
   render();
