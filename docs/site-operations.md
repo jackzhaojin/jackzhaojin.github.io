@@ -103,6 +103,11 @@ Expected redirect behaviour (the check script tests exactly this):
 - `sitemap.xml` is submitted and reads "Success". Search Console re-reads it on its own schedule; after adding pages you can resubmit it under Indexing > Sitemaps, or use URL Inspection > Request indexing for a single page.
 - Optional upgrade not done yet: a Domain property (`jackzhaojin.com`) would cover every subdomain and protocol, but needs a DNS TXT record in Cloudflare. The URL-prefix property is enough while everything redirects to www.
 
+## Bing Webmaster Tools
+
+- Site `https://www.jackzhaojin.com/`, added 2026-10-07 under Jack's personal Microsoft account.
+- Verified with the XML file `BingSiteAuth.xml` at the repo root (served at `/BingSiteAuth.xml`). **Never delete it**; it keeps the Bing site verified.
+
 ## Crawl and share metadata in the repo
 
 | File or tag | Rule |
