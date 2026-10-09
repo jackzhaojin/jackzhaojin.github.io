@@ -39,7 +39,7 @@ Shared design assets: `design-systems/v3/tokens.css`, `base.css`, `components.cs
 
 ## Adding Content
 
-Read [docs/publishing-writing.md](docs/publishing-writing.md) before publishing articles. Every entry needs complete on-site writing. Videos require a complete written companion and a verified YouTube destination. Never send article readers to LinkedIn. When filters become useful, they update the current listing in place; no facet page navigation.
+Read [docs/publishing-writing.md](docs/publishing-writing.md) before publishing articles. Every entry needs complete on-site writing. Videos require a complete written companion and a verified YouTube destination. A video article is a faithful rendition: everything material in the video appears in it, proven by a coverage map. New long-form LinkedIn Articles are cross-posted here with the same words, live here first (2026-10-09). Both flows are driven from the career-blogs repo (`video-release` skill, `jack-technical-writing`). Never send article readers to LinkedIn. When filters become useful, they update the current listing in place; no facet page navigation.
 
 Add credentials to `certifications/index.html`, preserve issuer verification links, update the ItemList and Person credential references, and synchronize the compatibility page. Add talks to `talks/index.html` with verified source details. Keep `sitemap.xml`, the discovery index and validation inventories consistent with canonical routes.
 
