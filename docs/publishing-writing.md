@@ -16,7 +16,7 @@ All production pages load the shared design-systems/v3 tokens, base and componen
 
 ## Add an article
 
-The bar for anything listed here: a reader learns something they can use, technical or about building with AI. Personal journey, milestone and announcement posts stay on LinkedIn (Jack, 2026-10-03).
+The bar for anything listed here: a reader learns something they can use, technical or about building with AI. Personal journey, milestone and announcement posts stay on LinkedIn (Jack, 2026-10-03). New long-form LinkedIn Articles are cross-posted here with the same words, live here first; the LinkedIn Article follows once this URL is indexed (Jack, 2026-10-09).
 
 1. Create writing/yyyy-mm-dd-descriptive-slug/index.html. The date is the day the page goes live, the same as datePublished and the byline. The first article, writing/2026-09-20-aem-edge-functions-google-sign-in/, keeps its recording-date slug because published URLs never change using the current production head, header and footer. Replace the title, description, canonical and social metadata. Keep the analytics snippet immediately after viewport and the pre-paint theme setup before stylesheets.
 2. Write the complete article in semantic HTML: one H1, introduction, useful H2/H3 sections, code or diagrams as needed, limitations, and links to primary evidence. The design system's post template is a visual reference, not publish-ready content.
@@ -30,7 +30,7 @@ The bar for anything listed here: a reader learns something they can use, techni
 
 ## Articles with a video
 
-The article is the piece; a video is something it may include. The byline reads `N min read · Includes my mm:ss video`, never "companion to my video". A video in the Writing listing must have a complete written article. The article should explain the material without requiring playback. A raw transcript or short summary is insufficient. Add a verified Watch on YouTube link. If you embed the video, use a real lazy-loaded iframe from youtube-nocookie.com in the initial HTML, not a click-to-load poster: Google does not click, so it cannot detect a video that needs one. Set a custom YouTube thumbnail cut from the recording. In VideoObject use embedUrl and leave out contentUrl, which must point at a media file, never a YouTube watch page. Keep the original recording date separate from the article's dates. Never invent a channel or video URL.
+The article is the piece; a video is something it may include. The byline reads `N min read · Includes my mm:ss video`, never "companion to my video". A video in the Writing listing must have a complete written article. The article should explain the material without requiring playback. A raw transcript or short summary is insufficient. It is a faithful rendition: everything material in the video (each part, demo result, command, limit and correction) appears in the article, which can go deeper but adds no claim the video does not make (Jack, 2026-10-09; the jack-technical-writing skill checks this with a coverage map). Add a verified Watch on YouTube link. If you embed the video, use a real lazy-loaded iframe from youtube-nocookie.com in the initial HTML, not a click-to-load poster: Google does not click, so it cannot detect a video that needs one. Set a custom YouTube thumbnail cut from the recording. In VideoObject use embedUrl and leave out contentUrl, which must point at a media file, never a YouTube watch page. Keep the original recording date separate from the article's dates. Never invent a channel or video URL.
 
 ## Search and AI discovery
 
