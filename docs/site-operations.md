@@ -45,6 +45,7 @@ Consequences of Cloudflare sitting in front:
   ```
 
 - Wait for `built` before loading any new URL in a browser or curl. Loading a new path before the build finishes lets Cloudflare cache a 404 for that path (see Troubleshooting).
+- Request indexing for a new page (Google Search Console, Bing Webmaster Tools) no sooner than 4 hours after it goes live, so any 404 cached before the build has expired. The 404 page is noindex; on 2026-10-11 Bing crawled the adaptTo recap 7 minutes after launch and recorded "Indexing allowed: No" until indexing was requested again.
 - `jackzhaojin.github.io` still resolves and 301s to the custom domain.
 - The empty `.nojekyll` file at the repo root turns Jekyll off. Without it, Pages runs Jekyll on every build and converts any file that opens with YAML front matter (`---`) into a themed `.html`, so the original file 404s. That is how `design-systems/v3/DESIGN.md` went missing on 2026-09-14. Keep `.nojekyll`; a file with front matter is fine once it is there.
 
