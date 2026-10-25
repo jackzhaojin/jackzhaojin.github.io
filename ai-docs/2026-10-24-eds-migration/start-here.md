@@ -59,6 +59,15 @@ As of 2026-10-25:
   - **Home** live at https://main--www-eds--jackzhaojin.aem.live/ (blocks hero, showcase, cards, columns). Gate pub6: pixel 0.24% at 1440, 1.11% at 360, height delta 0, content-diff 0 red and 0 nothing-lost, chrome crops 100%, cap probe and clip probe pass. Dark 0.13% / 0.93%. Lighthouse mobile performance 100 (source 98). Editability 28/28, no edit-mode drift.
   - **Article archetype** live at https://main--www-eds--jackzhaojin.aem.live/writing/2026-09-20-aem-edge-functions-google-sign-in/ : `templates/article` and the first explainer family blocks (figure, code, compare, switch, lab), plus rail, row-list, author-box, fine-print. Gate pub6: pixel 0.05% / 0.84%, height delta 0, content-diff 0 red and 0 nothing-lost (7 rail thumbnails owner-accepted at 360, register R7). Dark 0.01% / 4.17%. Lighthouse mobile performance 100 (source 93). Editability 110/110, no edit-mode drift. Interaction parity 14 of 14. The family pattern and vocabulary: `www-eds/stardust/explainer-family.md`; the importer: `www-eds/stardust/scripts/import-article.mjs`.
   - **RECONCILE.** The promoted design spec agrees with v3. The block catalog is corrected for what home and D1 established (`www-eds/stardust/reconcile-first-page.md`). v3's contrast eval passes on both pages in Light, Dark and System (`stardust/scripts/v3-eval.mjs`).
+- **Wide rollout (2026-10-25, one session: the main thread plus 7 parallel streams, each in its own worktree), all in `www-eds` main.** Per-stream results: `www-eds/stardust/rollout/streams.md`; shared rules: `stardust/rollout/brief.md`.
+  - **Every sitemap URL is live:** all 34 answer 200 on https://main--www-eds--jackzhaojin.aem.live at the same path, plus `/404.html` and the root files (Google and Bing verification, `llms.txt`, favicon).
+  - **Streams.** Listings (writing, talks, certifications, privacy, 404); portfolio (all 11 `#ch-*` anchors resolve); four article batches A1 to A4 (27 articles, 40 explainer engines under `blocks/explainer/engines/`, each with an import engine); the design system site `/design-systems/v3/` (template `design-docs`, published, `noindex`).
+  - **Per-page gates** (content-diff 0 looks-same red and 0 nothing-lost yellow, pixel, height, clip, chrome, editability 0 dead and 0 duplicated) pass at 1440 and 360 on every page except, by decision or register: 2026-08-15 (R11, the source's explainers never run), 2025-07-06 at 1440 (-10px, R13) and the design system page (see Left).
+  - **Final sweep** after link localization (gate-all, all 34 pages): pixel and height pass on 34 of 34 at 1440 and 360; full verdict 33 of 34 at each width (portfolio content presence: two repo cards whose source wraps the whole card in one link).
+  - **Lighthouse mobile performance 100** on every page type: home, writing listing, article, portfolio, talks, certifications, privacy.
+  - **QA:** dark-mode check, v3 eval on all 36 pages and `stardust:qa` (triaged: no migration defect left); 301 of 301 linked anchors resolve.
+  - **Shared code built by the main thread for the streams:** series nav; code wrap, prose, plain, stack; data-table nowrap, cheat, rank, stack, caption, sr-caption, row-heads, fill-in, span-first, mono-head, compact, merged cells; figure page, narrow, slim, compact, tall, native, open and split boards; article section styles code-wrap, code-wrap-wide, roomy-h3, page theme code-nowrap, h2 keep-together; dark inverse for a band forced dark; shared theme control. Links localized across the whole content tree (113 links).
+  - **Register** R8 to R23 added for review (variant budgets, one-article looks, link targets that would 404 after cutover, explainer behaviour); catalog updated with every block, variant and engine.
 
 ## Left
 
@@ -79,19 +88,21 @@ In order. The steps and their "done when" are in [workstreams.md](workstreams.md
   - [x] Check every item in [best-practices.md](best-practices.md) § 9 and update the note.
 - [x] **Foundation and first page:** `stardust:replica --first-page home`. Approval waits for Jack's register review.
 - [x] **Article archetype** and the explainer family's first blocks. Approval waits for Jack's register review.
-- [ ] **Jack: register review** (decisions 15, 16) of `www-eds/stardust/replica/inconsistency-register.md`: R1 to R7, and R3 needs a decision (the one-frame light canvas for a stored Dark choice). Then the two state rows advance (`stardust/reconcile-first-page.md` § 3).
+- [ ] **Jack: register review** (decisions 15, 16) of `www-eds/stardust/replica/inconsistency-register.md`: now R1 to R23. R3 needs a decision (the one-frame light canvas for a stored Dark choice); R11, R16, R18, R20 are applied and need review. Then the state rows advance (`stardust/reconcile-first-page.md` § 3).
 
 ### Phase 2: parallel (Goal 2)
 
-- [ ] **Blocks, templates and library:** C1, C2, C3, D2, F, G1, H.
+- [x] **Blocks, templates and pages:** C1, C2, C3, D2, F, G1 done in the wide rollout (2026-10-25).
+- [ ] **H, design system site:** published at `/design-systems/v3/` with every story; 0 nothing-lost yellow and editability 1431/1431 (0 dead, 0 dup), but it does not pass the gate (1440: 76 red, 13.28%, -240px; 360: 75 red, 18.67%, -567px), because its stories are the site's own blocks (decision 7) where v3 shows prototype markup (live header and footer, cards, stats, chapter head, showcase meta order, buttons with no EDS equivalent). Residuals are in the register (R17) for Jack. The library config (the blocks sheet, rows listed in `stardust/rollout/streams.md`) is a config change: waits for Jack.
+- [ ] **Writing listing from `/query-index.json`:** needs the query index config and article metadata (config change): waits for Jack.
 
 ### Phase 3: single thread (Goal 3)
 
-- [ ] **E:** one-off explainers.
-- [ ] **G2:** SEO and config.
-- [ ] **I:** rollout of the remaining 27 articles.
-- [ ] **B:** the edge on staging.
-- [ ] **J:** QA.
+- [x] **E:** one-off explainers, mapped onto the explainer core as engines (register R12, R19 to R23).
+- [ ] **G2:** SEO and config. Root files and social images done; redirects (`blogs.html`, `certifications.html`, and folder pages without their slash), query index, sitemap (it lists /nav and /footer today), robots, headers, bulk metadata (`og:type`), JSON-LD and GA4 wait for Jack (config).
+- [x] **I:** rollout of the remaining 27 articles, media upload, link localization over the whole tree.
+- [ ] **B:** the edge on staging. Built (not deployed): `www-eds/edge/` holds the Worker (project-site allowlist first, then Adobe's Cloudflare worker vendored from `adobe/aem-cloudflare-prod-worker@ec7387c`), `wrangler.toml` with the staging route `next.jackzhaojin.com/*` and no www route, 8 route-table tests passing, and `scripts/check-host.mjs`, which already passes with the Worker in-process against the real origins (34 pages from EDS, 7 project sites from GitHub Pages, root files, 404s; only the legacy redirects wait on config). Left for Jack: the staging DNS record, `wrangler login`, `npx wrangler deploy --env staging`, then `node scripts/check-host.mjs --base https://next.jackzhaojin.com`.
+- [ ] **J:** QA. Done: the final gate sweep; Lighthouse mobile 100 on every page type; the dark-mode check (stored Dark on all 34 pages: inside 10% and 8px except R11 and R13); the v3 eval on all 36 pages (Light, Dark, System: 9 of 9 pairs AA, no overflow, no console errors); `stardust:qa` swept and triaged (45 error / 127 warn left, none a migration defect: pre-cutover noindex, config items, findings the source has too; `www-eds/stardust/rollout/streams.md`). Left: project-site routes and `check-site.sh` on staging (need B).
 
 ### Cutover (Jack, not a goal)
 
@@ -151,3 +162,4 @@ One dated line per run: what changed, and what it stopped on.
 - 2026-10-25: site created through the aem.live tutorial; `www-eds` made ready for `/goal` (plugins, Node 22, docs access). Planning session.
 - 2026-10-25: DA token flow switched from `.env` to Adobe's `da-auth-helper` cache, and tested: 24-hour token, authenticated list 200. Planning session.
 - 2026-10-25: Goal 1. Prep, foundation, home and the article archetype built, published and gated (1440 and 360: 0 red, 0 nothing-lost, height delta 0; Lighthouse mobile 100 on both); spec, audit, section 9 and RECONCILE done. Stopped at the Experience Workspace enablement (config change) and the register review, for Jack.
+- 2026-10-25: Wide rollout ("migrate everything"). Shared blocks first, then 7 parallel streams (listings, portfolio, design system, articles A1 to A4) with the main thread answering their shared-file requests. All 34 sitemap URLs live and gated, links localized, final sweep 34/34 pixel and height at both widths, Lighthouse mobile 100 on every page type. The design system stream's push was refused by the permission check; Jack approved it and the main thread pushed. QA: dark check, v3 eval on all 36 pages, stardust:qa triaged, fixes for the defects it found. Stopped on the register review (R17 design system page, R24 portfolio repo cards), config (EW enablement, library, query index, redirects, sitemap, robots, bulk metadata) and Cloudflare for the staging edge (B), for Jack.
