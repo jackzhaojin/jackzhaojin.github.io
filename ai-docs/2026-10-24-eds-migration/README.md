@@ -103,7 +103,7 @@ Not done yet: the tutorial's optional code change, and Experience Workspace enab
 
 ## Inputs only Jack can provide
 
-- A DA (IMS) token for content writes, kept in `.env` as `DA_TOKEN`.
+- An Adobe sign-in for the DA token helper, which caches the token at `~/.aem/da-token.json` ([start-here.md](start-here.md) rule 8).
 - Sign-in to Cloudflare in the built-in browser, and an OK for each Cloudflare change.
 - `wrangler login`, so the Worker deploys from the repo.
 - A Cloudflare API token with Cache Purge on the `jackzhaojin.com` zone, for EDS push invalidation. Jack creates and stores it; no agent types it.

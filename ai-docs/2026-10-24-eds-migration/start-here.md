@@ -52,6 +52,7 @@ As of 2026-10-25:
   - `www-eds/.claude/settings.local.json` (git-ignored) lets sessions there read this repo.
   - Node 22 is pinned in `www-eds/.nvmrc`, with aem-cli 16.22.14 and playwright-cli 0.1.22 installed under it.
   - `www-eds/AGENTS.md` points here.
+  - DA token flow tested: Jack signed in through `da-auth-helper`, the cache is valid until 2026-10-26 09:29 ET, and an authenticated `admin.da.live/list/jackzhaojin/www-eds` returned 200.
 
 ## Left
 
@@ -61,7 +62,7 @@ In order. The steps and their "done when" are in [workstreams.md](workstreams.md
 
 - [ ] Open `www-eds` in Claude Code, trust the folder, and check that `/status` lists the project settings and that the three plugins load.
 - [ ] Use auto mode, so goal turns run without a prompt per tool call.
-- [ ] Have a DA token ready for content writes. Stardust's `deploy` reads `DA_TOKEN` from `www-eds/.env`. The boilerplate's `.gitignore` does not list `.env`, so add it there before creating the file (stardust's setup also writes that block).
+- [ ] Be ready to sign in to Adobe when the DA token helper opens a browser window (rule 8). The token is cached at `~/.aem/da-token.json` for 24 hours; no `.env` file is needed. The current one is valid until 2026-10-26 09:29 ET.
 - [ ] Answer [open-questions.md](open-questions.md), or let the goal apply its recommendations.
 
 ### Phase 1: single thread (Goal 1)
@@ -95,7 +96,7 @@ In order. The steps and their "done when" are in [workstreams.md](workstreams.md
 2. **Code:** commit and push to `www-eds` main (decision 14). Pull with rebase before every push; never force-push.
 3. **This folder is read-only** for goals, with two exceptions: this file's Done, Left and Run log, and the findings in [best-practices.md](best-practices.md) § 9. Edit them locally. Never commit or push `jackzhaojin.github.io`; Jack does that.
 4. **Stop and ask Jack at:**
-   - the DA token;
+   - the Adobe sign-in, whenever the cached DA token has expired;
    - any Experience Workspace or site config change;
    - every Cloudflare change, the Cache Purge token and `wrangler login`;
    - the register reviews (decisions 15 and 16);
@@ -103,6 +104,16 @@ In order. The steps and their "done when" are in [workstreams.md](workstreams.md
 5. **Node:** Bash calls do not keep shell state, so prefix every node, npm, npx, aem and playwright-cli command with `source ~/.nvm/nvm.sh && nvm use >/dev/null &&`.
 6. **Plugins:** never copy skill files into a repo. Declare plugins in `.claude/settings.json`, and update them between goals, not during one.
 7. **Copy:** plain hyphens only (no em or en dashes), content carried verbatim, never send readers to LinkedIn.
+8. **DA token:** get it through the aem-edge-delivery-services plugin's `da-auth` skill.
+   - Run `npx -y github:adobe-rnd/da-auth-helper token >/dev/null`. It opens Adobe's sign-in and caches the token at `~/.aem/da-token.json` for 24 hours (measured 2026-10-25). If the browser window doesn't appear, the helper prints the sign-in URL on stderr: open it in Chrome and let Jack sign in.
+   - Never print the token, never write it into a repo, and never pull it out of a browser. This replaces stardust's `.env` suggestion.
+   - Pass it inline to each command that needs it:
+
+     ```bash
+     DA_TOKEN=$(node -e "const t=require(process.env.HOME+'/.aem/da-token.json');if(t.expires_at>Date.now()+60000)process.stdout.write(t.access_token)") <command>
+     ```
+
+   - If that comes back empty, the token has expired: run the helper again and stop for Jack's sign-in.
 
 ## Goal prompts
 
@@ -131,3 +142,4 @@ Paste one per phase in a session opened in `/Users/jackjin/dev/jackzhaojin/www-e
 One dated line per run: what changed, and what it stopped on.
 
 - 2026-10-25: site created through the aem.live tutorial; `www-eds` made ready for `/goal` (plugins, Node 22, docs access). Planning session.
+- 2026-10-25: DA token flow switched from `.env` to Adobe's `da-auth-helper` cache, and tested: 24-hour token, authenticated list 200. Planning session.
