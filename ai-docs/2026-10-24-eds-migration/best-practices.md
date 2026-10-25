@@ -151,15 +151,19 @@ The questions this research raised (GA4 and consent, trailing slashes, the libra
 
 ## 9. Verify in the first spike
 
-- The `blocks` sheet pointing at `/design-systems/v3/` documents; `library-metadata` hidden on published pages.
-- No light-canvas flash for a stored Dark choice.
-- `/x` and `/x/index` behaviour for a folder index.
-- The preview proxy's automatic quick-edit bootstrap.
-- Server-side section metadata in `.plain.html` fragments.
-- `header.js` and the removed `.button-container` class.
-- The `redirects` sheet in Experience Workspace (the docs still use Excel wording).
-- Push invalidation config path (`cdn.json` vs `cdn/prod.json`; the docs disagree).
-- Scheduling: `/docs/deprecation` lists it as discouraged, but the Prepare menu offers Schedule Publish.
+All nine checked 2026-10-25 in Goal 1, against the source of adobe/da-live, da-nx, da-universal, ew-extensions, helix-tools-website and helix-html-pipeline (2026-10-22 to 10-23), the aem.live docs, and the live `main--www-eds--jackzhaojin` site. Evidence: `www-eds/stardust/first-page/s9-findings.md`.
+
+- [x] **The library's `blocks` sheet pointing at `/design-systems/v3/` documents.** Confirmed from source: any row with `name` and `path` is kept (da-live `blocks/edit/da-library/helpers/index.js:220`); `/library/blocks` is only the docs' convention. Register `https://content.da.live/jackzhaojin/www-eds/design-systems/v3/<block>` paths: they read the DA source in both editors, with no preview needed. **`library-metadata` is not hidden** by the pipeline or the boilerplate; the project hides it (done: `styles/lazy-styles.css`). Not yet tried live: the library is a site config change, so it waits for Jack's OK (Phase 2, H).
+- [x] **Light-canvas flash for a stored Dark choice: it exists.** With Dark stored on a light OS, one frame of the light canvas paints before `scripts.js` applies `data-theme` (screencast luminance 244, then 19); the source's inline head script goes straight to dark. Content never paints in the wrong theme (the body stays hidden until `appear`). Options: accept, or a tiny classic `/scripts/theme-init.js` in `head.html` (not inline; one extra blocking request). Jack's call: inconsistency register R3.
+- [x] **`/x` and `/x/index` for a folder index.** `/x/` serves the folder's `index` (200). `/x` returns **404 with no redirect**, and `/x/index` and `/x/index.html` return 404 (the pipeline rejects `/index` by design, `fetch-content.js:70`). GitHub Pages 301s `/x` to `/x/` today, so slash-less links would break: add `/x` to `/x/` redirects (redirects sheet entries per folder page, or the Worker), in G2 or B.
+- [x] **The preview proxy's automatic quick-edit bootstrap.** Confirmed: the proxy appends it to `scripts/scripts.js` when that file has a top-level `loadPage` and no `quick-edit.js` import (da-universal `quick-edit.js:255-257`, "Inject Quick Edit (#224)", 2026-06-03). `/docs/ew/about` is out of date. Add nothing; keep `loadPage()`. Seeing it in the canvas waits for `ew.enabled`.
+- [x] **Server-side section metadata in `.plain.html`.** Confirmed live: `style` arrives as classes (`<div class="tint">`, `related`), `id` as the section id (`#part-1` to `#part-6`, `#video`, `#takeaways`), any other key as `data-*` (`data-note-label`), and the section-metadata block is gone. A section holding only the page metadata block is left empty; the project hides empty sections.
+- [x] **`header.js` and the removed `.button-container` class.** Confirmed: the boilerplate header called `brandLink.closest('.button-container').className = ''`, which throws now that the class is gone. The v3 header block replaces it (no reference).
+- [x] **The `redirects` sheet in Experience Workspace.** Confirmed: a DA sheet named `redirects` at the site root, columns `Source` and `Destination`, one default tab (a named single sheet is not accepted), preview and publish. Proven on adobe/da-live (`/adaptto` 301). Not created yet: G2.
+- [x] **Push invalidation config path.** Both work: `cdn.json` with `{"prod": {...}}` or `cdn/prod.json` flat ("two views of the same node", helix-admin); tools.aem.live writes `cdn/prod.json`. Keys `host`, `type: "cloudflare"`, `plan` (free, pro, business, enterprise; default free), `zoneId`, `apiToken`; optional `route`, `branch`.
+- [x] **Scheduling.** `/docs/deprecation` covers only the old `.helix` `crontab` sheet. Experience Workspace Schedule Publish is supported (built in, `helix-snapshot-scheduler-prod`). It needs a `prepare` tab row titled `Schedule Publish` in the DA site or org config and Register site at `da.live/apps/scheduler`: a config change for Jack's OK.
+
+Also learned: `ew.enabled` is set in the DA config's `flags` tab (site or org), off by default (da-nx `nx2/utils/ewFlags.js:163`); the Sidekick edit URL is `sidekick.json` in the config service, `editUrlPattern: "https://da.live/canvas#/{{org}}/{{site}}{{pathname}}"`. The `ew-setup` tool (adobe-rnd/ew-extensions) makes exactly those two writes.
 
 ## Sources
 

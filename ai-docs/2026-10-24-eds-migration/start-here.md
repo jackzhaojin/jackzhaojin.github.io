@@ -53,6 +53,12 @@ As of 2026-10-25:
   - Node 22 is pinned in `www-eds/.nvmrc`, with aem-cli 16.22.14 and playwright-cli 0.1.22 installed under it.
   - `www-eds/AGENTS.md` points here.
   - DA token flow tested: Jack signed in through `da-auth-helper`, the cache is valid until 2026-10-26 09:29 ET, and an authenticated `admin.da.live/list/jackzhaojin/www-eds` returned 200.
+- **Goal 1 (2026-10-25), all in `www-eds` main:**
+  - **Prep.** Baselines frozen (home and the article, 1440 and 360). Site scope: extract `--prep` of all 34 sitemap pages, spec S1 to S10 passing (S5 skipped: no telemetry key), dynamics triaged (`stardust/dynamic-features.md`), audit 74/100 (`stardust/audit/jackzhaojin-com/`). Section 9 of [best-practices.md](best-practices.md): all nine checked, findings recorded there. Open questions 1 and 2: recommendations (a) applied (stardust deploys through the Source API).
+  - **Foundation.** v3 tokens ported as is into `styles/styles.css`, self-hosted fonts with measured fallback faces, the stored theme applied in `loadEager()`, the v3 header (theme control, menu) and compact footer, bands as section-metadata style words, opt-in buttons and text links in a `.cta-slot` wrapper that holds in quick edit.
+  - **Home** live at https://main--www-eds--jackzhaojin.aem.live/ (blocks hero, showcase, cards, columns). Gate pub6: pixel 0.24% at 1440, 1.11% at 360, height delta 0, content-diff 0 red and 0 nothing-lost, chrome crops 100%, cap probe and clip probe pass. Dark 0.13% / 0.93%. Lighthouse mobile performance 100 (source 98). Editability 28/28, no edit-mode drift.
+  - **Article archetype** live at https://main--www-eds--jackzhaojin.aem.live/writing/2026-09-20-aem-edge-functions-google-sign-in/ : `templates/article` and the first explainer family blocks (figure, code, compare, switch, lab), plus rail, row-list, author-box, fine-print. Gate pub6: pixel 0.05% / 0.84%, height delta 0, content-diff 0 red and 0 nothing-lost (7 rail thumbnails owner-accepted at 360, register R7). Dark 0.01% / 4.17%. Lighthouse mobile performance 100 (source 93). Editability 110/110, no edit-mode drift. Interaction parity 14 of 14. The family pattern and vocabulary: `www-eds/stardust/explainer-family.md`; the importer: `www-eds/stardust/scripts/import-article.mjs`.
+  - **RECONCILE.** The promoted design spec agrees with v3. The block catalog is corrected for what home and D1 established (`www-eds/stardust/reconcile-first-page.md`). v3's contrast eval passes on both pages in Light, Dark and System (`stardust/scripts/v3-eval.mjs`).
 
 ## Left
 
@@ -68,11 +74,12 @@ In order. The steps and their "done when" are in [workstreams.md](workstreams.md
 ### Phase 1: single thread (Goal 1)
 
 - [ ] **Prep:**
-  - Experience Workspace enablement (`ew.enabled`, the Sidekick edit URL), with Jack's OK.
-  - Freeze the baseline, run spec and audit.
-  - Check every item in [best-practices.md](best-practices.md) § 9 and update the note.
-- [ ] **Foundation and first page:** `stardust:replica --first-page home`.
-- [ ] **Article archetype** and the explainer family's first blocks.
+  - [ ] Experience Workspace enablement (`ew.enabled` in the DA config `flags` tab, the Sidekick `editUrlPattern` in `sidekick.json`), with Jack's OK. **Asked 2026-10-25; waiting.**
+  - [x] Freeze the baseline, run spec and audit.
+  - [x] Check every item in [best-practices.md](best-practices.md) § 9 and update the note.
+- [x] **Foundation and first page:** `stardust:replica --first-page home`. Approval waits for Jack's register review.
+- [x] **Article archetype** and the explainer family's first blocks. Approval waits for Jack's register review.
+- [ ] **Jack: register review** (decisions 15, 16) of `www-eds/stardust/replica/inconsistency-register.md`: R1 to R7, and R3 needs a decision (the one-frame light canvas for a stored Dark choice). Then the two state rows advance (`stardust/reconcile-first-page.md` § 3).
 
 ### Phase 2: parallel (Goal 2)
 
@@ -143,3 +150,4 @@ One dated line per run: what changed, and what it stopped on.
 
 - 2026-10-25: site created through the aem.live tutorial; `www-eds` made ready for `/goal` (plugins, Node 22, docs access). Planning session.
 - 2026-10-25: DA token flow switched from `.env` to Adobe's `da-auth-helper` cache, and tested: 24-hour token, authenticated list 200. Planning session.
+- 2026-10-25: Goal 1. Prep, foundation, home and the article archetype built, published and gated (1440 and 360: 0 red, 0 nothing-lost, height delta 0; Lighthouse mobile 100 on both); spec, audit, section 9 and RECONCILE done. Stopped at the Experience Workspace enablement (config change) and the register review, for Jack.
