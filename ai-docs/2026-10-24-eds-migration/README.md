@@ -53,10 +53,10 @@ Answers to the first round of [open-questions.md](open-questions.md).
 9. **GA4 and consent.** GA4 loads in `consented.js` with consent granted by default and no banner, as the site works today. A browser's Global Privacy Control signal counts as a decline, and GA4 starts 3 seconds after LCP. At cutover, `docs/site-operations.md` drops the "gtag first in `<head>`" rule.
 10. **Trailing slashes stay.** `/writing/<slug>/` keeps its slash (decision 4 stands). The spike still checks what `/x` and `/x/index` return.
 11. **The design system pages are the library.** This holds if the spike confirms that the library's `blocks` sheet can point at them and that `library-metadata` stays hidden on published pages. Otherwise, a `/library/blocks/` copy generated from the same source.
-12. **Names.**
-    - Repo `github.com/jackzhaojin/jackzhaojin-com`.
-    - Experience Workspace org `jackzhaojin`, site `jackzhaojin-com`.
-    - Origin `main--jackzhaojin-com--jackzhaojin.aem.live`.
+12. **Names.** Shortened to `www-eds` when the site was created on 2026-10-25, through the aem.live tutorial:
+    - Repo `github.com/jackzhaojin/www-eds` (public, from `adobe/aem-boilerplate`), cloned to `~/dev/jackzhaojin/www-eds`.
+    - Experience Workspace org `jackzhaojin`, site `www-eds`, admin `jackzhaojin@gmail.com`.
+    - Origins `main--www-eds--jackzhaojin.aem.page` and `main--www-eds--jackzhaojin.aem.live`.
     - Staging `next.jackzhaojin.com`.
 13. **Build shape: keep it simple.** The initial build runs single-threaded. Only blocks, templates and the block library run in parallel ([workstreams.md](workstreams.md)).
 14. **Git.** Every stream commits and pushes straight to the EDS repo's main. No agent pushes to `jackzhaojin.github.io`; the Cloudflare www route and the cutover stay Jack's.
@@ -86,9 +86,20 @@ Answers to the first round of [open-questions.md](open-questions.md).
 
 The questions it raised (GA4 and consent, trailing slashes, the library source) were answered on 2026-10-25: decisions 9 to 11.
 
+## The site so far (2026-10-25)
+
+Created through the aem.live developer tutorial, driven in Chrome:
+
+1. The repo was made from the boilerplate template.
+2. AEM Code Sync was added to its selected repositories.
+3. The AEM configuration setup was saved: GitHub code, Experience Workspace content, one admin.
+4. The starter `index`, `nav` and `footer` documents were previewed and published from Experience Workspace.
+5. The repo was cloned locally, and `aem up` served it on `localhost:3000`.
+
+Not done yet: the tutorial's optional code change, and Experience Workspace enablement (`ew.enabled`, the Sidekick edit URL; [best-practices.md](best-practices.md) § 7).
+
 ## Inputs only Jack can provide
 
-- The GitHub repo name and the Experience Workspace org and site.
 - A DA (IMS) token for content writes, kept in `.env` as `DA_TOKEN`.
 - Sign-in to Cloudflare in the built-in browser, and an OK for each Cloudflare change.
 - `wrangler login`, so the Worker deploys from the repo.

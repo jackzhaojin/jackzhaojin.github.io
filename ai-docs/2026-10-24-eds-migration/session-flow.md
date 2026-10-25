@@ -151,6 +151,24 @@ What came of it:
 - "MCP always" raised a follow-up: stardust's own deploy writes through the Source API, and its ledger and gates depend on that. That is now open question 1.
 - The workstreams were rewritten as three phases: single thread, parallel blocks, templates and library, then single thread.
 
+### 10. The aem.live tutorial in Chrome
+
+> I guess outside of the goal let's get https://www.aem.live/developer/tutorial done in the chrome mcp! make sure the github is created and local directory is set under ~/dev/jackzhaojin and repo name, and we can run the goal there
+
+Claude read the current tutorial, confirmed the name was free, and asked before anything public. Jack approved going through publish, and shortened the name:
+
+> Oh your first recommendaiton, although maybe make the site name shorter like www-eds
+
+Then, in Jack's Chrome:
+
+1. **The repo** `jackzhaojin/www-eds`, created from the `adobe/aem-boilerplate` template, public.
+2. **AEM Code Sync.** It was already installed on the account for six selected repos. GitHub asked for a passkey (sudo mode), which Jack confirmed. Claude then added `www-eds` as the seventh and left the six alone.
+3. **The AEM configuration setup.** It opened straight from the GitHub save, and showed code from GitHub and content from Experience Workspace. The Users step came up empty, so Claude asked which Adobe ID to add as admin before typing one.
+4. **Experience Workspace** already held starter `index`, `nav` and `footer` documents. Claude previewed and published all three from the browse view's selection bar; Delete sits next to Preview, and was zoomed on before clicking.
+5. **Local:** cloned to `~/dev/jackzhaojin/www-eds`, `npm install`, `aem up` served `localhost:3000`.
+
+Every step was checked outside the browser with `gh` and `curl`: the repo, synced code on aem.page, 200s on aem.page and aem.live, and the local server.
+
 ## Moments worth showing
 
 1. **The redirect trap.** One curl shows `jackzhaojin.github.io/<repo>/` answering 301 to www, and the whole routing design follows from it.
@@ -174,7 +192,7 @@ What came of it:
 - Answering the two remaining questions in [open-questions.md](open-questions.md).
 - The first spike ([best-practices.md](best-practices.md) § 9).
 - Writing the goal prompt.
-- Installing and running stardust, and creating the EDS repo and Experience Workspace site.
+- Installing and running stardust in `~/dev/jackzhaojin/www-eds` (the repo and Experience Workspace site exist since step 10).
 
 ## A possible video outline
 
