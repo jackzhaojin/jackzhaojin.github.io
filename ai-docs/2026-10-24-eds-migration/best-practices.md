@@ -145,16 +145,9 @@ From `/docs/byo-cdn-cloudflare-worker-setup`, `/docs/setup-byo-cdn-push-invalida
 - **How `jack-technical-writing` writes:** through the DA Source API (stardust `deploy-batch.mjs`) or the Experience Workspace MCP server. Versions mark agent-authored saves with "(agent)", which helps the demo show human and AI edits side by side.
 - **Universal Editor:** aem.live recommends Experience Workspace over Universal Editor for new projects. Stardust's content stays expressible in Universal Editor's three model shapes, so nothing locks us out.
 
-## 8. Open questions for Jack
+## 8. Open questions
 
-1. **GA4 and consent.** Options:
-   - (a) GA4 in `consented.js` behind a real consent banner (best practice, more work, some visits not counted).
-   - (b) GA4 in `consented.js` with consent granted by default and no banner, as today. A privacy call.
-   - (c) Keep gtag in `head.html`. Against aem.live guidance, and it risks the Lighthouse 100 gate.
-
-   Whichever you pick, `docs/site-operations.md` changes.
-2. **Trailing slashes.** Decision 4 keeps `/writing/<slug>/`. David's Model prefers `/writing/<slug>` with 301s. Keeping them is supported (folder index); the spike tests what `/x` and `/x/index` return.
-3. **Library source.** Design system pages double as the library (if the spike confirms it), or a separate `/library/blocks/` generated from the same source.
+The questions this research raised (GA4 and consent, trailing slashes, the library source) are in [open-questions.md](open-questions.md), items 1 to 3.
 
 ## 9. Verify in the first spike
 

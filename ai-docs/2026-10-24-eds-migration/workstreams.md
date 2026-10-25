@@ -16,7 +16,7 @@ How the build splits for a goal prompt that runs several agents at once.
 
 | # | Stream | Starts after | Owns | Done when |
 |---|---|---|---|---|
-| 0 | **Prep** | Jack's inputs (README), answers to [best-practices.md](best-practices.md) § 8 | `stardust/spec/`, `stardust/current/`, baseline, the spike | Baseline frozen, spec S1 to S10 passes, audit run, every item in [best-practices.md](best-practices.md) § 9 checked and the note updated |
+| 0 | **Prep** | Jack's inputs (README), answers to [open-questions.md](open-questions.md) 1 to 10 | `stardust/spec/`, `stardust/current/`, baseline, the spike | Baseline frozen, spec S1 to S10 passes, audit run, every item in [best-practices.md](best-practices.md) § 9 checked and the note updated |
 | A | **Foundation and first page** (first page first, Track A) | 0 | Shared files above, home page content | Home page published on aem.live, gated at 1440 and 360, both themes checked, Lighthouse 100 |
 | B | **Edge** | nothing, can start on day one | `edge/` in the EDS repo, staging hostname | Worker and route-table tests pass; wrangler deploys to staging; staging serves EDS and all 7 project sites; browser stage done up to (not including) the www route |
 | C1 | **v3 blocks, group 1** | A | hero, cards, stats, proof-links, panel | Each block passes the block gate and the editability gate |

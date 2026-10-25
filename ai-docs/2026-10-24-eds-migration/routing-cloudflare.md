@@ -60,7 +60,7 @@ Implementation notes:
 - The Worker, its allowlist, a unit test over the route table and the wrangler config live in `edge/` in the EDS repo, listed in `.hlxignore` (decided 2026-10-24). wrangler deploys from there, so the dashboard never holds hand-edited code.
 - Routes: the staging route can live in the wrangler config. The www route is added in the dashboard through the built-in browser at cutover, so no `wrangler deploy` can switch production by accident.
 - Push invalidation: EDS purges the Cloudflare cache on publish. It needs the zone ID and an API token with Cache Purge on this zone, set in the EDS site config. Jack creates and stores the token. On a non-Enterprise plan every publish purges the whole zone, project sites included; they refill from GitHub on the next request.
-- EDS must serve, before cutover: `google57906613577fdd42.html`, `BingSiteAuth.xml`, `robots.txt`, `sitemap.xml`, `llms.txt`, a 404 page, `favicon.ico`, and GA4 wired the way the consent decision says ([best-practices.md](best-practices.md) § 8; no longer first in `<head>`).
+- EDS must serve, before cutover: `google57906613577fdd42.html`, `BingSiteAuth.xml`, `robots.txt`, `sitemap.xml`, `llms.txt`, a 404 page, `favicon.ico`, and GA4 wired the way the consent decision says ([open-questions.md](open-questions.md) 1; no longer first in `<head>`).
 - The hostname does not change, so the Search Console URL-prefix property and the GA4 data stream keep working.
 - Unknown paths that are not in the allowlist get the EDS 404. That includes `/design-systems/2026-09-13/`, which is not migrated.
 

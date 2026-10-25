@@ -24,6 +24,8 @@ Move www.jackzhaojin.com from GitHub Pages to AEM Edge Delivery Services, with c
 | [routing-cloudflare.md](routing-cloudflare.md) | Request path today and after, the github.io redirect trap, the Worker, staging, cutover, rollback, and the limits of the browser stage |
 | [workstreams.md](workstreams.md) | The parallel split, file ownership, order, and what the goal prompt has to carry |
 | [best-practices.md](best-practices.md) | Current EDS, boilerplate and Experience Workspace practice (researched 2026-10-25): block variants and the library, editability, head.html, performance, config, Cloudflare. Every stream follows it |
+| [open-questions.md](open-questions.md) | Every open question, each with a recommendation. The one home for them |
+| [session-flow.md](session-flow.md) | How this folder was made, prompt by prompt; prep for a video |
 
 ## Site at a glance (measured 2026-10-24)
 
@@ -59,11 +61,7 @@ Move www.jackzhaojin.com from GitHub Pages to AEM Edge Delivery Services, with c
 - Buttons are opt-in (bold or italic).
 - Section metadata `id` carries the portfolio anchors.
 
-It also adds three open questions:
-
-1. GA4 and consent.
-2. Trailing slashes against David's Model rule 7.
-3. Whether the design system pages can double as the Experience Workspace library.
+The questions it raised (GA4 and consent, trailing slashes, the library source) are in [open-questions.md](open-questions.md) with the rest.
 
 ## Inputs only Jack can provide
 
