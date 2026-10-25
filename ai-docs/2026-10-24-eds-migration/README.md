@@ -1,5 +1,7 @@
 # EDS migration: analysis
 
+**Start at [start-here.md](start-here.md)**: what is done, what is left, and the `/goal` prompts.
+
 Status: analysis only, 2026-10-24, with Jack's decisions recorded the same day. Nothing is built. No EDS repo or Experience Workspace site exists yet, and Cloudflare is unchanged. These files are the input for a goal prompt that builds the migration with several agents in parallel.
 
 ## Goal
@@ -19,6 +21,7 @@ Move www.jackzhaojin.com from GitHub Pages to AEM Edge Delivery Services, with c
 
 | File | Covers |
 |---|---|
+| [start-here.md](start-here.md) | The entry point: where everything is, done and left, rules for every run, and the `/goal` prompt for each phase |
 | [adobe-skills-survey.md](adobe-skills-survey.md) | What is in adobe/skills, which skills apply, and the stardust behaviours that matter for this site |
 | [design-system-v3-on-eds.md](design-system-v3-on-eds.md) | Where each v3 piece lands in EDS, the source-of-truth question, the explainer tiers, the portfolio |
 | [routing-cloudflare.md](routing-cloudflare.md) | Request path today and after, the github.io redirect trap, the Worker, staging, cutover, rollback, and the limits of the browser stage |
