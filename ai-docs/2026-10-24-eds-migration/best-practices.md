@@ -8,7 +8,7 @@ Every stream follows this note. Where it conflicts with an older statement in th
 
 1. **Variants have a picker now.** The Experience Workspace canvas has a Variant dropdown on the block toolbar (da-live #1171, 2026-08-20; last fixed #1455, 2026-10-20). It lists the variants found in the library's block documents and writes them into the block header as `Name (variant)`. Nothing validates the words, so stardust's `@variants` declaration and probe are the validation (section 2).
 2. **No inline script in `head.html`.** aem.live: head.html "should remain largely unchanged from the boilerplate" and inline scripts or styles are "not advisable". The pre-paint theme script moves into `scripts.js` (section 4).
-3. **GA4 leaves the head.** Analytics loads in `scripts/consented.js` behind `consent-check.js`, which declines by default. This replaces the rule in `docs/site-operations.md` that gtag is the first thing in `<head>`. Jack has to choose the consent model (section 8).
+3. **GA4 leaves the head.** Analytics loads in `scripts/consented.js` behind `consent-check.js`, which declines by default. This replaces the rule in `docs/site-operations.md` that gtag is the first thing in `<head>`. The consent model is README decision 9.
 4. **Buttons are opt-in.** A link becomes a button only when authored bold (primary), italic (secondary) or both (accent). The wrapper class is `p.button-wrapper` (formerly `button-container`).
 5. **Section metadata is applied on the server** for sites created on or after 2026-05-01: `style` becomes classes, `id` becomes the section id, any other key becomes `data-*`, and the metadata block is gone from the served DOM. The `id` key is how the portfolio keeps its `#ch-*` anchors.
 6. **CSP and Trusted Types are on by default.** Every script needs the per-request nonce, and the default Trusted Types policy filters HTML strings.
@@ -142,12 +142,12 @@ From `/docs/byo-cdn-cloudflare-worker-setup`, `/docs/setup-byo-cdn-push-invalida
 
 - **Scope.** Experience Workspace is DA upgraded ("an upgrade, not a migration"). It covers the whole authoring surface: the canvas at `da.live/canvas#/{org}/{site}/{path}` with Layout, Content and Split modes; the AI Assistant, skills and author memory; versions, comments, Preflight; schedule and request-publish; AEM Assets integration; and an MCP server (`https://mcp.adobeaemcloud.com/adobe/mcp/da`, `da_*` tools) plus REST. The domains (da.live, content.da.live, admin.da.live) did not change.
 - **Enablement:** set `ew.enabled=true` explicitly; the docs disagree on the default. Set the Sidekick `editUrlPattern` to the canvas (the `ew-setup` tool does both).
-- **How `jack-technical-writing` writes:** through the DA Source API (stardust `deploy-batch.mjs`) or the Experience Workspace MCP server. Versions mark agent-authored saves with "(agent)", which helps the demo show human and AI edits side by side.
+- **How `jack-technical-writing` writes:** through the Experience Workspace MCP server, always (README decision 17). Which path stardust's own deploy uses is [open-questions.md](open-questions.md) 1. Versions mark agent-authored saves with "(agent)", which helps the demo show human and AI edits side by side.
 - **Universal Editor:** aem.live recommends Experience Workspace over Universal Editor for new projects. Stardust's content stays expressible in Universal Editor's three model shapes, so nothing locks us out.
 
 ## 8. Open questions
 
-The questions this research raised (GA4 and consent, trailing slashes, the library source) are in [open-questions.md](open-questions.md), items 1 to 3.
+The questions this research raised (GA4 and consent, trailing slashes, the library source) were answered on 2026-10-25: README decisions 9 to 11. Remaining questions are in [open-questions.md](open-questions.md).
 
 ## 9. Verify in the first spike
 

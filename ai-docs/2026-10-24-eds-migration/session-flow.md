@@ -6,7 +6,7 @@ Nothing was built. The whole session is analysis: what Adobe ships, what this si
 
 ## The arc in one paragraph
 
-Jack pointed Claude at a local clone of `adobe/skills` and asked what Adobe has been doing and whether any of it could migrate his GitHub Pages site pixel-perfect or better. Claude surveyed the repo (stardust dominates, about one release a day), mapped the site through stardust's eyes, then mapped design system v3 onto EDS. Mid-turn, Jack added the requirement that changed the routing plan: seven GitHub Pages project sites must keep working under www. A curl turned up a redirect trap, and the Worker design came out of it. Jack made eight decisions through multiple-choice questions with free text, and overrode the explainer recommendation for a reason only he could know: this is his flagship demo. Three research agents then read the aem.live docs, Experience Workspace's source and the boilerplate in parallel, and found a variant picker that exists in code but not yet in the docs. Everything was verified, written into this folder and pushed.
+Jack pointed Claude at a local clone of `adobe/skills` and asked what Adobe has been doing and whether any of it could migrate his GitHub Pages site pixel-perfect or better. Claude surveyed the repo (stardust dominates, about one release a day), mapped the site through stardust's eyes, then mapped design system v3 onto EDS. Mid-turn, Jack added the requirement that changed the routing plan: seven GitHub Pages project sites must keep working under www. A curl turned up a redirect trap, and the Worker design came out of it. Jack made eight decisions through multiple-choice questions with free text, and overrode the explainer recommendation for a reason only he could know: this is his flagship demo. Three research agents then read the aem.live docs, Experience Workspace's source and the boilerplate in parallel, and found a variant picker that exists in code but not yet in the docs. Everything was verified, written into this folder and pushed. Jack then answered the twelve open questions the same way. Where he overrode a recommendation, he picked the simpler option or the one that demos better.
 
 ## Timeline
 
@@ -126,6 +126,31 @@ Claude committed through the `jack-git-commit` skill (`f3f1633`, six files) and 
 
 This produced `open-questions.md` (12 questions, each with a recommendation, now the one home for them) and this file.
 
+### 9. Answering the open questions
+
+> OK ask me teh questions in MCQs format with recommended and otehrs section
+
+Three rounds of four. Jack's answers:
+
+- **The recommendation, 7 times:** GA4 and consent, trailing slashes, library source, names, run mode, approvals, dark mode.
+- **His own words, twice.** On how the parallel build runs:
+
+  > I would keep it simple - single thread the initial build out but then for block/templates/block libraries that could go in parallel we should, commit to main is fine
+
+  On the old repo:
+
+  > Keep, but we'll make a note in README.md and make sure the CNAME redirects and stuff
+
+- **A different option, 3 times:** streams push straight to the EDS repo's main; `jack-technical-writing` always writes through the Experience Workspace MCP server; the best-practices check stays manual.
+
+Every override went toward simpler (one thread first, one branch, no schedule) or toward the demo (MCP).
+
+What came of it:
+
+- The answers became README decisions 9 to 20.
+- "MCP always" raised a follow-up: stardust's own deploy writes through the Source API, and its ledger and gates depend on that. That is now open question 1.
+- The workstreams were rewritten as three phases: single thread, parallel blocks, templates and library, then single thread.
+
 ## Moments worth showing
 
 1. **The redirect trap.** One curl shows `jackzhaojin.github.io/<repo>/` answering 301 to www, and the whole routing design follows from it.
@@ -134,6 +159,7 @@ This produced `open-questions.md` (12 questions, each with a recommendation, now
 4. **The light-mode gap.** One grep shows stardust measures in light mode only, on a site with a Light / Dark / System toggle.
 5. **Two design systems claiming one file name.** Replica would have copied its reverse-engineered spec over v3's authored `DESIGN.md`.
 6. **Self-correction.** Writing the docs caught three of the agent's own numbers being wrong.
+7. **Simple beats clever.** Offered a session per stream with worktrees and merges, Jack chose one thread first and one branch.
 
 ## Techniques
 
@@ -145,7 +171,7 @@ This produced `open-questions.md` (12 questions, each with a recommendation, now
 
 ## Not done yet
 
-- Answering [open-questions.md](open-questions.md).
+- Answering the two remaining questions in [open-questions.md](open-questions.md).
 - The first spike ([best-practices.md](best-practices.md) § 9).
 - Writing the goal prompt.
 - Installing and running stardust, and creating the EDS repo and Experience Workspace site.

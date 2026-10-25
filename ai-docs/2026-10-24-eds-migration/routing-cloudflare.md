@@ -60,13 +60,13 @@ Implementation notes:
 - The Worker, its allowlist, a unit test over the route table and the wrangler config live in `edge/` in the EDS repo, listed in `.hlxignore` (decided 2026-10-24). wrangler deploys from there, so the dashboard never holds hand-edited code.
 - Routes: the staging route can live in the wrangler config. The www route is added in the dashboard through the built-in browser at cutover, so no `wrangler deploy` can switch production by accident.
 - Push invalidation: EDS purges the Cloudflare cache on publish. It needs the zone ID and an API token with Cache Purge on this zone, set in the EDS site config. Jack creates and stores the token. On a non-Enterprise plan every publish purges the whole zone, project sites included; they refill from GitHub on the next request.
-- EDS must serve, before cutover: `google57906613577fdd42.html`, `BingSiteAuth.xml`, `robots.txt`, `sitemap.xml`, `llms.txt`, a 404 page, `favicon.ico`, and GA4 wired the way the consent decision says ([open-questions.md](open-questions.md) 1; no longer first in `<head>`).
+- EDS must serve, before cutover: `google57906613577fdd42.html`, `BingSiteAuth.xml`, `robots.txt`, `sitemap.xml`, `llms.txt`, a 404 page, `favicon.ico`, and GA4 in `consented.js` per README decision 9 (no longer first in `<head>`).
 - The hostname does not change, so the Search Console URL-prefix property and the GA4 data stream keep working.
 - Unknown paths that are not in the allowlist get the EDS 404. That includes `/design-systems/2026-09-13/`, which is not migrated.
 
 ## Staging
 
-Use a staging hostname such as `next.jackzhaojin.com` (a proxied placeholder record, Cloudflare's usual pattern for a Worker-only hostname) with the same Worker. On staging, `fetch(request)` has no GitHub origin to reach, so the project-site branch fetches `https://www.jackzhaojin.com/<path>` instead. Make that one config value (`PROJECT_ORIGIN`: passthrough on www, the www URL on staging). It works before cutover and after.
+Staging is `next.jackzhaojin.com` (decision 12), with the same Worker. Its DNS entry is a proxied placeholder record, Cloudflare's usual pattern for a Worker-only hostname. On staging, `fetch(request)` has no GitHub origin to reach, so the project-site branch fetches `https://www.jackzhaojin.com/<path>` instead. Make that one config value (`PROJECT_ORIGIN`: passthrough on www, the www URL on staging). It works before cutover and after.
 
 Run `scripts/check-site.sh` against staging (its `SITE` value is hard-coded to www today, so it needs a way to point at staging) along with the redirect table in `docs/site-operations.md` and a 200 check on every project site.
 
@@ -78,8 +78,8 @@ Run `scripts/check-site.sh` against staging (its `SITE` value is hard-coded to w
 4. Push invalidation configured.
 5. Worker route `www.jackzhaojin.com/*` added. This is the switch.
 6. Verify: redirect table, project sites 200, a sample of EDS pages, GA4 real-time hits, Search Console fetch of the home page.
-7. Rewrite `docs/site-operations.md` for the new request path (in the EDS repo).
-8. Keep `jackzhaojin.github.io` with `CNAME` and Pages on. Its main-site files stay as the rollback for a while, then shrink to `CNAME`, `.nojekyll` and a minimal page.
+7. Rewrite `docs/site-operations.md` for the new request path and the GA4 change (decision 9), in the EDS repo.
+8. Keep `jackzhaojin.github.io` with `CNAME` and Pages on, and its main-site files as the rollback with no deadline (decision 19). Add a `README.md` there (the repo has none today). It notes that the main site moved to EDS, that the repo now serves the project sites under www, and that `CNAME` must stay. Then confirm `CNAME`, the `jackzhaojin.github.io/*` 301 to www, and a 200 from every project site.
 
 Rollback at any point after step 5: remove the www Worker route, then purge the cache.
 

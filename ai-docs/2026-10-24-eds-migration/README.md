@@ -46,6 +46,29 @@ Move www.jackzhaojin.com from GitHub Pages to AEM Edge Delivery Services, with c
 7. **One EDS repo, one Experience Workspace site.** The design system site is content in Experience Workspace too, built from the same blocks it documents.
 8. **Worker.** The Worker and its wrangler config and scripts live in the EDS repo under `edge/`, listed in `.hlxignore` so EDS never serves them.
 
+## Decisions (Jack, 2026-10-25)
+
+Answers to the first round of [open-questions.md](open-questions.md).
+
+9. **GA4 and consent.** GA4 loads in `consented.js` with consent granted by default and no banner, as the site works today. A browser's Global Privacy Control signal counts as a decline, and GA4 starts 3 seconds after LCP. At cutover, `docs/site-operations.md` drops the "gtag first in `<head>`" rule.
+10. **Trailing slashes stay.** `/writing/<slug>/` keeps its slash (decision 4 stands). The spike still checks what `/x` and `/x/index` return.
+11. **The design system pages are the library.** This holds if the spike confirms that the library's `blocks` sheet can point at them and that `library-metadata` stays hidden on published pages. Otherwise, a `/library/blocks/` copy generated from the same source.
+12. **Names.**
+    - Repo `github.com/jackzhaojin/jackzhaojin-com`.
+    - Experience Workspace org `jackzhaojin`, site `jackzhaojin-com`.
+    - Origin `main--jackzhaojin-com--jackzhaojin.aem.live`.
+    - Staging `next.jackzhaojin.com`.
+13. **Build shape: keep it simple.** The initial build runs single-threaded. Only blocks, templates and the block library run in parallel ([workstreams.md](workstreams.md)).
+14. **Git.** Every stream commits and pushes straight to the EDS repo's main. No agent pushes to `jackzhaojin.github.io`; the Cloudflare www route and the cutover stay Jack's.
+15. **Stardust run mode.** Gated for Prep, the first page and each archetype; hands-off for the sibling rollout, with a report per wave.
+16. **Design approvals.** Jack reviews the inconsistency register once per archetype, and once per batch of about 5 articles.
+17. **AI writing.** `jack-technical-writing` always writes through the Experience Workspace MCP server.
+18. **Dark mode.** A local check first (v3's eval plus dark captures), then a pull request to adobe/skills adding a colour-scheme option to stardust's capture scripts.
+19. **The old repo keeps its main-site files** as rollback, with no deadline. At cutover:
+    - a `README.md` in `jackzhaojin.github.io` notes that the main site moved to EDS, that the repo now serves the project sites, and that `CNAME` stays;
+    - the cutover checks confirm `CNAME`, the github.io-to-www redirect and every project site.
+20. **Staying current is manual.** The best-practices check runs when Jack asks; nothing is scheduled.
+
 ## Principles that follow
 
 - **Content in Experience Workspace, design in code.** A design-system change ships as code. Content stays the same, apart from added variant classes for new designs or CSS variations. A future design round is an EDS branch on the same content, previewed at `https://<branch>--<repo>--jackzhaojin.aem.page`.
@@ -61,7 +84,7 @@ Move www.jackzhaojin.com from GitHub Pages to AEM Edge Delivery Services, with c
 - Buttons are opt-in (bold or italic).
 - Section metadata `id` carries the portfolio anchors.
 
-The questions it raised (GA4 and consent, trailing slashes, the library source) are in [open-questions.md](open-questions.md) with the rest.
+The questions it raised (GA4 and consent, trailing slashes, the library source) were answered on 2026-10-25: decisions 9 to 11.
 
 ## Inputs only Jack can provide
 
