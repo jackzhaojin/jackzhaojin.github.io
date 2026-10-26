@@ -70,6 +70,22 @@ Staging is `next.jackzhaojin.com` (decision 12), with the same Worker. Its DNS e
 
 Run `scripts/check-site.sh` against staging (its `SITE` value is hard-coded to www today, so it needs a way to point at staging) along with the redirect table in `docs/site-operations.md` and a 200 check on every project site.
 
+## Cutover, as done (2026-10-26)
+
+Done at about 15:12 ET from another Claude session, **route-first**: the steps below weren't followed in order. It was validated afterwards from the www-eds session. Record: www-eds `ai-docs/2026-10-26-cutover/`.
+
+- **The switch:** the top-level Worker `www-eds-edge` was deployed with `PUSH_INVALIDATION=disabled` (version `fa323e37`; the var is now in `edge/wrangler.toml`). Then the route `www.jackzhaojin.com/*` was added in the dashboard, as a Route, not a Custom Domain.
+- **Step 4 (push invalidation) is still open.** Until the Cache Purge token is in the site config, the override keeps aem.live's cache times short.
+- **GitHub Pages was not moved** (decision 19 as written): this repo keeps `CNAME` `www.jackzhaojin.com`. `PROJECT_ORIGIN = "passthrough"` sends the 7 project sites to it, and gh.jackzhaojin.com mirrors the old site from it.
+- **Verified:**
+  - `check-host.mjs` passes on www, gh and eds;
+  - all 7 project sites answer 200 on www, and their slashless URLs redirect;
+  - the apex and jackzhaojin.github.io redirect to www;
+  - all 35 sitemap pages carry the same SEO tags as the original;
+  - the stardust sweep compared www with gh.
+- **Still open:** step 6's GA4 and Search Console checks, step 7 (`docs/site-operations.md`), and step 8's README in this repo.
+- **Rollback:** remove the www route (Workers & Pages > www-eds-edge > Domains). GitHub Pages never stopped serving www's origin.
+
 ## Cutover order
 
 1. EDS site published on aem.live; QA passed in both themes.
