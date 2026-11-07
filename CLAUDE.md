@@ -56,4 +56,4 @@ Do not add Book a talk, Follow the work, or an AEM + AI primary navigation desti
   - Wait for the Pages build to report `built` before requesting a new URL; Cloudflare caches 404s.
   - GitHub's "Enforce HTTPS" toggle is not eligible (Cloudflare terminates TLS). Expected, not a bug.
 - Do not create markdown files (like CHANGES.md) in the project root
-- Do not commit or push unless explicitly instructed to
+- Commit and push finished work without asking, after reading the diff for secrets and personal data; never force-push.
